@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "./navbar.scss";
 
 export default function Navbar() {
@@ -31,11 +32,12 @@ export default function Navbar() {
           </div>
         </div>
         <div className="navBottom">
-          <h3 className="menuItem">AIR FORCE</h3>
-          <h3 className="menuItem">JORDAN</h3>
-          <h3 className="menuItem">BLAZER</h3>
-          <h3 className="menuItem">CRATER</h3>
-          <h3 className="menuItem">HIPPIE</h3>
+          <Link to="/airforce" className="menuItem">AIR FORCE</Link>
+          <Link to="/jordan" className="menuItem">JORDAN</Link>
+          <Link to="/blazer" className="menuItem">BLAZER</Link>
+          <Link to="/hippie" className="menuItem">HIPPIE</Link>
+          <Link to="/crater" className="menuItem">CRATER</Link>
+
         </div>
       </nav>
     </>
