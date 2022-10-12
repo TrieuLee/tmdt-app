@@ -8,7 +8,7 @@ import Product from "../../components/product/Product";
 import Gallery from "../../components/gallery/Gallery";
 import NewSeason from "../../components/newSeason/Newseason";
 import Footer from "../../components/footer/Footer";
-export default function () {
+export default function Home() {
   return (
     <>
       <Navbar />
