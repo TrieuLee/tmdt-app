@@ -39,6 +39,7 @@ export default function Navbar() {
           <Link to="/crater" className="menuItem">CRATER</Link>
 
         </div>
+        
       </nav>
     </>
   );
