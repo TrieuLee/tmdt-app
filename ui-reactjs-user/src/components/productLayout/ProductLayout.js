@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "../../components/navbar/Navbar";
 import { styled } from "@mui/material/styles";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Grid from "@mui/material/Grid";
 import Container from "@mui/material/Container";
 import Paper from "@mui/material/Paper";
@@ -10,7 +10,7 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { CardActionArea } from "@mui/material";
-import Records from '../../server.json'
+import Records from "../../server.json";
 export default function ProductLayout() {
   const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: "#000",
@@ -19,7 +19,9 @@ export default function ProductLayout() {
     textAlign: "center",
     color: theme.palette.text.secondary,
   }));
+
   const { id } = useParams();
+
   // const [data, setData] = useState([]);
   // const [filter, setFilter] = useState(data);
   // const [loading, setLoading] = useState(false);
@@ -40,6 +42,7 @@ export default function ProductLayout() {
   //   };
   //   getProducts();
   // }, []);
+
   return (
     <>
       <Navbar />
@@ -50,32 +53,35 @@ export default function ProductLayout() {
         <Grid container border={1} spacing={2}>
           {Records.map((item) => (
             <Grid item xs={3}>
-              <Card sx={{ maxWidth: 345 }}>
-                <CardActionArea>
-                  <CardMedia
-                    component="img"
-                    height="140"
-                    image={item.images}
-                    alt=""
-                  />
-                  <CardContent>
-                    <Typography gutterBottom variant="h5" component="div">
-                      {item.title}
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary">
-                      {item.description}
-                    </Typography>
-                  </CardContent>
-                </CardActionArea>
-              </Card>
-              {/* <div>{item.id}</div> */}
-              {/* <img
+              <Link to={`${item.id}`}>
+                <Card key={item.id} sx={{ maxWidth: 345 }}>
+                  <CardActionArea>
+                    <CardMedia
+                      component="img"
+                      height="140"
+                      image={item.images}
+                      alt=""
+                    />
+                    <CardContent>
+                      <Typography gutterBottom variant="h5" component="div">
+                        {item.title}
+                      </Typography>
+                      <Typography variant="body2" color="text.secondary">
+                        {item.description}
+                      </Typography>
+                    </CardContent>
+                  </CardActionArea>
+                </Card>
+
+                {/* <div>{item.id}</div> */}
+                {/* <img
                 style={{ width: "20%", height: "20%" }}
                 src={item.images}
                 alt=""
               /> */}
-              {/* <div>{item.title}</div> */}
-              {/* <div>{item.description}</div> */}
+                {/* <div>{item.title}</div> */}
+                {/* <div>{item.description}</div> */}
+              </Link>
             </Grid>
           ))}
         </Grid>

@@ -6,6 +6,7 @@ import Register from "./pages/register/Register";
 import Home from "./pages/home/Home";
 import ProductLayout from "./components/productLayout/ProductLayout";
 import NotFound from "./components/notFound/NotFound";
+import ProductDetail from "./components/productDetail/ProductDetail";
 const Router = () => {
   return (
     <>
@@ -23,8 +24,8 @@ const Router = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/:id" element={<ProductLayout />} />
+        <Route path="/:id/:itemID" element={<ProductDetail />} />
       </Routes>
-      
     </>
   );
 };
