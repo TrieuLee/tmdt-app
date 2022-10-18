@@ -1,0 +1,88 @@
+[
+    {
+        "id":1,
+        "title":"Giay Adidas",
+        "price": 500,
+        "description":"Giay ngon re dep",
+        "category":{
+            "id":1,
+            "name": "Adidas",
+            "image":"https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Adidas_Logo.svg/2560px-Adidas_Logo.svg.png"
+            
+        },
+        "images":"https://bizweb.dktcdn.net/thumb/1024x1024/100/448/660/products/ea0bb554-e3f6-4bb9-9221-3baa7f65f052.jpg?v=1645670272520",
+        "categoryID":1
+        
+    },
+    {
+        "id":2,
+        "title":"Fake Adidas",
+        "price": 550,
+        "description":"Giay xau bo khoi mua",
+        "category":{
+            "id":1,
+            "name": "Adidas",
+            "image":"https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Adidas_Logo.svg/2560px-Adidas_Logo.svg.png"
+            
+        },
+        "images":"https://bizweb.dktcdn.net/thumb/1024x1024/100/448/660/products/giay-ultraboost-21-xam-fy0375-01-standard-e19e5c6a-d577-4f32-afd0-c791ac8c4f87.jpg?v=1645669520997",
+        "categoryID":1
+    },
+    {
+        "id":3,
+        "title":"Giay Bounce Adidas",
+        "price": 600,
+        "description":"Giay dep",
+        "category":{
+            "id":1,
+            "name": "Adidas",
+            "image":"https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Adidas_Logo.svg/2560px-Adidas_Logo.svg.png"
+            
+        },
+        "images":"https://bizweb.dktcdn.net/thumb/1024x1024/100/448/660/products/ee7692011663236159485.png?v=1664160703700",
+        "categoryID":1
+    },
+    {
+        "id":4,
+        "title":"Giay Bounce Adidas",
+        "price": 600,
+        "description":"Giay dep",
+        "category":{
+            "id":1,
+            "name": "Adidas",
+            "image":"https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Adidas_Logo.svg/2560px-Adidas_Logo.svg.png"
+            
+        },
+        "images":"https://bizweb.dktcdn.net/thumb/1024x1024/100/448/660/products/ee7692011663236159485.png?v=1664160703700",
+        "categoryID":1
+    },
+    {
+        "id":5,
+        "title":"Giay Bounce Adidas",
+        "price": 600,
+        "description":"Giay dep",
+        "category":{
+            "id":1,
+            "name": "Adidas",
+            "image":"https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Adidas_Logo.svg/2560px-Adidas_Logo.svg.png"
+            
+        },
+        "images":"https://bizweb.dktcdn.net/thumb/1024x1024/100/448/660/products/ee7692011663236159485.png?v=1664160703700",
+        "categoryID":1
+    },
+    {
+        "id":6,
+        "title":"Giay Bounce Adidas",
+        "price": 600,
+        "description":"Giay dep",
+        "category":{
+            "id":1,
+            "name": "Adidas",
+            "image":"https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Adidas_Logo.svg/2560px-Adidas_Logo.svg.png"
+            
+        },
+        "images":"https://bizweb.dktcdn.net/thumb/1024x1024/100/448/660/products/giayadizeroboston10ngoclam1663.jpg?v=1664160699080",
+        "categoryID":1
+    }
+
+]

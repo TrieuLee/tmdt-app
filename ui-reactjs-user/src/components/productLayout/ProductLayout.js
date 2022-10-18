@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Navbar from "../../components/navbar/Navbar";
 import { styled } from "@mui/material/styles";
 import { useParams } from "react-router-dom";
-import Grid from "@mui/material/Grid"; // Grid version 1
+import Grid from "@mui/material/Grid";
 import Container from "@mui/material/Container";
 import Paper from "@mui/material/Paper";
 import Card from "@mui/material/Card";
@@ -10,6 +10,7 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { CardActionArea } from "@mui/material";
+import Records from '../../server.json'
 export default function ProductLayout() {
   const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: "#000",
@@ -19,26 +20,26 @@ export default function ProductLayout() {
     color: theme.palette.text.secondary,
   }));
   const { id } = useParams();
-  const [data, setData] = useState([]);
-  const [filter, setFilter] = useState(data);
-  const [loading, setLoading] = useState(false);
-  let componentMounted = true;
-  useEffect(() => {
-    const getProducts = async () => {
-      setLoading(true);
-      const response = await fetch("https://api.escuelajs.co/api/v1/products");
-      if (componentMounted) {
-        setData(await response.clone().json());
-        setFilter(await response.json());
-        setLoading(false);
-        console.log(data);
-      }
-      return () => {
-        componentMounted = false;
-      };
-    };
-    getProducts();
-  }, []);
+  // const [data, setData] = useState([]);
+  // const [filter, setFilter] = useState(data);
+  // const [loading, setLoading] = useState(false);
+  // let componentMounted = true;
+  // useEffect(() => {
+  //   const getProducts = async () => {
+  //     setLoading(true);
+  //     const response = await fetch("https://api.escuelajs.co/api/v1/products");
+  //     if (componentMounted) {
+  //       setData(await response.clone().json());
+  //       setFilter(await response.json());
+  //       setLoading(false);
+  //       console.log(data);
+  //     }
+  //     return () => {
+  //       componentMounted = false;
+  //     };
+  //   };
+  //   getProducts();
+  // }, []);
   return (
     <>
       <Navbar />
@@ -47,7 +48,7 @@ export default function ProductLayout() {
         <h1> Fetch data from an api in react </h1>
 
         <Grid container border={1} spacing={2}>
-          {filter.map((item) => (
+          {Records.map((item) => (
             <Grid item xs={3}>
               <Card sx={{ maxWidth: 345 }}>
                 <CardActionArea>
