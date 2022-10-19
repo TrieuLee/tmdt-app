@@ -1,13 +1,23 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import Records from "../../server.json";
-import NotFound from "../notFound/NotFound";
 
 export default function ProductDetail() {
   const { id, itemID } = useParams();
-  const thisProduct = itemID
-    ? Records.find((item) => item.id === itemID)
-    : null;
+  if (itemID) {
+    Records.find((item) => item.id === itemID);
+  }  
+  
+  console.log(typeof itemID);
+  return (
+    <>
+      <div>{itemID}</div>
 
-  return <div>ProductDetail</div>;
+      {Records.filter((item) => item.id == itemID).map((item) => (
+        <div key={item.id}>
+          <div>Day la hinh {item.title}</div>
+        </div>
+      ))}
+    </>
+  );
 }

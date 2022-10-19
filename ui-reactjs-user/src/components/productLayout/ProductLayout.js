@@ -72,15 +72,6 @@ export default function ProductLayout() {
                     </CardContent>
                   </CardActionArea>
                 </Card>
-
-                {/* <div>{item.id}</div> */}
-                {/* <img
-                style={{ width: "20%", height: "20%" }}
-                src={item.images}
-                alt=""
-              /> */}
-                {/* <div>{item.title}</div> */}
-                {/* <div>{item.description}</div> */}
               </Link>
             </Grid>
           ))}

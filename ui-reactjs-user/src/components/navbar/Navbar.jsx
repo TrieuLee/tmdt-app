@@ -1,9 +1,16 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./navbar.scss";
+import { useParams } from "react-router-dom";
+import Records from "../../server.json";
 
 export default function Navbar() {
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
+  const { id } = useParams();
+  console.log(id);
+  if (id) {
+    Records.find((item) => item.category.name === id);
+  }
   return (
     <>
       <nav className="nav">
@@ -32,14 +39,22 @@ export default function Navbar() {
           </div>
         </div>
         <div className="navBottom">
-          <Link to="/airforce" className="menuItem">AIR FORCE</Link>
-          <Link to="/jordan" className="menuItem">JORDAN</Link>
-          <Link to="/blazer" className="menuItem">BLAZER</Link>
-          <Link to="/hippie" className="menuItem">HIPPIE</Link>
-          <Link to="/crater" className="menuItem">CRATER</Link>
-
+          <Link to="/airforce" className="menuItem">
+            AIR FORCE
+          </Link>
+          <Link to="/jordan" className="menuItem">
+            JORDAN
+          </Link>
+          <Link to="/blazer" className="menuItem">
+            BLAZER
+          </Link>
+          <Link to="/hippie" className="menuItem">
+            HIPPIE
+          </Link>
+          <Link to="/crater" className="menuItem">
+            CRATER
+          </Link>
         </div>
-        
       </nav>
     </>
   );
