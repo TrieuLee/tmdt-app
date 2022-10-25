@@ -4,8 +4,10 @@ import Records from "../../server.json";
 import Grid from "@mui/material/Grid";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
-import Box from '@mui/material/Box';
+import Box from "@mui/material/Box";
 import Navbar from "../../components/navbar/Navbar";
+import Button from "@mui/material/Button";
+import Stack from "@mui/material/Stack";
 
 export default function ProductDetail() {
   const { id, itemID } = useParams();
@@ -19,7 +21,6 @@ export default function ProductDetail() {
       <Navbar />
 
       <Container>
-
         <div>{itemID}</div>
 
         {/* {Records.filter((item) => item.id == itemID).map((item) => (
@@ -32,11 +33,11 @@ export default function ProductDetail() {
           {Records.filter((item) => item.id == itemID).map((item) => (
             <>
               <Grid item xs={6} border={1}>
-                <Box component="img"
+                <Box
+                  component="img"
                   sx={{ height: 480, width: 480 }}
                   src={item.images}
                 />
-
               </Grid>
               <Grid item xs={6}>
                 <Typography id="modal-modal-title" variant="h4" component="h6">
@@ -45,28 +46,27 @@ export default function ProductDetail() {
                 <Typography id="modal-modal-title" variant="h4" component="h6">
                   {item.price}
                 </Typography>
-                <Typography id="modal-modal-title" variant="h4" component="h6">
-                  {Records && Records.map((item,index)=>(
-                    <div>
-                      {index ?',':''} {item.size}
-                    </div>
-                  ))}
-                </Typography>
+
+                <div style={{ display: "flex" }}>
+                  {item.size &&
+                    item.size.map((record) => (
+                      <p style={{ border: "1px solid black" }}>{record}</p>
+                    ))}
+                </div>
+
                 <Typography id="modal-modal-title" variant="h4" component="h6">
                   {item.description}
                 </Typography>
+
+                <Stack direction="row" spacing={2}>
+                  <Button variant="contained">Thêm vào giỏ hàng</Button>
+                  <Button variant="contained">Mua ngay</Button>
+                </Stack>
               </Grid>
             </>
-
           ))}
         </Grid>
       </Container>
-
-
-
-
-
     </>
-
   );
 }
