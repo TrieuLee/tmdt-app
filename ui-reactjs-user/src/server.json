@@ -4,6 +4,7 @@
         "title":"Giay AirForce",
         "price": 500,
         "description":"Giay ngon re dep",
+        "size":[ "38", "39" ,"40" ,"41" ,"42" ],
         "category":{
             "id":1,
             "name": "airforce",

@@ -3,12 +3,7 @@ import { useParams } from "react-router-dom";
 import Records from "../../server.json";
 import Grid from "@mui/material/Grid";
 import Container from "@mui/material/Container";
-import Paper from "@mui/material/Paper";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
-import { CardActionArea } from "@mui/material";
 import Box from '@mui/material/Box';
 import Navbar from "../../components/navbar/Navbar";
 
@@ -17,8 +12,8 @@ export default function ProductDetail() {
   if (itemID) {
     Records.find((item) => item.id === itemID);
   }
-
-  console.log(typeof itemID);
+  // console.log(Records)
+  // console.log(typeof itemID);
   return (
     <>
       <Navbar />
@@ -27,11 +22,11 @@ export default function ProductDetail() {
 
         <div>{itemID}</div>
 
-        {Records.filter((item) => item.id == itemID).map((item) => (
-          <div key={item.id}>
-            <div>Day la hinh {item.title}</div>
-          </div>
-        ))}
+        {/* {Records.filter((item) => item.id == itemID).map((item) => (
+            <div key={item.id}>
+              <div>Day la hinh {item.title}</div>
+            </div>
+          ))} */}
 
         <Grid container border={1} spacing={2}>
           {Records.filter((item) => item.id == itemID).map((item) => (
@@ -44,7 +39,22 @@ export default function ProductDetail() {
 
               </Grid>
               <Grid item xs={6}>
-                <div>{item.title}</div>
+                <Typography id="modal-modal-title" variant="h4" component="h6">
+                  {item.title}
+                </Typography>
+                <Typography id="modal-modal-title" variant="h4" component="h6">
+                  {item.price}
+                </Typography>
+                <Typography id="modal-modal-title" variant="h4" component="h6">
+                  {Records && Records.map((item,index)=>(
+                    <div>
+                      {index ?',':''} {item.size}
+                    </div>
+                  ))}
+                </Typography>
+                <Typography id="modal-modal-title" variant="h4" component="h6">
+                  {item.description}
+                </Typography>
               </Grid>
             </>
 
