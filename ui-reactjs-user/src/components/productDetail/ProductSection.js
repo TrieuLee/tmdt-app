@@ -7,7 +7,6 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
-
 import IconButton from "@mui/material/IconButton";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 export default function ProductSection() {
@@ -21,6 +20,13 @@ export default function ProductSection() {
   const theme = {
     spacing: {
       marginTop: "20px",
+    },
+    tr: {
+      background: "#2196f3",
+      color:'#fff',
+      "&:hover": {
+        background: "#4dabf5",
+      },
     },
   };
   return (
@@ -55,8 +61,8 @@ export default function ProductSection() {
                 {item.description}
               </Typography>
 
-              <Stack direction="row" spacing={2} sx={theme.spacing}>
-                <Button variant="outlined">
+              <Stack direction="row" spacing={2} >
+                <Button sx={theme.tr}>
                   <IconButton>
                     <AddShoppingCartIcon />
                   </IconButton>
