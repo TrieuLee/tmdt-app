@@ -1,139 +1,122 @@
 [
     {
-        "id":1,
-        "title":"Giay AirForce",
+        "id": 1,
+        "title": "Giay AirForce",
         "price": 500,
-        "description":"Giay ngon re dep",
-        "size":[ "38", "39" ,"40" ,"41" ,"42" ],
-        "service":[
-            "Hỗ trợ đổi size miễn phí",
-            "Bảo hành từ 1 dến 5 năm",
-            "Giao hàng toàn quốc"
-        ],
-        "category":{
-            "id":1,
+        "description": "Giay ngon re dep",
+        "size": ["38", "39", "40", "41", "42"],
+        "service": ["Hỗ trợ đổi size miễn phí", "Bảo hành từ 1 dến 5 năm", "Giao hàng toàn quốc"],
+        "category": {
+            "id": 1,
             "name": "airforce",
-            "image":"https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Adidas_Logo.svg/2560px-Adidas_Logo.svg.png"
-            
+            "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Adidas_Logo.svg/2560px-Adidas_Logo.svg.png"
         },
-        "describe":"",
-        "images":"https://bizweb.dktcdn.net/thumb/1024x1024/100/448/660/products/ea0bb554-e3f6-4bb9-9221-3baa7f65f052.jpg?v=1645670272520",
-        "categoryID":1
-        
+        "describe": "",
+        "images": "https://bizweb.dktcdn.net/thumb/1024x1024/100/448/660/products/ea0bb554-e3f6-4bb9-9221-3baa7f65f052.jpg?v=1645670272520",
+        "categoryID": 1
     },
     {
-        "id":2,
-        "title":"Fake Adidas",
+        "id": 2,
+        "title": "Fake Adidas",
         "price": 550,
-        "description":"Giay xau bo khoi mua",
-        "category":{
-            "id":1,
+        "description": "Giay xau bo khoi mua",
+        "category": {
+            "id": 1,
             "name": "airforce",
-            "image":"https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Adidas_Logo.svg/2560px-Adidas_Logo.svg.png"
-            
+            "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Adidas_Logo.svg/2560px-Adidas_Logo.svg.png"
         },
-        "images":"https://bizweb.dktcdn.net/thumb/1024x1024/100/448/660/products/giay-ultraboost-21-xam-fy0375-01-standard-e19e5c6a-d577-4f32-afd0-c791ac8c4f87.jpg?v=1645669520997",
-        "categoryID":1
+        "images": "https://bizweb.dktcdn.net/thumb/1024x1024/100/448/660/products/giay-ultraboost-21-xam-fy0375-01-standard-e19e5c6a-d577-4f32-afd0-c791ac8c4f87.jpg?v=1645669520997",
+        "categoryID": 1
     },
     {
-        "id":3,
-        "title":"Giay Bounce Adidas",
+        "id": 3,
+        "title": "Giay Bounce Adidas",
         "price": 600,
-        "description":"Giay dep",
-        "category":{
-            "id":1,
+        "description": "Giay dep",
+        "category": {
+            "id": 1,
             "name": "airforce",
-            "image":"https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Adidas_Logo.svg/2560px-Adidas_Logo.svg.png"
-            
+            "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Adidas_Logo.svg/2560px-Adidas_Logo.svg.png"
         },
-        "images":"https://bizweb.dktcdn.net/thumb/1024x1024/100/448/660/products/ee7692011663236159485.png?v=1664160703700",
-        "categoryID":1
+        "images": "https://bizweb.dktcdn.net/thumb/1024x1024/100/448/660/products/ee7692011663236159485.png?v=1664160703700",
+        "categoryID": 1
     },
     {
-        "id":4,
-        "title":"Giay Bounce Adidas",
+        "id": 4,
+        "title": "Giay Bounce Adidas",
         "price": 600,
-        "description":"Giay dep",
-        "category":{
-            "id":1,
-            "name": "airforce",
-            "image":"https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Adidas_Logo.svg/2560px-Adidas_Logo.svg.png"
-            
+        "description": "Giay dep",
+        "category": {
+            "id": 1,
+            "name": "crater",
+            "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Adidas_Logo.svg/2560px-Adidas_Logo.svg.png"
         },
-        "images":"https://bizweb.dktcdn.net/thumb/1024x1024/100/448/660/products/ee7692011663236159485.png?v=1664160703700",
-        "categoryID":1
+        "images": "https://bizweb.dktcdn.net/thumb/1024x1024/100/448/660/products/ee7692011663236159485.png?v=1664160703700",
+        "categoryID": 1
     },
     {
-        "id":5,
-        "title":"Giay Bounce Adidas",
+        "id": 5,
+        "title": "Giay Bounce Adidas",
         "price": 600,
-        "description":"Giay dep",
-        "category":{
-            "id":1,
-            "name": "airforce",
-            "image":"https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Adidas_Logo.svg/2560px-Adidas_Logo.svg.png"
-            
+        "description": "Giay dep",
+        "category": {
+            "id": 1,
+            "name": "hippie",
+            "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Adidas_Logo.svg/2560px-Adidas_Logo.svg.png"
         },
-        "images":"https://bizweb.dktcdn.net/thumb/1024x1024/100/448/660/products/ee7692011663236159485.png?v=1664160703700",
-        "categoryID":1
+        "images": "https://bizweb.dktcdn.net/thumb/1024x1024/100/448/660/products/ee7692011663236159485.png?v=1664160703700",
+        "categoryID": 1
     },
     {
-        "id":6,
-        "title":"Giay Bounce Adidas",
+        "id": 6,
+        "title": "Giay Bounce Adidas",
         "price": 600,
-        "description":"Giay dep",
-        "category":{
-            "id":1,
-            "name": "airforce",
-            "image":"https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Adidas_Logo.svg/2560px-Adidas_Logo.svg.png"
-            
+        "description": "Giay dep",
+        "category": {
+            "id": 1,
+            "name": "hippie",
+            "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Adidas_Logo.svg/2560px-Adidas_Logo.svg.png"
         },
-        "images":"https://bizweb.dktcdn.net/thumb/1024x1024/100/448/660/products/giayadizeroboston10ngoclam1663.jpg?v=1664160699080",
-        "categoryID":1
+        "images": "https://bizweb.dktcdn.net/thumb/1024x1024/100/448/660/products/giayadizeroboston10ngoclam1663.jpg?v=1664160699080",
+        "categoryID": 1
     },
     {
-        "id":7,
-        "title":"Giay ALo Adidas",
+        "id": 7,
+        "title": "Giay ALo Adidas",
         "price": 750,
-        "description":"Giay dep",
-        "category":{
-            "id":1,
-            "name": "airforce",
-            "image":"https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Adidas_Logo.svg/2560px-Adidas_Logo.svg.png"
-            
+        "description": "Giay dep",
+        "category": {
+            "id": 1,
+            "name": "blazer",
+            "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Adidas_Logo.svg/2560px-Adidas_Logo.svg.png"
         },
-        "images":"https://bizweb.dktcdn.net/thumb/1024x1024/100/448/660/products/giayadizeroboston10ngoclam1663.jpg?v=1664160699080",
-        "categoryID":1
+        "images": "https://bizweb.dktcdn.net/thumb/1024x1024/100/448/660/products/giayadizeroboston10ngoclam1663.jpg?v=1664160699080",
+        "categoryID": 1
     },
     {
-        "id":8,
-        "title":"Giay Bounce Adidas",
+        "id": 8,
+        "title": "Giay Bounce Adidas",
         "price": 600,
-        "description":"Giay dep",
-        "category":{
-            "id":1,
+        "description": "Giay dep",
+        "category": {
+            "id": 1,
             "name": "airforce",
-            "image":"https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Adidas_Logo.svg/2560px-Adidas_Logo.svg.png"
-            
+            "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Adidas_Logo.svg/2560px-Adidas_Logo.svg.png"
         },
-        "images":"https://bizweb.dktcdn.net/thumb/1024x1024/100/448/660/products/fw6838-1.jpg?v=1645669067763",
-        "categoryID":1
+        "images": "https://bizweb.dktcdn.net/thumb/1024x1024/100/448/660/products/fw6838-1.jpg?v=1645669067763",
+        "categoryID": 1
     },
     {
-        "id":9,
-        "title":"Giay Jordan Adidas",
+        "id": 9,
+        "title": "Giay Jordan Adidas",
         "price": 650,
-        "description":"Giay dep",
-        "category":{
-            "id":1,
-            "name": "Jordan",
-            "image":"https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Adidas_Logo.svg/2560px-Adidas_Logo.svg.png"
-            
+        "description": "Giay dep",
+        "category": {
+            "id": 1,
+            "name": "jordan",
+            "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Adidas_Logo.svg/2560px-Adidas_Logo.svg.png"
         },
-        "images":"https://bizweb.dktcdn.net/thumb/1024x1024/100/448/660/products/fw6838-1.jpg?v=1645669067763",
-        "categoryID":1
+        "images": "https://bizweb.dktcdn.net/thumb/1024x1024/100/448/660/products/fw6838-1.jpg?v=1645669067763",
+        "categoryID": 1
     }
-    
-
-
 ]

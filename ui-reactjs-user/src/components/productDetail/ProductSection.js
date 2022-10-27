@@ -22,9 +22,9 @@ export default function ProductSection() {
         isPaneOpen: false,
         isPaneOpenLeft: false,
     });
-    if (itemID) {
-        Records.find((item) => item.id === itemID);
-    }
+    // if (itemID) {
+    //     Records.find((item) => item.id === itemID);
+    // }
     // console.log(Records)
     // console.log(typeof itemID);
     const theme = {
@@ -47,7 +47,7 @@ export default function ProductSection() {
         <Link underline="hover" key="2" color="inherit" href="/:id">
             {id}
         </Link>,
-        <Link key="3" href="/:id" color="text.primary">
+        <Link key="3" href="/:id/:itemID" color="text.primary">
             {itemID}
         </Link>,
     ];
@@ -85,6 +85,7 @@ export default function ProductSection() {
                                     {item.price}
                                 </Typography>
                                 <div>{item.service && item.service.map((records) => <p>{records}</p>)}</div>
+                                
                                 <div style={{ display: 'flex' }}>
                                     {item.size &&
                                         item.size.map((record) => (
@@ -115,7 +116,12 @@ export default function ProductSection() {
                                     <img src="img.png" />
                                 </SlidingPane>
                                 <Stack direction="row" spacing={2}>
-                                    <Button sx={theme.tr} onClick={()=>{alertClick();}}>
+                                    <Button
+                                        sx={theme.tr}
+                                        onClick={() => {
+                                            alertClick();
+                                        }}
+                                    >
                                         <IconButton>
                                             <AddShoppingCartIcon />
                                         </IconButton>
