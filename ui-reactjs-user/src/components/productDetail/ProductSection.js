@@ -113,7 +113,6 @@ export default function ProductSection() {
                                 >
                                     <div>And I am pane content. BTW, what rocks?</div>
                                     <br />
-                                    <img src="img.png" />
                                 </SlidingPane>
                                 <Stack direction="row" spacing={2}>
                                     <Button

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './navbar.scss';
 import { useParams } from 'react-router-dom';
@@ -12,6 +12,8 @@ export default function Navbar() {
     if (id) {
         Records.find((item) => item.category.name === id);
     }
+    const [items, setItems] = useState([]);
+
     // const categories = [...new Set(Records.map((item) => item.category.name))]
     const categories = Records.filter((item) => item.category.name === id);
 
@@ -25,8 +27,8 @@ export default function Navbar() {
                     </div>
                     <div className="navItem">
                         <div className="search">
-                            <input type="text" placeholder="Search..." class="searchInput" />
-                            <img src={PF + 'icon/search.png'} alt="" width="20" height="20" class="searchIcon" />
+                            <input type="text" placeholder="Search..." className="searchInput" />
+                            <img src={PF + 'icon/search.png'} alt="" width="20" height="20" className="searchIcon" />
                         </div>
                     </div>
                     <div className="navItem">

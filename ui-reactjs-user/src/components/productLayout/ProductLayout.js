@@ -21,7 +21,8 @@ export default function ProductLayout() {
     }));
 
     const { id } = useParams();
-
+    const categories = Records.find((item) => item.category.name === id);
+    console.log(categories);
     // const [data, setData] = useState([]);
     // const [filter, setFilter] = useState(data);
     // const [loading, setLoading] = useState(false);
@@ -48,27 +49,36 @@ export default function ProductLayout() {
             <Navbar />
             <Container>
                 <div>Day la {id} </div>
-                <Grid container spacing={2}>
-                    {Records.map((item) => (
-                        <Grid item xs={3}>
-                            <Link to={`${item.id}`}>
-                                <Card key={item.id} sx={{ maxWidth: 345 }}>
-                                    <CardActionArea>
-                                        <CardMedia component="img" height="140" image={item.images} alt="" />
-                                        <CardContent>
-                                            <Typography gutterBottom variant="h5" component="div">
-                                                {item.title}
-                                            </Typography>
-                                            <Typography variant="body2" color="text.secondary">
-                                                {item.description}
-                                            </Typography>
-                                        </CardContent>
-                                    </CardActionArea>
-                                </Card>
-                            </Link>
+                {Records.filter((record) => record.category.name == id).map((record) => (
+                    <>
+                        <div>{record.category.name}</div>
+
+                        <Grid container spacing={2}>
+                            {Records.map((item) => (
+                                <Grid item xs={3}>
+                                    <Link to={`${item.id}`}>
+                                        <Card key={item.id} sx={{ maxWidth: 345 }}>
+                                            <CardActionArea>
+                                                <CardMedia component="img" height="140" image={item.images} alt="" />
+                                                <CardContent>
+                                                    <Typography gutterBottom variant="h5" component="div">
+                                                        {item.id}
+                                                    </Typography>
+                                                    <Typography gutterBottom variant="h5" component="div">
+                                                        {item.title}
+                                                    </Typography>
+                                                    <Typography variant="body2" color="text.secondary">
+                                                        {item.category.name}
+                                                    </Typography>
+                                                </CardContent>
+                                            </CardActionArea>
+                                        </Card>
+                                    </Link>
+                                </Grid>
+                            ))}
                         </Grid>
-                    ))}
-                </Grid>
+                    </>
+                ))}
             </Container>
         </>
     );
