@@ -48,8 +48,6 @@ export default function ProductLayout() {
       <Navbar />
       <Container>
         <div>Day la {id} </div>
-        <h1> Fetch data from an api in react </h1>
-
         <Grid container border={1} spacing={2}>
           {Records.map((item) => (
             <Grid item xs={3}>
