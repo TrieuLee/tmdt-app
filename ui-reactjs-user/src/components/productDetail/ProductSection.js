@@ -13,15 +13,10 @@ import Stack from '@mui/material/Stack';
 import Link from '@mui/material/Link';
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
-import SlidingPane from 'react-sliding-pane';
-import 'react-sliding-pane/dist/react-sliding-pane.css';
 
 export default function ProductSection() {
     const { id, itemID } = useParams();
-    const [state, setState] = useState({
-        isPaneOpen: false,
-        isPaneOpenLeft: false,
-    });
+
     // if (itemID) {
     //     Records.find((item) => item.id === itemID);
     // }
@@ -96,24 +91,7 @@ export default function ProductSection() {
                                 <Typography id="modal-modal-title" variant="h4" component="h6">
                                     {item.description}
                                 </Typography>
-                                <button onClick={() => setState({ isPaneOpen: true })}>
-                                    Click me to open right pane!
-                                </button>
-                                <SlidingPane
-                                    className="some-custom-class"
-                                    overlayClassName="some-custom-overlay-class"
-                                    isOpen={state.isPaneOpen}
-                                    title="Giỏ hàng của tôi"
-                                    subtitle="Optional subtitle."
-                                    width=""
-                                    onRequestClose={() => {
-                                        // triggered on "<" on left top click or on outside click
-                                        setState({ isPaneOpen: false });
-                                    }}
-                                >
-                                    <div>And I am pane content. BTW, what rocks?</div>
-                                    <br />
-                                </SlidingPane>
+                                
                                 <Stack direction="row" spacing={2}>
                                     <Button
                                         sx={theme.tr}
