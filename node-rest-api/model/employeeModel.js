@@ -4,7 +4,7 @@ const ObjectId = mongoose.Schema.Types.ObjectId;
 
 const employeeSchema = new mongoose.Schema({
     name:{type:String, required:true}, //ten khach hang
-    phone:{type:String, require:true}, //sdt 
+    phone:{type:String, required:true}, //sdt 
     email: {type: String, required: true},//email
     role: {type: String, required: true},// chức vụ
     decentralize:{type:Number,required:true},//phan quyen

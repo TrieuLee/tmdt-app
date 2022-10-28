@@ -11,14 +11,7 @@ const Router = () => {
   return (
     <>
       <Routes>
-        {/* {["/air-force/", "/:jordan", "/:blazer", "/:cratier","/:hippie"].map(path =>(
-        <Route
-          key ={path}
-          path ={path}
-          element={<ProductLayout />}>
-
-        </Route>
-      ))} */}
+       
         <Route exact path="/" element={<Home />} />
         <Route path="*" element={<NotFound />} />
         <Route path="/login" element={<Login />} />
