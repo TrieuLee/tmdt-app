@@ -15,7 +15,7 @@ export default function Widget({ type }) {
     switch (type) {
         case 'user':
             data = {
-                title: 'USERS',
+                title: 'SỐ LƯỢNG KHÁCH HÀNG',
                 isMoney: false,
                 link: 'See all users',
                 icon: (
@@ -31,7 +31,7 @@ export default function Widget({ type }) {
             break;
         case 'order':
             data = {
-                title: 'ORDERS',
+                title: 'ĐƠN ĐẶT HÀNG',
                 isMoney: false,
                 link: 'View all orders',
                 icon: (
@@ -47,7 +47,7 @@ export default function Widget({ type }) {
             break;
         case 'earning':
             data = {
-                title: 'EARNINGS',
+                title: 'DOANH THU SẢN PHẨM',
                 isMoney: true,
                 link: 'View net earnings',
                 icon: (

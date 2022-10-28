@@ -4,6 +4,10 @@
     display: flex;
     align-items: center;
     font-size: 14px;
+    background-color: black;
+    padding: 5px;
+    border: 0.5px solid rgb(230, 227, 227);
+
     color: #555;
 
     .wrapper {
@@ -17,13 +21,14 @@
             display: flex;
             align-items: center;
             border: 0.5px solid lightgray;
-            padding: 3px;
+            padding: 5px;
+            width: 30%;
 
             input {
                 border: none;
                 outline: none;
                 background: transparent;
-
+                color: white;
                 &::placeholder {
                     font-size: 12px;
                 }

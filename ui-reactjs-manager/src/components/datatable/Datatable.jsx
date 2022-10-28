@@ -32,9 +32,9 @@ export default function Datatable() {
     return (
         <div className="datatable">
             <div className="datatableTitle">
-                Add New User
+                Danh sách khách hàng
                 <Link to="/users/new" className="link">
-                    Add New
+                    Thêm khách hàng
                 </Link>
             </div>
             <DataGrid

@@ -2,8 +2,11 @@ import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 
 //component
-import List from './pages/list/List';
-import Single from './pages/single/Single';
+import UserList from './pages/customer/customerlist/CustomerList';
+import UserInfo from './pages/customer/customerinfo/CustomerInfo';
+import ProductList from './pages/product/productlist/ProductList';
+import ProductInfo from './pages/product/productinfo/ProductInfo';
+import Table from './components/table/Table';
 import { productInputs, userInputs } from './formSource';
 import New from './pages/new/New';
 
@@ -15,14 +18,17 @@ const Router = () => {
                 <Route path="/">
                     <Route index element={<Home />} />
                     <Route path="users">
-                        <Route index element={<List />} />
-                        <Route path=":userId" element={<Single />} />
-                        <Route path="new" element={<New inputs={userInputs} title="Add New User" />} />
+                        <Route index element={<UserList />} />
+                        <Route path=":userId" element={<UserInfo />} />
+                        <Route path="new" element={<New inputs={userInputs} title="Thêm khách hàng" />} />
                     </Route>
                     <Route path="products">
-                        <Route index element={<List />} />
-                        <Route path=":productId" element={<Single />} />
+                        <Route index element={<ProductList />} />
+                        <Route path=":productId" element={<ProductInfo />} />
                         <Route path="new" element={<New inputs={productInputs} title="Add New Product" />} />
+                    </Route>
+                    <Route path="deliveries">
+                        <Route index element={<Table />} />
                     </Route>
                 </Route>
             </Routes>
