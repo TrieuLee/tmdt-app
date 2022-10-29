@@ -6,30 +6,30 @@ export default function Feature() {
     <div className="features">
       <div className="feature">
         <img src={PF + "icon/shipping.png"} alt="" className="featureIcon" />
-        <span className="featureTitle">FREE SHIPPING</span>
+        <span className="featureTitle">MIỄN PHÍ VẬN CHUYỂN</span>
         <span className="featureDesc">
-          Free worldwide shipping on all orders.
+          Miễn phí vận chuyển đặt hàng trong nước.
         </span>
       </div>
       <div className="feature">
         <img src={PF + "icon/return.png"} alt="" className="featureIcon" />
-        <span className="featureTitle">30 DAYS RETURN</span>
+        <span className="featureTitle">HOẢN TRẢ TRONG 30 NGÀY</span>
         <span className="featureDesc">
-          No question return and easy refund in 14 days.
+          Hoàn trả lại dễ dàng trong 30 ngày .
         </span>
       </div>
       <div className="feature">
         <img src={PF + "icon/gift.png"} alt="" className="featureIcon" />
-        <span className="featureTitle">GIFT CARDS</span>
+        <span className="featureTitle">THẺ QUÀ TẶNG</span>
         <span className="featureDesc">
-          Buy gift cards and use coupon codes easily.
+        Mua thẻ quà tặng và sử dụng mã phiếu giảm giá dễ dàng.
         </span>
       </div>
       <div className="feature">
         <img src={PF + "icon/contact.png"} alt="" className="featureIcon" />
-        <span className="featureTitle">CONTACT US!</span>
+        <span className="featureTitle">LIÊN HỆ VỚI CHÚNG TÔI!</span>
         <span className="featureDesc">
-          Keep in touch via email and support system.
+        Giữ liên lạc qua email và hệ thống hỗ trợ.
         </span>
       </div>
     </div>

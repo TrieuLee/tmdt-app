@@ -11,11 +11,11 @@ export default function Newseason() {
         />
       </div>
       <div className="nsItem">
-        <h3 className="nsTitleSm">WINTER NEW ARRIVALS</h3>
-        <h1 className="nsTitle">New Season</h1>
-        <h1 className="nsTitle">New Collection</h1>
+        <h3 className="nsTitleSm">MÙA ĐÔNG ĐÃ ĐẾN</h3>
+        <h1 className="nsTitle">Siêu phẩm mới</h1>
+        <h1 className="nsTitle">Bộ sưu tập mới</h1>
         <a href="#nav" className="nsLink">
-          <button className="nsButton">CHOOSE YOUR STYLE</button>
+          <button className="nsButton">PHONG CÁCH CỦA RIÊNG BẠN</button>
         </a>
       </div>
       <div className="nsItem">
