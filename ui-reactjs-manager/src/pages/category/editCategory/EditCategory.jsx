@@ -2,7 +2,7 @@ import React from "react";
 import Sidebar from "../../../components/sidebar/Sidebar";
 import Navbar from "../../../components/navbar/Navbar";
 import "./Edit.scss";
-export default function editProduct({ inputs, title }) {
+export default function EditCategory({ inputs, title }) {
   return (
     <div className="edit">
       <Sidebar />

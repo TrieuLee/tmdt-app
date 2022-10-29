@@ -12,7 +12,7 @@ export default function ProductInfo() {
         <div className="top">
           <div className="left">
             <div className="editButton">
-              <Link to="/users/edit" className="link">
+              <Link to="/products/edit" className="link">
                 Chỉnh sửa
               </Link>
             </div>
