@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./Datatable.scss";
 import { DataGrid } from "@mui/x-data-grid";
-import { userColumns, userRows } from "../../customer/datatableCus";
+import { userColumns, userRows } from "../../product/datatableProduct";
 import { Link } from "react-router-dom";
 
 export default function Datatable() {
@@ -35,9 +35,9 @@ export default function Datatable() {
   return (
     <div className="datatable">
       <div className="datatableTitle">
-        Danh sách khách hàng
+        Danh sách sản phẩm
         <Link to="/users/new" className="link">
-          Thêm khách hàng
+          Thêm sản phẩm
         </Link>
       </div>
       <DataGrid

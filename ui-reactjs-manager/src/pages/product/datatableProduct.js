@@ -1,7 +1,7 @@
 export const userColumns = [
   {
     field: "user",
-    headerName: "Tên khách hàng",
+    headerName: "Tên sản phẩm",
     width: 230,
     renderCell: (params) => {
       return <div className="cellWithImg">{params.row.username}</div>;
@@ -9,23 +9,28 @@ export const userColumns = [
   },
   {
     field: "email",
-    headerName: "Email",
-    width: 230,
+    headerName: "Hãng",
+    width: 180,
   },
 
   {
     field: "phoneNumber",
-    headerName: "Số điện thoại",
-    width: 200,
+    headerName: "Giá tiền",
+    width: 160,
   },
   {
     field: "point",
-    headerName: "Điểm thưởng",
+    headerName: "Size",
     width: 150,
   },
   {
     field: "member",
-    headerName: "Thành viên",
+    headerName: "Màu giày",
+    width: 140,
+  },
+  {
+    field: "state",
+    headerName: "Tình trạng",
     width: 160,
   },
 ];
