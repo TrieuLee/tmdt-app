@@ -18,7 +18,7 @@ export default function Datatable() {
       renderCell: (params) => {
         return (
           <div className="cellAction">
-            <Link to="/users/test" style={{ textDecoration: "none" }}>
+            <Link to="/products/view" style={{ textDecoration: "none" }}>
               <div className="viewButton">View</div>
             </Link>
             <div
@@ -36,7 +36,7 @@ export default function Datatable() {
     <div className="datatable">
       <div className="datatableTitle">
         Danh sách sản phẩm
-        <Link to="/users/new" className="link">
+        <Link to="/products/new" className="link">
           Thêm sản phẩm
         </Link>
       </div>

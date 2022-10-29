@@ -8,23 +8,23 @@ export const userColumns = [
     },
   },
   {
-    field: "email",
+    field: "category",
     headerName: "Hãng",
     width: 180,
   },
 
   {
-    field: "phoneNumber",
+    field: "price",
     headerName: "Giá tiền",
     width: 160,
   },
   {
-    field: "point",
+    field: "size",
     headerName: "Size",
     width: 150,
   },
   {
-    field: "member",
+    field: "color",
     headerName: "Màu giày",
     width: 140,
   },
@@ -39,11 +39,12 @@ export const userColumns = [
 export const userRows = [
   {
     id: 1,
-    username: "Snow",
-    member: "thường",
-    email: "1snow@gmail.com",
-    phoneNumber: 35,
-    point: 1000,
+    username: "Air Force 1",
+    category: "Air Force",
+    price: 400000,
+    size: [38, 39, 40],
+    color: "red",
+    state: "Còn hàng",
   },
   {
     id: 2,

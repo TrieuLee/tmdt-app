@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./Datatable.scss";
 import { DataGrid } from "@mui/x-data-grid";
-import { userColumns, userRows } from "../../customer/datatableCus";
+import { userColumns, userRows } from "../../category/datatableCategory";
 import { Link } from "react-router-dom";
 
 export default function Datatable() {
@@ -18,7 +18,7 @@ export default function Datatable() {
       renderCell: (params) => {
         return (
           <div className="cellAction">
-            <Link to="/users/view" style={{ textDecoration: "none" }}>
+            <Link to="/categories/test" style={{ textDecoration: "none" }}>
               <div className="viewButton">View</div>
             </Link>
             <div
@@ -35,9 +35,9 @@ export default function Datatable() {
   return (
     <div className="datatable">
       <div className="datatableTitle">
-        Danh sách khách hàng
-        <Link to="/users/new" className="link">
-          Thêm khách hàng
+        Danh sách loại sản phẩm
+        <Link to="/categories/new" className="link">
+          Thêm loại sản phẩm
         </Link>
       </div>
       <DataGrid
