@@ -20,7 +20,7 @@ export default function New({ inputs, title }) {
                   <input type={input.type} placeholder={input.placeholder} />
                 </div>
               ))}
-              <button>Send</button>
+              <button>Cập nhật</button>
             </form>
           </div>
         </div>
