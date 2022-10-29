@@ -18,7 +18,7 @@ import CategoryInfo from "./pages/category/categoryinfo/CategoryInfo";
 import NewCategory from "./pages/category/newCategory/NewCategory";
 
 // Thông tin đơn hàng
-import DeliveryList from "./pages/delivery/orderlist/DeliveryList";
+import OrderList from "./pages/order/orderlist/OrderList";
 import { productInputs, userInputs } from "./formSource";
 
 import Home from "./pages/home/Home";
@@ -88,7 +88,7 @@ const Router = () => {
           />
         </Route>
         <Route path="deliveries">
-          <Route index element={<DeliveryList />} />
+          <Route index element={<OrderList />} />
         </Route>
       </Routes>
     </>
