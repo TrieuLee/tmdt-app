@@ -1,35 +1,3 @@
-export const userColumns = [
-  {
-    field: "user",
-    headerName: "Tên khách hàng",
-    width: 230,
-    renderCell: (params) => {
-      return <div className="cellWithImg">{params.row.username}</div>;
-    },
-  },
-  {
-    field: "email",
-    headerName: "Email",
-    width: 230,
-  },
-
-  {
-    field: "phoneNumber",
-    headerName: "Số điện thoại",
-    width: 200,
-  },
-  {
-    field: "point",
-    headerName: "Điểm thưởng",
-    width: 150,
-  },
-  {
-    field: "member",
-    headerName: "Thành viên",
-    width: 160,
-  },
-];
-
 //temporary data
 export const userRows = [
   {

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./Datatable.scss";
 import { DataGrid } from "@mui/x-data-grid";
-import { userColumns, userRows } from "../../customer/datatableCus";
+import { userRows } from "../../customer/datatableCus";
 import { Link } from "react-router-dom";
 
 export default function Datatable() {
@@ -9,7 +9,38 @@ export default function Datatable() {
   const handleDelete = (id) => {
     setData(data.filter((item) => item.id !== id));
   };
-
+  const userColumns = [
+    {
+      field: "user",
+      headerName: "Tên khách hàng",
+      width: 230,
+      renderCell: (params) => {
+        return <div className="cellWithImg">{params.row.username}</div>;
+      },
+    },
+    {
+      field: "email",
+      headerName: "Email",
+      width: 230,
+    },
+  
+    {
+      field: "phoneNumber",
+      headerName: "Số điện thoại",
+      width: 200,
+    },
+    {
+      field: "point",
+      headerName: "Điểm thưởng",
+      width: 150,
+    },
+    {
+      field: "member",
+      headerName: "Thành viên",
+      width: 160,
+    },
+  ];
+  
   const actionColumn = [
     {
       field: "action",

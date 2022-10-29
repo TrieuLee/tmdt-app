@@ -19,7 +19,6 @@ import NewCategory from "./pages/category/newCategory/NewCategory";
 
 // Thông tin đơn hàng
 import OrderList from "./pages/order/orderlist/OrderList";
-import { productInputs, userInputs } from "./formSource";
 
 import Home from "./pages/home/Home";
 const Router = () => {
@@ -32,38 +31,20 @@ const Router = () => {
           <Route path="users">
             <Route index element={<UserList />} />
             <Route path=":userId" element={<UserInfo />} />
-            <Route
-              path="new"
-              element={<NewUser inputs={userInputs} title="Thêm khách hàng" />}
-            />
+            <Route path="new" element={<NewUser title="Thêm khách hàng" />} />
             <Route
               path="edit"
-              element={
-                <EditUser
-                  inputs={userInputs}
-                  title="Chỉnh sửa thông tin khách hàng"
-                />
-              }
+              element={<EditUser title="Chỉnh sửa thông tin khách hàng" />}
             />
           </Route>
           {/* Sản phẩm */}
           <Route path="products">
             <Route index element={<ProductList />} />
             <Route path=":productId" element={<ProductInfo />} />
-            <Route
-              path="new"
-              element={
-                <NewProduct inputs={productInputs} title="Thêm sản phẩm" />
-              }
-            />
+            <Route path="new" element={<NewProduct title="Thêm sản phẩm" />} />
             <Route
               path="edit"
-              element={
-                <EditProduct
-                  inputs={userInputs}
-                  title="Chỉnh sửa thông tin sản phẩm"
-                />
-              }
+              element={<EditProduct title="Chỉnh sửa thông tin sản phẩm" />}
             />
           </Route>
         </Route>
@@ -73,18 +54,11 @@ const Router = () => {
           <Route path=":categoryId" element={<CategoryInfo />} />
           <Route
             path="new"
-            element={
-              <NewCategory inputs={productInputs} title="Thêm loại sản phẩm" />
-            }
+            element={<NewCategory title="Thêm loại sản phẩm" />}
           />
           <Route
             path="edit"
-            element={
-              <NewCategory
-                inputs={productInputs}
-                title="Chỉnh sửa thông tin sản phẩm"
-              />
-            }
+            element={<NewCategory title="Chỉnh sửa thông tin sản phẩm" />}
           />
         </Route>
         <Route path="deliveries">
