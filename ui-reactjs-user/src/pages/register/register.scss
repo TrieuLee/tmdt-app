@@ -30,7 +30,7 @@
       flex-direction: column;
       justify-content: center;
       .registerBox {
-        height: 400px;
+        height: 600px;
         padding: 20px;
         background-color: white;
         border-radius: 10px;
@@ -55,6 +55,7 @@
           color: white;
           font-size: 20px;
           font-weight: 500;
+          text-transform: none;
           cursor: pointer;
         }
         .registerForgot {
@@ -71,7 +72,9 @@
           color: white;
           font-size: 20px;
           font-weight: 500;
+          text-transform: none;
           cursor: pointer;
+          margin-top: 10px;
         }
       }
     }

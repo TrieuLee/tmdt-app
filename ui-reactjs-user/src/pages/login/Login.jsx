@@ -43,7 +43,7 @@ export default function Login() {
         <div className="loginLeft">
           <h3 className="loginLogo">.Sneaker</h3>
           <span className="loginDesc" style={{ color: "white" }}>
-            By your Fashion and Enjoy yourself
+            Hãy là thời trang của chính mình
           </span>
         </div>
         <div className="loginRight">
