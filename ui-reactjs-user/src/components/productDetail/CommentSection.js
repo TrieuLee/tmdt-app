@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Tab from "@mui/material/Tab";
 import TabPanel from "@mui/lab/TabPanel";
 import TabContext from "@mui/lab/TabContext";
@@ -9,7 +9,6 @@ import Box from "@mui/material/Box";
 
 export default function CommentSection() {
   const [value, setValue] = React.useState("1");
-
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -18,6 +17,7 @@ export default function CommentSection() {
       marginTop: "20px",
     },
   };
+
   return (
     <Container>
       <Grid container sx={theme.spacing} spacing={2}>

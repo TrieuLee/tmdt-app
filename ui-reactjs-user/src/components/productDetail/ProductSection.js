@@ -1,37 +1,45 @@
-import React from "react";
+import React, { useState } from "react";
 import { useParams } from "react-router-dom";
-import Footer from "../../components/footer/Footer";
 import Records from "../../server.json";
 import Grid from "@mui/material/Grid";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import IconButton from "@mui/material/IconButton";
+import ShoppingBagIcon from "@mui/icons-material/ShoppingBag";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import Breadcrumbs from "@mui/material/Breadcrumbs";
 import Stack from "@mui/material/Stack";
 import Link from "@mui/material/Link";
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
-
+import "./test.css";
 export default function ProductSection() {
   const { id, itemID } = useParams();
 
-  // if (itemID) {
-  //     Records.find((item) => item.id === itemID);
-  // }
-  // console.log(Records)
-  // console.log(typeof itemID);
+  const [active, setActive] = useState();
+
   const theme = {
     spacing: {
-      marginTop: "20px",
+      marginTop: "30px",
     },
     tr: {
-      background: "#2196f3",
+      background: "black",
       color: "#fff",
       "&:hover": {
-        background: "#4dabf5",
+        background: "white",
+        border: "1px solid black",
+        shadow: "none",
+        color: "black",
+      },
+    },
+    bread: {
+      background: "black",
+      color: "white",
+      "&:hover": {
+        border: "1px solid black",
+        backgroud: "white",
+        color: "black",
       },
     },
   };
@@ -48,7 +56,7 @@ export default function ProductSection() {
     </Link>,
   ];
 
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
   const alertClick = () => {
     setOpen(true);
   };
@@ -62,12 +70,12 @@ export default function ProductSection() {
   return (
     <>
       <Container>
-        <Stack spacing={2}>
+        <Stack spacing={2} sx={{ mt: 2 }}>
           <Breadcrumbs separator="›" aria-label="breadcrumb">
             {breadcrumbs}
           </Breadcrumbs>
         </Stack>
-        <Grid container border={1} spacing={2}>
+        <Grid container spacing={2} sx={{ mt: 1 }}>
           {Records.filter((item) => item.id == itemID).map((item) => (
             <>
               <Grid item xs={6}>
@@ -89,28 +97,37 @@ export default function ProductSection() {
                     item.service.map((records) => <p>{records}</p>)}
                 </div>
 
-                <div style={{ display: "flex" }}>
+                <div style={{ display: "flex", alignItems: "center" }}>
+                  <div>Size giày:</div>
+
                   {item.size &&
                     item.size.map((record) => (
-                      <p style={{ border: "1px solid black" }}>{record}</p>
+                      <>
+                        <span
+                          style={{
+                            border: "1px solid black",
+                            padding: "8px",
+                            marginLeft: "20px",
+                            cursor: "pointer",
+                          }}
+                          onClick={() => setActive(record)}
+                          className={active === record ? "active" : undefined}
+                        >
+                          {record}
+                        </span>
+                      </>
                     ))}
                 </div>
 
-                <Typography id="modal-modal-title" variant="h4" component="h6">
-                  {item.description}
-                </Typography>
-
-                <Stack direction="row" spacing={2}>
+                <Stack direction="row" spacing={2} sx={theme.spacing}>
                   <Button
-                    sx={theme.tr}
+                    sx={theme.bread}
                     onClick={() => {
                       alertClick();
                     }}
                   >
-                    <IconButton>
-                      <AddShoppingCartIcon />
-                    </IconButton>
-                    Thêm vào giỏ hàng
+                    <AddShoppingCartIcon sx={theme.AddShoppingCartIcon} />
+                    <p style={{ margin: "8px" }}>Thêm vào giỏ hàng</p>
                   </Button>
                   <Snackbar
                     open={open}
@@ -125,14 +142,16 @@ export default function ProductSection() {
                       Thêm vào giỏ hàng thành công
                     </Alert>
                   </Snackbar>
-                  <Button variant="contained">Mua ngay</Button>
+
+                  <Button variant="contained" startIcon={<ShoppingBagIcon />}>
+                    Mua ngay
+                  </Button>
                 </Stack>
               </Grid>
             </>
           ))}
         </Grid>
       </Container>
-      <Footer />
     </>
   );
 }
