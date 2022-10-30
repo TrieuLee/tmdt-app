@@ -13,17 +13,18 @@ import Typography from "@mui/material/Typography";
 import { CardActionArea } from "@mui/material";
 import Records from "../../server.json";
 export default function ProductLayout() {
-//   const Item = styled(Paper)(({ theme }) => ({
-//     backgroundColor: "#000",
-//     ...theme.typography.body2,
-//     padding: theme.spacing(1),
-//     textAlign: "center",
-//     color: theme.palette.text.secondary,
-//   }));
+  //   const Item = styled(Paper)(({ theme }) => ({
+  //     backgroundColor: "#000",
+  //     ...theme.typography.body2,
+  //     padding: theme.spacing(1),
+  //     textAlign: "center",
+  //     color: theme.palette.text.secondary,
+  //   }));
 
   const { id } = useParams();
-  const categories = Records.find((item) => item.category.name === id);
+  const categories = Records.filter((item) => item.category.name === id);
   console.log(categories);
+
   // const [data, setData] = useState([]);
   // const [filter, setFilter] = useState(data);
   // const [loading, setLoading] = useState(false);
@@ -50,51 +51,37 @@ export default function ProductLayout() {
       <Navbar />
       <Container>
         <div>Day la {id} </div>
-        {Records.filter((record) => record.category.name == id).map(
-          (record) => (
-            <>
-              <div>{record.category.name}</div>
-
-              <Grid container spacing={2}>
-                {Records.map((item) => (
-                  <Grid item xs={3}>
-                    <Link to={`${item.id}`}>
-                      <Card key={item.id} sx={{ maxWidth: 345 }}>
-                        <CardActionArea>
-                          <CardMedia
-                            component="img"
-                            height="140"
-                            image={item.images}
-                            alt=""
-                          />
-                          <CardContent>
-                            <Typography
-                              gutterBottom
-                              variant="h5"
-                              component="div"
-                            >
-                              {item.id}
-                            </Typography>
-                            <Typography
-                              gutterBottom
-                              variant="h5"
-                              component="div"
-                            >
-                              {item.title}
-                            </Typography>
-                            <Typography variant="body2" color="text.secondary">
-                              {item.category.name}
-                            </Typography>
-                          </CardContent>
-                        </CardActionArea>
-                      </Card>
-                    </Link>
-                  </Grid>
-                ))}
+        <Grid container spacing={2} columns={16}>
+          {Records.filter((record) => record.category.name == id).map(
+            (record) => (
+              <Grid item xs={4}>
+                <Link to={`${record.id}`}>
+                  <Card key={record.id} sx={{ maxWidth: 345 }}>
+                    <CardActionArea>
+                      <CardMedia
+                        component="img"
+                        height="200"
+                        image={record.images}
+                        alt=""
+                      />
+                      <CardContent>
+                        <Typography gutterBottom variant="h5" component="div">
+                          {record.title}
+                        </Typography>
+                        <Typography gutterBottom variant="h5" component="div">
+                          {record.price}
+                        </Typography>
+                        <Typography variant="body2" color="text.secondary">
+                          {record.category.name}
+                        </Typography>
+                      </CardContent>
+                    </CardActionArea>
+                  </Card>
+                </Link>
               </Grid>
-            </>
-          )
-        )}
+            )
+          )}
+        </Grid>
       </Container>
       <Footer />
     </>
