@@ -13,12 +13,11 @@ import Stack from "@mui/material/Stack";
 import Link from "@mui/material/Link";
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
+import Record from "../../server.json";
 import "./test.css";
 export default function ProductSection() {
   const { id, itemID } = useParams();
-
   const [active, setActive] = useState();
-
   const theme = {
     spacing: {
       marginTop: "30px",
@@ -67,6 +66,32 @@ export default function ProductSection() {
 
     setOpen(false);
   };
+
+  const [cartItems, setCartItems] = useState([]);
+  const onAdd = (product) => {
+    const exist = cartItems.find((x) => x.id === product.id);
+    if (exist) {
+      setCartItems(
+        cartItems.map((x) =>
+          x.id === product.id ? { ...exist, qty: exist.qty + 1 } : x
+        )
+      );
+    } else {
+      setCartItems([...cartItems, { ...product, qty: 1 }]);
+    }
+  };
+  const onRemove = (product) => {
+    const exist = cartItems.find((x) => x.id === product.id);
+    if (exist.qty === 1) {
+      setCartItems(cartItems.filter((x) => x.id !== product.id));
+    } else {
+      setCartItems(
+        cartItems.map((x) =>
+          x.id === product.id ? { ...exist, qty: exist.qty - 1 } : x
+        )
+      );
+    }
+  };
   return (
     <>
       <Container>
@@ -110,7 +135,10 @@ export default function ProductSection() {
                             marginLeft: "20px",
                             cursor: "pointer",
                           }}
-                          onClick={() => setActive(record)}
+                          onClick={() => {
+                            setActive(record);
+                            console.log(setActive(record));
+                          }}
                           className={active === record ? "active" : undefined}
                         >
                           {record}
@@ -124,6 +152,8 @@ export default function ProductSection() {
                     sx={theme.bread}
                     onClick={() => {
                       alertClick();
+                      onAdd(item);
+                      console.log(onAdd(item));
                     }}
                   >
                     <AddShoppingCartIcon sx={theme.AddShoppingCartIcon} />
