@@ -1,13 +1,12 @@
 import React from "react";
 import Navbar from "../../components/navbar/Navbar";
 import Footer from "../../components/footer/Footer";
-import CheckOutGrid from "./CheckOutGrid";
-
-export default function CheckOut() {
+import OrderGrid from "../../components/finishOrderGrid/OrderGrid";
+export default function FinsishOrder() {
   return (
     <>
       <Navbar />
-      <CheckOutGrid />
+      <OrderGrid />
       <Footer />
     </>
   );

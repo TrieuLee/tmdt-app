@@ -48,7 +48,6 @@ export default function ProductGrid() {
 
   return (
     <>
-      <Navbar />
       <Container>
         <div>Day la {id} </div>
         <Grid container spacing={2} columns={16}>
@@ -83,7 +82,6 @@ export default function ProductGrid() {
           )}
         </Grid>
       </Container>
-      <Footer />
     </>
   );
 }
