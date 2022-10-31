@@ -1,5 +1,6 @@
 import React from "react";
 import { styled } from "@mui/material/styles";
+import { Link } from "react-router-dom";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell, { tableCellClasses } from "@mui/material/TableCell";
@@ -9,9 +10,14 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 import Container from "@mui/material/Container";
-import Typography from "@mui/material/Typography";
+import Button from "@mui/material/Button";
+
+import "./Grid.scss";
 export default function CheckOutGrid() {
-  const StyledTableCell = styled(TableCell)(({ theme }) => ({
+  const StyledTableCell = styled(
+    TableCell,
+    Paper
+  )(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
       backgroundColor: theme.palette.common.black,
       color: theme.palette.common.white,
@@ -76,12 +82,68 @@ export default function CheckOutGrid() {
               </Paper>
             </TableContainer>
           </Grid>
+
           <Grid item xs={4}>
-            <Paper variant="outlined" square>
-              <Typography variant="h5" component="p">
-                Đơn hàng
-              </Typography>
-            </Paper>
+            <TableContainer>
+              <Paper variant="outlined" square>
+                <Table sx={{ minWidth: 300 }} aria-label="customized table">
+                  <TableHead>
+                    <TableRow>
+                      <StyledTableCell>TÓM TẮT ĐƠN HÀNG</StyledTableCell>
+                    </TableRow>
+                  </TableHead>
+                  {/*Nội dung  */}
+                  <TableBody>
+                    <StyledTableRow>
+                      <StyledTableCell component="th" scope="row">
+                        Số lượng:
+                      </StyledTableCell>
+                    </StyledTableRow>
+
+                    <StyledTableRow>
+                      <StyledTableCell component="th" scope="row">
+                        Tạm tính:
+                      </StyledTableCell>
+                    </StyledTableRow>
+
+                    <StyledTableRow>
+                      <StyledTableCell component="th" scope="row">
+                        Tổng cộng
+                      </StyledTableCell>
+                    </StyledTableRow>
+
+                    <div style={{ marginTop: "10px" }}>
+                      <div>
+                        <Button
+                          variant="contained"
+                          square
+                          sx={{ width: "100%" }}
+                        >
+                          THANH TOÁN
+                        </Button>
+                      </div>
+
+                      <div>
+                        <Button
+                          variant="contained"
+                          sx={{
+                            width: "100%",
+                            marginTop: "10px",
+                            textDecoration: "none",
+                            color: "white",
+                          }}
+                        >
+                        
+                          <Link to="/airforce" className="addMore">
+                            MUA THÊM SẢN PHẨM
+                          </Link>
+                        </Button>
+                      </div>
+                    </div>
+                  </TableBody>
+                </Table>
+              </Paper>
+            </TableContainer>
           </Grid>
         </Grid>
       </Container>
