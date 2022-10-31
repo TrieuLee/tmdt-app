@@ -8,6 +8,7 @@ import ProductLayout from "./components/productLayout/ProductLayout";
 import NotFound from "./components/notFound/NotFound";
 import ProductDetail from "./components/productDetail/ProductDetail";
 import CheckOut from "./components/checkOut/CheckOut";
+import OrderCompletion from "./components/orderCompletion/OrderCompletion";
 const Router = () => {
   return (
     <>
@@ -19,6 +20,7 @@ const Router = () => {
         <Route path="/:id" element={<ProductLayout />} />
         <Route path="/:id/:itemID" element={<ProductDetail />} />
         <Route path="/checkout" element={<CheckOut />} />
+        <Route path="/order" element={<OrderCompletion/>} />
       </Routes>
     </>
   );

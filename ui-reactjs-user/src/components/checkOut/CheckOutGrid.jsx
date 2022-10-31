@@ -13,6 +13,7 @@ import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 
 import "./Grid.scss";
+
 export default function CheckOutGrid() {
   const StyledTableCell = styled(
     TableCell,
@@ -89,7 +90,7 @@ export default function CheckOutGrid() {
                 <Table sx={{ minWidth: 300 }} aria-label="customized table">
                   <TableHead>
                     <TableRow>
-                      <StyledTableCell>TÓM TẮT ĐƠN HÀNG</StyledTableCell>
+                      <StyledTableCell sx={{textAlign:'center'}}>TÓM TẮT ĐƠN HÀNG</StyledTableCell>
                     </TableRow>
                   </TableHead>
                   {/*Nội dung  */}
@@ -117,7 +118,7 @@ export default function CheckOutGrid() {
                         <Button
                           variant="contained"
                           square
-                          sx={{ width: "100%" }}
+                          sx={{ width: "100%", borderRadius:'0px' }}
                         >
                           THANH TOÁN
                         </Button>
@@ -129,8 +130,7 @@ export default function CheckOutGrid() {
                           sx={{
                             width: "100%",
                             marginTop: "10px",
-                            textDecoration: "none",
-                            color: "white",
+                            borderRadius:'0px'
                           }}
                         >
                         
