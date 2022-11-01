@@ -13,7 +13,6 @@ import Stack from "@mui/material/Stack";
 import Link from "@mui/material/Link";
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
-import Record from "../../server.json";
 import "./test.css";
 export default function ProductSection() {
   const { id, itemID } = useParams();
@@ -103,6 +102,7 @@ export default function ProductSection() {
         <Grid container spacing={2} sx={{ mt: 1 }}>
           {Records.filter((item) => item.id == itemID).map((item) => (
             <>
+              <div></div>
               <Grid item xs={6}>
                 <Box
                   component="img"
@@ -119,7 +119,7 @@ export default function ProductSection() {
                 </Typography>
                 <div>
                   {item.service &&
-                    item.service.map((records) => <p>{records}</p>)}
+                    item.service.map((records, i) => <p key={i}>{records}</p>)}
                 </div>
 
                 <div style={{ display: "flex", alignItems: "center" }}>
