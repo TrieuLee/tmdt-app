@@ -1,6 +1,6 @@
 import React from "react";
-import Navbar from "../../components/navbar/Navbar";
-import Footer from "../../components/footer/Footer";
+import Navbar from "../navbar/Navbar";
+import Footer from "../footer/Footer";
 // import { styled } from "@mui/material/styles";
 import { Link, useParams } from "react-router-dom";
 import Grid from "@mui/material/Grid";
@@ -12,7 +12,7 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { CardActionArea } from "@mui/material";
 import Records from "../../server.json";
-export default function ProductLayout() {
+export default function ProductGrid() {
   //   const Item = styled(Paper)(({ theme }) => ({
   //     backgroundColor: "#000",
   //     ...theme.typography.body2,
@@ -48,7 +48,6 @@ export default function ProductLayout() {
 
   return (
     <>
-      <Navbar />
       <Container>
         <div>Day la {id} </div>
         <Grid container spacing={2} columns={16}>
@@ -83,7 +82,6 @@ export default function ProductLayout() {
           )}
         </Grid>
       </Container>
-      <Footer />
     </>
   );
 }

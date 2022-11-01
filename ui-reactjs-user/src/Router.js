@@ -4,10 +4,11 @@ import { Routes, Route } from "react-router-dom";
 import Login from "./pages/login/Login";
 import Register from "./pages/register/Register";
 import Home from "./pages/home/Home";
-import ProductLayout from "./components/productLayout/ProductLayout";
 import NotFound from "./components/notFound/NotFound";
-import ProductDetail from "./components/productDetail/ProductDetail";
-import CheckOut from "./components/checkOut/CheckOut";
+import Product from "./pages/product/Product";
+import ProductDetail from "./pages/productDetail/ProductDetail";
+import CheckOut from "./pages/checkOut/CheckOut";
+import FinishOrder from "./pages/finishOrder/FinishOrder";
 const Router = () => {
   return (
     <>
@@ -16,9 +17,10 @@ const Router = () => {
         <Route path="*" element={<NotFound />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/:id" element={<ProductLayout />} />
+        <Route path="/:id" element={<Product />} />
         <Route path="/:id/:itemID" element={<ProductDetail />} />
         <Route path="/checkout" element={<CheckOut />} />
+        <Route path="/order" element={<FinishOrder />} />
       </Routes>
     </>
   );
