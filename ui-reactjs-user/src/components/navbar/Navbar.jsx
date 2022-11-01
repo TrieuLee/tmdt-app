@@ -35,9 +35,7 @@ export default function Navbar() {
     color: "white",
   });
 
-  const [state, setState] = useState({
-    isPaneOpen: false,
-  });
+  const [isLiked, setIsLiked] = useState(false);
 
   return (
     <>
@@ -67,14 +65,12 @@ export default function Navbar() {
             </div>
           </div>
           <div className="navItem">
-            <Button onClick={() => setState({ isPaneOpen: true })}>
+            <Button onClick={() => setIsLiked(!isLiked)}>
               <Cart
-                visible={state.isPaneOpen}
+                visible={isLiked}
                 onRequestClose={() => {
                   // triggered on "<" on left top click or on outside click
-                  setState({ isPaneOpen: false });
-
-                  console.log(setState({ isPaneOpen: false }))
+                  setIsLiked(isLiked);
                 }}
               />
               <ThemeComponent color="error" sx={{ mb: 1 }} fontSize="large" />
