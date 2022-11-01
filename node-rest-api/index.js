@@ -5,5 +5,5 @@ const loaders = require("./loaders");
 loaders(app);
 
 app.listen(8800, () => {
-  console.log("Server is running");
+  console.log("Server is running at port", 8800);
 });
