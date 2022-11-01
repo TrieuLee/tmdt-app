@@ -1,24 +1,9 @@
 const express = require("express");
-const cors = require("cors");
 const app = express();
-const mongoose = require("mongoose");
-var bodyParser = require("body-parser");
-const morgan = require("morgan");
-const dotenv = require("dotenv");
+const multer = require("multer");
+const loaders = require("./loaders");
+loaders(app);
 
-
-dotenv.config()
-//CONNECT MONGODB
-mongoose.connect((process.env.MONGODB_URL),()=>{
-    console.log("Connect to MongoDB")
-})
-// Parse nhanh
-app.use(bodyParser.json({limit:"50mb"}));
-app.use(cors());
-// Hien o terminal (Morgan)
-app.use(morgan("common"));
-
-
-app.listen(5000, ()=>{
-    console.log("Server is starting at port 5000")
+app.listen(8800, () => {
+  console.log("Server is running");
 });
