@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Routes, Route } from "react-router-dom";
 //import Component
 import Login from "./pages/login/Login";
@@ -10,7 +10,7 @@ import ProductDetail from "./pages/productDetail/ProductDetail";
 import CheckOut from "./pages/checkOut/CheckOut";
 import FinishOrder from "./pages/finishOrder/FinishOrder";
 const Router = () => {
-  return (
+    return (
     <>
       <Routes>
         <Route exact path="/" element={<Home />} />

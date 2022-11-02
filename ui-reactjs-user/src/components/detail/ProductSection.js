@@ -14,11 +14,9 @@ import Link from "@mui/material/Link";
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
 import "./test.css";
-export default function ProductSection() {
+export default function ProductSection(props) {
   const { id, itemID } = useParams();
-
   const [active, setActive] = useState();
-
   const theme = {
     spacing: {
       marginTop: "30px",
@@ -67,6 +65,13 @@ export default function ProductSection() {
 
     setOpen(false);
   };
+
+  function Add(items) {
+    localStorage.setItem("items", JSON.stringify(items));
+  }
+
+  const { onAdd } = props;
+  const { cartItems } = props;
   return (
     <>
       <Container>
@@ -76,9 +81,9 @@ export default function ProductSection() {
           </Breadcrumbs>
         </Stack>
         <Grid container spacing={2} sx={{ mt: 1 }}>
-          {Records.filter((item) => item.id == itemID).map((item) => (
+          {Records.filter((item) => item.id == itemID).map((item, i) => (
             <>
-              <Grid item xs={6}>
+              <Grid key={i} item xs={6}>
                 <Box
                   component="img"
                   sx={{ height: 480, width: 480 }}
@@ -94,7 +99,7 @@ export default function ProductSection() {
                 </Typography>
                 <div>
                   {item.service &&
-                    item.service.map((records) => <p>{records}</p>)}
+                    item.service.map((records, i) => <p key={i}>{records}</p>)}
                 </div>
 
                 <div style={{ display: "flex", alignItems: "center" }}>
@@ -110,7 +115,9 @@ export default function ProductSection() {
                             marginLeft: "20px",
                             cursor: "pointer",
                           }}
-                          onClick={() => setActive(record)}
+                          onClick={() => {
+                            setActive(record);
+                          }}
                           className={active === record ? "active" : undefined}
                         >
                           {record}
@@ -124,10 +131,13 @@ export default function ProductSection() {
                     sx={theme.bread}
                     onClick={() => {
                       alertClick();
+                      onAdd(item);
                     }}
                   >
                     <AddShoppingCartIcon sx={theme.AddShoppingCartIcon} />
-                    <p style={{ margin: "8px" }}>Thêm vào giỏ hàng</p>
+                    <p style={{ margin: "8px" }}>
+                      Thêm vào giỏ hàng ({cartItems.length})
+                    </p>
                   </Button>
                   <Snackbar
                     open={open}

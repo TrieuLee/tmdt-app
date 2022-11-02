@@ -36,13 +36,7 @@ export default function CheckOutGrid() {
       border: 0,
     },
   }));
-  function createData(name, calories, fat, carbs, protein) {
-    return { name, calories, fat, carbs, protein };
-  }
-  const rows = [
-    createData("Frozen yoghurt", 159, 6.0, 24, 4.0),
-    createData("Ice cream sandwich", 237, 9.0, 37, 4.3),
-  ];
+
   return (
     <>
       <Container sx={{ mt: 5 }}>
@@ -54,30 +48,33 @@ export default function CheckOutGrid() {
                   <TableHead>
                     <TableRow>
                       <StyledTableCell>Tên sản phẩm</StyledTableCell>
-                      <StyledTableCell align="right">Giá</StyledTableCell>
-                      <StyledTableCell align="right">Số lượng</StyledTableCell>
-                      <StyledTableCell align="right">
-                        Thành tiền
-                      </StyledTableCell>
+                      <StyledTableCell>Giá</StyledTableCell>
+                      <StyledTableCell>Số lượng</StyledTableCell>
+                      <StyledTableCell>Thành tiền</StyledTableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>
-                    {rows.map((row) => (
-                      <StyledTableRow key={row.name}>
-                        <StyledTableCell component="th" scope="row">
-                          {row.name}
-                        </StyledTableCell>
-                        <StyledTableCell align="right">
-                          {row.calories}
-                        </StyledTableCell>
-                        <StyledTableCell align="right">
-                          {row.fat}
-                        </StyledTableCell>
-                        <StyledTableCell align="right">
-                          {row.carbs}
-                        </StyledTableCell>
-                      </StyledTableRow>
-                    ))}
+                    <StyledTableRow>
+                      <StyledTableCell component="th" scope="row">
+                        <div style={{ display: "flex" }}>
+                          <img
+                            src="https://bizweb.dktcdn.net/thumb/1024x1024/100/448/660/products/giay-ultraboost-21-xam-fy0375-01-standard-e19e5c6a-d577-4f32-afd0-c791ac8c4f87.jpg?v=1645669520997"
+                            style={{ width: "100px" }}
+                            alt=""
+                          />
+                          <div>
+                            <p>Giày nam Fake</p>
+                            <p>Size: 38</p>
+                            <p>XÓa</p>
+                          </div>
+                        </div>
+                      </StyledTableCell>
+                      <StyledTableCell>
+                        <p>300.000đ</p>
+                      </StyledTableCell>
+                      <StyledTableCell align="right"></StyledTableCell>
+                      <StyledTableCell align="right"></StyledTableCell>
+                    </StyledTableRow>
                   </TableBody>
                 </Table>
               </Paper>
@@ -90,7 +87,9 @@ export default function CheckOutGrid() {
                 <Table sx={{ minWidth: 300 }} aria-label="customized table">
                   <TableHead>
                     <TableRow>
-                      <StyledTableCell sx={{textAlign:'center'}}>TÓM TẮT ĐƠN HÀNG</StyledTableCell>
+                      <StyledTableCell sx={{ textAlign: "center" }}>
+                        TÓM TẮT ĐƠN HÀNG
+                      </StyledTableCell>
                     </TableRow>
                   </TableHead>
                   {/*Nội dung  */}
@@ -118,7 +117,7 @@ export default function CheckOutGrid() {
                         <Button
                           variant="contained"
                           square
-                          sx={{ width: "100%", borderRadius:'0px' }}
+                          sx={{ width: "100%", borderRadius: "0px" }}
                         >
                           THANH TOÁN
                         </Button>
@@ -130,10 +129,9 @@ export default function CheckOutGrid() {
                           sx={{
                             width: "100%",
                             marginTop: "10px",
-                            borderRadius:'0px'
+                            borderRadius: "0px",
                           }}
                         >
-                        
                           <Link to="/airforce" className="addMore">
                             MUA THÊM SẢN PHẨM
                           </Link>

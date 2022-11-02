@@ -36,7 +36,7 @@ export default function OrderGrid() {
         </Grid>
         <Grid item xs={6}>
           <Paper variant="outlined" square>
-              
+            
           </Paper>
         </Grid>
       </Grid>
