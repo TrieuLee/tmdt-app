@@ -14,7 +14,7 @@ import Link from "@mui/material/Link";
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
 import "./test.css";
-export default function ProductSection() {
+export default function ProductSection(props) {
   const { id, itemID } = useParams();
   const [active, setActive] = useState();
   const theme = {
@@ -66,31 +66,8 @@ export default function ProductSection() {
     setOpen(false);
   };
 
-  const [cartItems, setCartItems] = useState([]);
-  const onAdd = (product) => {
-    const exist = cartItems.find((x) => x.id === product.id);
-    if (exist) {
-      setCartItems(
-        cartItems.map((x) =>
-          x.id === product.id ? { ...exist, qty: exist.qty + 1 } : x
-        )
-      );
-    } else {
-      setCartItems([...cartItems, { ...product, qty: 1 }]);
-    }
-  };
-  const onRemove = (product) => {
-    const exist = cartItems.find((x) => x.id === product.id);
-    if (exist.qty === 1) {
-      setCartItems(cartItems.filter((x) => x.id !== product.id));
-    } else {
-      setCartItems(
-        cartItems.map((x) =>
-          x.id === product.id ? { ...exist, qty: exist.qty - 1 } : x
-        )
-      );
-    }
-  };
+  const { onAdd } = props;
+  const { cartItems } = props;
   return (
     <>
       <Container>
@@ -100,10 +77,9 @@ export default function ProductSection() {
           </Breadcrumbs>
         </Stack>
         <Grid container spacing={2} sx={{ mt: 1 }}>
-          {Records.filter((item) => item.id == itemID).map((item) => (
+          {Records.filter((item) => item.id == itemID).map((item, i) => (
             <>
-              <div></div>
-              <Grid item xs={6}>
+              <Grid key={i} item xs={6}>
                 <Box
                   component="img"
                   sx={{ height: 480, width: 480 }}
@@ -137,7 +113,6 @@ export default function ProductSection() {
                           }}
                           onClick={() => {
                             setActive(record);
-                            console.log(setActive(record));
                           }}
                           className={active === record ? "active" : undefined}
                         >
@@ -153,11 +128,12 @@ export default function ProductSection() {
                     onClick={() => {
                       alertClick();
                       onAdd(item);
-                      console.log(onAdd(item));
                     }}
                   >
                     <AddShoppingCartIcon sx={theme.AddShoppingCartIcon} />
-                    <p style={{ margin: "8px" }}>Thêm vào giỏ hàng</p>
+                    <p style={{ margin: "8px" }}>
+                      Thêm vào giỏ hàng ({cartItems.length})
+                    </p>
                   </Button>
                   <Snackbar
                     open={open}

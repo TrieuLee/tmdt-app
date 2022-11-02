@@ -52,10 +52,10 @@ export default function ProductGrid() {
         <div>Day la {id} </div>
         <Grid container spacing={2} columns={16}>
           {Records.filter((record) => record.category.name == id).map(
-            (record) => (
-              <Grid item xs={4}>
+            (record, i) => (
+              <Grid key={i} item xs={4}>
                 <Link to={`${record.id}`}>
-                  <Card key={record.id} sx={{ maxWidth: 345 }}>
+                  <Card sx={{ maxWidth: 345 }}>
                     <CardActionArea>
                       <CardMedia
                         component="img"

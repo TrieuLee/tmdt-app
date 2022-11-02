@@ -9,12 +9,8 @@ import Product from "./pages/product/Product";
 import ProductDetail from "./pages/productDetail/ProductDetail";
 import CheckOut from "./pages/checkOut/CheckOut";
 import FinishOrder from "./pages/finishOrder/FinishOrder";
-import Record from "./server.json";
 const Router = () => {
-  const [cartItems, setCartItems] = useState([]);
-
-  const { productItem } = Record;
-  return (
+    return (
     <>
       <Routes>
         <Route exact path="/" element={<Home />} />
@@ -22,12 +18,7 @@ const Router = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/:id" element={<Product />} />
-        <Route
-          path="/:id/:itemID"
-          element={
-            <ProductDetail productItem={productItem} cartItems={cartItems} />
-          }
-        />
+        <Route path="/:id/:itemID" element={<ProductDetail />} />
         <Route path="/checkout" element={<CheckOut />} />
         <Route path="/order" element={<FinishOrder />} />
       </Routes>
