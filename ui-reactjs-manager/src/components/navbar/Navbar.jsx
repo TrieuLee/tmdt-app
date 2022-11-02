@@ -47,7 +47,7 @@ export default function Navbar() {
               >
                 <Avatar sx={{ width: 32, height: 32 }}>M</Avatar>
                 <Typography sx={{ ml: 2, color: "#eee" }}>
-                  Xin chào ai đó
+                  Xin chào Admin
                 </Typography>
               </IconButton>
             </Box>
