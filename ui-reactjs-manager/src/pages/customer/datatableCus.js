@@ -2,20 +2,20 @@
 export const userRows = [
   {
     id: 1,
-    username: "Snow",
+    username: "Kiệt",
     member: "thường",
     email: "1snow@gmail.com",
-    phoneNumber: 35,
+    phoneNumber: '0783467852',
     point: 1000,
   },
   {
     id: 2,
-    username: "Jamie Lannister",
+    username: "Phúc",
     img: "https://images.pexels.com/photos/1820770/pexels-photo-1820770.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
     email: "2snow@gmail.com",
     member: "VIP",
+    phoneNumber: '0783467852',
     point: 2000,
-    age: 42,
   },
   {
     id: 3,
@@ -23,7 +23,8 @@ export const userRows = [
     img: "https://images.pexels.com/photos/1820770/pexels-photo-1820770.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
     email: "3snow@gmail.com",
     status: "pending",
-    age: 45,
+    phoneNumber: '0783467852',
+    point: 2000,
   },
   {
     id: 4,
