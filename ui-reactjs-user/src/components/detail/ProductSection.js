@@ -66,6 +66,10 @@ export default function ProductSection(props) {
     setOpen(false);
   };
 
+  function Add(items) {
+    localStorage.setItem("items", JSON.stringify(items));
+  }
+
   const { onAdd } = props;
   const { cartItems } = props;
   return (

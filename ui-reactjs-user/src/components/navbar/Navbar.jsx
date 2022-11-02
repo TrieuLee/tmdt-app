@@ -46,20 +46,24 @@ export default function Navbar(props) {
   });
   const { cartItems } = props;
   const { onAdd, onRemove } = props;
-  // const itemsPrice = cartItems.reduce((a, c) => a + c.price * c.qty, 0);
-  // const dis = itemsPrice * 0.01;
-  // const shippingPrice = itemsPrice < 200000 ? 0 : dis;
-  // const totalPrice = itemsPrice + shippingPrice;
-  // const data = !localStorage.itemRes ? "" : JSON.parse(localStorage.itemRes);
-  // function SetCartPayment() {
-  //   const lstOrFd = {
-  //     cart: cartItems,
-  //     itemsPrice: itemsPrice ? itemsPrice : "",
-  //     shippingPrice: shippingPrice ? shippingPrice : "",
-  //     totalPrice: totalPrice ? totalPrice : "",
-  //   };
-  //   localStorage.setItem("lstOrFd", JSON.stringify(lstOrFd));
-  // }
+  const itemsPrice = cartItems
+    ? cartItems.reduce((a, c) => a + c.price * c.qty, 0)
+    : 0;
+  const dis = itemsPrice * 0.01;
+  const shippingPrice = itemsPrice < 200000 ? 0 : dis;
+  const totalPrice = itemsPrice + shippingPrice;
+  const data = !localStorage.itemRes ? "" : JSON.parse(localStorage.itemRes);
+  function SetCartPayment() {
+    const lstOrFd = {
+      cart: cartItems,
+      itemsPrice: itemsPrice ? itemsPrice : "",
+      shippingPrice: shippingPrice ? shippingPrice : "",
+      totalPrice: totalPrice ? totalPrice : "",
+    };
+    localStorage.setItem("lstOrFd", JSON.stringify(lstOrFd));
+  }
+  console.log(cartItems);
+
   return (
     <>
       <nav className="nav">
@@ -138,7 +142,7 @@ export default function Navbar(props) {
                     </div>
                   </div>
                 ))}
-              {/* {(cartItems.length !== 0 || data) && (
+              {cartItems && (cartItems.length !== 0 || data) && (
                 <>
                   <div className=" justify-content-end">
                     <p className="d-flex justify-content-end">
@@ -162,7 +166,7 @@ export default function Navbar(props) {
                     Thanh Toán
                   </a>
                 </>
-              )} */}
+              )}
               {/* {cartItems.map((item) => (
                 <div key={item.id} className="row mt-2">
                   <div className="col-3">
