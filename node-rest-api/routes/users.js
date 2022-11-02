@@ -72,19 +72,29 @@ router.delete("/:id", async (req, res) => {
     return res.status(403).json("bạn chỉ có thể xóa tài khoản của bạn");
   }
 });
-// // get a user
-// router.get("/", async (req, res) => {
-//   const userId = req.query.userId;
-//   const username = req.query.username;
-//   try {
-//     const user = userId
-//       ? await User.findById(userId)
-//       : await User.findOne({ username: username });
-//     const { password, updatedAt, ...others } = user._doc;
-//     res.status(200).json(others);
-//   } catch (err) {
-//     return res.status(500).json(err);
-//   }
-// });
-// follow a user
+
+router.post("/login", async (req, res) => {
+  const user = await User.findOne({ email: req.body.email });
+  if (!user) {
+    return res.status(400).json({
+      errorMessage: "Sai tài khoản hoặc mật khẩu. Vui lòng nhập lại.",
+    });
+  }
+  console.log(user);
+  //const correctUser = await bcrypt.compare(req.body.password, user.password);
+
+  if (req.body.password !== user.password) {
+    return res.status(400).json({
+      errorMessage: "Sai tài khoản hoặc mật khẩu. Vui lòng nhập lại.",
+    });
+  }
+
+  try {
+    res.status(200).json(user);
+  } catch (err) {
+    res.status(500).json(err);
+    console.log(err);
+  }
+});
+
 module.exports = router;

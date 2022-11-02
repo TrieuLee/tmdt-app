@@ -31,6 +31,9 @@ export default function Login() {
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
   };
+  function CheatLogin() {
+    localStorage.setItem("items", "Admin");
+  }
   return (
     <div
       className="login"
@@ -113,8 +116,15 @@ export default function Login() {
             </div>
             <span className="loginForgot">Quên mật khẩu?</span>
 
-            <Button variant="contained" className="loginButon" type="submit">
-              Đăng nhập
+            <Button
+              variant="contained"
+              className="loginButon"
+              type="submit"
+              onClick={() => CheatLogin()}
+            >
+              <Link style={{ textDecoration: "none", color: "white" }} to="/">
+                Đăng nhập
+              </Link>
             </Button>
 
             <Button variant="contained " className="loginRegisterButton">

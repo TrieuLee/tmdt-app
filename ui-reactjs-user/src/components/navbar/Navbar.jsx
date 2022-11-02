@@ -63,7 +63,8 @@ export default function Navbar(props) {
     localStorage.setItem("lstOrFd", JSON.stringify(lstOrFd));
   }
   console.log(cartItems);
-
+  const admin = localStorage.getItem("items");
+  const register = localStorage.getItem("register");
   return (
     <>
       <nav className="nav">
@@ -205,9 +206,14 @@ export default function Navbar(props) {
               <br />
             </SlidingPane>
             <IconButton>
-              <Link to="/login">
-                <ThemeComponent1 fontSize="large"></ThemeComponent1>
-              </Link>
+              {}
+              {admin ? (
+                <p style={{ color: "white" }}>xin chào, Admin</p>
+              ) : (
+                <Link to="/login">
+                  <ThemeComponent1 fontSize="large"></ThemeComponent1>
+                </Link>
+              )}
             </IconButton>
           </div>
         </div>

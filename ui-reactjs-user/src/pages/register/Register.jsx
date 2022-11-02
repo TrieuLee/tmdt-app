@@ -29,6 +29,9 @@ export default function Register() {
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
   };
+  function CheatRegister() {
+    localStorage.setItem("register", "Lê Hải Triều");
+  }
   return (
     <div
       className="register"
@@ -126,7 +129,12 @@ export default function Register() {
                 />
               </FormControl>
             </div>
-            <Button variant="contained" className="registerButon" type="submit">
+            <Button
+              variant="contained"
+              className="registerButon"
+              type="submit"
+              onClick={() => CheatRegister()}
+            >
               Đăng nhập
             </Button>
 
