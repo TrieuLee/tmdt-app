@@ -35,7 +35,7 @@ export default function ProductDetail() {
   return (
     <>
       <Navbar cartItems={cartItems} onAdd={onAdd} onRemove={onRemove} />
-      <ProductSection onAdd={onAdd} cartItems={cartItems} />
+        <ProductSection onAdd={onAdd} cartItems={cartItems} />
       <CommentSection />
       <Footer />
     </>

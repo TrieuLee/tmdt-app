@@ -21,7 +21,7 @@ export default function CommentSection() {
   return (
     <Container>
       <Grid container sx={theme.spacing} spacing={2}>
-        <Grid item xs={9}>
+        <Grid item xs={8} border={1}>
           Mô tả sản phẩm
           <Box sx={{ width: "100%", typography: "body1" }}>
             <TabContext value={value}>
@@ -36,11 +36,10 @@ export default function CommentSection() {
               </Box>
               <TabPanel value="1">Item One</TabPanel>
               <TabPanel value="2">Item Two</TabPanel>
-              <TabPanel value="3">Item Three</TabPanel>
             </TabContext>
           </Box>
         </Grid>
-        <Grid item xs={3}>
+        <Grid item xs={4} border={1}>
           Sản phẩm liên quan
         </Grid>
       </Grid>

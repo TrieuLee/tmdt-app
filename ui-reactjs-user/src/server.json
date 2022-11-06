@@ -2,7 +2,7 @@
   {
     "id": 1,
     "title": "Giay AirForce",
-    "price": 500,
+    "price": 500000,
     "description": "Giay ngon re dep",
     "size": ["38", "39", "40", "41", "42"],
     "service": [
@@ -10,6 +10,10 @@
       "Bảo hành từ 1 dến 5 năm",
       "Giao hàng toàn quốc"
     ],
+    "rate": 4,
+    "icon": ["faStar", "faStar", "faStar", "faStar"],
+    "sold": 230,
+    "status": "Còn hàng",
     "category": {
       "id": 1,
       "name": "airforce",
@@ -19,19 +23,7 @@
     "images": "https://bizweb.dktcdn.net/thumb/1024x1024/100/448/660/products/ea0bb554-e3f6-4bb9-9221-3baa7f65f052.jpg?v=1645670272520",
     "categoryID": 1
   },
-  {
-    "id": 2,
-    "title": "Fake Adidas",
-    "price": 550,
-    "description": "Giay xau bo khoi mua",
-    "category": {
-      "id": 2,
-      "name": "airforce",
-      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Adidas_Logo.svg/2560px-Adidas_Logo.svg.png"
-    },
-    "images": "https://bizweb.dktcdn.net/thumb/1024x1024/100/448/660/products/giay-ultraboost-21-xam-fy0375-01-standard-e19e5c6a-d577-4f32-afd0-c791ac8c4f87.jpg?v=1645669520997",
-    "categoryID": 1
-  },
+
   {
     "id": 2,
     "title": "Fake Adidas",

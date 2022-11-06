@@ -8,6 +8,7 @@
     "@mui/lab": "^5.0.0-alpha.105",
     "@mui/material": "^5.10.11",
     "react-fontawesome": "^1.7.1",
+    "react-number-format": "^5.1.1",
     "react-sliding-pane": "^7.3.0"
   }
 }

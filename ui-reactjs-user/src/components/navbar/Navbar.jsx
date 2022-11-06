@@ -1,24 +1,18 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./navbar.scss";
-import { useParams } from "react-router-dom";
-import Records from "../../server.json";
 import ShoppingBagIcon from "@mui/icons-material/ShoppingBag";
 import { IconButton } from "@mui/material";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import SlidingPane from "react-sliding-pane";
 import "react-sliding-pane/dist/react-sliding-pane.css";
 import { styled } from "@mui/system";
-import Cart from "../../components/cart/Cart";
-import Button from "@mui/material/Button";
 import "react-sliding-pane/dist/react-sliding-pane.css";
-import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCirclePlus } from "@fortawesome/free-solid-svg-icons";
 import { faCircleMinus } from "@fortawesome/free-solid-svg-icons";
 export default function Navbar(props) {
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
-  const { id } = useParams();
   //   console.log(id);
   //   if (id) {
   //     Records.find((item) => item.category.name === id);
@@ -62,9 +56,7 @@ export default function Navbar(props) {
     };
     localStorage.setItem("lstOrFd", JSON.stringify(lstOrFd));
   }
-  console.log(cartItems);
   const admin = localStorage.getItem("items");
-  const register = localStorage.getItem("register");
   return (
     <>
       <nav className="nav">
@@ -124,7 +116,7 @@ export default function Navbar(props) {
                       <div>
                         <p>{item.title}</p>
                         <p>{item.price}</p>
-
+                        <p>Size:{item.size}</p>
                         <p>
                           Số lượng: {item.qty} x {item.price}
                         </p>
