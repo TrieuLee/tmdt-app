@@ -71,7 +71,7 @@ export default function ProductSection(props) {
   function Add(items) {
     localStorage.setItem("items", JSON.stringify(items));
   }
-    
+
   const { onAdd } = props;
   const { cartItems } = props;
   return (
@@ -132,7 +132,7 @@ export default function ProductSection(props) {
                       variant="h4"
                       component="h6"
                       style={{ marginTop: "10px" }}
-                    > 
+                    >
                       {item.price.toLocaleString("it-IT", {
                         style: "currency",
                         currency: "VND",

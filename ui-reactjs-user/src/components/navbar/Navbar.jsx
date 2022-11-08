@@ -1,27 +1,20 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./navbar.scss";
-import ShoppingBagIcon from "@mui/icons-material/ShoppingBag";
+import "react-sliding-pane/dist/react-sliding-pane.css";
+import NavDropDown from "../navDropDown/NavDropDown";
+import { styled } from "@mui/system";
 import { IconButton } from "@mui/material";
+import ShoppingBagIcon from "@mui/icons-material/ShoppingBag";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import SlidingPane from "react-sliding-pane";
-import "react-sliding-pane/dist/react-sliding-pane.css";
-import { styled } from "@mui/system";
-import "react-sliding-pane/dist/react-sliding-pane.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCirclePlus } from "@fortawesome/free-solid-svg-icons";
-import { faCircleMinus } from "@fortawesome/free-solid-svg-icons";
+import Button from "@mui/material/Button";
+import Grid from "@mui/material/Grid";
+import AddCircleIcon from "@mui/icons-material/AddCircle";
+import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
+
 export default function Navbar(props) {
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
-  //   console.log(id);
-  //   if (id) {
-  //     Records.find((item) => item.category.name === id);
-  //   }
-
-  // // const categories = [...new Set(Records.map((item) => item.category.name))]
-  // const categories = Records.filter((item) => item.category.name === id);
-  // console.log(categories);
-
   const ThemeComponent = styled(
     ShoppingBagIcon,
     AccountCircleIcon
@@ -31,8 +24,6 @@ export default function Navbar(props) {
   const ThemeComponent1 = styled(AccountCircleIcon)({
     color: "white",
   });
-
-  // const [isLiked, setIsLiked] = useState(false);
 
   const [state, setState] = useState({
     isPaneOpen: false,
@@ -102,91 +93,113 @@ export default function Navbar(props) {
                 {cartItems && cartItems.length === 0 && (
                   <div>Giỏ hàng trống</div>
                 )}
-              </div>{" "}
+              </div>
               {cartItems &&
                 cartItems.map((item) => (
-                  <div key={item.id}>
-                    <div style={{ display: "flex" }}>
+                  <Grid container key={item.id}>
+                    <Grid item xs={3}>
                       <img
                         src={item.images}
                         style={{ width: "100px" }}
                         alt=""
                       />
-                      <div>
-                        <p>{item.title}</p>
-                        <p>{item.price.toLocaleString("it-IT", {
-                        style: "currency",
-                        currency: "VND",
-                      })}</p>
-                        <p>Size:{item.size}</p>
-                        <p>
-                          Số lượng: {item.qty} x {item.price.toLocaleString("it-IT", {
-                        style: "currency",
-                        currency: "VND",
-                      })}
-                        </p>
-                        <FontAwesomeIcon
-                          icon={faCirclePlus}
-                          className="me-3"
-                          onClick={() => onAdd(item)}
-                        />
+                    </Grid>
+                    <Grid
+                      item
+                      xs={6}
+                      sx={{ display: "flex", alignItems: "center" }}
+                    >
+                      <ul
+                        style={{ listStyle: "none", padding: "0", margin: "0" }}
+                      >
+                        <li>
+                          <b>{item.title}</b>
+                        </li>
+                        <li style={{ marginTop: "8px" }}>
+                          <b>
+                            {item.price.toLocaleString("it-IT", {
+                              style: "currency",
+                              currency: "VND",
+                            })}
+                          </b>
+                        </li>
+                        <li style={{ marginTop: "8px" }}>
+                          <b>Size:</b> {item.size}
+                        </li>
+                        <li style={{ marginTop: "8px" }}>
+                          <b>Số lượng:</b> {item.qty} x{" "}
+                          {item.price.toLocaleString("it-IT", {
+                            style: "currency",
+                            currency: "VND",
+                          })}
+                        </li>
+                      </ul>
+                    </Grid>
+                    <Grid
+                      item
+                      xs={3}
+                      sx={{ display: "flex", alignItems: "center" }}
+                    >
+                      <IconButton onClick={() => onAdd(item)}>
+                        <AddCircleIcon />
+                      </IconButton>
 
-                        <FontAwesomeIcon
-                          icon={faCircleMinus}
-                          className=""
-                          onClick={() => onRemove(item)}
-                        />
-                      </div>
-                    </div>
-                  </div>
+                      <IconButton onClick={() => onRemove(item)}>
+                        <RemoveCircleIcon />
+                      </IconButton>
+                    </Grid>
+                  </Grid>
                 ))}
+
               {cartItems && (cartItems.length !== 0 || data) && (
                 <>
-                  <div className=" justify-content-end">
-                    <p className="d-flex justify-content-end">
-                      Tạm tính: {itemsPrice.toLocaleString("it-IT", {
+                  <div style={{ marginTop: "70%" }}>
+                    <p style={{ display: "flex", justifyContent: "end" }}>
+                      Tạm tính:{" "}
+                      {itemsPrice.toLocaleString("it-IT", {
                         style: "currency",
                         currency: "VND",
                       })}
                     </p>
-                    <p className="d-flex justify-content-end">
-                      Phí ship: {shippingPrice.toLocaleString("it-IT", {
+                    <p style={{ display: "flex", justifyContent: "end" }}>
+                      Phí ship:{" "}
+                      {shippingPrice.toLocaleString("it-IT", {
                         style: "currency",
                         currency: "VND",
                       })}
                     </p>
-                    <p className="d-flex justify-content-end">
-                      Tổng tiền: {totalPrice.toLocaleString("it-IT", {
+                    <p style={{ display: "flex", justifyContent: "end" }}>
+                      Tổng tiền:{" "}
+                      {totalPrice.toLocaleString("it-IT", {
                         style: "currency",
                         currency: "VND",
                       })}
                     </p>
                   </div>
 
-                  <a
-                    type="submit"
-                    value="Thanh toán"
-                    className="w-100 p-2"
-                    href="/checkout"
-                    onClick={SetCartPayment}
-                  >
-                    Thanh Toán
-                  </a>
+                  <Button variant="contained" sx={{ width: "100%" }}>
+                    <Link
+                      type="submit"
+                      value="Thanh toán"
+                      to="/checkout"
+                      style={{ textDecoration: "none", color: "white" }}
+                      onClick={SetCartPayment}
+                    >
+                      Thanh Toán
+                    </Link>
+                  </Button>
                 </>
               )}
-           
               <br />
             </SlidingPane>
-            <IconButton>
-              {}
-              {admin ? (
-                <p style={{ color: "white" }}>xin chào, Admin</p>
-              ) : (
-                <Link to="/login">
-                  <ThemeComponent1 fontSize="large"></ThemeComponent1>
-                </Link>
-              )}
-            </IconButton>
+
+            {admin ? (
+              <NavDropDown />
+            ) : (
+              <Link to="/login">
+                <ThemeComponent1 fontSize="large" />
+              </Link>
+            )}
           </div>
         </div>
         <div
