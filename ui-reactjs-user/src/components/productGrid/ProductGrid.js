@@ -49,7 +49,6 @@ export default function ProductGrid() {
   return (
     <>
       <Container>
-        <div>Day la {id} </div>
         <Grid container spacing={2} columns={16}>
           {Records.filter((record) => record.category.name == id).map(
             (record, i) => (
@@ -68,7 +67,10 @@ export default function ProductGrid() {
                           {record.title}
                         </Typography>
                         <Typography gutterBottom variant="h5" component="div">
-                          {record.price}
+                          {record.price.toLocaleString("it-IT", {
+                        style: "currency",
+                        currency: "VND",
+                      })}
                         </Typography>
                         <Typography variant="body2" color="text.secondary">
                           {record.category.name}

@@ -23,11 +23,7 @@ export const userColumns = [
     headerName: "Size",
     width: 150,
   },
-  {
-    field: "color",
-    headerName: "Màu giày",
-    width: 140,
-  },
+ 
   {
     field: "state",
     headerName: "Tình trạng",

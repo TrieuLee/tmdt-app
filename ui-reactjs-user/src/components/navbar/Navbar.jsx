@@ -93,7 +93,6 @@ export default function Navbar(props) {
               overlayClassName="some-custom-overlay-class"
               isOpen={state.isPaneOpen}
               title="Giỏ hàng của tôi"
-              subtitle="Optional subtitle."
               width="40%"
               onRequestClose={() => {
                 setState({ isPaneOpen: false });
@@ -115,10 +114,16 @@ export default function Navbar(props) {
                       />
                       <div>
                         <p>{item.title}</p>
-                        <p>{item.price}</p>
+                        <p>{item.price.toLocaleString("it-IT", {
+                        style: "currency",
+                        currency: "VND",
+                      })}</p>
                         <p>Size:{item.size}</p>
                         <p>
-                          Số lượng: {item.qty} x {item.price}
+                          Số lượng: {item.qty} x {item.price.toLocaleString("it-IT", {
+                        style: "currency",
+                        currency: "VND",
+                      })}
                         </p>
                         <FontAwesomeIcon
                           icon={faCirclePlus}
@@ -139,13 +144,22 @@ export default function Navbar(props) {
                 <>
                   <div className=" justify-content-end">
                     <p className="d-flex justify-content-end">
-                      Tạm tính: {itemsPrice}
+                      Tạm tính: {itemsPrice.toLocaleString("it-IT", {
+                        style: "currency",
+                        currency: "VND",
+                      })}
                     </p>
                     <p className="d-flex justify-content-end">
-                      Discount: {shippingPrice}
+                      Phí ship: {shippingPrice.toLocaleString("it-IT", {
+                        style: "currency",
+                        currency: "VND",
+                      })}
                     </p>
                     <p className="d-flex justify-content-end">
-                      Tổng tiền: {totalPrice}
+                      Tổng tiền: {totalPrice.toLocaleString("it-IT", {
+                        style: "currency",
+                        currency: "VND",
+                      })}
                     </p>
                   </div>
 
@@ -153,48 +167,14 @@ export default function Navbar(props) {
                     type="submit"
                     value="Thanh toán"
                     className="w-100 p-2"
-                    href="/payment"
+                    href="/checkout"
                     onClick={SetCartPayment}
                   >
                     Thanh Toán
                   </a>
                 </>
               )}
-              {/* {cartItems.map((item) => (
-                <div key={item.id} className="row mt-2">
-                  <div className="col-3">
-                    <img
-                      src={item.Fd_image}
-                      style={{ width: "100px", height: "100px" }}
-                      alt=""
-                    />
-                  </div>
-
-                  <div className="col-6">
-                    <p className="my-4 mb-0 fw-bold fs-5">{item.Fd_name} </p>
-                    <div>
-                      <p className="m-0">
-                        Số lượng: {item.qty} x {item.Fd_price}
-                      </p>
-                    </div>
-                  </div>
-                  <div className="col-3 ">
-                    <div className="d-flex justify-content-center my-5">
-                      <FontAwesomeIcon
-                        icon={faCirclePlus}
-                        className="me-3"
-                        onClick={() => onAdd(item)}
-                      />
-
-                      <FontAwesomeIcon
-                        icon={faCircleMinus}
-                        className=""
-                        onClick={() => onRemove(item)}
-                      />
-                    </div>
-                  </div>
-                </div>
-              ))} */}
+           
               <br />
             </SlidingPane>
             <IconButton>
