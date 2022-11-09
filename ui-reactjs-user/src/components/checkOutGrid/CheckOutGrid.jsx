@@ -37,6 +37,92 @@ export default function CheckOutGrid() {
     },
   }));
 
+  const carts = !localStorage.lstOrFd ? "" : JSON.parse(localStorage.lstOrFd);
+  const shippingPrice = carts.shippingPrice;
+  const totalPrice = carts.totalPrice;
+  console.log(carts);
+  function listCart() {
+    let cartdb = [...carts.cart];
+    return cartdb.map((cart, i) => {
+      const total = cart.price * cart.qty;
+      return (
+        <>
+          <StyledTableCell component="th" scope="row">
+            <div style={{ display: "flex" }}>
+              <img src={cart.images} style={{ width: "100px" }} alt="" />
+              <div>
+                <p>{cart.title}</p>
+                <p>{cart.size}</p>
+                <p>XÓa</p>
+              </div>
+            </div>
+          </StyledTableCell>
+          <StyledTableCell>
+            <p>
+              {cart.price.toLocaleString("it-IT", {
+                style: "currency",
+                currency: "VND",
+              })}
+            </p>
+          </StyledTableCell>
+          <StyledTableCell>
+            <p>{cart.qty}</p>
+          </StyledTableCell>
+          <StyledTableCell>
+            {total.toLocaleString("it-IT", {
+              style: "currency",
+              currency: "VND",
+            })}
+          </StyledTableCell>
+        </>
+      );
+    });
+  }
+  function orderSummary() {
+    let cartdb = [...carts.cart];
+    return cartdb.map((cart, i) => {
+      return (
+        <>
+          <StyledTableRow>
+            <StyledTableCell component="th" scope="row">
+              Số lượng: {cart.qty}
+            </StyledTableCell>
+          </StyledTableRow>
+
+          <StyledTableRow>
+            <StyledTableCell component="th" scope="row">
+              Phí ship:{" "}
+              {shippingPrice.toLocaleString("it-IT", {
+                style: "currency",
+                currency: "VND",
+              })}
+            </StyledTableCell>
+          </StyledTableRow>
+
+          <StyledTableRow>
+            <StyledTableCell component="th" scope="row">
+              Tạm tính:{" "}
+              {totalPrice.toLocaleString("it-IT", {
+                style: "currency",
+                currency: "VND",
+              })}
+            </StyledTableCell>
+          </StyledTableRow>
+
+          <StyledTableRow>
+            <StyledTableCell component="th" scope="row">
+              Tổng cộng:{" "}
+              {totalPrice.toLocaleString("it-IT", {
+                style: "currency",
+                currency: "VND",
+              })}
+            </StyledTableCell>
+          </StyledTableRow>
+        </>
+      );
+    });
+  }
+
   return (
     <>
       <Container sx={{ mt: 5 }}>
@@ -54,27 +140,7 @@ export default function CheckOutGrid() {
                     </TableRow>
                   </TableHead>
                   <TableBody>
-                    <StyledTableRow>
-                      <StyledTableCell component="th" scope="row">
-                        <div style={{ display: "flex" }}>
-                          <img
-                            src="https://bizweb.dktcdn.net/thumb/1024x1024/100/448/660/products/giay-ultraboost-21-xam-fy0375-01-standard-e19e5c6a-d577-4f32-afd0-c791ac8c4f87.jpg?v=1645669520997"
-                            style={{ width: "100px" }}
-                            alt=""
-                          />
-                          <div>
-                            <p>Giày nam Fake</p>
-                            <p>Size: 38</p>
-                            <p>XÓa</p>
-                          </div>
-                        </div>
-                      </StyledTableCell>
-                      <StyledTableCell>
-                        <p>300.000đ</p>
-                      </StyledTableCell>
-                      <StyledTableCell align="right"></StyledTableCell>
-                      <StyledTableCell align="right"></StyledTableCell>
-                    </StyledTableRow>
+                    <StyledTableRow>{listCart()}</StyledTableRow>
                   </TableBody>
                 </Table>
               </Paper>
@@ -94,24 +160,7 @@ export default function CheckOutGrid() {
                   </TableHead>
                   {/*Nội dung  */}
                   <TableBody>
-                    <StyledTableRow>
-                      <StyledTableCell component="th" scope="row">
-                        Số lượng:
-                      </StyledTableCell>
-                    </StyledTableRow>
-
-                    <StyledTableRow>
-                      <StyledTableCell component="th" scope="row">
-                        Tạm tính:
-                      </StyledTableCell>
-                    </StyledTableRow>
-
-                    <StyledTableRow>
-                      <StyledTableCell component="th" scope="row">
-                        Tổng cộng
-                      </StyledTableCell>
-                    </StyledTableRow>
-
+                    {orderSummary()}
                     <div style={{ marginTop: "10px" }}>
                       <div>
                         <Button

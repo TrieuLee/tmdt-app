@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Routes, Route } from "react-router-dom";
 //import Component
 import Login from "./pages/login/Login";
@@ -9,6 +9,7 @@ import Product from "./pages/product/Product";
 import ProductDetail from "./pages/productDetail/ProductDetail";
 import CheckOut from "./pages/checkOut/CheckOut";
 import FinishOrder from "./pages/finishOrder/FinishOrder";
+import Profile from "./pages/profile/Profile";
 const Router = () => {
   return (
     <>
@@ -25,6 +26,7 @@ const Router = () => {
 
         <Route path="checkout" element={<CheckOut />} />
         <Route path="order" element={<FinishOrder />} />
+        <Route path="profile" element={<Profile />} />
       </Routes>
     </>
   );

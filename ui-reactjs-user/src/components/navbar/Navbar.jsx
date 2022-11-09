@@ -47,7 +47,7 @@ export default function Navbar(props) {
     };
     localStorage.setItem("lstOrFd", JSON.stringify(lstOrFd));
   }
-  const admin = localStorage.getItem("items");
+  const admin = localStorage.getItem("ites");
   return (
     <>
       <nav className="nav">
@@ -177,17 +177,17 @@ export default function Navbar(props) {
                     </p>
                   </div>
 
-                  <Button variant="contained" sx={{ width: "100%" }}>
-                    <Link
-                      type="submit"
-                      value="Thanh toán"
-                      to="/checkout"
-                      style={{ textDecoration: "none", color: "white" }}
-                      onClick={SetCartPayment}
-                    >
+                  <Link
+                    type="submit"
+                    value="Thanh toán"
+                    to="/checkout"
+                    style={{ textDecoration: "none", color: "white" }}
+                    onClick={SetCartPayment}
+                  >
+                    <Button variant="contained" sx={{ width: "100%" }}>
                       Thanh Toán
-                    </Link>
-                  </Button>
+                    </Button>
+                  </Link>
                 </>
               )}
               <br />
@@ -197,7 +197,7 @@ export default function Navbar(props) {
               <NavDropDown />
             ) : (
               <Link to="/login">
-                <ThemeComponent1 fontSize="large" />
+                <ThemeComponent1 sx={{ mb: -1.2 }} fontSize="large" />
               </Link>
             )}
           </div>

@@ -11,11 +11,15 @@ export default function ProductDetail() {
       setCartItems(
         cartItems.map((x) =>
           x.id === product.id ? { ...exist, qty: exist.qty + 1 } : x
+          
         )
+
       );
     } else {
       setCartItems([...cartItems, { ...product, qty: 1 }]);
     }
+    localStorage.setItem("items", JSON.stringify(product));
+
     console.log("into cart");
   };
   console.log(cartItems);

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Records from "../../server.json";
 import Grid from "@mui/material/Grid";
 import Container from "@mui/material/Container";
@@ -10,7 +10,6 @@ import ShoppingBagIcon from "@mui/icons-material/ShoppingBag";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import Breadcrumbs from "@mui/material/Breadcrumbs";
 import Stack from "@mui/material/Stack";
-import Link from "@mui/material/Link";
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -198,12 +197,20 @@ export default function ProductSection(props) {
                         </Alert>
                       </Snackbar>
 
-                      <Button
-                        variant="contained"
-                        startIcon={<ShoppingBagIcon />}
+                      <Link
+                        to="/checkout"
+                        style={{ textDecoration: "none", color: "white" }}
                       >
-                        Mua ngay
-                      </Button>
+                        <Button
+                          onClick={() => {
+                            Add(item);
+                          }}
+                          variant="contained"
+                          startIcon={<ShoppingBagIcon />}
+                        >
+                          <p style={{ margin: "8px" }}>MUA NGAY</p>{" "}
+                        </Button>
+                      </Link>
                     </Stack>
                   </Grid>
                 </React.Fragment>
