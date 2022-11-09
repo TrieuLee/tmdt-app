@@ -2,7 +2,7 @@
   {
     "id": 1,
     "title": "Giay AirForce",
-    "price": 500000,
+    "price": 5000000,
     "description": "Giay ngon re dep",
     "size": ["38", "39", "40", "41", "42"],
     "service": [
@@ -12,7 +12,7 @@
     ],
     "rate": 4,
     "icon": ["faStar", "faStar", "faStar", "faStar"],
-    "sold": 230,
+    "sold": 2300000,
     "status": "Còn hàng",
     "category": {
       "id": 1,
@@ -27,7 +27,7 @@
   {
     "id": 2,
     "title": "Fake Adidas",
-    "price": 550,
+    "price": 5500000,
     "description": "Giay xau bo khoi mua",
     "category": {
       "id": 2,
@@ -40,7 +40,7 @@
   {
     "id": 3,
     "title": "Giay Bounce Adidas",
-    "price": 600,
+    "price": 6000000,
     "description": "Giay dep",
     "category": {
       "id": 3,
@@ -53,7 +53,7 @@
   {
     "id": 4,
     "title": "Giay Bounce Adidas",
-    "price": 600,
+    "price": 6000000,
     "description": "Giay dep",
     "category": {
       "id": 1,
@@ -66,7 +66,7 @@
   {
     "id": 5,
     "title": "Giay Bounce Adidas",
-    "price": 600,
+    "price": 6000000,
     "description": "Giay dep",
     "category": {
       "id": 1,
@@ -79,7 +79,7 @@
   {
     "id": 6,
     "title": "Giay Bounce Adidas",
-    "price": 600,
+    "price": 6000000,
     "description": "Giay dep",
     "category": {
       "id": 1,
@@ -92,7 +92,7 @@
   {
     "id": 7,
     "title": "Giay ALo Adidas",
-    "price": 750,
+    "price": 7500000,
     "description": "Giay dep",
     "category": {
       "id": 1,
@@ -105,7 +105,7 @@
   {
     "id": 8,
     "title": "Giay Bounce Adidas",
-    "price": 600,
+    "price": 6000000,
     "description": "Giay dep",
     "category": {
       "id": 4,
@@ -118,7 +118,7 @@
   {
     "id": 9,
     "title": "Giay Jordan Adidas",
-    "price": 650,
+    "price": 6500000,
     "description": "Giay dep",
     "category": {
       "id": 1,
@@ -126,6 +126,162 @@
       "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Adidas_Logo.svg/2560px-Adidas_Logo.svg.png"
     },
     "images": "https://bizweb.dktcdn.net/thumb/1024x1024/100/448/660/products/fw6838-1.jpg?v=1645669067763",
+    "categoryID": 1
+  },
+  {
+    "id": 10,
+    "title": "Air Force 1 Low Paisley Swoosh ",
+    "price": 4600000,
+    "description": "Giay dep",
+    "category": {
+      "id": 1,
+      "name": "airforce",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Adidas_Logo.svg/2560px-Adidas_Logo.svg.png"
+    },
+    "images": "https://khogiaythethao.vn/wp-content/uploads/2021/10/air-force-1-paisley-swoosh.jpg",
+    "categoryID": 1
+  },
+  {
+    "id": 11,
+    "title": "Air force 1 All White ",
+    "price": 6300000,
+    "description": "Giay dep",
+    "category": {
+      "id": 1,
+      "name": "airforce",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Adidas_Logo.svg/2560px-Adidas_Logo.svg.png"
+    },
+    "images": "https://khogiaythethao.vn/wp-content/uploads/2021/09/nike-af1-full-white.jpg",
+    "categoryID": 1
+  },
+  {
+    "id": 12,
+    "title": "Air Force 1 Low LX UV Reactive",
+    "price": 6300000,
+    "description": "Giay dep",
+    "category": {
+      "id": 1,
+      "name": "airforce",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Adidas_Logo.svg/2560px-Adidas_Logo.svg.png"
+    },
+    "images": "https://khogiaythethao.vn/wp-content/uploads/2021/10/nike-af1-doi-mau.jpg",
+    "categoryID": 1
+  },
+  {
+    "id": 12,
+    "title": "Air Force 1 G – Dragon Paranoise 2.0",
+    "price": 6300000,
+    "description": "Giay dep",
+    "category": {
+      "id": 1,
+      "name": "airforce",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Adidas_Logo.svg/2560px-Adidas_Logo.svg.png"
+    },
+    "images": "https://khogiaythethao.vn/wp-content/uploads/2021/10/Air-Force-1-G-Dragon-Paranoise-2.jpg",
+    "categoryID": 1
+  },
+  {
+    "id": 13,
+    "title": "Air Force 1 LX Tear Away Red Swoosh",
+    "price": 6300000,
+    "description": "Giay dep",
+    "category": {
+      "id": 1,
+      "name": "airforce",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Adidas_Logo.svg/2560px-Adidas_Logo.svg.png"
+    },
+    "images": "https://khogiaythethao.vn/wp-content/uploads/2021/10/nike-xe-tear-away.jpg",
+    "categoryID": 1
+  },
+  {
+    "id": 14,
+    "title": "Air Force 1 Shadow Black White",
+    "price": 6300000,
+    "description": "Giay dep",
+    "category": {
+      "id": 1,
+      "name": "airforce",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Adidas_Logo.svg/2560px-Adidas_Logo.svg.png"
+    },
+    "images": "https://khogiaythethao.vn/wp-content/uploads/2021/10/af1-shadow-black-white.jpg",
+    "categoryID": 1
+  },
+  {
+    "id": 14,
+    "title": "Air Force 1 ID Gucci",
+    "price": 6300000,
+    "description": "Giay dep",
+    "category": {
+      "id": 1,
+      "name": "airforce",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Adidas_Logo.svg/2560px-Adidas_Logo.svg.png"
+    },
+    "images": "https://khogiaythethao.vn/wp-content/uploads/2021/10/Nike-Air-Force-1-custom-GUCCI.jpg",
+    "categoryID": 1
+  },
+  {
+    "id": 15,
+    "title": "Nike Air Force 1 Low Cream Black Swoosh",
+    "price": 798000,
+    "description": "Giay dep",
+    "category": {
+      "id": 1,
+      "name": "airforce",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Adidas_Logo.svg/2560px-Adidas_Logo.svg.png"
+    },
+    "images": "https://khogiaythethao.vn/wp-content/uploads/2022/11/af1-cream-black-swoosh.jpg",
+    "categoryID": 1
+  },
+  {
+    "id": 16,
+    "title": "Nike Air Force 1 Low x Louis Vuitton Monogram Brown Like Auth",
+    "price": 2490000,
+    "description": "Giay dep",
+    "category": {
+      "id": 1,
+      "name": "airforce",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Adidas_Logo.svg/2560px-Adidas_Logo.svg.png"
+    },
+    "images": "https://khogiaythethao.vn/wp-content/uploads/2022/11/nike-air-force-1-louis-vuitton-off-white.jpg",
+    "categoryID": 1
+  },
+  {
+    "id": 17,
+    "title": "Nike Air Force 1 Low x Louis Vuitton Monogram Brown Like Auth",
+    "price": 1190000,
+    "description": "Giay dep",
+    "category": {
+      "id": 1,
+      "name": "airforce",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Adidas_Logo.svg/2560px-Adidas_Logo.svg.png"
+    },
+    "images": "https://khogiaythethao.vn/wp-content/uploads/2022/11/Nike-Air-Force-1-Supreme.jpg",
+    "categoryID": 1
+  },
+  {
+    "id": 18,
+    "title": "Nike Air Force 1 Low ID Gucci Cream Green Red Like Auth",
+    "price": 1090000,
+    "description": "Giay dep",
+    "category": {
+      "id": 1,
+      "name": "airforce",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Adidas_Logo.svg/2560px-Adidas_Logo.svg.png"
+    },
+    "images": "https://khogiaythethao.vn/wp-content/uploads/2022/06/nike-air-force-1-gucci-custom.jpg",
+    "categoryID": 1
+  },
+  {
+    "id": 19,
+    "title": "Nike Dunk Low ‘Vintage Navy’",
+    "price": 898000,
+    "description": "Giay dep",
+    "category": {
+      "id": 1,
+      "name": "airforce",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Adidas_Logo.svg/2560px-Adidas_Logo.svg.png"
+    },
+    "images": "https://khogiaythethao.vn/wp-content/uploads/2022/08/giay-nike-dunk-low-vintage-navy-800x600-1.jpg",
     "categoryID": 1
   }
 ]
