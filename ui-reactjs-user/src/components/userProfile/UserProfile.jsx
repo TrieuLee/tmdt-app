@@ -48,7 +48,7 @@ export default function UserProfile() {
     {
       field: "title",
       headerName: "Tên sản phẩm",
-      width: 150,
+      width: 180,
       editable: true,
     },
     {
@@ -60,8 +60,7 @@ export default function UserProfile() {
     {
       field: "quantity",
       headerName: "Số lượng",
-      type: "number",
-      width: 90,
+      width: 120,
       editable: true,
     },
     {
@@ -73,13 +72,13 @@ export default function UserProfile() {
     {
       field: "payment",
       headerName: "Thanh toán",
-      width: 100,
+      width: 180,
       editable: true,
     },
     {
       field: "reward",
       headerName: "Điểm tích lũy",
-      width: 100,
+      width: 200,
       editable: true,
     },
   ];
@@ -149,9 +148,6 @@ export default function UserProfile() {
             columns={columns1}
             pageSize={5}
             rowsPerPageOptions={[5]}
-            checkboxSelection
-            disableSelectionOnClick
-            experimentalFeatures={{ newEditingApi: true }}
           />
         </Box>
       </Container>

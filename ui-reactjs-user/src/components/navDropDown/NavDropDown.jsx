@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
@@ -77,14 +78,14 @@ export default function NavDropDown() {
           <ListItemIcon>
             <PersonAdd fontSize="small" />
           </ListItemIcon>
-          Hồ sơ cá nhân
+          <Link
+            to="/profile"
+            style={{ textDecoration: "none", color: "black" }}
+          >
+            Hồ sơ cá nhân
+          </Link>
         </MenuItem>
-        <MenuItem>
-          <ListItemIcon>
-            <Settings fontSize="small" />
-          </ListItemIcon>
-          Theo dõi đơn hàng
-        </MenuItem>
+
         <MenuItem>
           <ListItemIcon onClick={logout}>
             <Logout fontSize="small" />

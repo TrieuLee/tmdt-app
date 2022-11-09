@@ -47,7 +47,7 @@ export default function Navbar(props) {
     };
     localStorage.setItem("lstOrFd", JSON.stringify(lstOrFd));
   }
-  const admin = localStorage.getItem("ites");
+  const admin = localStorage.getItem("items");
   return (
     <>
       <nav className="nav">
