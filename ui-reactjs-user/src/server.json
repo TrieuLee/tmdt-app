@@ -130,7 +130,7 @@
   },
   {
     "id": 10,
-    "title": "Air Force 1 Low Paisley Swoosh ",
+    "title": "AirForce 1 Paisley",
     "price": 4600000,
     "description": "Giay dep",
     "category": {
@@ -143,7 +143,7 @@
   },
   {
     "id": 11,
-    "title": "Air force 1 All White ",
+    "title": "Airforce 1 All White ",
     "price": 6300000,
     "description": "Giay dep",
     "category": {
@@ -156,7 +156,7 @@
   },
   {
     "id": 12,
-    "title": "Air Force 1 Low LX UV Reactive",
+    "title": "AirForce 1 LX",
     "price": 6300000,
     "description": "Giay dep",
     "category": {
@@ -168,8 +168,8 @@
     "categoryID": 1
   },
   {
-    "id": 12,
-    "title": "Air Force 1 G – Dragon Paranoise 2.0",
+    "id": 13,
+    "title": "AirForce 1 Dragon 2.0",
     "price": 6300000,
     "description": "Giay dep",
     "category": {
@@ -181,8 +181,8 @@
     "categoryID": 1
   },
   {
-    "id": 13,
-    "title": "Air Force 1 LX Tear Away Red Swoosh",
+    "id": 14,
+    "title": "AirForce Tear Red",
     "price": 6300000,
     "description": "Giay dep",
     "category": {
@@ -194,8 +194,8 @@
     "categoryID": 1
   },
   {
-    "id": 14,
-    "title": "Air Force 1 Shadow Black White",
+    "id": 15,
+    "title": "AirForce Black White",
     "price": 6300000,
     "description": "Giay dep",
     "category": {
@@ -207,7 +207,7 @@
     "categoryID": 1
   },
   {
-    "id": 14,
+    "id": 16,
     "title": "Air Force 1 ID Gucci",
     "price": 6300000,
     "description": "Giay dep",
@@ -220,8 +220,8 @@
     "categoryID": 1
   },
   {
-    "id": 15,
-    "title": "Nike Air Force 1 Low Cream Black Swoosh",
+    "id": 17,
+    "title": "AirForce Cream Black",
     "price": 798000,
     "description": "Giay dep",
     "category": {
@@ -233,8 +233,8 @@
     "categoryID": 1
   },
   {
-    "id": 16,
-    "title": "Nike Air Force 1 Low x Louis Vuitton Monogram Brown Like Auth",
+    "id": 18,
+    "title": "AirForce Louis Vuitton ",
     "price": 2490000,
     "description": "Giay dep",
     "category": {
@@ -246,8 +246,8 @@
     "categoryID": 1
   },
   {
-    "id": 17,
-    "title": "Nike Air Force 1 Low x Louis Vuitton Monogram Brown Like Auth",
+    "id": 19,
+    "title": "AirForce 1 Low Brown ",
     "price": 1190000,
     "description": "Giay dep",
     "category": {
@@ -259,8 +259,8 @@
     "categoryID": 1
   },
   {
-    "id": 18,
-    "title": "Nike Air Force 1 Low ID Gucci Cream Green Red Like Auth",
+    "id": 20,
+    "title": "AirForce Gucci Cream ",
     "price": 1090000,
     "description": "Giay dep",
     "category": {
@@ -272,8 +272,8 @@
     "categoryID": 1
   },
   {
-    "id": 19,
-    "title": "Nike Dunk Low ‘Vintage Navy’",
+    "id": 21,
+    "title": "AirForce‘Vintage Navy’",
     "price": 898000,
     "description": "Giay dep",
     "category": {
@@ -282,6 +282,149 @@
       "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Adidas_Logo.svg/2560px-Adidas_Logo.svg.png"
     },
     "images": "https://khogiaythethao.vn/wp-content/uploads/2022/08/giay-nike-dunk-low-vintage-navy-800x600-1.jpg",
+    "categoryID": 1
+  },
+  {
+    "id": 22,
+    "title": "Nike Jordan 1 Pero",
+    "price": 1690000,
+    "description": "Giay dep",
+    "category": {
+      "id": 1,
+      "name": "jordan",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Adidas_Logo.svg/2560px-Adidas_Logo.svg.png"
+    },
+    "images": "https://khogiaythethao.vn/wp-content/uploads/2022/11/giay-jordan-1-high-ma-maniere.jpg",
+    "categoryID": 1
+  },
+  {
+    "id": 23,
+    "title": "Nike Jordan 1 Zoom",
+    "price": 1390000,
+    "description": "Giay dep",
+    "category": {
+      "id": 1,
+      "name": "jordan",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Adidas_Logo.svg/2560px-Adidas_Logo.svg.png"
+    },
+    "images": "https://khogiaythethao.vn/wp-content/uploads/2022/11/jordan-1-zoom-london.jpg",
+    "categoryID": 1
+  },
+  {
+    "id": 24,
+    "title": "Jordan 1 Reto High",
+    "price": 1390000,
+    "description": "Giay dep",
+    "category": {
+      "id": 1,
+      "name": "jordan",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Adidas_Logo.svg/2560px-Adidas_Logo.svg.png"
+    },
+    "images": "https://khogiaythethao.vn/wp-content/uploads/2022/08/Jordan-1-Retro-High-OG-Hyper-Royal-800x600-2.jpg",
+    "categoryID": 1
+  },
+  {
+    "id": 25,
+    "title": "Jordan 1 Tokyo Bio",
+    "price": 1190000,
+    "description": "Giay dep",
+    "category": {
+      "id": 1,
+      "name": "jordan",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Adidas_Logo.svg/2560px-Adidas_Logo.svg.png"
+    },
+    "images": "https://khogiaythethao.vn/wp-content/uploads/2022/06/Jordan-1-Retro-High-Tokyo-Bio-Hack-1-2.jpg",
+    "categoryID": 1
+  },
+  {
+    "id": 26,
+    "title": "Jordan 1 Chicago",
+    "price": 1290000,
+    "description": "Giay dep",
+    "category": {
+      "id": 1,
+      "name": "jordan",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Adidas_Logo.svg/2560px-Adidas_Logo.svg.png"
+    },
+    "images": "https://khogiaythethao.vn/wp-content/uploads/2022/06/air-Jordan-1-Trophy-Room-Chicago.jpg",
+    "categoryID": 1
+  },
+  {
+    "id": 27,
+    "title": "Jordan 1 Shadow 2.0",
+    "price": 1490000,
+    "description": "Giay dep",
+    "category": {
+      "id": 1,
+      "name": "jordan",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Adidas_Logo.svg/2560px-Adidas_Logo.svg.png"
+    },
+    "images": "https://khogiaythethao.vn/wp-content/uploads/2022/06/air-jordan-retro-high-og-shadow-2.jpg",
+    "categoryID": 1
+  },
+  {
+    "id": 28,
+    "title": "Jordan 1 High Dior",
+    "price": 1990000,
+    "description": "Giay dep",
+    "category": {
+      "id": 1,
+      "name": "jordan",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Adidas_Logo.svg/2560px-Adidas_Logo.svg.png"
+    },
+    "images": "https://khogiaythethao.vn/wp-content/uploads/2021/08/giay-nike-air-jordan-1-dior-like-auth.png",
+    "categoryID": 1
+  },
+  {
+    "id": 29,
+    "title": "Jordan 1 Travis Scott",
+    "price": 1790000,
+    "description": "Giay dep",
+    "category": {
+      "id": 1,
+      "name": "jordan",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Adidas_Logo.svg/2560px-Adidas_Logo.svg.png"
+    },
+    "images": "https://khogiaythethao.vn/wp-content/uploads/2021/08/jordan-1-high-travis-scott.jpg",
+    "categoryID": 1
+  },
+  {
+    "id": 30,
+    "title": "Jordan 1 Black White",
+    "price": 898000,
+    "description": "Giay dep",
+    "category": {
+      "id": 1,
+      "name": "jordan",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Adidas_Logo.svg/2560px-Adidas_Logo.svg.png"
+    },
+    "images": "https://khogiaythethao.vn/wp-content/uploads/2020/10/Jordan-1-Retro-Black-White-replica.jpg",
+    "categoryID": 1
+  },
+  {
+    "id": 31,
+    "title": "Jordan 1 Off White",
+    "price": 698000,
+    "description": "Giay dep",
+    "category": {
+      "id": 1,
+      "name": "jordan",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Adidas_Logo.svg/2560px-Adidas_Logo.svg.png"
+    },
+    "images": "https://khogiaythethao.vn/wp-content/uploads/2019/02/nike-air-jordan-1-off-white-blue-rep.jpg",
+    "categoryID": 1
+  },
+  {
+    "id": 32,
+    "title": "Jordan 1 Off White",
+    "price": 698000,
+    "description": "Giay dep",
+    "category": {
+      "id": 1,
+      "name": "jordan",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Adidas_Logo.svg/2560px-Adidas_Logo.svg.png"
+    },
+    "images": "https://khogiaythethao.vn/wp-content/uploads/2019/02/nike-air-jordan-1-off-white-blue-rep.jpg",
     "categoryID": 1
   }
 ]
