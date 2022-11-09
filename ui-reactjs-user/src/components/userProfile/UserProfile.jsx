@@ -4,111 +4,149 @@ import Grid from "@mui/material/Grid";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import { DataGrid } from "@mui/x-data-grid";
 
 export default function UserProfile() {
   const columns = [
-    { field: "id", headerName: "ID", width: 90 },
+    { field: "id", headerName: "STT", width: 90 },
     {
-      field: "firstName",
-      headerName: "First name",
+      field: "title",
+      headerName: "Tên sản phẩm",
       width: 150,
       editable: true,
     },
     {
-      field: "lastName",
-      headerName: "Last name",
+      field: "price",
+      headerName: "Giá tiền",
       width: 150,
       editable: true,
     },
     {
-      field: "age",
-      headerName: "Age",
+      field: "quantity",
+      headerName: "Số lượng",
       type: "number",
-      width: 110,
+      width: 90,
       editable: true,
     },
     {
-      field: "fullName",
-      headerName: "Full name",
-      description: "This column has a value getter and is not sortable.",
-      sortable: false,
+      field: "total",
+      headerName: "Tổng tiền",
       width: 160,
-      valueGetter: (params) =>
-        `${params.row.firstName || ""} ${params.row.lastName || ""}`,
+      editable: true,
+    },
+    {
+      field: "payment",
+      headerName: "Thanh toán",
+      width: 100,
+      editable: true,
+    },
+  ];
+  const columns1 = [
+    { field: "id", headerName: "STT", width: 90 },
+    {
+      field: "title",
+      headerName: "Tên sản phẩm",
+      width: 150,
+      editable: true,
+    },
+    {
+      field: "price",
+      headerName: "Giá tiền",
+      width: 150,
+      editable: true,
+    },
+    {
+      field: "quantity",
+      headerName: "Số lượng",
+      type: "number",
+      width: 90,
+      editable: true,
+    },
+    {
+      field: "total",
+      headerName: "Tổng tiền",
+      width: 160,
+      editable: true,
+    },
+    {
+      field: "payment",
+      headerName: "Thanh toán",
+      width: 100,
+      editable: true,
+    },
+    {
+      field: "reward",
+      headerName: "Điểm tích lũy",
+      width: 100,
+      editable: true,
     },
   ];
 
   const rows = [
     { id: 1, lastName: "Snow", firstName: "Jon", age: 35 },
     { id: 2, lastName: "Lannister", firstName: "Cersei", age: 42 },
-    { id: 3, lastName: "Lannister", firstName: "Jaime", age: 45 },
-    { id: 4, lastName: "Stark", firstName: "Arya", age: 16 },
-    { id: 5, lastName: "Targaryen", firstName: "Daenerys", age: null },
-    { id: 6, lastName: "Melisandre", firstName: null, age: 150 },
-    { id: 7, lastName: "Clifford", firstName: "Ferrara", age: 44 },
-    { id: 8, lastName: "Frances", firstName: "Rossini", age: 36 },
-    { id: 9, lastName: "Roxie", firstName: "Harvey", age: 65 },
   ];
+  const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 
   return (
     <>
-      <div>COver Avatar</div>
+      <div className="profileCover">
+        <img className="profileCoverImg" src={PF + "img/5482397.jpg"} alt="" />
+        <img className="profileUserImg" src={PF + "img/noAvatar.png"} alt="" />
+      </div>
+      <div className="profileInfo">
+        <h4 className="profileInfoName">Thiên Phúc</h4>
+      </div>
+
       <Container>
         <Grid container spacing={2}>
           <Grid item xs={8}>
-            Theo dõi đơn hàng
+            <Typography sx={{ mb: 1 }} variant="h6" component="div">
+              Theo dõi đơn hàng
+            </Typography>
             <Box sx={{ height: 400, width: "100%" }}>
               <DataGrid
                 rows={rows}
                 columns={columns}
                 pageSize={5}
                 rowsPerPageOptions={[5]}
-                checkboxSelection
-                disableSelectionOnClick
-                experimentalFeatures={{ newEditingApi: true }}
               />
             </Box>
           </Grid>
           <Grid item xs={4}>
-            <Card sx={{ minWidth: 275 }}>
+            <Card sx={{ minWidth: 275, mt: 5 }}>
               <CardContent>
-                <p>Thông tin khách hàng</p>
-
-                <Typography
-                  sx={{ fontSize: 14 }}
-                  color="text.secondary"
-                  gutterBottom
-                >
-                  Word of the Day
-                </Typography>
-                <Typography variant="h5" component="div">
-                  benevolent
+                <Typography sx={{ mb: 1 }} variant="h6" component="div">
+                  Thông tin khách hàng
                 </Typography>
                 <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                  adjective
+                  Tên khách hàng: Thiên Phúc
                 </Typography>
-                <Typography variant="body2">
-                  well meaning and kindly.
-                  <br />
-                  {'"a benevolent smile"'}
+                <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                  Địa chỉ: Hồ Chí Minh
+                </Typography>
+                <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                  Số điện thoại: 0783467852
+                </Typography>
+                <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                  Điểm thưởng: 1000
+                </Typography>
+                <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                  Thành viên: Thường
                 </Typography>
               </CardContent>
-              <CardActions>
-                <Button size="small">Learn More</Button>
-              </CardActions>
             </Card>
           </Grid>
         </Grid>
-        Lịch sử mua hàng
         <Box sx={{ height: 400, width: "100%" }}>
+          <Typography sx={{ mt: 5, mb: 2 }} variant="h6" component="div">
+            Lịch sử mua hàng
+          </Typography>
           <DataGrid
             rows={rows}
-            columns={columns}
+            columns={columns1}
             pageSize={5}
             rowsPerPageOptions={[5]}
             checkboxSelection
