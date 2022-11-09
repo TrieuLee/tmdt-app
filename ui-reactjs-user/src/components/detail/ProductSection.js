@@ -66,13 +66,8 @@ export default function ProductSection(props) {
 
     setOpen(false);
   };
-
-  function Add(items) {
-    localStorage.setItem("items", JSON.stringify(items));
-  }
-
-  const { onAdd } = props;
   const { cartItems } = props;
+  const { onAdd } = props;
   return (
     <>
       <Container>
@@ -203,7 +198,7 @@ export default function ProductSection(props) {
                       >
                         <Button
                           onClick={() => {
-                            Add(item);
+                            onAdd(item);
                           }}
                           variant="contained"
                           startIcon={<ShoppingBagIcon />}
