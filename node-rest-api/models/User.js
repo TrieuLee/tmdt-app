@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const { Sequelize, DataTypes } = require("sequelize");
 
 const UserSchema = new mongoose.Schema(
   {
@@ -45,6 +44,7 @@ const UserSchema = new mongoose.Schema(
     role: {
       type: Number,
       enum: [1, 2, 3],
+      default: 3,
     },
   },
   { timestamps: true }

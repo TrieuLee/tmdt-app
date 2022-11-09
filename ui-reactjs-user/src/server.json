@@ -12,7 +12,7 @@
     ],
     "rate": 4,
     "icon": ["faStar", "faStar", "faStar", "faStar"],
-    "sold": 2300000,
+    "sold": 23,
     "status": "Còn hàng",
     "category": {
       "id": 1,
