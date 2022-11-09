@@ -1,15 +1,8 @@
 const mongoose = require("mongoose");
+const { Sequelize, DataTypes } = require("sequelize");
 
 const OrderSchema = new mongoose.Schema(
   {
-    customerID: {
-      type: String,
-      require: true,
-    },
-    productID: {
-      type: Array,
-      require: true,
-    },
     addressDeli: {
       type: String,
       require: true,

@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const { Sequelize, DataTypes } = require("sequelize");
 
 const UserSchema = new mongoose.Schema(
   {
