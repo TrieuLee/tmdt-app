@@ -33,6 +33,7 @@ const ProductSchema = new mongoose.Schema(
     },
     type: {
       type: String,
+      enum: ["air force", "jordan", "blazer", "hippie", "crater"],
       default: "air force",
     },
   },

@@ -24,6 +24,7 @@ class UserCURD {
         profilePicture: req.body.profilePicture,
         city: req.body.city,
         from: req.body.from,
+        role: req.body.role,
       });
       // save user and respond
       const user = await newUser.save();

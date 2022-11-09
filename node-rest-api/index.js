@@ -24,7 +24,7 @@ const { PORT } = require("./config/index");
 
 (async () => {
   await loaders(app);
-
+  app.use("/api/users", userRoute);
   // set up router
 
   app.listen(PORT, () => {
