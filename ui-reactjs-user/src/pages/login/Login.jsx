@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useRef } from "react";
 // import component
 import { Link } from "react-router-dom";
 import TextField from "@mui/material/TextField";
@@ -11,6 +11,10 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import InputAdornment from "@mui/material/InputAdornment";
 import InputLabel from "@mui/material/InputLabel";
 import Button from "@mui/material/Button";
+
+// import component
+import { AuthContext } from "../../context/AuthContext";
+import { loginCall } from "../../callAPIs";
 
 //import style
 import "./login.scss";
@@ -31,9 +35,15 @@ export default function Login() {
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
   };
-  function CheatLogin() {
-    localStorage.setItem("items", "Admin");
-  }
+
+  const { user, isFetching, dispatch } = useContext(AuthContext);
+  const email = useRef();
+  const password = useRef();
+  const handleClick = (e) => {
+    console.log(password.current.value);
+    e.preventDefault();
+    loginCall({ email: email, password: password }, dispatch);
+  };
   return (
     <div
       className="login"
@@ -50,30 +60,6 @@ export default function Login() {
           </span>
         </div>
         <div className="loginRight">
-          {/* <form className="loginBox">
-            <input
-              placeholder="Email"
-              type="email"
-              className="loginInput"
-              required
-            />
-            <input
-              placeholder="Mật khẩu"
-              type="password"
-              className="loginInput"
-              required
-              minLength="8"
-            />
-            <button className="loginButon" type="submit">
-              Đăng nhập
-            </button>
-            <span className="loginForgot">Quên mật khẩu?</span>
-            <Link to="/register" className="">
-              <button className="loginRegisterButton">
-                Đăng ký thành viên mới
-              </button>
-            </Link>
-          </form> */}
           <Box
             component="form"
             sx={{
@@ -82,46 +68,51 @@ export default function Login() {
             noValidate
             autoComplete="off"
             className="loginBox"
+            onSubmit={handleClick}
           >
-            <div>
-              <TextField required id="outlined-required" label="Email" />
-              <FormControl sx={{ m: 1, width: "60ch" }} variant="outlined">
-                <InputLabel htmlFor="outlined-adornment-password" required>
-                  Mật khẩu
-                </InputLabel>
-                <OutlinedInput
-                  id="outlined-adornment-password"
-                  type={values.showPassword ? "text" : "password"}
-                  value={values.password}
-                  onChange={handleChange("password")}
-                  endAdornment={
-                    <InputAdornment position="end">
-                      <IconButton
-                        aria-label="toggle password visibility"
-                        onClick={handleClickShowPassword}
-                        onMouseDown={handleMouseDownPassword}
-                        edge="end"
-                      >
-                        {values.showPassword ? (
-                          <VisibilityOff />
-                        ) : (
-                          <Visibility />
-                        )}
-                      </IconButton>
-                    </InputAdornment>
-                  }
-                  label="Password"
-                />
-              </FormControl>
-            </div>
+            <input
+              placeholder="Email"
+              type="email"
+              className="loginInput"
+              required
+            />
+            <TextField
+              required
+              id="outlined-required"
+              label="Email"
+              inputRef={email}
+            />
+            <FormControl
+              sx={{ m: 1, width: "60ch" }}
+              variant="outlined"
+              inputRef={password}
+            >
+              <InputLabel htmlFor="outlined-adornment-password" required>
+                Mật khẩu
+              </InputLabel>
+              <OutlinedInput
+                id="outlined-adornment-password"
+                type={values.showPassword ? "text" : "password"}
+                value={values.password}
+                onChange={handleChange("password")}
+                endAdornment={
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      onClick={handleClickShowPassword}
+                      onMouseDown={handleMouseDownPassword}
+                      edge="end"
+                    >
+                      {values.showPassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </InputAdornment>
+                }
+                label="Password"
+              />
+            </FormControl>
             <span className="loginForgot">Quên mật khẩu?</span>
 
-            <Button
-              variant="contained"
-              className="loginButon"
-              type="submit"
-              onClick={() => CheatLogin()}
-            >
+            <Button variant="contained" className="loginButon" type="submit">
               <Link style={{ textDecoration: "none", color: "white" }} to="/">
                 Đăng nhập
               </Link>
