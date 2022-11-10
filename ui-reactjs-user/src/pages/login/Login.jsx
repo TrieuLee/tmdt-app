@@ -38,11 +38,14 @@ export default function Login() {
 
   const { user, isFetching, dispatch } = useContext(AuthContext);
   const email = useRef();
-  const password = useRef();
+  const passwords = useRef();
   const handleClick = (e) => {
-    console.log(password.current.value);
+    console.log(dispatch);
     e.preventDefault();
-    loginCall({ email: email, password: password }, dispatch);
+    loginCall(
+      { email: email.current.value, password: passwords.current.value },
+      dispatch
+    );
   };
   return (
     <div
@@ -82,15 +85,12 @@ export default function Login() {
               label="Email"
               inputRef={email}
             />
-            <FormControl
-              sx={{ m: 1, width: "60ch" }}
-              variant="outlined"
-              inputRef={password}
-            >
-              <InputLabel htmlFor="outlined-adornment-password" required>
+            <FormControl sx={{ m: 1, width: "60ch" }} variant="outlined">
+              <InputLabel id="outlined-adornment-password" required>
                 Mật khẩu
               </InputLabel>
               <OutlinedInput
+                inputRef={passwords}
                 id="outlined-adornment-password"
                 type={values.showPassword ? "text" : "password"}
                 value={values.password}
@@ -113,7 +113,7 @@ export default function Login() {
             <span className="loginForgot">Quên mật khẩu?</span>
 
             <Button variant="contained" className="loginButon" type="submit">
-              <Link style={{ textDecoration: "none", color: "white" }} to="/">
+              <Link style={{ textDecoration: "none", color: "white" }}>
                 Đăng nhập
               </Link>
             </Button>
