@@ -33,11 +33,17 @@ export default function UserProfile() {
     {
       field: "total",
       headerName: "Tổng tiền",
-      width: 160,
+      width: 120,
       editable: true,
     },
     {
       field: "payment",
+      headerName: "Thanh toán",
+      width: 100,
+      editable: true,
+    },
+    {
+      field: "status",
       headerName: "Thanh toán",
       width: 100,
       editable: true,
@@ -84,8 +90,7 @@ export default function UserProfile() {
   ];
 
   const rows = [
-    { id: 1, lastName: "Snow", firstName: "Jon", age: 35 },
-    { id: 2, lastName: "Lannister", firstName: "Cersei", age: 42 },
+    { id: 1, title: "Giay Airforce", price: 500000, quantity: 1, total:500000, payment:'Tiền mặt', status:'Đang giao hàng' },
   ];
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 

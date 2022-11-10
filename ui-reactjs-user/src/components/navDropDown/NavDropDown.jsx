@@ -37,7 +37,7 @@ export default function NavDropDown() {
       >
         <Avatar sx={{ width: 32, height: 32 }}>M</Avatar>
 
-        <Typography sx={{ ml: 2, color: "#eee" }}>Xin chào Admin</Typography>
+        <Typography sx={{ ml: 2, color: "#eee" }}>Xin chào Phúc</Typography>
       </IconButton>
       <Menu
         anchorEl={anchorEl}
