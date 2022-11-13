@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { Link, useSearchParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
+import Record from "../../server.json";
 import "./navbar.scss";
 import "react-sliding-pane/dist/react-sliding-pane.css";
 import NavDropDown from "../navDropDown/NavDropDown";
@@ -50,18 +51,22 @@ export default function Navbar(props) {
     localStorage.setItem("lstOrFd", JSON.stringify(lstOrFd));
   }
   const admin = localStorage.getItem("items");
+  const navigate = useNavigate();
+  const { id } = useParams();
+  const { itemID } = useParams();
+  const handlesBar = () => {
+    navigate(`${id}/${itemID}`);
+  };
+  const [search, setSearch] = useState("");
 
-  const [search, setSearch] = useSearchParams();
-  const searchTerm = searchParams.get('q') || '';
-  const handleSearch = (event) =>{
-    const name = event.target.value
-    if (name){
-      setSearch({name : event.target.value})
-    }
-    else{
-      setSearch({});
-    }
-  }
+  // const searchTerm = searchParams.get('q') || '';
+  const handleSearch = (event) => {
+    setSearch(event.target.value);
+  };
+  const onSearch = (searchTerm) => {
+    setSearch(searchTerm);
+    console.log("search", searchTerm);
+  };
   return (
     <>
       <nav className="nav">
@@ -77,18 +82,42 @@ export default function Navbar(props) {
             <div className="search">
               <input
                 type="text"
-                value={searchTerm}
-                onChange ={handleSearch}
+                value={search}
+                onChange={handleSearch}
                 placeholder="Tìm kiếm..."
                 className="searchInput"
               />
+
               <img
                 src={PF + "icon/search.png"}
                 alt=""
                 width="20"
                 height="20"
                 className="searchIcon"
+                onClick={() => onSearch(search)}
               />
+            </div>
+            <div className="dropdown">
+              {Record.filter((item) => {
+                const searchTerm = search.toLowerCase();
+                const title = item.title.toLowerCase();
+
+                return (
+                  searchTerm &&
+                  title.startsWith(searchTerm) &&
+                  title !== searchTerm
+                );
+              })
+                .slice(0, 10)
+                .map((item) => (
+                  <div
+                    onClick={() => onSearch(item.title)}
+                    className="dropdown-row"
+                    key={item.id}
+                  >
+                    <p onClick={() => handlesBar()}>{item.title}</p>
+                  </div>
+                ))}
             </div>
           </div>
           <div className="navItem">
