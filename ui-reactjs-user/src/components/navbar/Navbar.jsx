@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import "./navbar.scss";
 import "react-sliding-pane/dist/react-sliding-pane.css";
 import NavDropDown from "../navDropDown/NavDropDown";
@@ -50,6 +50,18 @@ export default function Navbar(props) {
     localStorage.setItem("lstOrFd", JSON.stringify(lstOrFd));
   }
   const admin = localStorage.getItem("items");
+
+  const [search, setSearch] = useSearchParams();
+  const searchTerm = searchParams.get('q') || '';
+  const handleSearch = (event) =>{
+    const name = event.target.value
+    if (name){
+      setSearch({name : event.target.value})
+    }
+    else{
+      setSearch({});
+    }
+  }
   return (
     <>
       <nav className="nav">
@@ -65,6 +77,8 @@ export default function Navbar(props) {
             <div className="search">
               <input
                 type="text"
+                value={searchTerm}
+                onChange ={handleSearch}
                 placeholder="Tìm kiếm..."
                 className="searchInput"
               />
