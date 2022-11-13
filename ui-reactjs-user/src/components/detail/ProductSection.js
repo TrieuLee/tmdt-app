@@ -17,7 +17,27 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./test.css";
 export default function ProductSection(props) {
   const { id, itemID } = useParams();
+  const { cartItems } = props;
+  const { onAdd } = props;
   const [active, setActive] = useState();
+  const itemsPrice = cartItems
+    ? cartItems.reduce((a, c) => a + c.price * c.qty, 0)
+    : 0;
+  const dis = itemsPrice * 0.01;
+  const shippingPrice = itemsPrice < 200000 ? 0 : dis;
+  const totalPrice = itemsPrice + shippingPrice;
+  const data = !localStorage.itemRes ? "" : JSON.parse(localStorage.itemRes);
+
+  function SetCartPayment() {
+    const lstOrFd = {
+      cart: cartItems,
+      itemsPrice: itemsPrice ? itemsPrice : "",
+      shippingPrice: shippingPrice ? shippingPrice : "",
+      totalPrice: totalPrice ? totalPrice : "",
+    };
+    localStorage.setItem("lstOrFd", JSON.stringify(lstOrFd));
+  }
+
   const theme = {
     spacing: {
       marginTop: "30px",
@@ -66,8 +86,10 @@ export default function ProductSection(props) {
 
     setOpen(false);
   };
-  const { cartItems } = props;
-  const { onAdd } = props;
+
+  function Add(items) {
+    localStorage.setItem("items", JSON.stringify(items));
+  }
   return (
     <>
       <Container>
@@ -171,6 +193,7 @@ export default function ProductSection(props) {
                         onClick={() => {
                           alertClick();
                           onAdd(item);
+                          Add(item);
                         }}
                       >
                         <AddShoppingCartIcon sx={theme.AddShoppingCartIcon} />
@@ -191,14 +214,13 @@ export default function ProductSection(props) {
                           Thêm vào giỏ hàng thành công
                         </Alert>
                       </Snackbar>
-
                       <Link
                         to="/checkout"
                         style={{ textDecoration: "none", color: "white" }}
                       >
                         <Button
                           onClick={() => {
-                            onAdd(item);
+                            // Add(item);
                           }}
                           variant="contained"
                           startIcon={<ShoppingBagIcon />}
