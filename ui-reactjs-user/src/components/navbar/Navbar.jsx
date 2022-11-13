@@ -29,8 +29,10 @@ export default function Navbar(props) {
     isPaneOpen: false,
     isPaneOpenLeft: false,
   });
+
   const { cartItems } = props;
   const { onAdd, onRemove } = props;
+
   const itemsPrice = cartItems
     ? cartItems.reduce((a, c) => a + c.price * c.qty, 0)
     : 0;
