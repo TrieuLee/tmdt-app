@@ -64,7 +64,7 @@ export default function ProductSection(props) {
   };
 
   const breadcrumbs = [
-    <Link underline="hover" key="1" color="inherit" href={id}>
+     <Link underline="hover" key="1" color="inherit" href={id}>
       Trang chủ
     </Link>,
     <Link underline="hover" key="2" color="inherit">

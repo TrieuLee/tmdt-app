@@ -54,9 +54,13 @@ export default function Navbar(props) {
   const navigate = useNavigate();
   const { id } = useParams();
   const { itemID } = useParams();
-  const handlesBar = () => {
-    navigate(`${id}/${itemID}`);
-  };
+  // console.log(id);
+  // const categories = Record.filter((item) => item.category.name === id);
+  // console.log(categories);
+  // const handlesBar = () => {
+  //   navigate(`/${id}/${itemID}`);
+  //   // console.log(navigate(`/${id}/${itemID}`));
+  // };
   const [search, setSearch] = useState("");
 
   // const searchTerm = searchParams.get('q') || '';
@@ -72,11 +76,13 @@ export default function Navbar(props) {
       <nav className="nav">
         <div className="navTop">
           <div className="navItem">
-            <img
-              src={PF + "img/sneakers.png"}
-              alt=""
-              className="sidebarFriendImg"
-            />
+            <Link to="/">
+              <img
+                src={PF + "img/sneakers.png"}
+                alt=""
+                className="sidebarFriendImg"
+              />
+            </Link>
           </div>
           <div className="navItem">
             <div className="search">
@@ -115,7 +121,9 @@ export default function Navbar(props) {
                     className="dropdown-row"
                     key={item.id}
                   >
-                    <p onClick={() => handlesBar()}>{item.title}</p>
+                    <Link to={`/${item.category.name}/${item.id}`}>
+                      <p>{item.title}</p>
+                    </Link>
                   </div>
                 ))}
             </div>
