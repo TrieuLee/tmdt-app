@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useParams, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Record from "../../server.json";
 import "./navbar.scss";
 import "react-sliding-pane/dist/react-sliding-pane.css";
@@ -51,19 +51,9 @@ export default function Navbar(props) {
     localStorage.setItem("lstOrFd", JSON.stringify(lstOrFd));
   }
   const admin = localStorage.getItem("items");
-  const navigate = useNavigate();
-  const { id } = useParams();
-  const { itemID } = useParams();
-  // console.log(id);
-  // const categories = Record.filter((item) => item.category.name === id);
-  // console.log(categories);
-  // const handlesBar = () => {
-  //   navigate(`/${id}/${itemID}`);
-  //   // console.log(navigate(`/${id}/${itemID}`));
-  // };
+
   const [search, setSearch] = useState("");
 
-  // const searchTerm = searchParams.get('q') || '';
   const handleSearch = (event) => {
     setSearch(event.target.value);
   };
@@ -103,7 +93,15 @@ export default function Navbar(props) {
                 onClick={() => onSearch(search)}
               />
             </div>
-            <div className="dropdown">
+            <div
+              className="dropdown"
+              style={{
+                position: "absolute",
+                width: "29%",
+                zIndex: "1",
+                marginTop: "5px",
+              }}
+            >
               {Record.filter((item) => {
                 const searchTerm = search.toLowerCase();
                 const title = item.title.toLowerCase();
@@ -116,15 +114,37 @@ export default function Navbar(props) {
               })
                 .slice(0, 10)
                 .map((item) => (
-                  <div
-                    onClick={() => onSearch(item.title)}
-                    className="dropdown-row"
-                    key={item.id}
+                  <Link
+                    to={`/${item.category.name}/${item.id}`}
+                    style={{ textDecoration: "none", color: "black" }}
                   >
-                    <Link to={`/${item.category.name}/${item.id}`}>
-                      <p>{item.title}</p>
-                    </Link>
-                  </div>
+                    <div
+                      onClick={() => onSearch(item.title)}
+                      className="dropdown-row"
+                      style={{
+                        border: "1px solid black",
+                        backgroundColor: "white",
+                        width: "100%",
+                        marginTop: "0px",
+                      }}
+                      key={item.id}
+                    >
+                      <div style={{ display: "flex" }}>
+                        <img
+                          src={item.images}
+                          alt=""
+                          style={{
+                            width: "50px",
+                            height: "50px",
+                            verticalAlign: "middle",
+                            borderRadius: "50%",
+                            marginRight: "5px",
+                          }}
+                        />
+                        <p>{item.title}</p>
+                      </div>
+                    </div>
+                  </Link>
                 ))}
             </div>
           </div>

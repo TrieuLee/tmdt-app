@@ -1,58 +1,57 @@
 .nav {
-    background-color: #111;
-    color: white;
-    padding: 20px 50px;
-    .navTop {
-        display: flex;
-        // align-items: center;
-        justify-content: space-between;
-        .navItem {
-            .search {
-                display: flex;
-                align-items: center;
-                background-color: gray;
-                padding: 6px;
-                padding-left: 200px;
-                padding-right: 10px;
-                border-radius: 15px;
-                .searchInput {
-                    border: none;
-                    background-color: transparent;
-                    height: 20px;
-                    width: 400px;
-                    margin-left: -190px;
-                    // position: absolute;
-                    cursor: pointer;
-                }
-                .searchInput::placeholder {
-                    color: lightgray;
-                }
-                .searchInput:focus {
-                    outline: none;
-                }
-                .searchIcon {
-                }
-            }
-        }
-    }
-    .navBottom {
+  background-color: #111;
+  color: white;
+  padding: 20px 50px;
+  .navTop {
+    display: flex;
+    // align-items: center;
+    justify-content: space-between;
+    .navItem {
+      .search {
         display: flex;
         align-items: center;
-        justify-content: center;
-        .menuItem {
-            margin-right: 50px;
-            margin-top: 20px;
-            cursor: pointer;
-            color: lightgray;
-            font-weight: 400;
-            text-decoration: none;
+        background-color: gray;
+        padding: 6px;
+        padding-left: 200px;
+        padding-right: 10px;
+        border-radius: 15px;
+        .searchInput {
+          border: none;
+          background-color: transparent;
+          height: 20px;
+          width: 400px;
+          margin-left: -190px;
+          // position: absolute;
         }
-        .menuItem:hover {
-            color: gray;
+        .searchInput::placeholder {
+          color: lightgray;
         }
-        .navItem1 {
-            display: flex;
-            justify-content: space-between;
+        .searchInput:focus {
+          outline: none;
         }
+        .searchIcon {
+        }
+      }
     }
+  }
+  .navBottom {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .menuItem {
+      margin-right: 50px;
+      margin-top: 20px;
+      cursor: pointer;
+      color: lightgray;
+      font-weight: 400;
+      text-decoration: none;
+    }
+    .menuItem:hover {
+      color: gray;
+    }
+    .navItem1 {
+      display: flex;
+      justify-content: space-between;
+    }
+  }
 }
