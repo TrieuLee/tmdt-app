@@ -10,13 +10,14 @@ export default function ProductDetail() {
     if (exist) {
       setCartItems(
         cartItems.map((x) =>
-          x.id === product.id ? { ...exist, qty: exist.qty + 1, size:exist.size } : x
+          x.id === product.id
+            ? { ...exist, qty: exist.qty + 1, size: exist.size }
+            : x
         )
       );
     } else {
-      setCartItems([...cartItems, { ...product, qty: 1, size:product.size }]);
+      setCartItems([...cartItems, { ...product, qty: 1, size: product.size }]);
       // window.alert('Please Select a Shirt Size')
-
     }
     // SetCartPayment(product);
   };
@@ -29,7 +30,9 @@ export default function ProductDetail() {
     } else {
       setCartItems(
         cartItems.map((x) =>
-          x.id === product.id ? { ...exist, qty: exist.qty - 1, size:exist.size } : x
+          x.id === product.id
+            ? { ...exist, qty: exist.qty - 1, size: exist.size }
+            : x
         )
       );
     }

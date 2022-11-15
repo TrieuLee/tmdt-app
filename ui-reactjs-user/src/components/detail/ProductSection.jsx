@@ -20,7 +20,6 @@ export default function ProductSection(props) {
   const { cartItems } = props;
   const { onAdd } = props;
   const [active, setActive] = useState();
-
   const theme = {
     spacing: {
       marginTop: "30px",
@@ -83,9 +82,9 @@ export default function ProductSection(props) {
   // console.log(filter)
 
   const [size, setSize] = useState("");
-  const handleClick = () =>{
-    setSize(cartItems =>[...cartItems, ...size])
-  }
+  const handleClick = (product) => {
+    onAdd({ ...product, ...cartItems, size });
+  };
   console.log(size);
   return (
     <>
@@ -161,30 +160,26 @@ export default function ProductSection(props) {
                     <div style={{ display: "flex", alignItems: "center" }}>
                       <div>Size giày:</div>
 
-                      <select
-                        onChange={(e) => setSize(e.target.value)}
-                      >
+                      <select onChange={(e) => setSize(e.target.value)}>
                         {item.size &&
                           item.size.map((record) => (
-                            <>
-                              <option
-                                style={{
-                                  border: "1px solid black",
-                                  padding: "8px",
-                                  marginLeft: "20px",
-                                  cursor: "pointer",
-                                }}
-                                onClick={() => {
-                                  setActive(record);
-                                  
-                                }}
-                                className={
-                                  active === record ? "active" : undefined
-                                }
-                              >
-                                {record}
-                              </option>
-                            </>
+                            <option
+                              key={record}
+                              style={{
+                                border: "1px solid black",
+                                padding: "8px",
+                                marginLeft: "20px",
+                                cursor: "pointer",
+                              }}
+                              onClick={() => {
+                                setActive(record);
+                              }}
+                              className={
+                                active === record ? "active" : undefined
+                              }
+                            >
+                              {record}
+                            </option>
                           ))}
                       </select>
                     </div>
@@ -194,8 +189,7 @@ export default function ProductSection(props) {
                         sx={theme.bread}
                         onClick={() => {
                           alertClick();
-                          onAdd(item);
-                          Add(item);
+                          handleClick(item);
                         }}
                       >
                         <AddShoppingCartIcon sx={theme.AddShoppingCartIcon} />
