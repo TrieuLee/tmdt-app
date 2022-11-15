@@ -5,36 +5,20 @@ import ProductSection from "../../components/detail/ProductSection";
 import CommentSection from "../../components/detail/CommentSection";
 export default function ProductDetail() {
   const [cartItems, setCartItems] = useState([]);
-  const itemsPrice = cartItems
-    ? cartItems.reduce((a, c) => a + c.price * c.qty, 0)
-    : 0;
-  const dis = itemsPrice * 0.01;
-  const shippingPrice = itemsPrice < 200000 ? 0 : dis;
-  const totalPrice = itemsPrice + shippingPrice;
-  const data = !localStorage.itemRes ? "" : JSON.parse(localStorage.itemRes);
-
-  function SetCartPayment() {
-    const lstOrFd = {
-      cart: cartItems,
-      itemsPrice: itemsPrice ? itemsPrice : "",
-      shippingPrice: shippingPrice ? shippingPrice : "",
-      totalPrice: totalPrice ? totalPrice : "",
-    };
-    localStorage.setItem("lstOrFd", JSON.stringify(lstOrFd));
-  }
   const onAdd = (product) => {
     const exist = cartItems.find((x) => x.id === product.id);
     if (exist) {
       setCartItems(
         cartItems.map((x) =>
-          x.id === product.id ? { ...exist, qty: exist.qty + 1 } : x
+          x.id === product.id ? { ...exist, qty: exist.qty + 1, size:exist.size } : x
         )
       );
     } else {
-      setCartItems([...cartItems, { ...product, qty: 1 }]);
+      setCartItems([...cartItems, { ...product, qty: 1, size:product.size }]);
+      // window.alert('Please Select a Shirt Size')
+
     }
     // SetCartPayment(product);
-    console.log("into cart");
   };
   console.log(cartItems);
 
@@ -45,7 +29,7 @@ export default function ProductDetail() {
     } else {
       setCartItems(
         cartItems.map((x) =>
-          x.id === product.id ? { ...exist, qty: exist.qty - 1 } : x
+          x.id === product.id ? { ...exist, qty: exist.qty - 1, size:exist.size } : x
         )
       );
     }

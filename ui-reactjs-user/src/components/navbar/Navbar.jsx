@@ -197,7 +197,7 @@ export default function Navbar(props) {
                           </b>
                         </li>
                         <li style={{ marginTop: "8px" }}>
-                          <b>Size:</b> {item.size}
+                          <b>Size:</b> {item.size[0]}
                         </li>
                         <li style={{ marginTop: "8px" }}>
                           <b>Số lượng:</b> {item.qty} x{" "}

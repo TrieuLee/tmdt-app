@@ -20,23 +20,6 @@ export default function ProductSection(props) {
   const { cartItems } = props;
   const { onAdd } = props;
   const [active, setActive] = useState();
-  const itemsPrice = cartItems
-    ? cartItems.reduce((a, c) => a + c.price * c.qty, 0)
-    : 0;
-  const dis = itemsPrice * 0.01;
-  const shippingPrice = itemsPrice < 200000 ? 0 : dis;
-  const totalPrice = itemsPrice + shippingPrice;
-  const data = !localStorage.itemRes ? "" : JSON.parse(localStorage.itemRes);
-
-  function SetCartPayment() {
-    const lstOrFd = {
-      cart: cartItems,
-      itemsPrice: itemsPrice ? itemsPrice : "",
-      shippingPrice: shippingPrice ? shippingPrice : "",
-      totalPrice: totalPrice ? totalPrice : "",
-    };
-    localStorage.setItem("lstOrFd", JSON.stringify(lstOrFd));
-  }
 
   const theme = {
     spacing: {
@@ -64,7 +47,7 @@ export default function ProductSection(props) {
   };
 
   const breadcrumbs = [
-     <Link underline="hover" key="1" color="inherit" href={id}>
+    <Link underline="hover" key="1" color="inherit" href={id}>
       Trang chủ
     </Link>,
     <Link underline="hover" key="2" color="inherit">
@@ -83,13 +66,27 @@ export default function ProductSection(props) {
     if (reason === "clickaway") {
       return;
     }
-
     setOpen(false);
   };
 
   function Add(items) {
     localStorage.setItem("items", JSON.stringify(items));
   }
+  // const [filter, setFilter] = useState({})
+  // const handleFilter = (e) =>{
+  //   const value = e.target.value;
+  //   setFilter({
+  //     [e.target.name]:value,
+  //   })
+
+  // }
+  // console.log(filter)
+
+  const [size, setSize] = useState("");
+  const handleClick = () =>{
+    setSize(cartItems =>[...cartItems, ...size])
+  }
+  console.log(size);
   return (
     <>
       <Container>
@@ -164,27 +161,32 @@ export default function ProductSection(props) {
                     <div style={{ display: "flex", alignItems: "center" }}>
                       <div>Size giày:</div>
 
-                      {item.size &&
-                        item.size.map((record) => (
-                          <>
-                            <span
-                              style={{
-                                border: "1px solid black",
-                                padding: "8px",
-                                marginLeft: "20px",
-                                cursor: "pointer",
-                              }}
-                              onClick={() => {
-                                setActive(record);
-                              }}
-                              className={
-                                active === record ? "active" : undefined
-                              }
-                            >
-                              {record}
-                            </span>
-                          </>
-                        ))}
+                      <select
+                        onChange={(e) => setSize(e.target.value)}
+                      >
+                        {item.size &&
+                          item.size.map((record) => (
+                            <>
+                              <option
+                                style={{
+                                  border: "1px solid black",
+                                  padding: "8px",
+                                  marginLeft: "20px",
+                                  cursor: "pointer",
+                                }}
+                                onClick={() => {
+                                  setActive(record);
+                                  
+                                }}
+                                className={
+                                  active === record ? "active" : undefined
+                                }
+                              >
+                                {record}
+                              </option>
+                            </>
+                          ))}
+                      </select>
                     </div>
 
                     <Stack direction="row" spacing={2} sx={theme.spacing}>
