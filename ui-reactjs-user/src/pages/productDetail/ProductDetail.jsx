@@ -3,6 +3,7 @@ import Navbar from "../../components/navbar/Navbar";
 import Footer from "../../components/footer/Footer";
 import ProductSection from "../../components/detail/ProductSection";
 import CommentSection from "../../components/detail/CommentSection";
+
 export default function ProductDetail() {
   const [cartItems, setCartItems] = useState([]);
   const onAdd = (product) => {
@@ -16,9 +17,17 @@ export default function ProductDetail() {
         )
       );
     } else {
-      setCartItems([...cartItems, { ...product, qty: 1, size: product.size }]);
-      // window.alert('Please Select a Shirt Size')
+      if (!product.size) {
+        window.alert("Vui lòng chọn Size giày");
+      } else {
+        setCartItems([
+          ...cartItems,
+          { ...product, qty: 1, size: product.size },
+          
+        ]);
+      }
     }
+
     // SetCartPayment(product);
   };
   console.log(cartItems);

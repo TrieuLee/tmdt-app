@@ -68,24 +68,17 @@ export default function ProductSection(props) {
     setOpen(false);
   };
 
-  function Add(items) {
-    localStorage.setItem("items", JSON.stringify(items));
-  }
-  // const [filter, setFilter] = useState({})
-  // const handleFilter = (e) =>{
-  //   const value = e.target.value;
-  //   setFilter({
-  //     [e.target.name]:value,
-  //   })
-
-  // }
-  // console.log(filter)
-
+  // Chon size
   const [size, setSize] = useState("");
   const handleClick = (product) => {
-    onAdd({ ...product, ...cartItems, size });
+    onAdd({ ...cartItems, ...product, size });
   };
   console.log(size);
+
+  // function Add(items) {
+  //   localStorage.setItem("items", JSON.stringify(items));
+  // }
+
   return (
     <>
       <Container>
@@ -188,8 +181,11 @@ export default function ProductSection(props) {
                       <Button
                         sx={theme.bread}
                         onClick={() => {
-                          alertClick();
-                          handleClick(item);
+                          if (item.size) {
+                            alertClick();
+                            handleClick(item);
+                            console.log(item.size);
+                          }
                         }}
                       >
                         <AddShoppingCartIcon sx={theme.AddShoppingCartIcon} />
@@ -197,6 +193,7 @@ export default function ProductSection(props) {
                           Thêm vào giỏ hàng ({cartItems.length})
                         </p>
                       </Button>
+
                       <Snackbar
                         open={open}
                         autoHideDuration={2000}
