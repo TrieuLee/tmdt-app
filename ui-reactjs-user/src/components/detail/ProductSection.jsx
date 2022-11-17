@@ -181,10 +181,17 @@ export default function ProductSection(props) {
                       <Button
                         sx={theme.bread}
                         onClick={() => {
-                          if (item.size) {
+                          if (item.size !== "") {
                             alertClick();
                             handleClick(item);
-                            console.log(item.size);
+                          } else {
+                            <Alert
+                              onClose={alertClose}
+                              severity="success"
+                              sx={{ width: "100%" }}
+                            >
+                              Thêm vào giỏ hàng thành công
+                            </Alert>;
                           }
                         }}
                       >
@@ -201,7 +208,7 @@ export default function ProductSection(props) {
                       >
                         <Alert
                           onClose={alertClose}
-                          severity="success"
+                          severity="error"
                           sx={{ width: "100%" }}
                         >
                           Thêm vào giỏ hàng thành công
