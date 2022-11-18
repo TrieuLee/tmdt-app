@@ -7,15 +7,47 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { CardActionArea } from "@mui/material";
+import Breadcrumbs from "@mui/material/Breadcrumbs";
+import Stack from "@mui/material/Stack";
+import HomeIcon from "@mui/icons-material/Home";
+
 import Records from "../../server.json";
 export default function ProductGrid() {
   const { id } = useParams();
   const categories = Records.filter((item) => item.category.name === id);
   console.log(categories);
 
+  const breadcrumbs = [
+    <Link
+      key="1"
+      color="inherit"
+      to="/"
+      style={{
+        color: "black",
+        textDecoration: "none",
+        display: "flex",
+        alignItems: "center",
+      }}
+    >
+      <HomeIcon sx={{ mr: 0.75 }} fontSize="inherit" />
+      Trang chủ
+    </Link>,
+    <Link
+      underline="hover"
+      key="2"
+      style={{ color: "black", fontWeight: "bold", textDecoration: "none" }}
+    >
+      {id}
+    </Link>,
+  ];
   return (
     <>
       <Container>
+        <Stack spacing={2} sx={{ my: 2 }}>
+          <Breadcrumbs separator="›" aria-label="breadcrumb">
+            {breadcrumbs}
+          </Breadcrumbs>
+        </Stack>
         <Grid container spacing={2} columns={16}>
           {Records.filter((record) => record.category.name == id).map(
             (record, i) => (

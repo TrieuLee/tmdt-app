@@ -13,6 +13,7 @@ import Stack from "@mui/material/Stack";
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import HomeIcon from "@mui/icons-material/Home";
 
 import "./test.css";
 export default function ProductSection(props) {
@@ -46,14 +47,35 @@ export default function ProductSection(props) {
   };
 
   const breadcrumbs = [
-    <Link underline="hover" key="1" color="inherit" href={id}>
+    <Link
+      key="1"
+      color="inherit"
+      to="/"
+      style={{
+        color: "black",
+        textDecoration: "none",
+        display: "flex",
+        alignItems: "center",
+      }}
+    >
+      <HomeIcon sx={{ mr: 0.75 }} fontSize="inherit" />
       Trang chủ
     </Link>,
-    <Link underline="hover" key="2" color="inherit">
+    <Link
+      key="2"
+      style={{ color: "black", textDecoration: "none" }}
+      to={`/${id}`}
+    >
       {id}
     </Link>,
-    <Link key="3" href={itemID} color="text.primary">
-      {itemID}
+    <Link
+      key="3"
+      href={itemID}
+      style={{ color: "black", fontWeight: "bold", textDecoration: "none" }}
+    >
+      {Records.filter((item) => item.id == itemID).map((item, i) => (
+        <div>{item.title}</div>
+      ))}
     </Link>,
   ];
 
