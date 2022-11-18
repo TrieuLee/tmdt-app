@@ -13,8 +13,11 @@ import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
+import StripeCheckout from 'react-stripe-checkout'
+
 
 export default function Navbar(props) {
+  
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
   const ThemeComponent = styled(
     ShoppingBagIcon,

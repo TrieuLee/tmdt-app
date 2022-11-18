@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useState} from "react";
 import { styled } from "@mui/material/styles";
 import { Link } from "react-router-dom";
 import Table from "@mui/material/Table";
@@ -11,10 +11,16 @@ import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
-
+import StripeCheckout from "react-stripe-checkout";
 import "./Grid.scss";
 
 export default function CheckOutGrid() {
+  const KEY = process.env.REACT_PUBLISH_KEY;
+  const [stripeToken, setStripeToken] = useState(null)
+  const onToken =(token)=>{
+    setStripeToken(token)
+  }
+  console.log(stripeToken)
   const StyledTableCell = styled(
     TableCell,
     Paper
@@ -163,6 +169,15 @@ export default function CheckOutGrid() {
                     {orderSummary()}
                     <div style={{ marginTop: "10px" }}>
                       <div>
+                        <StripeCheckout
+                          name ="ScofieldShop"
+                          billingAddress  
+                          shippingAddress
+                          description=""
+                          amount={100}
+                          token={onToken}
+                          stripeKey ={KEY}>
+                          
                         <Button
                           variant="contained"
                           square
@@ -170,6 +185,8 @@ export default function CheckOutGrid() {
                         >
                           THANH TOÁN
                         </Button>
+                        </StripeCheckout>
+                        
                       </div>
 
                       <div>
