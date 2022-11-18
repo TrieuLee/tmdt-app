@@ -1,4 +1,5 @@
-import React,{useState} from "react";
+import React, { useState } from "react";
+import axios from "axios";
 import { styled } from "@mui/material/styles";
 import { Link } from "react-router-dom";
 import Table from "@mui/material/Table";
@@ -11,16 +12,10 @@ import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
-import StripeCheckout from "react-stripe-checkout";
+// import { url } from "../../stripeAPI";
 import "./Grid.scss";
 
 export default function CheckOutGrid() {
-  const KEY = process.env.REACT_PUBLISH_KEY;
-  const [stripeToken, setStripeToken] = useState(null)
-  const onToken =(token)=>{
-    setStripeToken(token)
-  }
-  console.log(stripeToken)
   const StyledTableCell = styled(
     TableCell,
     Paper
@@ -46,13 +41,31 @@ export default function CheckOutGrid() {
   const carts = !localStorage.lstOrFd ? "" : JSON.parse(localStorage.lstOrFd);
   const shippingPrice = carts.shippingPrice;
   const totalPrice = carts.totalPrice;
+
+  const checkout = async () => {
+    await fetch("http://localhost:5000/checkout", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ items: carts }),
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .then((response) => {
+        if (response.url) {
+          window.location.assign(response.url); // Forwarding user to Stripe
+        }
+      });
+  };
   console.log(carts);
   function listCart() {
     let cartdb = [...carts.cart];
     return cartdb.map((cart, i) => {
       const total = cart.price * cart.qty;
       return (
-        <>
+        <React.Fragment key={i}>
           <StyledTableCell component="th" scope="row">
             <div style={{ display: "flex" }}>
               <img src={cart.images} style={{ width: "100px" }} alt="" />
@@ -80,7 +93,7 @@ export default function CheckOutGrid() {
               currency: "VND",
             })}
           </StyledTableCell>
-        </>
+        </React.Fragment>
       );
     });
   }
@@ -88,7 +101,7 @@ export default function CheckOutGrid() {
     let cartdb = [...carts.cart];
     return cartdb.map((cart, i) => {
       return (
-        <>
+        <React.Fragment key={i}>
           <StyledTableRow>
             <StyledTableCell component="th" scope="row">
               Số lượng: {cart.qty}
@@ -124,7 +137,7 @@ export default function CheckOutGrid() {
               })}
             </StyledTableCell>
           </StyledTableRow>
-        </>
+        </React.Fragment>
       );
     });
   }
@@ -165,48 +178,32 @@ export default function CheckOutGrid() {
                     </TableRow>
                   </TableHead>
                   {/*Nội dung  */}
-                  <TableBody>
-                    {orderSummary()}
-                    <div style={{ marginTop: "10px" }}>
-                      <div>
-                        <StripeCheckout
-                          name ="ScofieldShop"
-                          billingAddress  
-                          shippingAddress
-                          description=""
-                          amount={100}
-                          token={onToken}
-                          stripeKey ={KEY}>
-                          
-                        <Button
-                          variant="contained"
-                          square
-                          sx={{ width: "100%", borderRadius: "0px" }}
-                        >
-                          THANH TOÁN
-                        </Button>
-                        </StripeCheckout>
-                        
-                      </div>
-
-                      <div>
-                        <Button
-                          variant="contained"
-                          sx={{
-                            width: "100%",
-                            marginTop: "10px",
-                            borderRadius: "0px",
-                          }}
-                        >
-                          <Link to="/airforce" className="addMore">
-                            MUA THÊM SẢN PHẨM
-                          </Link>
-                        </Button>
-                      </div>
-                    </div>
-                  </TableBody>
+                  <TableBody>{orderSummary()}</TableBody>
                 </Table>
               </Paper>
+              <div style={{ marginTop: "10px" }}>
+                <Button
+                  variant="contained"
+                  square="true"
+                  sx={{ width: "100%", borderRadius: "0px" }}
+                  onClick={() => checkout()}
+                >
+                  THANH TOÁN
+                </Button>
+
+                <Button
+                  variant="contained"
+                  sx={{
+                    width: "100%",
+                    marginTop: "10px",
+                    borderRadius: "0px",
+                  }}
+                >
+                  <Link to="/airforce" className="addMore">
+                    MUA THÊM SẢN PHẨM
+                  </Link>
+                </Button>
+              </div>
             </TableContainer>
           </Grid>
         </Grid>

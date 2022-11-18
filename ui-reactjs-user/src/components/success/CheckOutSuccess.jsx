@@ -1,0 +1,33 @@
+import React, { useEffect } from "react";
+import { Link } from "react-router-dom";
+import { runFireworks } from "../../style/utils";
+import { BsBagCheckFill } from "react-icons/bs";
+import "./COS.scss";
+export default function CheckOutSuccess() {
+  useEffect(() => {
+    localStorage.clear();
+    runFireworks();
+  });
+  return (
+    <div className="success-wrapper">
+      <div className="success">
+        <p className="icon">
+          <BsBagCheckFill />
+        </p>
+        <h2>Cảm ơn bạn đã lựa chọn sản phẩm của .sneaker</h2>
+        <p className="email-msg">Hóa đơn sẽ được gửi vào Email của bạn.</p>
+        <p className="description">
+          Nếu bạn có thắc mắc về sản phẩm của chúng tôi, liên hệ vào
+          <a className="email" href="mailto:order@example.com">
+            order@example.com
+          </a>
+        </p>
+        <Link to="/" className="email">
+          <button type="button" width="300px" className="btn">
+            Tiếp tục mua sắm
+          </button>
+        </Link>
+      </div>
+    </div>
+  );
+}

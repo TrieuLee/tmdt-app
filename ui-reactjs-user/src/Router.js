@@ -10,6 +10,7 @@ import ProductDetail from "./pages/productDetail/ProductDetail";
 import CheckOut from "./pages/checkOut/CheckOut";
 import FinishOrder from "./pages/finishOrder/FinishOrder";
 import Profile from "./pages/profile/Profile";
+import Success from "./pages/success/Success";
 const Router = () => {
   return (
     <>
@@ -27,6 +28,8 @@ const Router = () => {
         <Route path="checkout" element={<CheckOut />} />
         <Route path="order" element={<FinishOrder />} />
         <Route path="profile" element={<Profile />} />
+
+        <Route path="checkout-success" element={<Success />} />
       </Routes>
     </>
   );

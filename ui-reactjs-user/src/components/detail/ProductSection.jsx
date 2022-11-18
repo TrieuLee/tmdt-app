@@ -113,6 +113,7 @@ export default function ProductSection(props) {
                         {item.icon &&
                           item.icon.map((records, i) => (
                             <FontAwesomeIcon
+                              key={i}
                               icon={
                                 require("@fortawesome/free-solid-svg-icons")[
                                   records

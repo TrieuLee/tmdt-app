@@ -1,0 +1,66 @@
+.success-wrapper {
+  background-color: white;
+  min-height: 60vh;
+  .success {
+    width: 1000px;
+    margin: auto;
+    margin-top: 65px;
+    background-color: #dcdcdc;
+    padding: 20px;
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    .icon {
+      color: green;
+      font-size: 40px;
+      margin-bottom: 0;
+    }
+    h2 {
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      font-weight: 900;
+      font-size: 40px;
+      color: #324d67;
+    }
+    .email-msg {
+      font-size: 16px;
+      font-weight: 600;
+      text-align: center;
+    }
+    p {
+      font-size: 20px;
+      font-weight: 600;
+    }
+    .description {
+      font-size: 16px;
+      font-weight: 600;
+      text-align: center;
+      margin: 10px;
+      margin-top: 30px;
+      .email {
+        margin-left: 5px;
+        color: #f02d34;
+      }
+    }
+  }
+  .btn {
+    width: 100%;
+    max-width: 400px;
+    padding: 10px 12px;
+    border-radius: 15px;
+    border: none;
+    font-size: 20px;
+    margin-top: 10px;
+    margin-top: 40px;
+    text-transform: uppercase;
+    background-color: #f02d34;
+    color: #fff;
+    cursor: pointer;
+    transform: scale(1, 1);
+    transition: transform 0.5s ease;
+  }
+  .btn:hover {
+    transform: scale(1.1, 1.1);
+  }
+}
