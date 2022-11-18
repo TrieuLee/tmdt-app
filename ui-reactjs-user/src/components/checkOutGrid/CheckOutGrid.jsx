@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import axios from "axios";
+import React from "react";
 import { styled } from "@mui/material/styles";
 import { Link } from "react-router-dom";
 import Table from "@mui/material/Table";
@@ -41,25 +40,6 @@ export default function CheckOutGrid() {
   const carts = !localStorage.lstOrFd ? "" : JSON.parse(localStorage.lstOrFd);
   const shippingPrice = carts.shippingPrice;
   const totalPrice = carts.totalPrice;
-
-  const checkout = async () => {
-    await fetch("http://localhost:5000/checkout", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ items: carts }),
-    })
-      .then((response) => {
-        return response.json();
-      })
-      .then((response) => {
-        if (response.url) {
-          window.location.assign(response.url); // Forwarding user to Stripe
-        }
-      });
-  };
-  console.log(carts);
   function listCart() {
     let cartdb = [...carts.cart];
     return cartdb.map((cart, i) => {
@@ -186,7 +166,6 @@ export default function CheckOutGrid() {
                   variant="contained"
                   square="true"
                   sx={{ width: "100%", borderRadius: "0px" }}
-                  onClick={() => checkout()}
                 >
                   THANH TOÁN
                 </Button>
