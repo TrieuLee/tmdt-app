@@ -20,7 +20,6 @@ export default function ProductSection(props) {
   const { cartItems } = props;
   const { onAdd } = props;
   const [active, setActive] = useState();
-
   const theme = {
     spacing: {
       marginTop: "30px",
@@ -69,24 +68,17 @@ export default function ProductSection(props) {
     setOpen(false);
   };
 
-  function Add(items) {
-    localStorage.setItem("items", JSON.stringify(items));
-  }
-  // const [filter, setFilter] = useState({})
-  // const handleFilter = (e) =>{
-  //   const value = e.target.value;
-  //   setFilter({
-  //     [e.target.name]:value,
-  //   })
-
-  // }
-  // console.log(filter)
-
+  // Chon size
   const [size, setSize] = useState("");
-  const handleClick = () =>{
-    setSize(cartItems =>[...cartItems, ...size])
-  }
+  const handleClick = (product) => {
+    onAdd({ ...cartItems, ...product, size });
+  };
   console.log(size);
+
+  // function Add(items) {
+  //   localStorage.setItem("items", JSON.stringify(items));
+  // }
+
   return (
     <>
       <Container>
@@ -161,30 +153,26 @@ export default function ProductSection(props) {
                     <div style={{ display: "flex", alignItems: "center" }}>
                       <div>Size giày:</div>
 
-                      <select
-                        onChange={(e) => setSize(e.target.value)}
-                      >
+                      <select onChange={(e) => setSize(e.target.value)}>
                         {item.size &&
                           item.size.map((record) => (
-                            <>
-                              <option
-                                style={{
-                                  border: "1px solid black",
-                                  padding: "8px",
-                                  marginLeft: "20px",
-                                  cursor: "pointer",
-                                }}
-                                onClick={() => {
-                                  setActive(record);
-                                  
-                                }}
-                                className={
-                                  active === record ? "active" : undefined
-                                }
-                              >
-                                {record}
-                              </option>
-                            </>
+                            <option
+                              key={record}
+                              style={{
+                                border: "1px solid black",
+                                padding: "8px",
+                                marginLeft: "20px",
+                                cursor: "pointer",
+                              }}
+                              onClick={() => {
+                                setActive(record);
+                              }}
+                              className={
+                                active === record ? "active" : undefined
+                              }
+                            >
+                              {record}
+                            </option>
                           ))}
                       </select>
                     </div>
@@ -193,9 +181,18 @@ export default function ProductSection(props) {
                       <Button
                         sx={theme.bread}
                         onClick={() => {
-                          alertClick();
-                          onAdd(item);
-                          Add(item);
+                          if (item.size !== "") {
+                            alertClick();
+                            handleClick(item);
+                          } else {
+                            <Alert
+                              onClose={alertClose}
+                              severity="success"
+                              sx={{ width: "100%" }}
+                            >
+                              Thêm vào giỏ hàng thành công
+                            </Alert>;
+                          }
                         }}
                       >
                         <AddShoppingCartIcon sx={theme.AddShoppingCartIcon} />
@@ -203,6 +200,7 @@ export default function ProductSection(props) {
                           Thêm vào giỏ hàng ({cartItems.length})
                         </p>
                       </Button>
+
                       <Snackbar
                         open={open}
                         autoHideDuration={2000}
@@ -210,7 +208,7 @@ export default function ProductSection(props) {
                       >
                         <Alert
                           onClose={alertClose}
-                          severity="success"
+                          severity="error"
                           sx={{ width: "100%" }}
                         >
                           Thêm vào giỏ hàng thành công
