@@ -47,5 +47,6 @@
       "last 1 safari version"
     ]
   },
+  "homepage": "https://huflit-sneaker-11.netlify.app/",
   "proxy": "http://127.0.0.1:5000/"
 }
