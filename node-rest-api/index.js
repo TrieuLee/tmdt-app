@@ -4,7 +4,7 @@ const multer = require("multer");
 const loaders = require("./loaders");
 const userRoute = require("./routes/users");
 const { PORT } = require("./config/index");
-
+const stripe = require("./routes/stripe");
 // const storage = multer.diskStorage({
 //   destination: (req, file, cb) => {
 //     cb(null, "public/images");
@@ -26,7 +26,7 @@ const { PORT } = require("./config/index");
   await loaders(app);
   app.use("/api/users", userRoute);
   // set up router
-
+  app.use("/api/stripe", stripe);
   app.listen(PORT, () => {
     console.log(`Example app listening on port ${PORT}`);
   });

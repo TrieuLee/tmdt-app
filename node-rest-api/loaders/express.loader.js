@@ -3,7 +3,7 @@ const dotenv = require("dotenv");
 const helmet = require("helmet");
 const morgan = require("morgan");
 const path = require("path");
-
+const cors = require("cors");
 module.exports = (expressApp) => {
   dotenv.config();
   expressApp.use(express.json());
@@ -13,4 +13,5 @@ module.exports = (expressApp) => {
     "/images",
     express.static(path.join(__dirname, "public/images"))
   );
+  expressApp.use(cors());
 };

@@ -11,10 +11,11 @@ import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
-// import { url } from "../../stripeAPI";
+import { url } from "../../stripeAPI";
+import axios from "axios";
 import "./Grid.scss";
 
-export default function CheckOutGrid() {
+export default function CheckOutGrid(props) {
   const StyledTableCell = styled(
     TableCell,
     Paper
@@ -40,8 +41,9 @@ export default function CheckOutGrid() {
   const carts = !localStorage.lstOrFd ? "" : JSON.parse(localStorage.lstOrFd);
   const shippingPrice = carts.shippingPrice;
   const totalPrice = carts.totalPrice;
+  let cartdb = [...carts.cart];
+
   function listCart() {
-    let cartdb = [...carts.cart];
     return cartdb.map((cart, i) => {
       const total = cart.price * cart.qty;
       return (
@@ -78,7 +80,6 @@ export default function CheckOutGrid() {
     });
   }
   function orderSummary() {
-    let cartdb = [...carts.cart];
     return cartdb.map((cart, i) => {
       return (
         <React.Fragment key={i}>
@@ -121,7 +122,20 @@ export default function CheckOutGrid() {
       );
     });
   }
+  const handleCheckout = () => {
+    axios
+      .post(`${url}/stripe/create-checkout-session`, {
+        cartdb,
+      })
+      .then((res) => {
+        if (res.data.url) {
+          window.location.href = res.data.url;
+        }
+      })
+      .catch((err) => console.log(err.message));
 
+    console.log(carts.cart);
+  };
   return (
     <>
       <Container sx={{ mt: 5 }}>
@@ -166,6 +180,7 @@ export default function CheckOutGrid() {
                   variant="contained"
                   square="true"
                   sx={{ width: "100%", borderRadius: "0px" }}
+                  onClick={() => handleCheckout()}
                 >
                   THANH TOÁN
                 </Button>
