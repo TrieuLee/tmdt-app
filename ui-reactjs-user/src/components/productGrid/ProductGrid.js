@@ -10,7 +10,7 @@ import { CardActionArea } from "@mui/material";
 import Breadcrumbs from "@mui/material/Breadcrumbs";
 import Stack from "@mui/material/Stack";
 import HomeIcon from "@mui/icons-material/Home";
-
+import { Helmet } from "react-helmet-async";
 import Records from "../../server.json";
 export default function ProductGrid() {
   const { id } = useParams();
@@ -42,6 +42,11 @@ export default function ProductGrid() {
   ];
   return (
     <>
+      <Helmet>
+        <title>Product</title>
+        <meta name="description" content="Sneaker from us is the best" />
+        <link rel="canonical" href="/jordan" />
+      </Helmet>
       <Container>
         <Stack spacing={2} sx={{ my: 2 }}>
           <Breadcrumbs separator="›" aria-label="breadcrumb">

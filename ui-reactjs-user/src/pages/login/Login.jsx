@@ -11,7 +11,7 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import InputAdornment from "@mui/material/InputAdornment";
 import InputLabel from "@mui/material/InputLabel";
 import Button from "@mui/material/Button";
-
+import { Helmet } from "react-helmet-async";
 // import component
 import { AuthContext } from "../../context/AuthContext";
 import { loginCall } from "../../callAPIs";
@@ -48,82 +48,96 @@ export default function Login() {
     );
   };
   return (
-    <div
-      className="login"
-      style={{
-        backgroundImage: "url(" + PF + "img/5482397.jpg)",
-        backgroundSize: "cover",
-      }}
-    >
-      <div className="loginWrapper">
-        <div className="loginLeft">
-          <h3 className="loginLogo">.Sneaker</h3>
-          <span className="loginDesc" style={{ color: "white" }}>
-            Hãy là thời trang của chính mình
-          </span>
-        </div>
-        <div className="loginRight">
-          <Box
-            component="form"
-            sx={{
-              "& .MuiTextField-root": { m: 1, width: "60ch" },
-            }}
-            noValidate
-            autoComplete="off"
-            className="loginBox"
-            onSubmit={handleClick}
-          >
-            <input
-              placeholder="Email"
-              type="email"
-              className="loginInput"
-              required
-            />
-            <required id="outlined-required" label="Email" inputRef={email} />
-            <FormControl sx={{ m: 1, width: "60ch" }} variant="outlined">
-              <InputLabel id="outlined-adornment-password" required>
-                Mật khẩu
-              </InputLabel>
-              <OutlinedInput
-                inputRef={passwords}
-                id="outlined-adornment-password"
-                type={values.showPassword ? "text" : "password"}
-                value={values.password}
-                onChange={handleChange("password")}
-                endAdornment={
-                  <InputAdornment position="end">
-                    <IconButton
-                      aria-label="toggle password visibility"
-                      onClick={handleClickShowPassword}
-                      onMouseDown={handleMouseDownPassword}
-                      edge="end"
-                    >
-                      {values.showPassword ? <VisibilityOff /> : <Visibility />}
-                    </IconButton>
-                  </InputAdornment>
-                }
-                label="Password"
+    <>
+      <Helmet>
+        <title>Login</title>
+        <meta
+          name="description"
+          content="Đăng nhập vào hệ thống để xem sneaker"
+        />
+        <link rel="canonical" href="/login" />
+      </Helmet>
+      <div
+        className="login"
+        style={{
+          backgroundImage: "url(" + PF + "img/5482397.jpg)",
+          backgroundSize: "cover",
+        }}
+      >
+        <div className="loginWrapper">
+          <div className="loginLeft">
+            <h3 className="loginLogo">.Sneaker</h3>
+            <span className="loginDesc" style={{ color: "white" }}>
+              Hãy là thời trang của chính mình
+            </span>
+          </div>
+          <div className="loginRight">
+            <Box
+              component="form"
+              sx={{
+                "& .MuiTextField-root": { m: 1, width: "60ch" },
+              }}
+              noValidate
+              autoComplete="off"
+              className="loginBox"
+              onSubmit={handleClick}
+            >
+              <input
+                placeholder="Email"
+                type="email"
+                className="loginInput"
+                required
               />
-            </FormControl>
-            <span className="loginForgot">Quên mật khẩu?</span>
+              <required id="outlined-required" label="Email" inputRef={email} />
+              <FormControl sx={{ m: 1, width: "60ch" }} variant="outlined">
+                <InputLabel id="outlined-adornment-password" required>
+                  Mật khẩu
+                </InputLabel>
+                <OutlinedInput
+                  inputRef={passwords}
+                  id="outlined-adornment-password"
+                  type={values.showPassword ? "text" : "password"}
+                  value={values.password}
+                  onChange={handleChange("password")}
+                  endAdornment={
+                    <InputAdornment position="end">
+                      <IconButton
+                        aria-label="toggle password visibility"
+                        onClick={handleClickShowPassword}
+                        onMouseDown={handleMouseDownPassword}
+                        edge="end"
+                      >
+                        {values.showPassword ? (
+                          <VisibilityOff />
+                        ) : (
+                          <Visibility />
+                        )}
+                      </IconButton>
+                    </InputAdornment>
+                  }
+                  label="Password"
+                />
+              </FormControl>
+              <span className="loginForgot">Quên mật khẩu?</span>
 
-            <Button variant="contained" className="loginButon" type="submit">
-              <Link style={{ textDecoration: "none", color: "white" }}>
-                Đăng nhập
-              </Link>
-            </Button>
+              <Button variant="contained" className="loginButon" type="submit">
+                <Link style={{ textDecoration: "none", color: "white" }}>
+                  Đăng nhập
+                </Link>
+              </Button>
 
-            <Button variant="contained " className="loginRegisterButton">
-              <Link
-                style={{ textDecoration: "none", color: "white" }}
-                to="/register"
-              >
-                Thành viên mới ?
-              </Link>
-            </Button>
-          </Box>
+              <Button variant="contained " className="loginRegisterButton">
+                <Link
+                  style={{ textDecoration: "none", color: "white" }}
+                  to="/register"
+                >
+                  Thành viên mới ?
+                </Link>
+              </Button>
+            </Box>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
