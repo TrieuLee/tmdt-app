@@ -79,13 +79,7 @@ export default function Login() {
               className="loginInput"
               required
             />
-            <
-              
-              required
-              id="outlined-required"
-              label="Email"
-              inputRef={email}
-            />
+            <required id="outlined-required" label="Email" inputRef={email} />
             <FormControl sx={{ m: 1, width: "60ch" }} variant="outlined">
               <InputLabel id="outlined-adornment-password" required>
                 Mật khẩu
