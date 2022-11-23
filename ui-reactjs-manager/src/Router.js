@@ -11,7 +11,7 @@ import EditUser from "./pages/customer/editCus/EditCus";
 import ProductList from "./pages/product/productlist/ProductList";
 import ProductInfo from "./pages/product/productinfo/ProductInfo";
 import NewProduct from "./pages/product/newProduct/NewProduct";
-import EditProduct from "./pages/product/editProduct/EditProduct";
+import EditProduct from "./pages/product/editProduct/editProduct";
 // Thông tin loại sản phẩm
 import CategoryList from "./pages/category/categorylist/CategoryList";
 import CategoryInfo from "./pages/category/categoryinfo/CategoryInfo";
