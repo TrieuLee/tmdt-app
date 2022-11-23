@@ -1,5 +1,7 @@
-import React from "react";
-import { Routes, Route } from "react-router-dom";
+import React, { useContext } from "react";
+import { Routes, Route, Navigate } from "react-router-dom";
+import { AuthContext } from "./context/AuthContext";
+import Login from "./pages/login/Login";
 
 //component
 // Thông tin khách hàng
@@ -22,11 +24,17 @@ import OrderList from "./pages/order/orderlist/OrderList";
 
 import Home from "./pages/home/Home";
 const Router = () => {
+  const { user } = useContext(AuthContext);
+  // if (!user) {
+  //   return <Navigate to="/login" />;
+  // }
   return (
     <>
       <Routes>
         <Route path="/">
-          <Route index element={<Home />} />
+          <Route index element={user ? <Home /> : <Login />} />
+          <Route path="login" element={<Login />} />
+
           {/* Khách hàng */}
           <Route path="users">
             <Route index element={<UserList />} />

@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useContext } from "react";
+import { AuthContext } from "../../context/AuthContext";
+
 import "./Navbar.scss";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import Box from "@mui/material/Box";
@@ -12,6 +14,8 @@ import PersonAdd from "@mui/icons-material/PersonAdd";
 import Settings from "@mui/icons-material/Settings";
 import Logout from "@mui/icons-material/Logout";
 export default function Navbar() {
+  const { user } = useContext(AuthContext);
+
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -46,7 +50,7 @@ export default function Navbar() {
               >
                 <Avatar sx={{ width: 32, height: 32 }}>M</Avatar>
                 <Typography sx={{ ml: 2, color: "#eee" }}>
-                  Xin chào Admin
+                  Xin chào {user.username}
                 </Typography>
               </IconButton>
             </Box>

@@ -25,7 +25,7 @@ export default function Sidebar() {
       <div className="center">
         <ul>
           <p className="title">Trang chủ</p>
-          <Link to="/" style={{ textDecoration: "none" }}>
+          <Link to="/dashboard" style={{ textDecoration: "none" }}>
             <li>
               <DashboardIcon className="icon" />
               <span>Trang chủ</span>
