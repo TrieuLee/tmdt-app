@@ -56,5 +56,5 @@
     ]
   },
   "homepage": "https://huflit-sneaker-11.netlify.app/",
-  "proxy": "http://localhost:5000/api"
+  "proxy": "https://huflit-sneaker-11.netlify.app/api"
 }
