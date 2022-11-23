@@ -104,7 +104,7 @@ export default function Navbar() {
               <MenuItem>
                 <ListItemIcon>
                   <Logout fontSize="small" />
-                </ListItemIcon>
+                 </ListItemIcon>
                 Đăng xuất
               </MenuItem>
             </Menu>
