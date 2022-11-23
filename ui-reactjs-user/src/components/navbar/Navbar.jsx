@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import Record from "../../server.json";
 import "./navbar.scss";
@@ -13,11 +13,11 @@ import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
-import StripeCheckout from 'react-stripe-checkout'
-
+import { AuthContext } from "../../context/AuthContext";
 
 export default function Navbar(props) {
-  
+  const { user } = useContext(AuthContext);
+
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
   const ThemeComponent = styled(
     ShoppingBagIcon,
@@ -269,12 +269,12 @@ export default function Navbar(props) {
               <br />
             </SlidingPane>
 
-            {admin ? (
-              <NavDropDown />
-            ) : (
+            {user == null ? (
               <Link to="/login">
                 <ThemeComponent1 sx={{ mb: -1.2 }} fontSize="large" />
               </Link>
+            ) : (
+              user && <NavDropDown />
             )}
           </div>
         </div>

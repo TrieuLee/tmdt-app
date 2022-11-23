@@ -31,6 +31,7 @@ class UserCURD {
       res.status(200).json(user);
     } catch (err) {
       res.status(500).json(err);
+      console.log(err);
     }
   }
   async login(req, res) {
@@ -83,6 +84,14 @@ class UserCURD {
       }
     } else {
       return res.status(403).json("bạn chỉ có thể xóa tài khoản của bạn");
+    }
+  }
+
+  async logout(req, res) {
+    try {
+      res.clearCookie("token").send();
+    } catch (err) {
+      return res.json(err);
     }
   }
 }

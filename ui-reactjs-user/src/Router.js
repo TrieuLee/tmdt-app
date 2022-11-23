@@ -1,5 +1,7 @@
-import React from "react";
-import { Routes, Route } from "react-router-dom";
+import React, { useContext } from "react";
+import { Routes, Route, Navigate } from "react-router-dom";
+import { AuthContext } from "./context/AuthContext";
+
 //import Component
 import Login from "./pages/login/Login";
 import Register from "./pages/register/Register";
@@ -12,14 +14,18 @@ import FinishOrder from "./pages/finishOrder/FinishOrder";
 import Profile from "./pages/profile/Profile";
 import Success from "./pages/success/Success";
 const Router = () => {
+  const { user } = useContext(AuthContext);
+
   return (
     <>
       <Routes>
         <Route exact path="/" element={<Home />} />
         <Route path="*" element={<NotFound />} />
-        <Route path="login" element={<Login />} />
-        <Route path="register" element={<Register />} />
-
+        <Route path="login" element={user ? <Navigate to="/" /> : <Login />} />
+        <Route
+          path="register"
+          element={user ? <Navigate to="/" /> : <Register />}
+        />
         <Route path=":id">
           <Route index element={<Product />} />
           <Route path=":itemID" element={<ProductDetail />} />

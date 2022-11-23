@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
@@ -7,10 +9,15 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import Logout from "@mui/icons-material/Logout";
 import PersonAdd from "@mui/icons-material/PersonAdd";
 import Avatar from "@mui/material/Avatar";
-import Settings from "@mui/icons-material/Settings";
+import { AuthContext } from "../../context/AuthContext";
 import { IconButton } from "@mui/material";
 
 export default function NavDropDown() {
+  const navigate = useNavigate();
+  async function logOut() {
+    await axios.post("users/logout");
+    navigate("/");
+  }
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -19,12 +26,9 @@ export default function NavDropDown() {
   const handleClose = () => {
     setAnchorEl(null);
   };
-  const logout = () => {
-    localStorage.clear();
-    window.history.replaceState({}, document.title, "/");
 
-    window.location.reload();
-  };
+  const { user } = useContext(AuthContext);
+
   return (
     <>
       <IconButton
@@ -37,7 +41,9 @@ export default function NavDropDown() {
       >
         <Avatar sx={{ width: 32, height: 32 }}>M</Avatar>
 
-        <Typography sx={{ ml: 2, color: "#eee" }}>Xin chào Phúc</Typography>
+        <Typography sx={{ ml: 2, color: "#eee" }}>
+          Xin chào {user.username}
+        </Typography>
       </IconButton>
       <Menu
         anchorEl={anchorEl}
@@ -86,8 +92,8 @@ export default function NavDropDown() {
           </Link>
         </MenuItem>
 
-        <MenuItem>
-          <ListItemIcon onClick={logout}>
+        <MenuItem onClick={logOut}>
+          <ListItemIcon>
             <Logout fontSize="small" />
           </ListItemIcon>
           Đăng xuất

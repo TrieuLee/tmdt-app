@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./UserProfile.scss";
 import Grid from "@mui/material/Grid";
 import Container from "@mui/material/Container";
@@ -7,8 +7,11 @@ import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import { DataGrid } from "@mui/x-data-grid";
+import { AuthContext } from "../../context/AuthContext";
 
 export default function UserProfile() {
+  const { user } = useContext(AuthContext);
+
   const columns = [
     { field: "id", headerName: "STT", width: 90 },
     {
@@ -90,7 +93,15 @@ export default function UserProfile() {
   ];
 
   const rows = [
-    { id: 1, title: "Giay Airforce", price: 500000, quantity: 1, total:500000, payment:'Tiền mặt', status:'Đang giao hàng' },
+    {
+      id: 1,
+      title: "Giay Airforce",
+      price: 500000,
+      quantity: 1,
+      total: 500000,
+      payment: "Tiền mặt",
+      status: "Đang giao hàng",
+    },
   ];
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 
@@ -101,7 +112,7 @@ export default function UserProfile() {
         <img className="profileUserImg" src={PF + "img/noAvatar.png"} alt="" />
       </div>
       <div className="profileInfo">
-        <h4 className="profileInfoName">Thiên Phúc</h4>
+        <h4 className="profileInfoName">{user.username}</h4>
       </div>
 
       <Container>
@@ -126,16 +137,16 @@ export default function UserProfile() {
                   Thông tin khách hàng
                 </Typography>
                 <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                  Tên khách hàng: Thiên Phúc
+                  Tên khách hàng: {user.username}
                 </Typography>
                 <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                  Địa chỉ: Hồ Chí Minh
+                  Địa chỉ: {user.from}
                 </Typography>
                 <Typography sx={{ mb: 1.5 }} color="text.secondary">
                   Số điện thoại: 0783467852
                 </Typography>
                 <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                  Điểm thưởng: 1000
+                  Điểm thưởng: {user.reward}
                 </Typography>
                 <Typography sx={{ mb: 1.5 }} color="text.secondary">
                   Thành viên: Thường

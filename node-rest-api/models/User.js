@@ -42,6 +42,7 @@ const UserSchema = new mongoose.Schema(
       default: 0,
     },
     role: {
+      // 1: ad, 2: nhân viên, 3:khách hàng
       type: Number,
       enum: [1, 2, 3],
       default: 3,
