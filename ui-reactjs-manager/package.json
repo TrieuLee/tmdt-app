@@ -48,5 +48,7 @@
     ]
   },
   "main": "index.js",
-  "license": "MIT"
+  "license": "MIT",
+  "homepage": "https://sneaker-ad-huflit.netlify.app/",
+  "proxy": "https://sneaker-huflit-server.herokuapp.com/api"
 }
