@@ -252,18 +252,21 @@ export default function Navbar(props) {
                       })}
                     </p>
                   </div>
-
-                  <Link
-                    type="submit"
-                    value="Thanh toán"
-                    to="/checkout"
-                    style={{ textDecoration: "none", color: "white" }}
-                    onClick={SetCartPayment}
-                  >
-                    <Button variant="contained" sx={{ width: "100%" }}>
-                      Thanh Toán
-                    </Button>
-                  </Link>
+                  {user ? (
+                    <Link
+                      type="submit"
+                      value="Thanh toán"
+                      to="/checkout"
+                      style={{ textDecoration: "none", color: "white" }}
+                      onClick={SetCartPayment}
+                    >
+                      <Button variant="contained" sx={{ width: "100%" }}>
+                        Thanh Toán
+                      </Button>
+                    </Link>
+                  ) : (
+                    <p>Hãy đăng nhập để thanh toán sản phẩm</p>
+                  )}
                 </>
               )}
               <br />
