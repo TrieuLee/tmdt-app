@@ -27,7 +27,7 @@ const stripe = require("./routes/stripe");
   app.use("/api/users", userRoute);
   // set up router
   app.use("/api/stripe", stripe);
-  app.listen(PORT, () => {
+  app.listen(process.env.PORTM || PORT, () => {
     console.log(`Example app listening on port ${PORT}`);
   });
 })();
