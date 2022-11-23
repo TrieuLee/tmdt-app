@@ -21,7 +21,16 @@ const Router = () => {
       <Routes>
         <Route exact path="/" element={<Home />} />
         <Route path="*" element={<NotFound />} />
-        <Route path="login" element={user ? <Navigate to="/" /> : <Login />} />
+        <Route
+          path="login"
+          element={
+            user ? (
+              <Navigate to="https://huflit-sneaker-11.netlify.app/" />
+            ) : (
+              <Login />
+            )
+          }
+        />
         <Route
           path="register"
           element={
