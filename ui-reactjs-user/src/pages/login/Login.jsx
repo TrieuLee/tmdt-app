@@ -23,13 +23,19 @@ export default function Login() {
     console.log(user);
   };
   return (
-    <div className="login">
-      <div className="loginWrapper">
+    <div
+    className="login"
+    style={{
+      backgroundImage: "url(" + PF + "img/5482397.jpg)",
+      backgroundSize: "cover",
+    }}
+  >
+          <div className="loginWrapper">
         <div className="loginLeft">
-          <h3 className="loginLogo">AlohaSocial</h3>
-          <span className="loginDesc">
-            Kết nối bạn bè và thế giới quanh bạn
-          </span>
+        <h3 className="loginLogo">.Sneaker</h3>
+            <span className="loginDesc" style={{ color: "white" }}>
+              Hãy là thời trang của chính mình
+            </span>
         </div>
         <div className="loginRight">
           <form className="loginBox" onSubmit={handleClick}>
