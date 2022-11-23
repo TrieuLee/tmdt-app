@@ -24,7 +24,13 @@ const Router = () => {
         <Route path="login" element={user ? <Navigate to="/" /> : <Login />} />
         <Route
           path="register"
-          element={user ? <Navigate to="/" /> : <Register />}
+          element={
+            user ? (
+              <Navigate to="https://huflit-sneaker-11.netlify.app/" />
+            ) : (
+              <Register />
+            )
+          }
         />
         <Route path=":id">
           <Route index element={<Product />} />
