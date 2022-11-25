@@ -20,16 +20,16 @@ const UserSchema = new mongoose.Schema(
       require: true,
       min: 6,
     },
+    phone:{
+      type: String,
+      require: true,
+    },
     profilePicture: {
       type: String,
       default: "",
     },
 
-    city: {
-      type: String,
-      max: 50,
-    },
-    from: {
+    address: {
       type: String,
       max: 50,
     },
@@ -42,10 +42,8 @@ const UserSchema = new mongoose.Schema(
       default: 0,
     },
     role: {
-      // 1: ad, 2: nhân viên, 3:khách hàng
-      type: Number,
-      enum: [1, 2, 3],
-      default: 3,
+      type: Boolean,
+      default: false,
     },
   },
   { timestamps: true }
