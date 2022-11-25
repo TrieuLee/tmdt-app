@@ -13,7 +13,6 @@ export default function Login() {
   const email = useRef();
   const password = useRef();
   const { user, isFetching, dispatch } = useContext(AuthContext);
-  const navigate = useNavigate();
   const handleClick = (e) => {
     e.preventDefault();
     loginCall(
