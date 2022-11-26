@@ -43,7 +43,6 @@ export default function Register() {
   };
   // MUI
 
-
   const handleClick = async (e) => {
     e.preventDefault();
     if (confirmPassword.current.value !== password.current.value) {
@@ -57,7 +56,7 @@ export default function Register() {
         phone: phone.current.value,
       };
       try {
-        await axios.post("users/register", user);
+        await axios.post("auth/register", user);
         navigate("/login");
       } catch (err) {
         console.log(err);
@@ -95,7 +94,7 @@ export default function Register() {
               label="Tên khách hàng"
               inputRef={username}
             />
-            <TextField required id="outlined-required" label="Số điện thoại"  />
+            <TextField required id="outlined-required" label="Số điện thoại" />
             <TextField
               required
               id="outlined-required"
@@ -128,7 +127,11 @@ export default function Register() {
                       onMouseDown={handleMouseDownPassword}
                       edge="end"
                     >
-                      {values.showPasswords ? <VisibilityOff /> : <Visibility />}
+                      {values.showPasswords ? (
+                        <VisibilityOff />
+                      ) : (
+                        <Visibility />
+                      )}
                     </IconButton>
                   </InputAdornment>
                 }
@@ -153,7 +156,11 @@ export default function Register() {
                       onMouseDown={handleMouseDownPassword}
                       edge="end"
                     >
-                      {values.showPasswords ? <VisibilityOff /> : <Visibility />}
+                      {values.showPasswords ? (
+                        <VisibilityOff />
+                      ) : (
+                        <Visibility />
+                      )}
                     </IconButton>
                   </InputAdornment>
                 }
@@ -164,7 +171,7 @@ export default function Register() {
               Đăng nhập
             </Button>
           </Box>
-           {/* <form className="registerRight" onSubmit={handleClick}>
+          {/* <form className="registerRight" onSubmit={handleClick}>
           <div className="registerBox">
             <input
               placeholder="Tên đăng nhập"
@@ -201,7 +208,6 @@ export default function Register() {
           </div>
         </form> */}
         </div>
-       
       </div>
     </div>
   );

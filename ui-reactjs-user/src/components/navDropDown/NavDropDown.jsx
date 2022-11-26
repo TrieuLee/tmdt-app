@@ -14,10 +14,10 @@ import { IconButton } from "@mui/material";
 
 export default function NavDropDown() {
   const navigate = useNavigate();
-  async function logOut() {
-    await axios.post("users/logout");
-    navigate("/");
-  }
+  // async function logOut() {
+  //   await axios.post("users/logout");
+  //   navigate("/");
+  // }
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -28,7 +28,6 @@ export default function NavDropDown() {
   };
 
   const { user } = useContext(AuthContext);
-
   return (
     <>
       <IconButton
@@ -42,7 +41,7 @@ export default function NavDropDown() {
         <Avatar sx={{ width: 32, height: 32 }}>M</Avatar>
 
         <Typography sx={{ ml: 2, color: "#eee" }}>
-          Xin chào {user.username}
+          Xin chào {user.user.username}
         </Typography>
       </IconButton>
       <Menu
@@ -92,7 +91,7 @@ export default function NavDropDown() {
           </Link>
         </MenuItem>
 
-        <MenuItem onClick={logOut}>
+        <MenuItem>
           <ListItemIcon>
             <Logout fontSize="small" />
           </ListItemIcon>

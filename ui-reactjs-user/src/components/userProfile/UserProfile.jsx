@@ -112,7 +112,7 @@ export default function UserProfile() {
         <img className="profileUserImg" src={PF + "img/noAvatar.png"} alt="" />
       </div>
       <div className="profileInfo">
-        <h4 className="profileInfoName">{user.username}</h4>
+        <h4 className="profileInfoName">{user.user.username}</h4>
       </div>
 
       <Container>
@@ -137,16 +137,16 @@ export default function UserProfile() {
                   Thông tin khách hàng
                 </Typography>
                 <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                  Tên khách hàng: {user.username}
+                  Tên khách hàng: {user.user.username}
                 </Typography>
                 <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                  Địa chỉ: {user.from}
+                  Địa chỉ: {user.user.address}
                 </Typography>
                 <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                  Số điện thoại: 0783467852
+                  Số điện thoại: {user.user.phone}
                 </Typography>
                 <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                  Điểm thưởng: {user.reward}
+                  Điểm thưởng: {user.user.reward}
                 </Typography>
                 <Typography sx={{ mb: 1.5 }} color="text.secondary">
                   Thành viên: Thường
