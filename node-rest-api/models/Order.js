@@ -3,17 +3,26 @@ const { Sequelize, DataTypes } = require("sequelize");
 
 const OrderSchema = new mongoose.Schema(
   {
+    userID: {
+      type: String,
+      required: true,
+    },
     addressDeli: {
       type: String,
       require: true,
     },
-    pay: {
+    total: {
       type: Number,
       default: 0,
     },
-    payment: {
+    amount: {
       type: Number,
-      default: 0,
+      required: true,
+    },
+    payment: {
+      type: String,
+      enum: ["Thanh toán bằng tiền mặt", "Thanh toán bằng Stripe"],
+      default: "Thanh toán bằng tiền mặt",
     },
 
     orderDate: {
@@ -26,7 +35,8 @@ const OrderSchema = new mongoose.Schema(
     },
     orderStatus: {
       type: Number,
-      enum: [0, 1, 2, 3, 4, 5, 6],
+      // 0: hủy đơn, 1:đặt hàng thành công, 2:đã duyệt đơn, 3:đang giao, 4: giao thành công
+      enum: [0, 1, 2, 3, 4],
       default: 0,
     },
   },

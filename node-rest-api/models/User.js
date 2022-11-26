@@ -20,23 +20,16 @@ const UserSchema = new mongoose.Schema(
       require: true,
       min: 6,
     },
-    phone:{
+    phone: {
       type: String,
       require: true,
-    },
-    profilePicture: {
-      type: String,
-      default: "",
     },
 
     address: {
       type: String,
       max: 50,
     },
-    likes: {
-      type: Array,
-      default: [],
-    },
+ 
     reward: {
       type: Number,
       default: 0,

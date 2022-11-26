@@ -2,7 +2,10 @@ const express = require("express");
 const app = express();
 const multer = require("multer");
 const loaders = require("./loaders");
+// Routes
 const userRoute = require("./routes/users");
+const authRoute = require("./routes/auth");
+// Routes
 const { PORT } = require("./config/index");
 const stripe = require("./routes/stripe");
 // const storage = multer.diskStorage({
@@ -24,8 +27,10 @@ const stripe = require("./routes/stripe");
 
 (async () => {
   await loaders(app);
-  app.use("/api/users", userRoute);
   // set up router
+  app.use("/api/auth", authRoute);
+  app.use("/api/users", userRoute);
+
   app.use("/api/stripe", stripe);
   app.listen(PORT, () => {
     console.log(`Example app listening on port ${PORT}`);
