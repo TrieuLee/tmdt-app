@@ -18,8 +18,8 @@ const ProductSchema = new mongoose.Schema(
 
     category: {
       type: String,
-      enum: ["Air Force", "Jordan", "Blazer", "Hippie", "Crater"],
-      default: "Air Force",
+      enum: ["airforce", "jordan", "blazer", "hippie", "c rater"],
+      default: "airforce",
     },
     state: {
       type: Boolean,

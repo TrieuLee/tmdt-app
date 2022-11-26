@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
+import axios from "axios";
 import Grid from "@mui/material/Grid";
 import Container from "@mui/material/Container";
 import Card from "@mui/material/Card";
@@ -12,10 +13,23 @@ import Stack from "@mui/material/Stack";
 import HomeIcon from "@mui/icons-material/Home";
 import { Helmet } from "react-helmet-async";
 import Records from "../../server.json";
-export default function ProductGrid() {
+export default function ProductGrid({ cate }) {
   const { id } = useParams();
-  const categories = Records.filter((item) => item.category.name === id);
-  console.log(categories);
+  // const categories = Records.filter((item) => item.category.name === id);
+  // console.log(categories);
+
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    const getProducts = async () => {
+      try {
+        const res = await axios.get("http://localhost:5000/api/products");
+        console.log(res);
+        setProducts(res.data);
+      } catch (err) {}
+    };
+    getProducts();
+  }, [cate]);
 
   const breadcrumbs = [
     <Link
@@ -54,10 +68,11 @@ export default function ProductGrid() {
           </Breadcrumbs>
         </Stack>
         <Grid container spacing={2} columns={16}>
-          {Records.filter((record) => record.category.name == id).map(
-            (record, i) => (
+          {products
+            .filter((record) => record.category == id)
+            .map((record, i) => (
               <Grid key={i} item xs={4}>
-                <Link to={`${record.id}`} style={{ textDecoration: "none" }}>
+                <Link to={`${record._id}`} style={{ textDecoration: "none" }}>
                   <Card sx={{ maxWidth: 345 }}>
                     <CardActionArea>
                       <CardMedia
@@ -84,8 +99,7 @@ export default function ProductGrid() {
                   </Card>
                 </Link>
               </Grid>
-            )
-          )}
+            ))}
         </Grid>
       </Container>
     </>
