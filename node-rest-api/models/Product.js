@@ -7,19 +7,16 @@ const ProductSchema = new mongoose.Schema(
       require: true,
       min: 3,
       max: 60,
-      unique: true,
     },
     price: {
       type: Number,
       default: 0,
     },
     size: {
-      type: Number,
-      enum: [38, 39, 40, 41, 42, 43],
-      default: 38,
+      type: Array,
     },
 
-    type: {
+    category: {
       type: String,
       enum: ["Air Force", "Jordan", "Blazer", "Hippie", "Crater"],
       default: "Air Force",
@@ -28,7 +25,7 @@ const ProductSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
-    image: {
+    images: {
       type: String,
       default: "",
     },

@@ -1,9 +1,6 @@
 const { Product } = require("../models");
 
 class ProductCRUD {
-// Lấy 1 sản phẩm
-
-  // Lấy danh sách tất cả sản phẩm
   async get(req, res) {
     try {
       const product = await Product.find();
@@ -15,11 +12,13 @@ class ProductCRUD {
 
   async create(req, res) {
     const newProduct = new Product(req.body);
-    
-    try{
-      
-    }catch{
-      
+
+    try {
+      const savedProduct = await newProduct.save();
+      res.status(200).json(savedProduct);
+    } catch (err) {
+      res.status(500).json(err);
+      console.log(err);
     }
   }
 }

@@ -5,9 +5,11 @@ const loaders = require("./loaders");
 // Routes
 const userRoute = require("./routes/users");
 const authRoute = require("./routes/auth");
+const productRoute = require("./routes/products");
+const stripe = require("./routes/stripe");
+
 // Routes
 const { PORT } = require("./config/index");
-const stripe = require("./routes/stripe");
 // const storage = multer.diskStorage({
 //   destination: (req, file, cb) => {
 //     cb(null, "public/images");
@@ -30,6 +32,7 @@ const stripe = require("./routes/stripe");
   // set up router
   app.use("/api/auth", authRoute);
   app.use("/api/users", userRoute);
+  app.use("/api/products", productRoute);
 
   app.use("/api/stripe", stripe);
   app.listen(PORT, () => {
