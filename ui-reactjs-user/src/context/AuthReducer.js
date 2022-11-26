@@ -18,7 +18,13 @@ const AuthReducer = (state, action) => {
         isFetching: false,
         error: action.payload,
       };
-      case "REGISTER_START":
+    case "LOGOUT":
+      return {
+        user: null,
+        loading: false,
+        error: null,
+      };
+    case "REGISTER_START":
       return {
         user: null,
         isFetching: true,

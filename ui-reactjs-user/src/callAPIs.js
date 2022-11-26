@@ -7,6 +7,7 @@ export const loginCall = async (userCredentials, dispatch) => {
       "https://sneaker-huflit-server.herokuapp.com/api/auth/login",
       userCredentials
     );
+    
     dispatch({ type: "LOGIN_SUCCESS", payload: res.data });
   } catch (err) {
     dispatch({ type: "LOGIN_FAILURE", payload: err });

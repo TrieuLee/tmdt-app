@@ -94,7 +94,12 @@ export default function Register() {
               label="Tên khách hàng"
               inputRef={username}
             />
-            <TextField required id="outlined-required" label="Số điện thoại" />
+            <TextField
+              required
+              id="outlined-required"
+              label="Số điện thoại"
+              inputRef={phone}
+            />
             <TextField
               required
               id="outlined-required"
