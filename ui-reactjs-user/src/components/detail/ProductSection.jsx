@@ -7,7 +7,6 @@ import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import ShoppingBagIcon from "@mui/icons-material/ShoppingBag";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import Breadcrumbs from "@mui/material/Breadcrumbs";
 import Stack from "@mui/material/Stack";
@@ -23,6 +22,26 @@ export default function ProductSection(props) {
   const { cartItems } = props;
   const { onAdd } = props;
   const [active, setActive] = useState();
+
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    const getProducts = async () => {
+      try {
+        const res = await axios.get("http://localhost:5000/api/products");
+        console.log(res);
+        setProducts(res.data);
+      } catch (err) {}
+    };
+    getProducts();
+  }, [cateID]);
+  // Chon size
+  const [size, setSize] = useState("");
+  const handleClick = (product) => {
+    const addSize = { ...cartItems, ...product, size };
+    onAdd(addSize);
+  };
+  console.log(size);
   const theme = {
     spacing: {
       marginTop: "30px",
@@ -47,18 +66,6 @@ export default function ProductSection(props) {
       },
     },
   };
-  const [products, setProducts] = useState([]);
-
-  useEffect(() => {
-    const getProducts = async () => {
-      try {
-        const res = await axios.get("http://localhost:5000/api/products");
-        console.log(res);
-        setProducts(res.data);
-      } catch (err) {}
-    };
-    getProducts();
-  }, [cateID]);
 
   const breadcrumbs = [
     <Link
@@ -105,17 +112,6 @@ export default function ProductSection(props) {
     }
     setOpen(false);
   };
-
-  // Chon size
-  const [size, setSize] = useState("");
-  const handleClick = (product) => {
-    onAdd({ ...cartItems, ...product, size });
-  };
-  console.log(size);
-
-  // function Add(items) {
-  //   localStorage.setItem("items", JSON.stringify(items));
-  // }
 
   return (
     <>
@@ -255,20 +251,6 @@ export default function ProductSection(props) {
                             Thêm vào giỏ hàng thành công
                           </Alert>
                         </Snackbar>
-                        <Link
-                          to="/checkout"
-                          style={{ textDecoration: "none", color: "white" }}
-                        >
-                          <Button
-                            onClick={() => {
-                              // Add(item);
-                            }}
-                            variant="contained"
-                            startIcon={<ShoppingBagIcon />}
-                          >
-                            <p style={{ margin: "8px" }}>MUA NGAY</p>{" "}
-                          </Button>
-                        </Link>
                       </Stack>
                     </Grid>
                   </React.Fragment>

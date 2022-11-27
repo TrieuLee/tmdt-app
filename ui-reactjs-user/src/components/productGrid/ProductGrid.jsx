@@ -12,7 +12,7 @@ import Breadcrumbs from "@mui/material/Breadcrumbs";
 import Stack from "@mui/material/Stack";
 import HomeIcon from "@mui/icons-material/Home";
 import { Helmet } from "react-helmet-async";
-import Records from "../../server.json";
+// import Records from "../../server.json";
 export default function ProductGrid({ cate }) {
   const { id } = useParams();
   // const categories = Records.filter((item) => item.category.name === id);
@@ -69,7 +69,7 @@ export default function ProductGrid({ cate }) {
         </Stack>
         <Grid container spacing={2} columns={16}>
           {products
-            .filter((record) => record.category == id)
+            .filter((record) => record.category === id)
             .map((record, i) => (
               <Grid key={i} item xs={4}>
                 <Link to={`${record._id}`} style={{ textDecoration: "none" }}>
