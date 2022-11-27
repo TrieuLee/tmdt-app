@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
-import Records from "../../server.json";
+// import Records from "../../server.json";
 import Grid from "@mui/material/Grid";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
@@ -14,58 +14,62 @@ import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import HomeIcon from "@mui/icons-material/Home";
-
-import "./test.css";
+import AddIcon from "@mui/icons-material/Add";
+import RemoveIcon from "@mui/icons-material/Remove";
+const theme = {
+  spacing: {
+    marginTop: "30px",
+  },
+  tr: {
+    background: "black",
+    color: "#fff",
+    "&:hover": {
+      background: "white",
+      border: "1px solid black",
+      shadow: "none",
+      color: "black",
+    },
+  },
+  bread: {
+    background: "black",
+    color: "white",
+    "&:hover": {
+      border: "1px solid black",
+      backgroud: "white",
+      color: "black",
+    },
+  },
+};
 export default function ProductSection(props) {
   const { id, itemID } = useParams();
   const { cateID } = props;
   const { cartItems } = props;
   const { onAdd } = props;
-  const [active, setActive] = useState();
-
   const [products, setProducts] = useState([]);
+  const [size, setSize] = useState("");
+  const [quantity, setQuantity] = useState(1);
+  const handleQuantity = (type) => {
+    if (type === "dec") {
+      quantity > 1 && setQuantity(quantity - 1);
+    } else {
+      setQuantity(quantity + 1);
+    }
+  };
+  const handleClick = (product) => {
+    const addSize = { ...cartItems, ...product, quantity, size };
+    onAdd(addSize);
+    console.log(addSize);
+  };
 
   useEffect(() => {
     const getProducts = async () => {
       try {
         const res = await axios.get("http://localhost:5000/api/products");
-        console.log(res);
         setProducts(res.data);
       } catch (err) {}
     };
     getProducts();
   }, [cateID]);
-  // Chon size
-  const [size, setSize] = useState("");
-  const handleClick = (product) => {
-    const addSize = { ...cartItems, ...product, size };
-    onAdd(addSize);
-  };
-  console.log(size);
-  const theme = {
-    spacing: {
-      marginTop: "30px",
-    },
-    tr: {
-      background: "black",
-      color: "#fff",
-      "&:hover": {
-        background: "white",
-        border: "1px solid black",
-        shadow: "none",
-        color: "black",
-      },
-    },
-    bread: {
-      background: "black",
-      color: "white",
-      "&:hover": {
-        border: "1px solid black",
-        backgroud: "white",
-        color: "black",
-      },
-    },
-  };
 
   const breadcrumbs = [
     <Link
@@ -97,7 +101,7 @@ export default function ProductSection(props) {
       {products
         .filter((item) => item._id === itemID)
         .map((item, i) => (
-          <div>{item.title}</div>
+          <div key={i}>{item.title}</div>
         ))}
     </Link>,
   ];
@@ -186,10 +190,11 @@ export default function ProductSection(props) {
                             <p key={i}>{records}</p>
                           ))}
                       </div>
-
+                      <RemoveIcon onClick={() => handleQuantity("dec")} />
+                      <div>{quantity}</div>
+                      <AddIcon onClick={() => handleQuantity("inc")} />
                       <div style={{ display: "flex", alignItems: "center" }}>
                         <div>Size giày:</div>
-
                         <select onChange={(e) => setSize(e.target.value)}>
                           {item.size &&
                             item.size.map((record) => (
@@ -201,12 +206,6 @@ export default function ProductSection(props) {
                                   marginLeft: "20px",
                                   cursor: "pointer",
                                 }}
-                                onClick={() => {
-                                  setActive(record);
-                                }}
-                                className={
-                                  active === record ? "active" : undefined
-                                }
                               >
                                 {record}
                               </option>
@@ -234,7 +233,7 @@ export default function ProductSection(props) {
                         >
                           <AddShoppingCartIcon sx={theme.AddShoppingCartIcon} />
                           <p style={{ margin: "8px" }}>
-                            Thêm vào giỏ hàng ({cartItems.length})
+                            Thêm vào giỏ hàng ({quantity})
                           </p>
                         </Button>
 

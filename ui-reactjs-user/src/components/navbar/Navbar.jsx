@@ -14,24 +14,21 @@ import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
+const ThemeComponent = styled(
+  ShoppingBagIcon,
+  AccountCircleIcon
+)({
+  color: "white",
+});
+const ThemeComponent1 = styled(AccountCircleIcon)({
+  color: "white",
+});
 export default function Navbar(props) {
-  const { user } = useContext(AuthContext);
-
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
-  const ThemeComponent = styled(
-    ShoppingBagIcon,
-    AccountCircleIcon
-  )({
-    color: "white",
-  });
-  const ThemeComponent1 = styled(AccountCircleIcon)({
-    color: "white",
-  });
-  const [isLiked, setIsLiked] = useState(false);
-
+  const { user } = useContext(AuthContext);
   const { cartItems } = props;
   const { onAdd, onRemove } = props;
-
+  const [isLiked, setIsLiked] = useState(false);
   const [search, setSearch] = useState("");
   const handleSearch = (event) => {
     setSearch(event.target.value);
@@ -42,7 +39,7 @@ export default function Navbar(props) {
   };
 
   const itemsPrice = cartItems
-    ? cartItems.reduce((a, c) => a + c.price * c.qty, 0)
+    ? cartItems.reduce((a, c) => a + c.price * c.quantity, 0)
     : 0;
   const dis = itemsPrice * 0.01;
   const shippingPrice = itemsPrice < 200000 ? 0 : dis;
@@ -195,7 +192,7 @@ export default function Navbar(props) {
                           <b>Size:</b> {item.size}
                         </li>
                         <li style={{ marginTop: "8px" }}>
-                          <b>Số lượng:</b> {item.qty} x{" "}
+                          <b>Số lượng:</b> {item.quantity} x{" "}
                           {item.price.toLocaleString("it-IT", {
                             style: "currency",
                             currency: "VND",

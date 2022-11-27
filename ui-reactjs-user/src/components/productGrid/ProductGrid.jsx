@@ -24,7 +24,6 @@ export default function ProductGrid({ cate }) {
     const getProducts = async () => {
       try {
         const res = await axios.get("http://localhost:5000/api/products");
-        console.log(res);
         setProducts(res.data);
       } catch (err) {}
     };
