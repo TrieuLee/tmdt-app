@@ -56,7 +56,7 @@ export default function ProductSection(props) {
     }
   };
   const handleClick = (product) => {
-    const addSize = { ...cartItems, ...product, quantity, size };
+    const addSize = { ...product, quantity, size };
     onAdd(addSize);
     console.log(addSize);
   };
