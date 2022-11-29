@@ -7,7 +7,7 @@ import useFetch from "../../../components/hooks/useFetch";
 export default function Datatable() {
   
   const { data, loading, error } = useFetch(
-    "https://sneaker-huflit-server.herokuapp.com/api/users"
+    "https://sneaker-huflit-server.herokuapp.com/api/auth"
   );
   const handleDelete = (id) => {
     // setData(data.filter((item) => item.id !== id));
