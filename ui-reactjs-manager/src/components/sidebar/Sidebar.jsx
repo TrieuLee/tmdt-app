@@ -25,7 +25,7 @@ export default function Sidebar() {
       <div className="center">
         <ul>
           <p className="title">Trang chủ</p>
-          <Link to="/dashboard" style={{ textDecoration: "none" }}>
+          <Link to="/" style={{ textDecoration: "none" }}>
             <li>
               <DashboardIcon className="icon" />
               <span>Trang chủ</span>
@@ -44,12 +44,7 @@ export default function Sidebar() {
               <span>Sản phẩm</span>
             </li>
           </Link>
-          <Link to="/categories" style={{ textDecoration: "none" }}>
-            <li>
-              <StoreIcon className="icon" />
-              <span>Loại sản phẩm</span>
-            </li>
-          </Link>
+         
 
           <Link to="/deliveries" style={{ textDecoration: "none" }}>
             <li>

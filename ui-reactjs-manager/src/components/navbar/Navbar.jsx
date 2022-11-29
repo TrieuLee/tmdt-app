@@ -15,7 +15,13 @@ import Settings from "@mui/icons-material/Settings";
 import Logout from "@mui/icons-material/Logout";
 export default function Navbar() {
   const { user } = useContext(AuthContext);
-
+  const handleLogOut = () =>{
+    const answer = window.confirm("Bạn có chắc chắn đăng xuất?");
+    if (answer) {
+      localStorage.clear("user", user);
+      window.location.reload(false);
+    }
+  }
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -50,7 +56,7 @@ export default function Navbar() {
               >
                 <Avatar sx={{ width: 32, height: 32 }}>M</Avatar>
                 <Typography sx={{ ml: 2, color: "#eee" }}>
-                  Xin chào {user.username}
+                  Xin chào {user.user.username}
                 </Typography>
               </IconButton>
             </Box>
@@ -101,8 +107,8 @@ export default function Navbar() {
                 </ListItemIcon>
                 Settings
               </MenuItem>
-              <MenuItem>
-                <ListItemIcon>
+              <MenuItem onClick={handleLogOut}>
+                <ListItemIcon >
                   <Logout fontSize="small" />
                  </ListItemIcon>
                 Đăng xuất

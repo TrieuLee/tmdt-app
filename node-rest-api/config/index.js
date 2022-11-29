@@ -2,7 +2,7 @@ require("dotenv").config();
 
 module.exports = {
   DATABASE: {
-    DB_URI: process.env.MONGGO_URL,
+    DB_URI: process.env.MONGODB_URL,
   },
   PORT: process.env.PORT || 5000,
   JWT_SECRET: process.env.JWT_SECRET,
