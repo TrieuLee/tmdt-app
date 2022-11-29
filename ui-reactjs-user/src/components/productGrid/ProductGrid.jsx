@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useLocation } from "react-router-dom";
 import axios from "axios";
 import Grid from "@mui/material/Grid";
 import Container from "@mui/material/Container";
@@ -13,18 +13,25 @@ import Stack from "@mui/material/Stack";
 import HomeIcon from "@mui/icons-material/Home";
 import { Helmet } from "react-helmet-async";
 // import Records from "../../server.json";
-export default function ProductGrid({ cate }) {
+export default function ProductGrid() {
   const { id } = useParams();
   // const categories = Records.filter((item) => item.category.name === id);
   // console.log(categories);
-
+  const location = useLocation();
+  const cate = location.pathname.split("/")[1];
+  console.log(cate);
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
     const getProducts = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/api/products");
+        const res = await axios.get(
+          cate
+            ? `http://localhost:5000/api/products?category=${cate}`
+            : "http://localhost:5000/api/products?"
+        );
         setProducts(res.data);
+        console.log(res);
       } catch (err) {}
     };
     getProducts();
@@ -67,38 +74,36 @@ export default function ProductGrid({ cate }) {
           </Breadcrumbs>
         </Stack>
         <Grid container spacing={2} columns={16}>
-          {products
-            .filter((record) => record.category === id)
-            .map((record, i) => (
-              <Grid key={i} item xs={4}>
-                <Link to={`${record._id}`} style={{ textDecoration: "none" }}>
-                  <Card sx={{ maxWidth: 345 }}>
-                    <CardActionArea>
-                      <CardMedia
-                        component="img"
-                        height="200"
-                        image={record.images}
-                        alt=""
-                      />
-                      <CardContent>
-                        <Typography gutterBottom variant="h5" component="div">
-                          {record.title}
-                        </Typography>
-                        <Typography gutterBottom variant="h5" component="div">
-                          {record.price.toLocaleString("it-IT", {
-                            style: "currency",
-                            currency: "VND",
-                          })}
-                        </Typography>
-                        <Typography variant="body2" color="text.secondary">
-                          {record.category.name}
-                        </Typography>
-                      </CardContent>
-                    </CardActionArea>
-                  </Card>
-                </Link>
-              </Grid>
-            ))}
+          {products.map((record, i) => (
+            <Grid key={i} item xs={4}>
+              <Link to={`${record._id}`} style={{ textDecoration: "none" }}>
+                <Card sx={{ maxWidth: 345 }}>
+                  <CardActionArea>
+                    <CardMedia
+                      component="img"
+                      height="200"
+                      image={record.images}
+                      alt=""
+                    />
+                    <CardContent>
+                      <Typography gutterBottom variant="h5" component="div">
+                        {record.title}
+                      </Typography>
+                      <Typography gutterBottom variant="h5" component="div">
+                        {record.price.toLocaleString("it-IT", {
+                          style: "currency",
+                          currency: "VND",
+                        })}
+                      </Typography>
+                      <Typography variant="body2" color="text.secondary">
+                        {record.category.name}
+                      </Typography>
+                    </CardContent>
+                  </CardActionArea>
+                </Card>
+              </Link>
+            </Grid>
+          ))}
         </Grid>
       </Container>
     </>
