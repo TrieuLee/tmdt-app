@@ -39,13 +39,12 @@ export default function Login() {
   const email = useRef();
   const password = useRef();
   const { user, isFetching, dispatch } = useContext(AuthContext);
-  
+
   const handleClick = (e) => {
     e.preventDefault();
     loginCall(
       { email: email.current.value, password: password.current.value },
-      dispatch,
-
+      dispatch
     );
     console.log(user);
   };
@@ -119,38 +118,15 @@ export default function Login() {
               {isFetching ? (
                 <CircularProgress color="inherit" />
               ) : (
-                <Link to="/register" style={{color:"white", textDecoration:"none"}}>Thành viên mới</Link>
+                <Link
+                  to="/register"
+                  style={{ color: "white", textDecoration: "none" }}
+                >
+                  Thành viên mới
+                </Link>
               )}
             </Button>
           </Box>
-          {/* <form className="loginBox" onSubmit={handleClick}>
-            <input
-              placeholder="Email"
-              type="email"
-              className="loginInput"
-              ref={email}
-              required
-            />
-            <input
-              placeholder="Mật khẩu"
-              type="password"
-              className="loginInput"
-              ref={password}
-              required
-              minLength="8"
-            />
-            <button className="loginButon" type="submit" disabled={isFetching}>
-              {isFetching ? <CircularProgress color="inherit" /> : "Đăng nhập"}
-            </button>
-            <span className="loginForgot">Quên mật khẩu?</span>
-            <button className="loginRegisterButton">
-              {isFetching ? (
-                <CircularProgress color="inherit" />
-              ) : (
-                "Đăng ký Tài khoản mới"
-              )}
-            </button>
-          </form> */}
         </div>
       </div>
     </div>

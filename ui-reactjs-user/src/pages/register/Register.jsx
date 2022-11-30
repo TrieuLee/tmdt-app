@@ -90,36 +90,36 @@ export default function Register() {
           >
             <TextField
               required
-              id="outlined-required"
+              id="outlined-username"
               label="Tên khách hàng"
               inputRef={username}
             />
             <TextField
               required
-              id="outlined-required"
+              id="outlined-phone"
               label="Số điện thoại"
               inputRef={phone}
             />
             <TextField
               required
-              id="outlined-required"
+              id="outlined-address"
               label="Địa chỉ"
               inputRef={address}
             />
 
             <TextField
               required
-              id="outlined-required"
+              id="outlined-email"
               label="Email"
               inputRef={email}
             />
 
             <FormControl sx={{ m: 1, width: "60ch" }} variant="outlined">
-              <InputLabel htmlFor="outlined-adornment-password" required>
+              <InputLabel htmlFor="outlined-password" required>
                 Mật khẩu
               </InputLabel>
               <OutlinedInput
-                id="outlined-adornment-password"
+                id="outlined-password"
                 type={values.showPasswords ? "text" : "password"}
                 value={values.passwords}
                 onChange={handleChange("passwords")}
@@ -144,11 +144,11 @@ export default function Register() {
               />
             </FormControl>
             <FormControl sx={{ m: 1, width: "60ch" }} variant="outlined">
-              <InputLabel htmlFor="outlined-adornment-password" required>
+              <InputLabel htmlFor="outlined-confirm-password" required>
                 Xác nhận mật khẩu
               </InputLabel>
               <OutlinedInput
-                id="outlined-adornment-password"
+                id="outlined-confirm-password"
                 type={values.showPasswords ? "text" : "password"}
                 value={values.passwords}
                 onChange={handleChange("passwords")}
@@ -169,7 +169,7 @@ export default function Register() {
                     </IconButton>
                   </InputAdornment>
                 }
-                label="Password"
+                label="Confirm Password"
               />
             </FormControl>
             <Button variant="contained" className="registerButon" type="submit">

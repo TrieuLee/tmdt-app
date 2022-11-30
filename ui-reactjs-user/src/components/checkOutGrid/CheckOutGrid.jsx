@@ -15,117 +15,105 @@ import { url } from "../../stripeAPI";
 import axios from "axios";
 import "./Grid.scss";
 
+const StyledTableCell = styled(
+  TableCell,
+  Paper
+)(({ theme }) => ({
+  [`&.${tableCellClasses.head}`]: {
+    backgroundColor: theme.palette.common.black,
+    color: theme.palette.common.white,
+  },
+  [`&.${tableCellClasses.body}`]: {
+    fontSize: 14,
+  },
+}));
+const StyledTableRow = styled(TableRow)(({ theme }) => ({
+  "&:nth-of-type(odd)": {
+    backgroundColor: theme.palette.action.hover,
+  },
+  // hide last border
+  "&:last-child td, &:last-child th": {
+    border: 0,
+  },
+}));
 export default function CheckOutGrid(props) {
-  const StyledTableCell = styled(
-    TableCell,
-    Paper
-  )(({ theme }) => ({
-    [`&.${tableCellClasses.head}`]: {
-      backgroundColor: theme.palette.common.black,
-      color: theme.palette.common.white,
-    },
-    [`&.${tableCellClasses.body}`]: {
-      fontSize: 14,
-    },
-  }));
-  const StyledTableRow = styled(TableRow)(({ theme }) => ({
-    "&:nth-of-type(odd)": {
-      backgroundColor: theme.palette.action.hover,
-    },
-    // hide last border
-    "&:last-child td, &:last-child th": {
-      border: 0,
-    },
-  }));
-
   const carts = !localStorage.lstOrFd ? "" : JSON.parse(localStorage.lstOrFd);
-  const shippingPrice = carts.shippingPrice;
-  const totalPrice = carts.totalPrice;
-  let cartdb = [...carts.cart];
+  console.log(carts);
 
   function listCart() {
-    return cartdb.map((cart, i) => {
-      const total = cart.price * cart.qty;
+    return carts.cart.products.map((item, i) => {
       return (
         <React.Fragment key={i}>
-          <StyledTableCell component="th" scope="row">
+          <StyledTableCell component="th">
             <div style={{ display: "flex" }}>
-              <img src={cart.images} style={{ width: "100px" }} alt="" />
-              <div>
-                <p>{cart.title}</p>
-                <p>{cart.size}</p>
+              <img src={item.images} style={{ width: "100px" }} alt="" />
+              {/* <div>
+                <p>{item.title}</p>
+                <p>{item.size}</p>
                 <p>XÓa</p>
-              </div>
+              </div> */}
             </div>
           </StyledTableCell>
           <StyledTableCell>
             <p>
-              {cart.price.toLocaleString("it-IT", {
+              {item.price?.toLocaleString("it-IT", {
                 style: "currency",
                 currency: "VND",
               })}
             </p>
           </StyledTableCell>
           <StyledTableCell>
-            <p>{cart.qty}</p>
-          </StyledTableCell>
-          <StyledTableCell>
-            {total.toLocaleString("it-IT", {
-              style: "currency",
-              currency: "VND",
-            })}
+            <p>{item.quantity}</p>
           </StyledTableCell>
         </React.Fragment>
       );
     });
   }
   function orderSummary() {
-    return cartdb.map((cart, i) => {
-      return (
-        <React.Fragment key={i}>
-          <StyledTableRow>
-            <StyledTableCell component="th" scope="row">
-              Số lượng: {cart.qty}
-            </StyledTableCell>
-          </StyledTableRow>
+    return (
+      <React.Fragment>
+        <StyledTableRow>
+          <StyledTableCell component="th" scope="row">
+            Số lượng: {carts.cart.quantity}
+          </StyledTableCell>
+        </StyledTableRow>
 
-          <StyledTableRow>
-            <StyledTableCell component="th" scope="row">
-              Phí ship:{" "}
-              {shippingPrice.toLocaleString("it-IT", {
+        <StyledTableRow>
+          <StyledTableCell component="th" scope="row">
+            Phí ship:{" "}
+            {/* {shippingPrice.toLocaleString("it-IT", {
                 style: "currency",
                 currency: "VND",
-              })}
-            </StyledTableCell>
-          </StyledTableRow>
+              })} */}
+          </StyledTableCell>
+        </StyledTableRow>
 
-          <StyledTableRow>
-            <StyledTableCell component="th" scope="row">
-              Tạm tính:{" "}
-              {totalPrice.toLocaleString("it-IT", {
+        <StyledTableRow>
+          <StyledTableCell component="th" scope="row">
+            Tạm tính:{" "}
+            {/* {totalPrice.toLocaleString("it-IT", {
                 style: "currency",
                 currency: "VND",
-              })}
-            </StyledTableCell>
-          </StyledTableRow>
+              })} */}
+          </StyledTableCell>
+        </StyledTableRow>
 
-          <StyledTableRow>
-            <StyledTableCell component="th" scope="row">
-              Tổng cộng:{" "}
-              {totalPrice.toLocaleString("it-IT", {
-                style: "currency",
-                currency: "VND",
-              })}
-            </StyledTableCell>
-          </StyledTableRow>
-        </React.Fragment>
-      );
-    });
+        <StyledTableRow>
+          <StyledTableCell component="th" scope="row">
+            Tổng cộng:{" "}
+            {carts.cart.total?.toLocaleString("it-IT", {
+              style: "currency",
+              currency: "VND",
+            })}
+          </StyledTableCell>
+        </StyledTableRow>
+      </React.Fragment>
+    );
   }
   const handleCheckout = () => {
     axios
       .post(`${url}/stripe/create-checkout-session`, {
-        cartdb,
+        carts,
       })
       .then((res) => {
         if (res.data.url) {
@@ -133,8 +121,6 @@ export default function CheckOutGrid(props) {
         }
       })
       .catch((err) => console.log(err.message));
-
-    console.log(carts.cart);
   };
   return (
     <>
@@ -171,7 +157,7 @@ export default function CheckOutGrid(props) {
                       </StyledTableCell>
                     </TableRow>
                   </TableHead>
-                  {/*Nội dung  */}
+                  {/* Nội dung */}
                   <TableBody>{orderSummary()}</TableBody>
                 </Table>
               </Paper>

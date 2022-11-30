@@ -27,8 +27,8 @@ export default function ProductGrid() {
       try {
         const res = await axios.get(
           cate
-            ? `http://localhost:5000/api/products?category=${cate}`
-            : "http://localhost:5000/api/products?"
+            ? `https://huflit-sneaker-api.up.railway.app/api/products?category=${cate}`
+            : "https://huflit-sneaker-api.up.railway.app/api/products?"
         );
         setProducts(res.data);
         console.log(res);

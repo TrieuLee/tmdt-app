@@ -6,7 +6,8 @@ const stripe = require("stripe")(
 const YOUR_DOMAIN = "http://localhost:3000";
 
 router.post("/create-checkout-session", async (req, res) => {
-  const line_items = req.body.cartdb.map((item) => {
+  const line_items = req.body.carts.cart.products.map((item) => {
+    console.log(req.body.carts.cart.products);
     return {
       price_data: {
         currency: "USD",
@@ -16,7 +17,7 @@ router.post("/create-checkout-session", async (req, res) => {
         },
         unit_amount: item.price,
       },
-      quantity: 1,
+      quantity: item.quantity,
     };
   });
   const session = await stripe.checkout.sessions.create({

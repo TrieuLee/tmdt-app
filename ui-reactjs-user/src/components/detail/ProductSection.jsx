@@ -48,8 +48,6 @@ export default function ProductSection(props) {
   const idP = location.pathname.split("/")[2];
   console.log(idP);
   const { id, itemID } = useParams();
-  const { cartItems } = props;
-  const { onAdd } = props;
   const [products, setProducts] = useState({});
   const [size, setSize] = useState("");
   const [quantity, setQuantity] = useState(1);
@@ -62,11 +60,6 @@ export default function ProductSection(props) {
       setQuantity(quantity + 1);
     }
   };
-  // const handleClick = (product) => {
-  //   const addSize = { ...products, ...product, quantity, size };
-  //   onAdd(addSize);
-  //   console.log(addSize);
-  // };
 
   const handleClick = () => {
     dispatch(addProduct({ ...products, quantity, size }));
@@ -76,7 +69,7 @@ export default function ProductSection(props) {
     const getProducts = async () => {
       try {
         const res = await axios.get(
-          "http://localhost:5000/api/products/find/" + idP
+          "https://huflit-sneaker-api.up.railway.app/api/products/find/" + idP
         );
         setProducts(res.data);
       } catch (err) {}
@@ -165,7 +158,7 @@ export default function ProductSection(props) {
                   Đã bán: {products.sold}
                 </p>
                 <p style={{ margin: "0", marginLeft: "20px" }}>
-                  Tình trạng:{" "}
+                  Tình trạng:
                   <span style={{ color: "green", fontWeight: "bold" }}>
                     {products.state}
                   </span>
