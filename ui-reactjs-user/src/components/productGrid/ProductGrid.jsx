@@ -19,7 +19,6 @@ export default function ProductGrid() {
   // console.log(categories);
   const location = useLocation();
   const cate = location.pathname.split("/")[1];
-  console.log(cate);
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
@@ -31,7 +30,6 @@ export default function ProductGrid() {
             : "https://huflit-sneaker-api.up.railway.app/api/products?"
         );
         setProducts(res.data);
-        console.log(res);
       } catch (err) {}
     };
     getProducts();

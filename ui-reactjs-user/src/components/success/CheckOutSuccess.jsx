@@ -1,13 +1,26 @@
-import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import { runFireworks } from "../../style/utils";
 import { BsBagCheckFill } from "react-icons/bs";
+import { AuthContext } from "../../context/AuthContext";
+
 import "./COS.scss";
+
 export default function CheckOutSuccess() {
+  const { user } = useContext(AuthContext);
+
+  const navigate = useNavigate();
   useEffect(() => {
-    localStorage.clear();
     runFireworks();
   });
+  const handleClear = () => {
+    const myItem = localStorage.getItem("user", user);
+    localStorage.clear();
+
+    localStorage.setItem("user", myItem);
+    navigate("/");
+    window.location.reload();
+  };
   return (
     <div className="success-wrapper">
       <div className="success">
@@ -22,11 +35,14 @@ export default function CheckOutSuccess() {
             order@example.com
           </a>
         </p>
-        <Link to="/" className="email">
-          <button type="button" width="300px" className="btn">
-            Tiếp tục mua sắm
-          </button>
-        </Link>
+        <button
+          onClick={handleClear}
+          type="button"
+          width="300px"
+          className="btn"
+        >
+          Tiếp tục mua sắm
+        </button>
       </div>
     </div>
   );

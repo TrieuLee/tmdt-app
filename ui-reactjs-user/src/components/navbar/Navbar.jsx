@@ -1,5 +1,7 @@
-import React, { useState, useContext } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useContext, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
+import axios from "axios";
+
 import { useSelector } from "react-redux";
 import Record from "../../server.json";
 import "./navbar.scss";
@@ -28,6 +30,7 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
     top: 13,
     border: `2px solid black`,
     padding: "0 4px",
+    zIndex: "0",
   },
 }));
 export default function Navbar(props) {
@@ -36,7 +39,26 @@ export default function Navbar(props) {
   const { user } = useContext(AuthContext);
   const quantity = useSelector((state) => state.cart.quantity);
   const [isLiked, setIsLiked] = useState(false);
+
+  const location = useLocation();
+  const cate = location.pathname.split("/")[1];
+  const [products, setProducts] = useState([]);
   const [search, setSearch] = useState("");
+
+  useEffect(() => {
+    const getProducts = async () => {
+      try {
+        const res = await axios.get(
+          cate
+            ? `https://huflit-sneaker-api.up.railway.app/api/products?category=${cate}`
+            : "https://huflit-sneaker-api.up.railway.app/api/products?"
+        );
+        setProducts(res.data);
+      } catch (err) {}
+    };
+    getProducts();
+  }, [cate]);
+
   const handleSearch = (event) => {
     setSearch(event.target.value);
   };
@@ -86,16 +108,17 @@ export default function Navbar(props) {
                 marginTop: "5px",
               }}
             >
-              {Record.filter((item) => {
-                const searchTerm = search.toLowerCase();
-                const title = item.title.toLowerCase();
+              {products
+                .filter((item) => {
+                  const searchTerm = search.toLowerCase();
+                  const title = item.title.toLowerCase();
 
-                return (
-                  searchTerm &&
-                  title.startsWith(searchTerm) &&
-                  title !== searchTerm
-                );
-              })
+                  return (
+                    searchTerm &&
+                    title.startsWith(searchTerm) &&
+                    title !== searchTerm
+                  );
+                })
                 .slice(0, 10)
                 .map((item) => (
                   <Link
