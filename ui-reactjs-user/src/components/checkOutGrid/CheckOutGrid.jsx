@@ -38,33 +38,34 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 export default function CheckOutGrid(props) {
   const carts = !localStorage.lstOrFd ? "" : JSON.parse(localStorage.lstOrFd);
-  console.log(carts);
 
   function listCart() {
     return carts.cart.products.map((item, i) => {
       return (
         <React.Fragment key={i}>
-          <StyledTableCell component="th">
-            <div style={{ display: "flex" }}>
-              <img src={item.images} style={{ width: "100px" }} alt="" />
-              {/* <div>
-                <p>{item.title}</p>
-                <p>{item.size}</p>
-                <p>XÓa</p>
-              </div> */}
-            </div>
-          </StyledTableCell>
-          <StyledTableCell>
-            <p>
-              {item.price?.toLocaleString("it-IT", {
-                style: "currency",
-                currency: "VND",
-              })}
-            </p>
-          </StyledTableCell>
-          <StyledTableCell>
-            <p>{item.quantity}</p>
-          </StyledTableCell>
+          <StyledTableRow>
+            <StyledTableCell component="th">
+              <div style={{ display: "flex" }}>
+                <img src={item.images} style={{ width: "100px" }} alt="" />
+                <div>
+                  <p>{item.title}</p>
+                  <p>{item.size}</p>
+                </div>
+              </div>
+            </StyledTableCell>
+
+            <StyledTableCell>
+              <p>
+                {item.price?.toLocaleString("it-IT", {
+                  style: "currency",
+                  currency: "VND",
+                })}
+              </p>
+            </StyledTableCell>
+            <StyledTableCell>
+              <p>{item.quantity}</p>
+            </StyledTableCell>
+          </StyledTableRow>
         </React.Fragment>
       );
     });
@@ -74,7 +75,7 @@ export default function CheckOutGrid(props) {
       <React.Fragment>
         <StyledTableRow>
           <StyledTableCell component="th" scope="row">
-            Số lượng: {carts.cart.quantity}
+            Tổng số lượng : {carts.cart.quantity}
           </StyledTableCell>
         </StyledTableRow>
 
@@ -135,12 +136,9 @@ export default function CheckOutGrid(props) {
                       <StyledTableCell>Tên sản phẩm</StyledTableCell>
                       <StyledTableCell>Giá</StyledTableCell>
                       <StyledTableCell>Số lượng</StyledTableCell>
-                      <StyledTableCell>Thành tiền</StyledTableCell>
                     </TableRow>
                   </TableHead>
-                  <TableBody>
-                    <StyledTableRow>{listCart()}</StyledTableRow>
-                  </TableBody>
+                  <TableBody>{listCart()}</TableBody>
                 </Table>
               </Paper>
             </TableContainer>

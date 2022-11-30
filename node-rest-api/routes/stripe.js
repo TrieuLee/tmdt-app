@@ -8,6 +8,7 @@ const YOUR_DOMAIN = "http://localhost:3000";
 router.post("/create-checkout-session", async (req, res) => {
   const line_items = req.body.carts.cart.products.map((item) => {
     console.log(req.body.carts.cart.products);
+    console.log(req.body.carts.cart.products.quantity);
     return {
       price_data: {
         currency: "USD",
