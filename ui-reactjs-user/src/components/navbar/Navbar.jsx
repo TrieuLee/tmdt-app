@@ -14,6 +14,8 @@ import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
+import Badge from "@mui/material/Badge";
+import { useSelector } from "react-redux";
 const ThemeComponent = styled(
   ShoppingBagIcon,
   AccountCircleIcon
@@ -23,9 +25,21 @@ const ThemeComponent = styled(
 const ThemeComponent1 = styled(AccountCircleIcon)({
   color: "white",
 });
+
+const StyledBadge = styled(Badge)(({ theme }) => ({
+  "& .MuiBadge-badge": {
+    right: -3,
+    top: 13,
+    border: `2px solid black`,
+    padding: "0 4px",
+  },
+}));
 export default function Navbar(props) {
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
+
   const { user } = useContext(AuthContext);
+  const quantity = useSelector((state) => state.cart.quantity);
+  const cart = useSelector((state) => state.cart);
   const { cartItems } = props;
   const { onAdd, onRemove } = props;
   const [isLiked, setIsLiked] = useState(false);
@@ -142,7 +156,9 @@ export default function Navbar(props) {
           </div>
           <div className="navItem">
             <IconButton onClick={() => setIsLiked(!isLiked)}>
-              <ThemeComponent color="error" sx={{ mb: 1 }} fontSize="large" />
+              <StyledBadge badgeContent={quantity} color="secondary">
+                <ThemeComponent color="error" sx={{ mb: 1 }} fontSize="large" />
+              </StyledBadge>
             </IconButton>
 
             <SlidingPane
@@ -154,73 +170,70 @@ export default function Navbar(props) {
                 setIsLiked(!isLiked);
               }}
             >
-              {cartItems && cartItems.length === 0 && <p>Giỏ hàng trống</p>}
-              {cartItems &&
-                cartItems.map((item) => (
-                  <Grid container key={item._id}>
-                    <Grid item xs={3}>
-                      <img
-                        src={item.images}
-                        style={{ width: "100px" }}
-                        alt=""
-                      />
-                    </Grid>
-                    <Grid
-                      item
-                      xs={6}
-                      sx={{ display: "flex", alignItems: "center" }}
+              {cart.products && cart.products.length === 0 && (
+                <p>Giỏ hàng trống</p>
+              )}
+              {cart.products.map((item) => (
+                <Grid container key={item._id}>
+                  <Grid item xs={3}>
+                    <img src={item.images} style={{ width: "100px" }} alt="" />
+                  </Grid>
+                  <Grid
+                    item
+                    xs={6}
+                    sx={{ display: "flex", alignItems: "center" }}
+                  >
+                    <ul
+                      style={{
+                        listStyle: "none",
+                        padding: "0",
+                        margin: "0",
+                      }}
                     >
-                      <ul
-                        style={{
-                          listStyle: "none",
-                          padding: "0",
-                          margin: "0",
-                        }}
-                      >
-                        <li>
-                          <b>{item.title}</b>
-                        </li>
-                        <li style={{ marginTop: "8px" }}>
-                          <b>
-                            {item.price.toLocaleString("it-IT", {
-                              style: "currency",
-                              currency: "VND",
-                            })}
-                          </b>
-                        </li>
-                        <li style={{ marginTop: "8px" }}>
-                          <b>Size:</b> {item.size}
-                        </li>
-                        <li style={{ marginTop: "8px" }}>
-                          <b>Số lượng:</b> {item.quantity} x{" "}
+                      <li>
+                        <b>{item.title}</b>
+                      </li>
+                      <li style={{ marginTop: "8px" }}>
+                        <b>
                           {item.price.toLocaleString("it-IT", {
                             style: "currency",
                             currency: "VND",
                           })}
-                        </li>
-                      </ul>
-                    </Grid>
-                    <Grid
-                      item
-                      xs={3}
-                      sx={{ display: "flex", alignItems: "center" }}
-                    >
-                      <IconButton onClick={() => onAdd(item)}>
-                        <AddCircleIcon />
-                      </IconButton>
-
-                      <IconButton onClick={() => onRemove(item)}>
-                        <RemoveCircleIcon />
-                      </IconButton>
-                    </Grid>
+                        </b>
+                      </li>
+                      <li style={{ marginTop: "8px" }}>
+                        <b>Size:</b> {item.size}
+                      </li>
+                      <li style={{ marginTop: "8px" }}>
+                        <b>Số lượng:</b> {item.quantity} x{" "}
+                        {item.price.toLocaleString("it-IT", {
+                          style: "currency",
+                          currency: "VND",
+                        })}
+                      </li>
+                    </ul>
                   </Grid>
-                ))}
-              {cartItems && cartItems.length !== 0 && (
+                  <Grid
+                    item
+                    xs={3}
+                    sx={{ display: "flex", alignItems: "center" }}
+                  >
+                    <IconButton onClick={() => onAdd(item)}>
+                      <AddCircleIcon />
+                    </IconButton>
+
+                    <IconButton onClick={() => onRemove(item)}>
+                      <RemoveCircleIcon />
+                    </IconButton>
+                  </Grid>
+                </Grid>
+              ))}
+              {cart.products && cart.products.length !== 0 && (
                 <>
                   <div style={{ marginTop: "70%" }}>
                     <p style={{ display: "flex", justifyContent: "end" }}>
                       Tạm tính:{" "}
-                      {itemsPrice.toLocaleString("it-IT", {
+                      {cart.total?.toLocaleString("it-IT", {
                         style: "currency",
                         currency: "VND",
                       })}
