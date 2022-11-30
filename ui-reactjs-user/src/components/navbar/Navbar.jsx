@@ -49,9 +49,7 @@ export default function Navbar(props) {
     const getProducts = async () => {
       try {
         const res = await axios.get(
-          cate
-            ? `https://huflit-sneaker-api.up.railway.app/api/products?category=${cate}`
-            : "https://huflit-sneaker-api.up.railway.app/api/products?"
+          "https://huflit-sneaker-api.up.railway.app/api/products"
         );
         setProducts(res.data);
       } catch (err) {}
