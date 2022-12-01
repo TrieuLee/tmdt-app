@@ -44,6 +44,7 @@ export default function Cart(props) {
       {cart.products && cart.products.length === 0 && <p>Giỏ hàng trống</p>}
       {cart.products.map((item, i) => (
         <Grid container key={i}>
+        
           <Grid item xs={3}>
             <img src={item.images} style={{ width: "100px" }} alt="" />
           </Grid>

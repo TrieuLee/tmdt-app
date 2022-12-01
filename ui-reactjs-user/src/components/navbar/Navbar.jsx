@@ -120,7 +120,7 @@ export default function Navbar(props) {
                 .slice(0, 10)
                 .map((item) => (
                   <Link
-                    to={`/${item.category.name}/${item.id}`}
+                    to={`/${item.category}/${item._id}`}
                     style={{ textDecoration: "none", color: "black" }}
                   >
                     <div
@@ -132,7 +132,7 @@ export default function Navbar(props) {
                         width: "100%",
                         marginTop: "0px",
                       }}
-                      key={item.id}
+                      key={item._id}
                     >
                       <div style={{ display: "flex" }}>
                         <img

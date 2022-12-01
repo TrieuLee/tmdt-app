@@ -1,14 +1,12 @@
 const express = require("express");
 const router = express.Router();
-const stripe = require("stripe")(
-  "sk_test_51M4DNQLPEIpJHgz9Ph5mee7rbBlhBk6nyzzASuyzG9ywTZfxFRzBVc8PzW1x6btHGaufcRI7zNeOG9uEoSREmS8O00bzDXn395"
-);
+const stripe = require("stripe")(STRIPE_SERCET_KEY);
 const YOUR_DOMAIN = "http://localhost:3000";
 
 router.post("/create-checkout-session", async (req, res) => {
   const line_items = req.body.carts.cart.products.map((item) => {
     console.log(req.body.carts.cart.products);
-    console.log(req.body.carts.cart.products.quantity);
+    
     return {
       price_data: {
         currency: "USD",
