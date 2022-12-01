@@ -205,7 +205,7 @@ export default function ProductSection(props) {
                 <Button
                   sx={theme.bread}
                   onClick={() => {
-                    if (!products.size) {
+                    if (products.size !== "") {
                       alert("Vui long chon size giay")
                       handleClick();
                     } else {
