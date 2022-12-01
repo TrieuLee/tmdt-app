@@ -56,7 +56,7 @@ export default function Register() {
         phone: phone.current.value,
       };
       try {
-        await axios.post("auth/register", user);
+        await axios.post("https://huflit-sneaker-api.up.railway.app/api/auth/register", user);
         navigate("/login");
       } catch (err) {
         console.log(err);
