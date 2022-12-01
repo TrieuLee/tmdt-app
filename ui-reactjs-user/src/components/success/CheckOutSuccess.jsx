@@ -3,12 +3,12 @@ import { useNavigate } from "react-router-dom";
 import { runFireworks } from "../../style/utils";
 import { BsBagCheckFill } from "react-icons/bs";
 import { AuthContext } from "../../context/AuthContext";
+import { useSelector } from "react-redux";
 
 import "./COS.scss";
 
 export default function CheckOutSuccess() {
   const { user } = useContext(AuthContext);
-
   const navigate = useNavigate();
   useEffect(() => {
     runFireworks();

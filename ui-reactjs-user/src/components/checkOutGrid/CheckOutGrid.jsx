@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { styled } from "@mui/material/styles";
 import { Link } from "react-router-dom";
 import Table from "@mui/material/Table";
@@ -13,6 +13,7 @@ import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import { url } from "../../stripeAPI";
 import axios from "axios";
+import { AuthContext } from "../../context/AuthContext";
 import "./Grid.scss";
 
 const StyledTableCell = styled(
@@ -38,7 +39,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 export default function CheckOutGrid(props) {
   const carts = !localStorage.lstOrFd ? "" : JSON.parse(localStorage.lstOrFd);
-
+  const { user } = useContext(AuthContext);
   function listCart() {
     return carts.cart.products.map((item, i) => {
       return (
@@ -55,9 +56,7 @@ export default function CheckOutGrid(props) {
             </StyledTableCell>
 
             <StyledTableCell>
-              <p>
-                {item.price}$
-              </p>
+              <p>{item.price}$</p>
             </StyledTableCell>
             <StyledTableCell>
               <p>{item.quantity}</p>
@@ -98,8 +97,7 @@ export default function CheckOutGrid(props) {
 
         <StyledTableRow>
           <StyledTableCell component="th" scope="row">
-            Tổng cộng:{" "}
-            {carts.cart.total}$
+            Tổng cộng: {carts.cart.total}$
           </StyledTableCell>
         </StyledTableRow>
       </React.Fragment>
@@ -109,6 +107,7 @@ export default function CheckOutGrid(props) {
     axios
       .post(`${url}/stripe/create-checkout-session`, {
         carts,
+        userId: user.user._id,
       })
       .then((res) => {
         if (res.data.url) {
