@@ -5,7 +5,7 @@ export const loginCall = async (userCredentials, dispatch) => {
   try {
     const res = await axios.post(
       "https://huflit-sneaker-api.up.railway.app/api/auth/login",
-      userCredentials
+      userCredentials 
     );
     dispatch({ type: "LOGIN_SUCCESS", payload: res.data });
   } catch (err) {
