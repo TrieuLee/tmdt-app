@@ -60,10 +60,7 @@ export default function Cart(props) {
               </li>
               <li style={{ marginTop: "8px" }}>
                 <b>
-                  {item.price.toLocaleString("it-IT", {
-                    style: "currency",
-                    currency: "VND",
-                  })}
+                  {item.price}$
                 </b>
               </li>
               <li style={{ marginTop: "8px" }}>
@@ -71,10 +68,7 @@ export default function Cart(props) {
               </li>
               <li style={{ marginTop: "8px" }}>
                 <b>Số lượng:</b> {item.quantity} x{" "}
-                {item.price.toLocaleString("it-IT", {
-                  style: "currency",
-                  currency: "VND",
-                })}
+                {item.price}$
               </li>
             </ul>
           </Grid>
@@ -94,10 +88,7 @@ export default function Cart(props) {
           <div style={{ marginTop: "70%" }}>
             <p style={{ display: "flex", justifyContent: "end" }}>
               Tạm tính:{" "}
-              {cart.total?.toLocaleString("it-IT", {
-                style: "currency",
-                currency: "VND",
-              })}
+              {cart.total}$
             </p>
             {/* <p style={{ display: "flex", justifyContent: "end" }}>
               Phí ship:{" "}

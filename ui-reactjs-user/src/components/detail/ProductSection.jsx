@@ -170,10 +170,7 @@ export default function ProductSection(props) {
                 component="h6"
                 style={{ marginTop: "10px" }}
               >
-                {products.price?.toLocaleString("it-IT", {
-                  style: "currency",
-                  currency: "VND",
-                })}
+                {products.price}$
               </Typography>
               <div>
                 {products.service &&

@@ -88,10 +88,7 @@ export default function ProductGrid() {
                         {record.title}
                       </Typography>
                       <Typography gutterBottom variant="h5" component="div">
-                        {record.price.toLocaleString("it-IT", {
-                          style: "currency",
-                          currency: "VND",
-                        })}
+                        {record.price}$
                       </Typography>
                       <Typography variant="body2" color="text.secondary">
                         {record.category.name}

@@ -56,10 +56,7 @@ export default function CheckOutGrid(props) {
 
             <StyledTableCell>
               <p>
-                {item.price?.toLocaleString("it-IT", {
-                  style: "currency",
-                  currency: "VND",
-                })}
+                {item.price}$
               </p>
             </StyledTableCell>
             <StyledTableCell>
@@ -102,10 +99,7 @@ export default function CheckOutGrid(props) {
         <StyledTableRow>
           <StyledTableCell component="th" scope="row">
             Tổng cộng:{" "}
-            {carts.cart.total?.toLocaleString("it-IT", {
-              style: "currency",
-              currency: "VND",
-            })}
+            {carts.cart.total}$
           </StyledTableCell>
         </StyledTableRow>
       </React.Fragment>
