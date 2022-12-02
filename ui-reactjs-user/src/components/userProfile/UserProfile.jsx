@@ -1,5 +1,6 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState} from "react";
 import "./UserProfile.scss";
+import axios from "axios";
 import Grid from "@mui/material/Grid";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
@@ -11,7 +12,18 @@ import { AuthContext } from "../../context/AuthContext";
 
 export default function UserProfile() {
   const { user } = useContext(AuthContext);
+  const [orders, setOrders] = useState([])
+  useEffect(()=>{
+    const getOrders = async()=>{
+      try{
+        const res = await axios.get(
 
+        )
+      }catch{
+
+      }
+    }
+  })
   const columns = [
     { field: "id", headerName: "STT", width: 90 },
     {
