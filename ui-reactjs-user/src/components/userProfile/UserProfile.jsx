@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState} from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./UserProfile.scss";
 import axios from "axios";
 import Grid from "@mui/material/Grid";
@@ -12,20 +12,22 @@ import { AuthContext } from "../../context/AuthContext";
 
 export default function UserProfile() {
   const { user } = useContext(AuthContext);
-  const [orders, setOrders] = useState([])
-  useEffect(()=>{
-    const getOrders = async()=>{
-      try{
+  const [orders, setOrders] = useState([]);
+
+  useEffect(() => {
+    const getOrders = async () => {
+      try {
         const res = await axios.get(
-
-        )
-      }catch{
-
-      }
-    }
-  })
+          "http://localhost:5000/api/orders/"
+        );
+        setOrders(res.data);
+        console.log(res.data);
+      } catch (err) {}
+    };
+    getOrders();
+  },[]);
   const columns = [
-    { field: "id", headerName: "STT", width: 90 },
+    { field: "_id", headerName: "STT", width: 90 },
     {
       field: "title",
       headerName: "Tên sản phẩm",
@@ -33,7 +35,7 @@ export default function UserProfile() {
       editable: true,
     },
     {
-      field: "price",
+      field: "total",
       headerName: "Giá tiền",
       width: 150,
       editable: true,
@@ -65,7 +67,7 @@ export default function UserProfile() {
     },
   ];
   const columns1 = [
-    { field: "id", headerName: "STT", width: 90 },
+    { field: "_id", headerName: "STT", width: 90 },
     {
       field: "title",
       headerName: "Tên sản phẩm",
@@ -172,10 +174,11 @@ export default function UserProfile() {
             Lịch sử mua hàng
           </Typography>
           <DataGrid
-            rows={rows}
+            rows={orders}
             columns={columns1}
             pageSize={5}
             rowsPerPageOptions={[5]}
+            getRowId={(rows)=>rows._id}
           />
         </Box>
       </Container>
