@@ -11,3 +11,5 @@ router.put("/:id", verifyTokenAndAuthoriation, cartController.update);
 router.delete("/:id", verifyTokenAndAuthoriation, cartController.delete);
 router.get("/", verifyTokenAndAdmin, cartController.get);
 router.get("/find/:id", verifyTokenAndAuthoriation, cartController.getUserCart);
+
+module.exports = router;
