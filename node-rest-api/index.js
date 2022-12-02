@@ -6,6 +6,7 @@ const loaders = require("./loaders");
 const userRoute = require("./routes/users");
 const authRoute = require("./routes/auth");
 const productRoute = require("./routes/products");
+const orderRoute = require("./routes/orders");
 const stripe = require("./routes/stripe");
 
 // Routes
@@ -33,7 +34,7 @@ const { PORT } = require("./config/index");
   app.use("/api/auth", authRoute);
   app.use("/api/users", userRoute);
   app.use("/api/products", productRoute);
-
+  app.use("/api/orders", orderRoute);
   app.use("/api/stripe", stripe);
   app.listen(PORT, () => {
     console.log(`Example app listening on port ${PORT}`);

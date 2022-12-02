@@ -1,5 +1,6 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./UserProfile.scss";
+import axios from "axios";
 import Grid from "@mui/material/Grid";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
@@ -11,17 +12,37 @@ import { AuthContext } from "../../context/AuthContext";
 
 export default function UserProfile() {
   const { user } = useContext(AuthContext);
+  const [orders, setOrders] = useState([]);
 
+  useEffect(() => {
+    const getOrders = async () => {
+      try {
+        const res = await axios.get(
+          "http://localhost:5000/api/orders/"
+        );
+        setOrders(res.data);
+        console.log(res.data);
+      } catch (err) {}
+    };
+    getOrders();
+  },[]);
   const columns = [
-    { field: "id", headerName: "STT", width: 90 },
+    { field: "_id", headerName: "Mã đơn hàng", width: 120 },
     {
-      field: "title",
-      headerName: "Tên sản phẩm",
+      field: "products",
+      headerName: "Sản phẩm",
       width: 150,
-      editable: true,
+      renderCell: (params) => (
+        <ul className="flex">
+          {params.value.map((role, index) => (
+            <li key={index}>{role._id}</li>
+          ))}
+        </ul>
+      ),
+      type: 'string',
     },
     {
-      field: "price",
+      field: "total",
       headerName: "Giá tiền",
       width: 150,
       editable: true,
@@ -53,7 +74,7 @@ export default function UserProfile() {
     },
   ];
   const columns1 = [
-    { field: "id", headerName: "STT", width: 90 },
+    { field: "_id", headerName: "STT", width: 90 },
     {
       field: "title",
       headerName: "Tên sản phẩm",
@@ -92,17 +113,7 @@ export default function UserProfile() {
     },
   ];
 
-  const rows = [
-    {
-      id: 1,
-      title: "Giay Airforce",
-      price: 500000,
-      quantity: 1,
-      total: 500000,
-      payment: "Tiền mặt",
-      status: "Đang giao hàng",
-    },
-  ];
+ 
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 
   return (
@@ -123,10 +134,12 @@ export default function UserProfile() {
             </Typography>
             <Box sx={{ height: 400, width: "100%" }}>
               <DataGrid
-                rows={rows}
+                rows={orders}
                 columns={columns}
                 pageSize={5}
                 rowsPerPageOptions={[5]}
+                getRowId={(rows)=>rows._id}
+
               />
             </Box>
           </Grid>
@@ -160,10 +173,11 @@ export default function UserProfile() {
             Lịch sử mua hàng
           </Typography>
           <DataGrid
-            rows={rows}
+            rows={orders}
             columns={columns1}
             pageSize={5}
             rowsPerPageOptions={[5]}
+            getRowId={(rows)=>rows._id}
           />
         </Box>
       </Container>
