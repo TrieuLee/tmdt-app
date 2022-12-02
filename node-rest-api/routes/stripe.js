@@ -107,7 +107,7 @@ const createOrder = async (customer, data) => {
   });
 
   const newOrder = new Order({
-    userId: customer.metadata.userId,
+    userId: customer.metadata.userId, 
     customerId: data.customer,
     paymentIntentId: data.payment_intent,
     products,
