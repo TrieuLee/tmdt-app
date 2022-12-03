@@ -105,7 +105,7 @@ export default function ProductSection(props) {
       href={itemID}
       style={{ color: "black", fontWeight: "bold", textDecoration: "none" }}
     >
-      {products.title}
+      {products.name}
     </Link>,
   ];
 
@@ -185,7 +185,8 @@ export default function ProductSection(props) {
                 <Button
                   sx={theme.bread}
                   onClick={() => {
-                    if (products.size !== "") {
+                    if (products.size === "") {
+                      alert("Vui lòng chọn size giày")
                       handleClick();
                     } else {
                       <Alert

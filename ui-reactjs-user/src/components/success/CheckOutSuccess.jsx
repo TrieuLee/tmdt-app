@@ -18,7 +18,7 @@ export default function CheckOutSuccess() {
     localStorage.clear();
 
     localStorage.setItem("user", myItem);
-    navigate("/");
+    navigate(`https://huflit-sneaker-11.netlify.app/`);
     window.location.reload();
   };
   return (
