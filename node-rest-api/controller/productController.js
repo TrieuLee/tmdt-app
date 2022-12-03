@@ -53,16 +53,16 @@ class ProductCRUD {
   // GET ALL PRODUCT
   async get(req, res) {
     const qNew = req.query.new;
-    const qCategory = req.query.brand;
+    const qBrand = req.query.brand;
     try {
       let products;
 
       if (qNew) {
         products = await Product.find().sort({ createdAt: -1 }).limit(1);
-      } else if (qCategory) {
+      } else if (qBrand) {
         products = await Product.find({
-          category: {
-            $in: [qCategory],
+          brand: {
+            $in: [qBrand],
           },
         });
       } else {
