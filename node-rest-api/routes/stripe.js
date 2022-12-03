@@ -3,7 +3,7 @@ const router = express.Router();
 const stripe = require("stripe")(
   "sk_test_51M4DNQLPEIpJHgz9Ph5mee7rbBlhBk6nyzzASuyzG9ywTZfxFRzBVc8PzW1x6btHGaufcRI7zNeOG9uEoSREmS8O00bzDXn395"
 );
-const { Order } = require("../models"); 
+const { Order } = require("../models");
 const YOUR_DOMAIN = "http://localhost:3000";
 
 router.post("/create-checkout-session", async (req, res) => {
@@ -13,7 +13,7 @@ router.post("/create-checkout-session", async (req, res) => {
       cart: JSON.stringify(req.body.carts.cart.products),
     },
   });
-
+  console.log(customer.metadata.cart);
   const line_items = req.body.carts.cart.products.map((item) => {
     return {
       price_data: {
@@ -105,9 +105,10 @@ const createOrder = async (customer, data) => {
       quantity: item.quantity,
     };
   });
-
+  
+  console.log(products);
   const newOrder = new Order({
-    userId: customer.metadata.userId, 
+    userId: customer.metadata.userId,
     customerId: data.customer,
     paymentIntentId: data.payment_intent,
     products,

@@ -27,10 +27,6 @@ const ProductSchema = new mongoose.Schema(
       type: String,
       default: "",
     },
-    describe: {
-      type: String,
-      default: "",
-    },
   },
   { timestamps: true }
 );

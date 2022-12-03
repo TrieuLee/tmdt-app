@@ -72,6 +72,7 @@ export default function ProductSection(props) {
           "https://huflit-sneaker-api.up.railway.app/api/products/find/" + idP
         );
         setProducts(res.data);
+        console.log(res.data);
       } catch (err) {}
     };
     getProducts();
