@@ -6,6 +6,7 @@ const path = require("path");
 const cors = require("cors");
 module.exports = (expressApp) => {
   dotenv.config();
+  express.urlencoded({ extended: false });
   expressApp.use(express.json());
   expressApp.use(helmet());
   expressApp.use(morgan("combined"));
