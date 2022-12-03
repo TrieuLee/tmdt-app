@@ -47,9 +47,9 @@ export default function CheckOutGrid(props) {
           <StyledTableRow>
             <StyledTableCell component="th">
               <div style={{ display: "flex" }}>
-                <img src={item.images} style={{ width: "100px" }} alt="" />
+                <img src={item.img} style={{ width: "100px" }} alt="" />
                 <div>
-                  <p>{item.title}</p>
+                  <p>{item.name}</p>
                   <p>{item.size}</p>
                 </div>
               </div>

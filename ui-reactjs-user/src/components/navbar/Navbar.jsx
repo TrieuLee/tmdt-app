@@ -109,7 +109,7 @@ export default function Navbar(props) {
               {products
                 .filter((item) => {
                   const searchTerm = search.toLowerCase();
-                  const title = item.title.toLowerCase();
+                  const title = item.name.toLowerCase();
 
                   return (
                     searchTerm &&
@@ -120,11 +120,11 @@ export default function Navbar(props) {
                 .slice(0, 10)
                 .map((item) => (
                   <Link
-                    to={`/${item.category}/${item._id}`}
+                    to={`/${item.brand}/${item._id}`}
                     style={{ textDecoration: "none", color: "black" }}
                   >
                     <div
-                      onClick={() => onSearch(item.title)}
+                      onClick={() => onSearch(item.name)}
                       className="dropdown-row"
                       style={{
                         border: "1px solid black",
@@ -136,7 +136,7 @@ export default function Navbar(props) {
                     >
                       <div style={{ display: "flex" }}>
                         <img
-                          src={item.images}
+                          src={item.img}
                           alt=""
                           style={{
                             width: "50px",
@@ -146,7 +146,7 @@ export default function Navbar(props) {
                             marginRight: "5px",
                           }}
                         />
-                        <p>{item.title}</p>
+                        <p>{item.name}</p>
                       </div>
                     </div>
                   </Link>

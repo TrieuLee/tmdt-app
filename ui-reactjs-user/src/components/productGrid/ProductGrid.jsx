@@ -26,7 +26,7 @@ export default function ProductGrid() {
       try {
         const res = await axios.get(
           cate
-            ? `https://huflit-sneaker-api.up.railway.app/api/products?category=${cate}`
+            ? `https://huflit-sneaker-api.up.railway.app/api/products?brand=${cate}`
             : "https://huflit-sneaker-api.up.railway.app/api/products?"
         );
         setProducts(res.data);
@@ -80,18 +80,18 @@ export default function ProductGrid() {
                     <CardMedia
                       component="img"
                       height="200"
-                      image={record.images}
+                      image={record.img}
                       alt=""
                     />
                     <CardContent>
                       <Typography gutterBottom variant="h5" component="div">
-                        {record.title}
+                        {record.name}
                       </Typography>
                       <Typography gutterBottom variant="h5" component="div">
                         {record.price}$
                       </Typography>
                       <Typography variant="body2" color="text.secondary">
-                        {record.category.name}
+                        {record.brand.name}
                       </Typography>
                     </CardContent>
                   </CardActionArea>

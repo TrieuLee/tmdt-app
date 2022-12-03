@@ -134,30 +134,16 @@ export default function ProductSection(props) {
               <Box
                 component="img"
                 sx={{ height: 480, width: 480 }}
-                src={products.images}
+                src={products.img}
               />
             </Grid>
             <Grid item xs={6}>
               <Typography id="modal-modal-title" variant="h4" component="h6">
-                {products.title}
+                {products.name}
               </Typography>
               <div style={{ display: "flex", marginTop: "10px" }}>
                 <p style={{ margin: "0" }}> {products.rate} </p>
-                <div>
-                  {products.icon &&
-                    products.icon.map((records, i) => (
-                      <FontAwesomeIcon
-                        key={i}
-                        icon={
-                          require("@fortawesome/free-solid-svg-icons")[records]
-                        }
-                        color="orange"
-                      />
-                    ))}
-                </div>
-                <p style={{ margin: "0", marginLeft: "20px" }}>
-                  Đã bán: {products.sold}
-                </p>
+              
                 <p style={{ margin: "0", marginLeft: "20px" }}>
                   Tình trạng:
                   <span style={{ color: "green", fontWeight: "bold" }}>
@@ -173,12 +159,7 @@ export default function ProductSection(props) {
               >
                 {products.price}$
               </Typography>
-              <div>
-                {products.service &&
-                  products.service.map((records, i) => (
-                    <p key={i}>{records}</p>
-                  ))}
-              </div>
+           
               <RemoveIcon onClick={() => handleQuantity("dec")} />
               <div>{quantity}</div>
               <AddIcon onClick={() => handleQuantity("inc")} />
