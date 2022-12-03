@@ -53,7 +53,7 @@ class ProductCRUD {
   // GET ALL PRODUCT
   async get(req, res) {
     const qNew = req.query.new;
-    const qCategory = req.query.category;
+    const qCategory = req.query.brand;
     try {
       let products;
 

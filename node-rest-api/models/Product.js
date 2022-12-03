@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const ProductSchema = new mongoose.Schema(
   {
-    title: {
+    name: {
       type: String,
       require: true,
       min: 3,
@@ -16,14 +16,14 @@ const ProductSchema = new mongoose.Schema(
       type: Array,
     },
 
-    category: {
-      type: Array,
+    brand: {
+      type: String,
     },
     state: {
       type: Boolean,
       default: false,
     },
-    images: {
+    img: {
       type: String,
       default: "",
     },
