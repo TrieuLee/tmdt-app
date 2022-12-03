@@ -34,7 +34,7 @@ router.post("/create-checkout-session", async (req, res) => {
   const session = await stripe.checkout.sessions.create({
     payment_method_types: ["card"],
     shipping_address_collection: {
-      allowed_countries: ["US", "CA", "KE"],
+      allowed_countries: ["US", "CA", "VN"],
     },
     shipping_options: [
       {
@@ -105,7 +105,7 @@ const createOrder = async (customer, data) => {
       quantity: item.quantity,
     };
   });
-  
+
   console.log(products);
   const newOrder = new Order({
     userId: customer.metadata.userId,

@@ -17,7 +17,7 @@ const ProductSchema = new mongoose.Schema(
     },
 
     brand: {
-      type: String,
+      type: Array,
     },
     state: {
       type: Boolean,
