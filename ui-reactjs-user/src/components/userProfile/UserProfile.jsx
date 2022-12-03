@@ -13,19 +13,20 @@ import { AuthContext } from "../../context/AuthContext";
 export default function UserProfile() {
   const { user } = useContext(AuthContext);
   const [orders, setOrders] = useState([]);
-
+  const idUser = user.user._id ? user.user._id : "";
+  console.log(idUser);
   useEffect(() => {
     const getOrders = async () => {
       try {
         const res = await axios.get(
-          "http://localhost:5000/api/orders/"
+          `http://localhost:5000/api/orders/find/${idUser}`
         );
         setOrders(res.data);
         console.log(res.data);
       } catch (err) {}
     };
     getOrders();
-  },[]);
+  }, []);
   const columns = [
     { field: "_id", headerName: "Mã đơn hàng", width: 120 },
     {
@@ -39,7 +40,7 @@ export default function UserProfile() {
           ))}
         </ul>
       ),
-      type: 'string',
+      type: "string",
     },
     {
       field: "total",
@@ -113,7 +114,6 @@ export default function UserProfile() {
     },
   ];
 
- 
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 
   return (
@@ -138,8 +138,7 @@ export default function UserProfile() {
                 columns={columns}
                 pageSize={5}
                 rowsPerPageOptions={[5]}
-                getRowId={(rows)=>rows._id}
-
+                getRowId={(rows) => rows._id}
               />
             </Box>
           </Grid>
@@ -177,7 +176,7 @@ export default function UserProfile() {
             columns={columns1}
             pageSize={5}
             rowsPerPageOptions={[5]}
-            getRowId={(rows)=>rows._id}
+            getRowId={(rows) => rows._id}
           />
         </Box>
       </Container>
