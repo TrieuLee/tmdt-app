@@ -142,12 +142,10 @@ export default function ProductSection(props) {
                 {products.name}
               </Typography>
               <div style={{ display: "flex", marginTop: "10px" }}>
-                <p style={{ margin: "0" }}> {products.rate} </p>
-              
-                <p style={{ margin: "0", marginLeft: "20px" }}>
-                  Tình trạng:
+                <p style={{ margin: "0" }}>
+                  Tình trạng: {""}
                   <span style={{ color: "green", fontWeight: "bold" }}>
-                    {products.state}
+                    {products.state === true ? "Còn hàng" : "Hết hàng"}
                   </span>
                 </p>
               </div>
@@ -159,7 +157,7 @@ export default function ProductSection(props) {
               >
                 {products.price}$
               </Typography>
-           
+
               <RemoveIcon onClick={() => handleQuantity("dec")} />
               <div>{quantity}</div>
               <AddIcon onClick={() => handleQuantity("inc")} />

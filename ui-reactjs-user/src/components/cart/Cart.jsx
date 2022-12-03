@@ -44,9 +44,8 @@ export default function Cart(props) {
       {cart.products && cart.products.length === 0 && <p>Giỏ hàng trống</p>}
       {cart.products.map((item, i) => (
         <Grid container key={i}>
-        
           <Grid item xs={3}>
-            <img src={item.images} style={{ width: "100px" }} alt="" />
+            <img src={item.img} style={{ width: "100px" }} alt="" />
           </Grid>
           <Grid item xs={6} sx={{ display: "flex", alignItems: "center" }}>
             <ul
@@ -57,19 +56,16 @@ export default function Cart(props) {
               }}
             >
               <li>
-                <b>{item.title}</b>
+                <b>{item.name}</b>
               </li>
               <li style={{ marginTop: "8px" }}>
-                <b>
-                  {item.price}$
-                </b>
+                <b>{item.price}$</b>
               </li>
               <li style={{ marginTop: "8px" }}>
                 <b>Size:</b> {item.size}
               </li>
               <li style={{ marginTop: "8px" }}>
-                <b>Số lượng:</b> {item.quantity} x{" "}
-                {item.price}$
+                <b>Số lượng:</b> {item.quantity} x {item.price}$
               </li>
             </ul>
           </Grid>
@@ -88,8 +84,7 @@ export default function Cart(props) {
         <>
           <div style={{ marginTop: "70%" }}>
             <p style={{ display: "flex", justifyContent: "end" }}>
-              Tạm tính:{" "}
-              {cart.total}$
+              Tạm tính: {cart.total}$
             </p>
             {/* <p style={{ display: "flex", justifyContent: "end" }}>
               Phí ship:{" "}
