@@ -185,8 +185,8 @@ export default function ProductSection(props) {
                 <Button
                   sx={theme.bread}
                   onClick={() => {
-                    if (products.size === "") {
-                      alert("Vui lòng chọn size giày")
+                    if (products.size !== "") {
+                      // alert("Vui lòng chọn size giày")
                       handleClick();
                     } else {
                       <Alert
