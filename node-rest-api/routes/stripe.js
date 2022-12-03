@@ -13,7 +13,7 @@ router.post("/create-checkout-session", async (req, res) => {
       cart: JSON.stringify(req.body.carts.cart.products),
     },
   });
-  console.log(customer.metadata.cart);
+
   const line_items = req.body.carts.cart.products.map((item) => {
     return {
       price_data: {
@@ -106,7 +106,7 @@ const createOrder = async (customer, data) => {
     };
   });
 
-  console.log(products);
+
   const newOrder = new Order({
     userId: customer.metadata.userId,
     customerId: data.customer,

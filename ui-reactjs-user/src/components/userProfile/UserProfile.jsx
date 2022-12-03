@@ -14,7 +14,6 @@ export default function UserProfile() {
   const { user } = useContext(AuthContext);
   const [orders, setOrders] = useState([]);
   const idUser = user.user._id ? user.user._id : "";
-  console.log(idUser);
   useEffect(() => {
     const getOrders = async () => {
       try {
@@ -26,7 +25,7 @@ export default function UserProfile() {
       } catch (err) {}
     };
     getOrders();
-  }, []);
+  }, [idUser]);
   const columns = [
     { field: "_id", headerName: "Mã đơn hàng", width: 120 },
     {
