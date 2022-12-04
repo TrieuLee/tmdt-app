@@ -1,4 +1,5 @@
-export const url = "http://localhost:5000/api";
+import domain from "./utils/domain";
+export const url = `${domain}/api`;
 
 export const setHeaders = () => {
   const headers = {
