@@ -46,7 +46,6 @@ const theme = {
 export default function ProductSection(props) {
   const location = useLocation();
   const idP = location.pathname.split("/")[2];
-  console.log(idP);
   const { id, itemID } = useParams();
   const [products, setProducts] = useState({});
   const [size, setSize] = useState("");
@@ -72,7 +71,6 @@ export default function ProductSection(props) {
           "https://huflit-sneaker-api.up.railway.app/api/products/find/" + idP
         );
         setProducts(res.data);
-        console.log(res.data);
       } catch (err) {}
     };
     getProducts();

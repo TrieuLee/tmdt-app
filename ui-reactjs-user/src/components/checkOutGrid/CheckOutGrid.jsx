@@ -39,6 +39,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 export default function CheckOutGrid(props) {
   const carts = !localStorage.lstOrFd ? "" : JSON.parse(localStorage.lstOrFd);
+
   const { user } = useContext(AuthContext);
   function listCart() {
     return carts.cart.products.map((item, i) => {
