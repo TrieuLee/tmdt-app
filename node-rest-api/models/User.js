@@ -29,7 +29,7 @@ const UserSchema = new mongoose.Schema(
       type: String,
       max: 50,
     },
- 
+
     reward: {
       type: Number,
       default: 0,
