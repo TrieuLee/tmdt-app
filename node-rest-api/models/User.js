@@ -35,8 +35,9 @@ const UserSchema = new mongoose.Schema(
       default: 0,
     },
     role: {
-      type: Boolean,
-      default: false,
+      type: Number,
+      default: 3,
+      enum: [1, 2, 3],
     },
   },
   { timestamps: true }
