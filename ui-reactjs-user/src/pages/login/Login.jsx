@@ -20,6 +20,7 @@ import "./login.scss";
 import { Link } from "react-router-dom";
 
 export default function Login() {
+  console.log(domain);
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
   const [values, setValues] = useState({ password: "", showPassword: false });
   const handleChange = (prop) => (event) => {
