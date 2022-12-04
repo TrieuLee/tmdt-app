@@ -29,14 +29,15 @@ const UserSchema = new mongoose.Schema(
       type: String,
       max: 50,
     },
- 
+
     reward: {
       type: Number,
       default: 0,
     },
     role: {
-      type: Boolean,
-      default: false,
+      type: Number,
+      default: 3,
+      enum: [1, 2, 3],
     },
   },
   { timestamps: true }
