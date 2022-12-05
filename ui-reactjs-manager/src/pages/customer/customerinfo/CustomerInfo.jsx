@@ -44,7 +44,7 @@ export default function CustomerInfo() {
     };
     getOrders();
   }, [idP]);
-  console.log(typeof orders);
+  console.log(orders);
   return (
     <div className="single">
       <Sidebar />
@@ -103,24 +103,32 @@ export default function CustomerInfo() {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  <TableRow key={orders._id}>
-                    <TableCell className="tableCell">{orders._id}</TableCell>
-                    <TableCell className="tableCell">
-                      <div className="cellWrapper">
-                        {/* <img src={orders.img} alt="" className="image" />
+                  {orders.map((item, i) => (
+                    <TableRow key={i}>
+                      <TableCell className="tableCell">{item._id}</TableCell>
+                      <TableCell className="tableCell">
+                        <div className="cellWrapper">
+                          {/* <img src={orders.img} alt="" className="image" />
                         {orders.product} */}
-                      </div>
-                    </TableCell>
-                    {/* <TableCell className="tableCell">{orders}</TableCell>
-                    <TableCell className="tableCell">{orders.date}</TableCell>
-                    <TableCell className="tableCell">{orders.amount}</TableCell>
-                    <TableCell className="tableCell">{orders.method}</TableCell>
-                    <TableCell className="tableCell">
-                      <span className={`status ${orders.status}`}>
-                        {orders.status}
-                      </span>
-                    </TableCell> */}
-                  </TableRow>
+                        </div>
+                      </TableCell>
+                      <TableCell className="tableCell">
+                        {orders.total}
+                      </TableCell>
+                      <TableCell className="tableCell">{orders.date}</TableCell>
+                      <TableCell className="tableCell">
+                        {orders.amount}
+                      </TableCell>
+                      <TableCell className="tableCell">
+                        {orders.method}
+                      </TableCell>
+                      <TableCell className="tableCell">
+                        <span className={`status ${orders.status}`}>
+                          {orders.status}
+                        </span>
+                      </TableCell>
+                    </TableRow>
+                  ))}
                 </TableBody>
               </Table>
             </TableContainer>
