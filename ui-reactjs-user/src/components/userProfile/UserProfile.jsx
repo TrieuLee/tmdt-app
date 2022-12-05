@@ -31,15 +31,16 @@ export default function UserProfile() {
       return product.quantity;
     })
   );
-  console.log(orderMap);
+
+  console.log(orderMap.toString());
   const columns = [
     { field: "_id", headerName: "Mã đơn hàng", width: 120 },
     {
       field: "products",
       headerName: "Sản phẩm",
-      width: 150,
+      width: 200,
       renderCell: (params) => (
-        <ul className="flex">
+        <ul style={{ listStyle: "none" }}>
           {params.value.map((role, index) => (
             <li key={index}>{role.name}</li>
           ))}
@@ -54,9 +55,9 @@ export default function UserProfile() {
       editable: true,
     },
     {
-      field: orderMap,
+      field: orderMap.toString(),
       headerName: "Số lượng",
-      type: "string",
+      type: "number",
       width: 90,
       renderCell: () => (
         <ul>
