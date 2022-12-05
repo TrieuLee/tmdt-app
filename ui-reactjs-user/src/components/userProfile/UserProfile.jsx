@@ -9,7 +9,7 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import { DataGrid } from "@mui/x-data-grid";
 import { AuthContext } from "../../context/AuthContext";
-import domain from "../../utils/domain"
+import domain from "../../utils/domain";
 export default function UserProfile() {
   const { user } = useContext(AuthContext);
   const [orders, setOrders] = useState([]);
@@ -17,9 +17,8 @@ export default function UserProfile() {
   useEffect(() => {
     const getOrders = async () => {
       try {
-        const res = await axios.get(
-          `${domain}/api/orders/find/${idUser}`
-        );
+        const res = await axios.get(`${domain}/api/orders/find/${idUser}`);
+        console.log(res.data);
         setOrders(res.data);
       } catch (err) {}
     };
@@ -34,7 +33,7 @@ export default function UserProfile() {
       renderCell: (params) => (
         <ul className="flex">
           {params.value.map((role, index) => (
-            <li key={index}>{role._id}</li>
+            <li key={index}>{role.name}</li>
           ))}
         </ul>
       ),
