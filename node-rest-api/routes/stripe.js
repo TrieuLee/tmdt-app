@@ -10,8 +10,12 @@ const YOUR_DOMAIN = "http://localhost:3000";
 router.post("/create-checkout-session", async (req, res) => {
   const cart = req.body.carts.cart.products;
   const x = cart.map((item) => {
-    const temp = { id: item._id, quantity: item.quantity };
-    console.log(item._id);
+    const temp = {
+      id: item._id,
+      quantity: item.quantity,
+      name: item.name,
+      price: item.price,
+    };
     return temp;
   });
   const customer = await stripe.customers.create({
@@ -105,17 +109,15 @@ router.post("/create-checkout-session", async (req, res) => {
 
 const createOrder = async (customer, data) => {
   const Items = JSON.parse(customer.metadata.cart);
-  console.log(Items);
-  const products = Items.map(async (item) => {
-    const name = await Product.findById(item.id);
-    console.log(name, item.id);
-    return {
+  const products = Items.map((item) => {
+    const product = {
       productId: item.id,
       quantity: item.quantity,
-      name: name,
+      name: item.name,
+      price: item.price,
     };
+    return product;
   });
-
   const newOrder = new Order({
     userId: customer.metadata.userId,
     customerId: data.customer,
