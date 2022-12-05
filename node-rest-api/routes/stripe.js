@@ -8,12 +8,10 @@ const YOUR_DOMAIN = "http://localhost:3000";
 
 router.post("/create-checkout-session", async (req, res) => {
   const cart = req.body.carts.cart.products;
-  //console.log(cart);
   const x = cart.map((item) => {
     const temp = { id: item._id, quantity: item.quantity };
     return temp;
   });
-  //console.log(x);
   const customer = await stripe.customers.create({
     metadata: {
       userId: req.body.userId,
@@ -105,7 +103,6 @@ router.post("/create-checkout-session", async (req, res) => {
 
 const createOrder = async (customer, data) => {
   const Items = JSON.parse(customer.metadata.cart);
-  console.log(Items);
   const products = Items.map((item) => {
     return {
       productId: item._id,
@@ -126,7 +123,6 @@ const createOrder = async (customer, data) => {
 
   try {
     const savedOrder = await newOrder.save();
-    console.log("Processed Order:", savedOrder);
   } catch (err) {
     console.log(err);
   }
@@ -179,7 +175,6 @@ router.post(
             // CREATE ORDER
             createOrder(customer, data);
           } catch (err) {
-            console.log(typeof createOrder);
             console.log(err);
           }
         })

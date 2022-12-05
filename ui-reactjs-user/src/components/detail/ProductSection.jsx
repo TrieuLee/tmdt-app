@@ -62,7 +62,6 @@ export default function ProductSection(props) {
 
   const handleClick = () => {
     dispatch(addProduct({ ...products, quantity, size }));
-    console.log(addProduct({ ...products, quantity, size }));
   };
   useEffect(() => {
     const getProducts = async () => {

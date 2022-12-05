@@ -62,7 +62,6 @@ export default function Navbar(props) {
   };
   const onSearch = (searchTerm) => {
     setSearch(searchTerm);
-    console.log("search", searchTerm);
   };
 
   return (
