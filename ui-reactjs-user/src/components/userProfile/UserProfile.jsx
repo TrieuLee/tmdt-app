@@ -35,7 +35,7 @@ export default function UserProfile() {
       renderCell: (params) => (
         <ul className="flex">
           {params.value.map((role, index) => (
-            <li key={index}>{role._id}</li>
+            <p key={index}>{role._id}</p>
           ))}
         </ul>
       ),
