@@ -18,7 +18,7 @@ const verifyToken = (req, res, next) => {
 
 const verifyTokenAndAuthoriation = (req, res, next) => {
   verifyToken(req, res, () => {
-    if (req.user.id === req.params.id || req.user.role) {
+    if (req.user.id === req.params.id || req.user.role === 1) {
       next();
     } else {
       res.status(403).json("You are not allowed to do");
@@ -28,7 +28,7 @@ const verifyTokenAndAuthoriation = (req, res, next) => {
 
 const verifyTokenAndAdmin = (req, res, next) => {
   verifyToken(req, res, () => {
-    if (req.user.role) {
+    if (req.user.role === 1) {
       next();
     } else {
       res.status(403).json("You are not alowed to do that!");

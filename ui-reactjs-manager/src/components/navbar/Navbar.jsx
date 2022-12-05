@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
-
+import { useNavigate } from "react-router-dom";
 import "./Navbar.scss";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import Box from "@mui/material/Box";
@@ -15,13 +15,16 @@ import Settings from "@mui/icons-material/Settings";
 import Logout from "@mui/icons-material/Logout";
 export default function Navbar() {
   const { user } = useContext(AuthContext);
-  const handleLogOut = () =>{
+  const navigate = useNavigate();
+  const handleLogOut = () => {
     const answer = window.confirm("Bạn có chắc chắn đăng xuất?");
     if (answer) {
       localStorage.clear("user", user);
+      navigate("/");
+
       window.location.reload(false);
     }
-  }
+  };
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -108,9 +111,9 @@ export default function Navbar() {
                 Settings
               </MenuItem>
               <MenuItem onClick={handleLogOut}>
-                <ListItemIcon >
+                <ListItemIcon>
                   <Logout fontSize="small" />
-                 </ListItemIcon>
+                </ListItemIcon>
                 Đăng xuất
               </MenuItem>
             </Menu>

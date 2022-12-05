@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useEffect, useContext } from "react";
 import "./Single.scss";
 import Sidebar from "../../../components/sidebar/Sidebar";
 import Navbar from "../../../components/navbar/Navbar";
 import List from "../../../components/table/Table";
 import { Link } from "react-router-dom";
-
+import axios from "axios";
+import { AuthContext } from "../../../context/AuthContext";
 export default function CustomerInfo() {
+  const { user } = useContext(AuthContext);
+  console.log(user);
   return (
     <div className="single">
       <Sidebar />
@@ -26,7 +29,7 @@ export default function CustomerInfo() {
                 className="itemImg"
               />
               <div className="details">
-                <h1 className="itemTitle">Jane Doe</h1>
+                <h1 className="itemTitle">{user.user.username}</h1>
                 <div className="detailItem">
                   <span className="itemKey">Email:</span>
                   <span className="itemValue">janedoe@gmail.com</span>

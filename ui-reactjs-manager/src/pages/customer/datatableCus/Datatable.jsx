@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import "./Datatable.scss";
 import { DataGrid } from "@mui/x-data-grid";
-import { userRows } from "../../customer/datatableCus";
+// import { userRows } from "../../customer/datatableCus";
 import { Link } from "react-router-dom";
 import useFetch from "../../../components/hooks/useFetch";
+import domain from "../../../utils/domain";
+
 export default function Datatable() {
-  
-  const { data, loading, error } = useFetch(
-    "https://sneaker-huflit-server.herokuapp.com/api/auth"
-  );
+  const { data, loading, error } = useFetch(`${domain}/api/auth`);
+
   const handleDelete = (id) => {
     // setData(data.filter((item) => item.id !== id));
   };
@@ -16,8 +16,8 @@ export default function Datatable() {
     { field: "_id", headerName: "ID", width: 70 },
     {
       field: "user",
-      headerName: "User",
-      width: 230,
+      headerName: "Tên người dùng",
+      width: 200,
       renderCell: (params) => {
         return (
           <div className="cellWithImg">
@@ -34,23 +34,33 @@ export default function Datatable() {
     {
       field: "email",
       headerName: "Email",
-      width: 230,
+      width: 200,
     },
 
     {
-      field: "country",
-      headerName: "Country",
-      width: 100,
+      field: "address",
+      headerName: "Địa chỉ",
+      width: 200,
     },
-    {
-      field: "city",
-      headerName: "City",
-      width: 100,
-    },
+
     {
       field: "phone",
       headerName: "Phone",
+      width: 130,
+    },
+    {
+      field: "role",
+      headerName: "Phân quyền",
       width: 100,
+      renderCell: (params) => {
+        if (params.row.role === 1) {
+          return <div>Admin</div>;
+        } else if (params.row.role === 2) {
+          return <div>Nhân viên</div>;
+        } else {
+          return <div>Khách hàng</div>;
+        }
+      },
     },
   ];
 
@@ -91,7 +101,7 @@ export default function Datatable() {
         pageSize={9}
         rowsPerPageOptions={[9]}
         checkboxSelection
-        getRowId={row => row._id}
+        getRowId={(row) => row._id}
       />
     </div>
   );

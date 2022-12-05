@@ -10,7 +10,7 @@ import CardContent from "@mui/material/CardContent";
 import { DataGrid } from "@mui/x-data-grid";
 import { AuthContext } from "../../context/AuthContext";
 import domain from "../../utils/domain"
-export default function UserProfile() {
+export default function  UserProfile() {
   const { user } = useContext(AuthContext);
   const [orders, setOrders] = useState([]);
   const idUser = user.user._id ? user.user._id : "";
