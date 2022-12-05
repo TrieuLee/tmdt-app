@@ -13,12 +13,7 @@ module.exports = (expressApp) => {
   );
   expressApp.use(
     cors({
-      origin: [
-        "http://localhost:3000",
-        "http://localhost:3001",
-        "https://huflit-sneaker-11.netlify.app",
-        "https://sneaker-ad-huflit.netlify.app",
-      ],
+      origin: "*",
       credentials: true,
     })
   );
