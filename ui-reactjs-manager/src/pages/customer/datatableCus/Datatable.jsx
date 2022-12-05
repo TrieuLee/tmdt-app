@@ -5,7 +5,6 @@ import { DataGrid } from "@mui/x-data-grid";
 import { Link } from "react-router-dom";
 import useFetch from "../../../components/hooks/useFetch";
 import domain from "../../../utils/domain";
-import { AuthContext } from "../../../context/AuthContext";
 export default function Datatable() {
   const { data, loading, error } = useFetch(`${domain}/api/auth`);
   console.log(data);
@@ -54,11 +53,17 @@ export default function Datatable() {
       width: 100,
       renderCell: (params) => {
         if (params.row.role === 1) {
-          return <div>Admin</div>;
+          return <div style={{ color: "red", fontWeight: "bold" }}>Admin</div>;
         } else if (params.row.role === 2) {
-          return <div>Nhân viên</div>;
+          return (
+            <div style={{ color: "green", fontWeight: "bold" }}>Nhân viên</div>
+          );
         } else {
-          return <div>Khách hàng</div>;
+          return (
+            <div style={{ color: "orange", fontWeight: "bold" }}>
+              Khách hàng
+            </div>
+          );
         }
       },
     },

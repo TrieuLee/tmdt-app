@@ -53,7 +53,7 @@ const Router = () => {
           </Route>
         </Route>
 
-        <Route path="deliveries">
+        <Route path="orders">
           <Route index element={<OrderList />} />
         </Route>
       </Routes>

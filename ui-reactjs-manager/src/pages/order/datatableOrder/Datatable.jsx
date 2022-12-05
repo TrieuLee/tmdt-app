@@ -1,15 +1,17 @@
 import React, { useState } from "react";
 import "./Datatable.scss";
 import { DataGrid } from "@mui/x-data-grid";
-import { userRows } from "../../order/datatableOrder";
+// import { userRows } from "../../order/datatableOrder";
 import { Link } from "react-router-dom";
+import useFetch from "../../../components/hooks/useFetch";
+import domain from "../../../utils/domain";
 
 export default function Datatable() {
-  const [data, setData] = useState(userRows);
+  const { data, loading, error } = useFetch(`${domain}/api/orders`);
   const handleDelete = (id) => {
-    setData(data.filter((item) => item.id !== id));
+    // setData(data.filter((item) => item.id !== id));
   };
-
+  console.log(data);
   const userColumns = [
     {
       field: "_id",
@@ -25,7 +27,7 @@ export default function Datatable() {
       width: 180,
     },
     {
-      field: "category",
+      field: "shipping",
       headerName: "Khách hàng",
       width: 180,
     },
@@ -40,12 +42,12 @@ export default function Datatable() {
       width: 120,
     },
     {
-      field: "payment",
+      field: "payment_status",
       headerName: "Thanh toán",
       width: 160,
     },
     {
-      field: "status",
+      field: "delivery_status",
       headerName: "Trạng thái",
       width: 100,
     },
@@ -82,6 +84,7 @@ export default function Datatable() {
         pageSize={9}
         rowsPerPageOptions={[9]}
         checkboxSelection
+        getRowId={(row) => row._id}
       />
     </div>
   );

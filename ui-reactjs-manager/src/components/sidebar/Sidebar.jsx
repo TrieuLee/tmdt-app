@@ -46,7 +46,7 @@ export default function Sidebar() {
             </li>
           </Link>
 
-          <Link to="/deliveries" style={{ textDecoration: "none" }}>
+          <Link to="/orders" style={{ textDecoration: "none" }}>
             <li>
               <LocalShippingIcon className="icon" />
               <span>Giao hàng</span>
