@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const { Product } = require("../models");
 const stripe = require("stripe")(
   "sk_test_51M4DNQLPEIpJHgz9Ph5mee7rbBlhBk6nyzzASuyzG9ywTZfxFRzBVc8PzW1x6btHGaufcRI7zNeOG9uEoSREmS8O00bzDXn395"
 );
@@ -9,7 +10,12 @@ const YOUR_DOMAIN = "http://localhost:3000";
 router.post("/create-checkout-session", async (req, res) => {
   const cart = req.body.carts.cart.products;
   const x = cart.map((item) => {
-    const temp = { id: item._id, quantity: item.quantity };
+    const temp = {
+      id: item._id,
+      quantity: item.quantity,
+      name: item.name,
+      price: item.price,
+    };
     return temp;
   });
   const customer = await stripe.customers.create({
@@ -104,12 +110,14 @@ router.post("/create-checkout-session", async (req, res) => {
 const createOrder = async (customer, data) => {
   const Items = JSON.parse(customer.metadata.cart);
   const products = Items.map((item) => {
-    return {
-      productId: item._id,
+    const product = {
+      productId: item.id,
       quantity: item.quantity,
+      name: item.name,
+      price: item.price,
     };
+    return product;
   });
-
   const newOrder = new Order({
     userId: customer.metadata.userId,
     customerId: data.customer,
