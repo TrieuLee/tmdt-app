@@ -16,7 +16,6 @@ import { Helmet } from "react-helmet-async";
 export default function ProductGrid() {
   const { id } = useParams();
   // const categories = Records.filter((item) => item.category.name === id);
-  // console.log(categories);
   const location = useLocation();
   const cate = location.pathname.split("/")[1];
   const [products, setProducts] = useState([]);

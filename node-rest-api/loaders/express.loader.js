@@ -3,7 +3,7 @@ const dotenv = require("dotenv");
 const helmet = require("helmet");
 const path = require("path");
 const cors = require("cors");
-module.exports = (expressApp) => {
+module.exports = async (expressApp) => {
   dotenv.config();
   expressApp.use(express.json());
   expressApp.use(helmet());

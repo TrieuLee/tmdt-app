@@ -17,7 +17,6 @@ export default function Cart(props) {
   const { visible, onRequestClose } = props;
   const cart = useSelector((state) => state.cart);
   const { user } = useContext(AuthContext);
-  console.log(cart);
   //   const itemsPrice = cart
   //     ? cart.reduce((a, c) => a + c.price * c.quantity, 0)
   //     : 0;

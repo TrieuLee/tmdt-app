@@ -9,7 +9,7 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import { DataGrid } from "@mui/x-data-grid";
 import { AuthContext } from "../../context/AuthContext";
-
+import domain from "../../utils/domain"
 export default function UserProfile() {
   const { user } = useContext(AuthContext);
   const [orders, setOrders] = useState([]);
@@ -18,10 +18,9 @@ export default function UserProfile() {
     const getOrders = async () => {
       try {
         const res = await axios.get(
-          `http://localhost:5000/api/orders/find/${idUser}`
+          `${domain}/api/orders/find/${idUser}`
         );
         setOrders(res.data);
-        console.log(res.data);
       } catch (err) {}
     };
     getOrders();
