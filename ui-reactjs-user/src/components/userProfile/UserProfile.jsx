@@ -21,11 +21,17 @@ export default function UserProfile() {
           `http://localhost:5000/api/orders/find/${idUser}`
         );
         setOrders(res.data);
-        console.log(res.data);
+        // console.log(res.data);
       } catch (err) {}
     };
     getOrders();
   }, [idUser]);
+  const orderMap = orders.map((item) =>
+    item.products.map((product) => {
+      return product.quantity;
+    })
+  );
+  console.log(orderMap);
   const columns = [
     { field: "_id", headerName: "Mã đơn hàng", width: 120 },
     {
@@ -35,10 +41,7 @@ export default function UserProfile() {
       renderCell: (params) => (
         <ul className="flex">
           {params.value.map((role, index) => (
-            <p>
-              {" "}
-              key={index}>{role._id}
-            </p>
+            <li key={index}>{role.name}</li>
           ))}
         </ul>
       ),
@@ -46,23 +49,24 @@ export default function UserProfile() {
     },
     {
       field: "total",
-      headerName: "Giá tiền",
+      headerName: "Tổng tiền",
       width: 150,
       editable: true,
     },
     {
-      field: "quantity",
+      field: orderMap,
       headerName: "Số lượng",
-      type: "number",
+      type: "string",
       width: 90,
-      editable: true,
+      renderCell: () => (
+        <ul>
+          {orderMap.map((item, i) => (
+            <li key={i}>{item}</li>
+          ))}
+        </ul>
+      ),
     },
-    {
-      field: "total",
-      headerName: "Tổng tiền",
-      width: 120,
-      editable: true,
-    },
+
     {
       field: "payment",
       headerName: "Thanh toán",
@@ -169,7 +173,7 @@ export default function UserProfile() {
             </Card>
           </Grid>
         </Grid>
-        <Box sx={{ height: 400, width: "100%" }}>
+        {/* <Box sx={{ height: 400, width: "100%" }}>
           <Typography sx={{ mt: 5, mb: 2 }} variant="h6" component="div">
             Lịch sử mua hàng
           </Typography>
@@ -180,7 +184,7 @@ export default function UserProfile() {
             rowsPerPageOptions={[5]}
             getRowId={(rows) => rows._id}
           />
-        </Box>
+        </Box> */}
       </Container>
     </>
   );
