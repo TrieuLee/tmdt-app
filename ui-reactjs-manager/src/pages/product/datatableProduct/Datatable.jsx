@@ -6,6 +6,17 @@ import useFetch from "../../../components/hooks/useFetch";
 import domain from "../../../utils/domain";
 import axios from "axios";
 
+const currencyFormatter = new Intl.NumberFormat("en-US", {
+  style: "currency",
+  currency: "USD",
+});
+
+const usdPrice = {
+  type: "number",
+  width: 130,
+  valueFormatter: ({ value }) => currencyFormatter.format(value),
+  cellClassName: "font-tabular-nums",
+};
 export default function Datatable() {
   const location = useLocation();
   const path = location.pathname.split("/")[1];
@@ -14,7 +25,6 @@ export default function Datatable() {
   useEffect(() => {
     setList(data);
   }, [data]);
-
 
   const handleDelete = async (id) => {
     const answer = window.confirm("Bạn có chắc chắn xóa sản phẩm?");
@@ -46,6 +56,7 @@ export default function Datatable() {
 
     {
       field: "price",
+      ...usdPrice,
       headerName: "Giá tiền",
       width: 160,
     },
@@ -59,6 +70,14 @@ export default function Datatable() {
       field: "state",
       headerName: "Tình trạng",
       width: 160,
+      renderCell: (params) => {
+        if (params.row.state === true) {
+          return (
+            <div style={{ color: "green", fontWeight: "bold" }}>Còn hàng</div>
+          );
+        }
+        return <div style={{ color: "red", fontWeight: "bold" }}>Tạm hết</div>;
+      },
     },
   ];
 
@@ -70,14 +89,17 @@ export default function Datatable() {
       renderCell: (params) => {
         return (
           <div className="cellAction">
-            <Link to="/products/view" style={{ textDecoration: "none" }}>
-              <div className="viewButton">View</div>
+            <Link
+              to={`/${path}/${params.row._id}`}
+              style={{ textDecoration: "none" }}
+            >
+              <div className="viewButton">Chi tiết</div>
             </Link>
             <div
               className="deleteButton"
               onClick={() => handleDelete(params.row._id)}
             >
-              Delete
+              Xóa
             </div>
           </div>
         );

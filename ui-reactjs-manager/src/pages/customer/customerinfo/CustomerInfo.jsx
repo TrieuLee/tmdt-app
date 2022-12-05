@@ -1,14 +1,28 @@
-import React, { useEffect, useContext } from "react";
+import React, { useEffect, useContext, useState } from "react";
 import "./Single.scss";
 import Sidebar from "../../../components/sidebar/Sidebar";
 import Navbar from "../../../components/navbar/Navbar";
 import List from "../../../components/table/Table";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import axios from "axios";
-import { AuthContext } from "../../../context/AuthContext";
+import domain from "../../../utils/domain";
 export default function CustomerInfo() {
-  const { user } = useContext(AuthContext);
-  console.log(user);
+  // const { user } = useContext(AuthContext);
+  const location = useLocation();
+
+  const idP = location.pathname.split("/")[2];
+  console.log(idP);
+  const [users, setUsers] = useState({});
+  useEffect(() => {
+    const getUsers = async () => {
+      try {
+        const res = await axios.get(`${domain}/api/auth/find/` + idP);
+        setUsers(res.data);
+        console.log(res.data);
+      } catch (err) {}
+    };
+    getUsers();
+  }, [idP]);
   return (
     <div className="single">
       <Sidebar />
@@ -29,37 +43,31 @@ export default function CustomerInfo() {
                 className="itemImg"
               />
               <div className="details">
-                <h1 className="itemTitle">{user.user.username}</h1>
+                <h1 className="itemTitle">{users.username}</h1>
                 <div className="detailItem">
                   <span className="itemKey">Email:</span>
-                  <span className="itemValue">janedoe@gmail.com</span>
+                  <span className="itemValue">{users.email}</span>
                 </div>
                 <div className="detailItem">
                   <span className="itemKey">Số điện thoại:</span>
-                  <span className="itemValue">+1 2345 67 89</span>
+                  <span className="itemValue">{users.phone}</span>
                 </div>
                 <div className="detailItem">
                   <span className="itemKey">Địa chỉ:</span>
-                  <span className="itemValue">
-                    Elton St. 234 Garden Yd. NewYork
-                  </span>
-                </div>
-                <div className="detailItem">
-                  <span className="itemKey">Điểm thưởng:</span>
-                  <span className="itemValue">1000</span>
-                </div>
-                <div className="detailItem">
-                  <span className="itemKey">Thành viên:</span>
-                  <span className="itemValue">Thường</span>
+                  <span className="itemValue">{users.address}</span>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div className="bottom">
-          <h1 className="title">Sản phẩm đã mua</h1>
-          <List />
-        </div>
+        {users.role !== 3 ? (
+          <div></div>
+        ) : (
+          <div className="bottom">
+            <h1 className="title">Sản phẩm đã mua</h1>
+            <List />
+          </div>
+        )}
       </div>
     </div>
   );

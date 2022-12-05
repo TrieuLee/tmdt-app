@@ -40,6 +40,7 @@ class UserCURD {
       return res.status(403).json("bạn chỉ có thể xóa tài khoản của bạn");
     }
   }
+
 }
 
 module.exports = new UserCURD();

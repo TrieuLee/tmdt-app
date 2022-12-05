@@ -4,6 +4,8 @@ const authController = require("../controller/authController");
 router.get("/", authController.get);
 router.post("/register", authController.register);
 router.post("/login", authController.login);
+router.get("/find/:id", authController.getUser);
+
 // router.post("/logout", authController.logout);
 // router.put("/:id", authController.update);
 // router.delete("/:id", authController.delete);

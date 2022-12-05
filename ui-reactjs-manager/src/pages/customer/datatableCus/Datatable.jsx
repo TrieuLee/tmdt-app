@@ -1,14 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import "./Datatable.scss";
 import { DataGrid } from "@mui/x-data-grid";
 // import { userRows } from "../../customer/datatableCus";
 import { Link } from "react-router-dom";
 import useFetch from "../../../components/hooks/useFetch";
 import domain from "../../../utils/domain";
-
+import { AuthContext } from "../../../context/AuthContext";
 export default function Datatable() {
   const { data, loading, error } = useFetch(`${domain}/api/auth`);
-
+  console.log(data);
   const handleDelete = (id) => {
     // setData(data.filter((item) => item.id !== id));
   };
@@ -72,14 +72,18 @@ export default function Datatable() {
       renderCell: (params) => {
         return (
           <div className="cellAction">
-            <Link to="/users/view" style={{ textDecoration: "none" }}>
-              <div className="viewButton">View</div>
+            <Link
+              to={`/users/${params.row._id}`}
+              // to ="/users/view"
+              style={{ textDecoration: "none" }}
+            >
+              <div className="viewButton">Chi tiết</div>
             </Link>
             <div
               className="deleteButton"
               onClick={() => handleDelete(params.row._id)}
             >
-              Delete
+              Xóa
             </div>
           </div>
         );

@@ -12,11 +12,11 @@ export default function Datatable() {
 
   const userColumns = [
     {
-      field: "user",
+      field: "_id",
       headerName: "Mã đơn hàng",
       width: 140,
       renderCell: (params) => {
-        return <div className="cellWithImg">{params.row.username}</div>;
+        return <div className="cellWithImg">{params.row._id}</div>;
       },
     },
     {

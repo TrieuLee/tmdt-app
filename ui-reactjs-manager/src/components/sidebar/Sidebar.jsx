@@ -6,8 +6,9 @@ import LocalShippingIcon from "@mui/icons-material/LocalShipping";
 import StoreIcon from "@mui/icons-material/Store";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
+import LeaderboardIcon from "@mui/icons-material/Leaderboard";
 import { Link } from "react-router-dom";
-
+import { FaStripe } from "react-icons/fa";
 export default function Sidebar() {
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
   return (
@@ -35,7 +36,7 @@ export default function Sidebar() {
           <Link to="/users" style={{ textDecoration: "none" }}>
             <li>
               <PersonOutlineIcon className="icon" />
-              <span>Khách hàng </span>
+              <span>Người dùng </span>
             </li>
           </Link>
           <Link to="/products" style={{ textDecoration: "none" }}>
@@ -44,7 +45,6 @@ export default function Sidebar() {
               <span>Sản phẩm</span>
             </li>
           </Link>
-         
 
           <Link to="/deliveries" style={{ textDecoration: "none" }}>
             <li>
@@ -53,9 +53,19 @@ export default function Sidebar() {
             </li>
           </Link>
 
+          <Link
+            to={`//dashboard.stripe.com/test/dashboard`}
+            style={{ textDecoration: "none" }}
+          >
+            <li>
+              <FaStripe style={{ color: "#eee", fontSize: "20px" }} />
+              <span>Stripe</span>
+            </li>
+          </Link>
+
           <Link to="/statistic" style={{ textDecoration: "none" }}>
             <li>
-              <LocalShippingIcon className="icon" />
+              <LeaderboardIcon className="icon" />
               <span>Báo cáo doanh thu</span>
             </li>
           </Link>
