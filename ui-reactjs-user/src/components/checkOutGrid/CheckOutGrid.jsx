@@ -40,7 +40,6 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 export default function CheckOutGrid(props) {
   const carts = !localStorage.lstOrFd ? "" : JSON.parse(localStorage.lstOrFd);
-  console.log(carts.total);
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
   function listCart() {

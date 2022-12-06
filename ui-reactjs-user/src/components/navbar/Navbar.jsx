@@ -3,7 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import axios from "axios";
 
 import { useSelector } from "react-redux";
-import Record from "../../server.json";
+// import Record from "../../server.json";
 import "./navbar.scss";
 import NavDropDown from "../navDropDown/NavDropDown";
 import Cart from "../cart/Cart";
@@ -11,8 +11,9 @@ import { styled } from "@mui/system";
 import { IconButton } from "@mui/material";
 import ShoppingBagIcon from "@mui/icons-material/ShoppingBag";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import { AuthContext } from "../../context/AuthContext";
 import Badge from "@mui/material/Badge";
+import { AuthContext } from "../../context/AuthContext";
+import domain from "../../utils/domain";
 
 const ThemeComponent = styled(
   ShoppingBagIcon,
@@ -37,22 +38,18 @@ export default function Navbar(props) {
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 
   const { user } = useContext(AuthContext);
-  const quantity = useSelector((state) => state.cart.quantity);
   const cart = useSelector((state) => state.cart.products);
-  console.log(cart);
+  // console.log(cart);
 
-  const [isLiked, setIsLiked] = useState(false);
   const location = useLocation();
   const cate = location.pathname.split("/")[1];
   const [products, setProducts] = useState([]);
   const [search, setSearch] = useState("");
-
+  const [isLiked, setIsLiked] = useState(false);
   useEffect(() => {
     const getProducts = async () => {
       try {
-        const res = await axios.get(
-          "https://huflit-sneaker-api.up.railway.app/api/products"
-        );
+        const res = await axios.get(`${domain}/api/products`);
         setProducts(res.data);
       } catch (err) {}
     };
@@ -157,7 +154,7 @@ export default function Navbar(props) {
           <div className="navItem">
             <IconButton onClick={() => setIsLiked(!isLiked)}>
               <Cart
-                visible={isLiked}
+                isOpen={isLiked}
                 onRequestClose={() => {
                   setIsLiked(isLiked);
                 }}
