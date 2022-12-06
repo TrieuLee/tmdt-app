@@ -29,7 +29,7 @@ class UserCURD {
     // }
   }
   async delete(req, res) {
-    if (req.user.id === req.params.id) {
+    if (req.user.id === req.params.id || req.user.role ===1) {
       try {
         await User.findByIdAndDelete(req.params.id);
         res.status(200).json("Bạn đã xóa tài khoản thành công");
