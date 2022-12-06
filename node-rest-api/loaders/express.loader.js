@@ -20,6 +20,7 @@ module.exports = async (expressApp) => {
         "https://sneaker-ad-huflit.netlify.app",
       ],
       credentials: true,
+      optionSuccessStatus: 200,
     })
   );
 };
