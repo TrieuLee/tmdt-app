@@ -13,11 +13,10 @@ router.delete(
   verifyTokenAndUpdate,
   productController.delete
 );
-router.get("/", verifyToken, verifyTokenAndUpdate, productController.get);
+router.get("/", verifyToken, productController.get);
 router.get(
   "/find/:id",
   verifyToken,
-  verifyTokenAndUpdate,
   productController.getProduct
 );
 // router.get("/", productController.get);
