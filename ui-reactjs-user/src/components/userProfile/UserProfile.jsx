@@ -9,7 +9,21 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import { DataGrid } from "@mui/x-data-grid";
 import { AuthContext } from "../../context/AuthContext";
-
+import { Divider } from "@mui/material";
+import { styled } from "@mui/material/styles";
+const StyledDataGrid = styled(DataGrid)(({}) => ({
+  "& .MuiDataGrid-renderingZone": {
+    maxHeight: "none !important",
+  },
+  "& .MuiDataGrid-cell": {
+    lineHeight: "unset !important",
+    maxHeight: "none !important",
+    whiteSpace: "normal",
+  },
+  "& .MuiDataGrid-row": {
+    maxHeight: "none !important",
+  },
+}));
 export default function UserProfile() {
   const { user } = useContext(AuthContext);
   const [orders, setOrders] = useState([]);
@@ -28,7 +42,7 @@ export default function UserProfile() {
   }, [idUser]);
   const orderMap = orders.map((item) =>
     item.products.map((product) => {
-      return product.quantity;
+      return <li>{product.quantity}</li>;
     })
   );
 
@@ -48,24 +62,25 @@ export default function UserProfile() {
       ),
       type: "string",
     },
-    {
-      field: "total",
-      headerName: "Tổng tiền",
-      width: 150,
-      editable: true,
-    },
+
     {
       field: orderMap.toString(),
       headerName: "Số lượng",
       type: "number",
       width: 90,
       renderCell: () => (
-        <ul>
+        <ul style={{ listStyle: "none" }}>
           {orderMap.map((item, i) => (
             <li key={i}>{item}</li>
           ))}
         </ul>
       ),
+    },
+    {
+      field: "total",
+      headerName: "Tổng tiền",
+      width: 150,
+      editable: true,
     },
 
     {
@@ -140,7 +155,7 @@ export default function UserProfile() {
               Theo dõi đơn hàng
             </Typography>
             <Box sx={{ height: 400, width: "100%" }}>
-              <DataGrid
+              <StyledDataGrid
                 rows={orders}
                 columns={columns}
                 pageSize={5}
