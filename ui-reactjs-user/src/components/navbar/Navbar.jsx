@@ -38,8 +38,10 @@ export default function Navbar(props) {
 
   const { user } = useContext(AuthContext);
   const quantity = useSelector((state) => state.cart.quantity);
-  const [isLiked, setIsLiked] = useState(false);
+  const cart = useSelector((state) => state.cart.products);
+  console.log(cart);
 
+  const [isLiked, setIsLiked] = useState(false);
   const location = useLocation();
   const cate = location.pathname.split("/")[1];
   const [products, setProducts] = useState([]);
@@ -160,7 +162,10 @@ export default function Navbar(props) {
                   setIsLiked(isLiked);
                 }}
               />
-              <StyledBadge badgeContent={quantity} color="secondary">
+              <StyledBadge
+                badgeContent={cart.length ? cart.length : "0"}
+                color="secondary"
+              >
                 <ThemeComponent color="error" sx={{ mb: 1 }} fontSize="large" />
               </StyledBadge>
             </IconButton>

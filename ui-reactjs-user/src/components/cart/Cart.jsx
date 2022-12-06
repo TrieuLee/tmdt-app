@@ -1,10 +1,15 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 
 import { useSelector } from "react-redux";
 import { AuthContext } from "../../context/AuthContext";
 import { useDispatch } from "react-redux";
-import { resetCart } from "../../context/CartReducer";
+import {
+  incrementQuantity,
+  decrementQuantity,
+  removeProduct,
+  resetCart,
+} from "../../context/CartReducer";
 
 import SlidingPane from "react-sliding-pane";
 import "react-sliding-pane/dist/react-sliding-pane.css";
@@ -15,13 +20,23 @@ import Button from "@mui/material/Button";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
 import DeleteIcon from "@mui/icons-material/Delete";
+
 export default function Cart(props) {
   const { visible, onRequestClose } = props;
   const cart = useSelector((state) => state.cart);
+  console.log(cart);
+  const getTotal = () => {
+    let totalQuantity = 0;
+    let totalPrice = 0;
+    cart.products.forEach((item) => {
+      totalQuantity += item.quantity;
+      totalPrice += item.price * item.quantity;
+    });
+    return { totalPrice, totalQuantity };
+  };
   const { user } = useContext(AuthContext);
   const dispatch = useDispatch();
-  const quantity = useSelector((state) => state.cart.quantity);
-  console.log(cart)
+
   //   const itemsPrice = cart
   //     ? cart.reduce((a, c) => a + c.price * c.quantity, 0)
   //     : 0;
@@ -31,6 +46,7 @@ export default function Cart(props) {
   function SetCartPayment() {
     const lstOrFd = {
       cart: cart,
+      total: getTotal(),
       // itemsPrice: itemsPrice ? itemsPrice : "",
       // shippingPrice: shippingPrice ? shippingPrice : "",
       // totalPrice: totalPrice ? totalPrice : "",
@@ -47,7 +63,7 @@ export default function Cart(props) {
     >
       {cart.products && cart.products.length === 0 && <p>Giỏ hàng trống</p>}
       {cart.products.map((item, i) => (
-        <Grid container key={i} >
+        <Grid container key={i}>
           <Grid item xs={3}>
             <img src={item.img} style={{ width: "100px" }} alt="" />
           </Grid>
@@ -74,11 +90,11 @@ export default function Cart(props) {
             </ul>
           </Grid>
           <Grid item xs={3} sx={{ display: "flex", alignItems: "center" }}>
-            <IconButton>
+            <IconButton onClick={() => dispatch(incrementQuantity(item._id))}>
               <AddCircleIcon />
             </IconButton>
-
-            <IconButton>
+            <div>{item.quantity}</div>
+            <IconButton onClick={() => dispatch(decrementQuantity(item._id))}>
               <RemoveCircleIcon />
             </IconButton>
           </Grid>
@@ -86,34 +102,33 @@ export default function Cart(props) {
       ))}
       {cart.products && cart.products.length !== 0 && (
         <>
-            <p
-              style={{
-                display: "flex",
-                justifyContent: "end",
-                color: "green",
-                fontWeight: "bold",
-                marginTop: "0",
-              }}
-            >
-              Tạm tính: {cart.total}$
-            </p>
-            <p
-              style={{
-                display: "flex",
-                justifyContent: "end",
-                color: "red",
-                fontWeight: "bold",
-                cursor: "pointer",
-                alignItems:"center"
-              }}
-              className="reset"
-              onClick={() => dispatch(resetCart())}
-            >
-              <DeleteIcon />
-              Xoá tất cả sản phẩm
-            </p>
+          <p
+            style={{
+              display: "flex",
+              justifyContent: "end",
+              color: "green",
+              fontWeight: "bold",
+              marginTop: "0",
+            }}
+          >
+            Tạm tính: {getTotal().totalPrice}$
+          </p>
+          <p
+            style={{
+              display: "flex",
+              justifyContent: "end",
+              color: "red",
+              fontWeight: "bold",
+              cursor: "pointer",
+              alignItems: "center",
+            }}
+            className="reset"
+            onClick={() => dispatch(resetCart())}
+          >
+            <DeleteIcon />
+            Xoá tất cả sản phẩm
+          </p>
 
-         
           {user ? (
             <Link
               type="submit"

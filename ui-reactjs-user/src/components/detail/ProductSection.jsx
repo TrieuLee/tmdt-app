@@ -12,7 +12,7 @@ import Breadcrumbs from "@mui/material/Breadcrumbs";
 import Stack from "@mui/material/Stack";
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
-import domain from "../../utils/domain"
+import domain from "../../utils/domain";
 import HomeIcon from "@mui/icons-material/Home";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
@@ -53,29 +53,29 @@ export default function ProductSection(props) {
   const [quantity, setQuantity] = useState(1);
   const dispatch = useDispatch();
 
-  const handleQuantity = (type) => {
-    if (type === "dec") {
-      quantity > 1 && setQuantity(quantity - 1);
-    } else {
-      setQuantity(quantity + 1);
+  const [open, setOpen] = useState(false);
+  const alertClick = () => {
+    setOpen(true);
+  };
+  const alertClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
     }
+    setOpen(false);
   };
 
   const handleClick = () => {
-    if(!size){
-      return window.alert("Vui lòng chọn size giày")
-    }
-    else{
+    if (!size) {
+      window.alert("Vui lòng chọn size giày");
+    } else {
       dispatch(addProduct({ ...products, quantity, size }));
-
+      alertClick();
     }
   };
   useEffect(() => {
     const getProducts = async () => {
       try {
-        const res = await axios.get(
-          `${domain}/api/products/find/` + idP
-        );
+        const res = await axios.get(`${domain}/api/products/find/` + idP);
         setProducts(res.data);
       } catch (err) {}
     };
@@ -112,17 +112,6 @@ export default function ProductSection(props) {
       {products.name}
     </Link>,
   ];
-
-  const [open, setOpen] = useState(false);
-  const alertClick = () => {
-    setOpen(true);
-  };
-  const alertClose = (event, reason) => {
-    if (reason === "clickaway") {
-      return;
-    }
-    setOpen(false);
-  };
 
   return (
     <>
@@ -162,9 +151,13 @@ export default function ProductSection(props) {
                 {products.price}$
               </Typography>
 
-              <RemoveIcon onClick={() => handleQuantity("dec")} />
+              <RemoveIcon
+                onClick={() =>
+                  setQuantity((prev) => (prev === 1 ? 1 : prev - 1))
+                }
+              />
               <div>{quantity}</div>
-              <AddIcon onClick={() => handleQuantity("inc")} />
+              <AddIcon onClick={() => setQuantity((prev) => prev + 1)} />
               <div style={{ display: "flex", alignproductss: "center" }}>
                 <div>Size giày:</div>
                 <select onChange={(e) => setSize(e.target.value)}>
@@ -189,7 +182,7 @@ export default function ProductSection(props) {
                 <Button
                   sx={theme.bread}
                   onClick={() => {
-                    handleClick()
+                    handleClick();
                   }}
                 >
                   <AddShoppingCartIcon sx={theme.AddShoppingCartIcon} />
@@ -203,7 +196,7 @@ export default function ProductSection(props) {
                 >
                   <Alert
                     onClose={alertClose}
-                    severity="error"
+                    severity="success"
                     sx={{ width: "100%" }}
                   >
                     Thêm vào giỏ hàng thành công
