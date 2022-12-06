@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { styled } from "@mui/material/styles";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell, { tableCellClasses } from "@mui/material/TableCell";
@@ -15,7 +15,8 @@ import { url } from "../../stripeAPI";
 import axios from "axios";
 import { AuthContext } from "../../context/AuthContext";
 import "./Grid.scss";
-
+import { FaStripe } from "react-icons/fa";
+import LocalAtmIcon from '@mui/icons-material/LocalAtm';
 const StyledTableCell = styled(
   TableCell,
   Paper
@@ -39,19 +40,19 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 export default function CheckOutGrid(props) {
   const carts = !localStorage.lstOrFd ? "" : JSON.parse(localStorage.lstOrFd);
-
   const { user } = useContext(AuthContext);
+  const navigate = useNavigate();
   function listCart() {
     return carts.cart.products.map((item, i) => {
       return (
         <React.Fragment key={i}>
           <StyledTableRow>
             <StyledTableCell component="th">
-              <div style={{ display: "flex" }}>
+              <div style={{ display: "flex"} }>
                 <img src={item.img} style={{ width: "100px" }} alt="" />
-                <div>
-                  <p>{item.name}</p>
-                  <p>{item.size}</p>
+                <div style={{marginTop:"20px"}}>
+                  <p style={{fontWeight:"bold"}}>{item.name}</p>
+                  <p style={{fontWeight:"bold"}}>Size: {item.size}</p>
                 </div>
               </div>
             </StyledTableCell>
@@ -78,33 +79,13 @@ export default function CheckOutGrid(props) {
 
         <StyledTableRow>
           <StyledTableCell component="th" scope="row">
-            Phí ship:{" "}
-            {/* {shippingPrice.toLocaleString("it-IT", {
-                style: "currency",
-                currency: "VND",
-              })} */}
-          </StyledTableCell>
-        </StyledTableRow>
-
-        <StyledTableRow>
-          <StyledTableCell component="th" scope="row">
-            Tạm tính:{" "}
-            {/* {totalPrice.toLocaleString("it-IT", {
-                style: "currency",
-                currency: "VND",
-              })} */}
-          </StyledTableCell>
-        </StyledTableRow>
-
-        <StyledTableRow>
-          <StyledTableCell component="th" scope="row">
             Tổng cộng: {carts.cart.total}$
           </StyledTableCell>
         </StyledTableRow>
       </React.Fragment>
     );
   }
-  const handleCheckout = () => {
+  const handleStripe = () => {
     axios
       .post(`${url}/stripe/create-checkout-session`, {
         carts,
@@ -117,6 +98,11 @@ export default function CheckOutGrid(props) {
       })
       .catch((err) => console.log(err.message));
   };
+
+  const handleMoney = () => {
+    navigate("/order")
+  }
+
   return (
     <>
       <Container sx={{ mt: 5 }}>
@@ -158,9 +144,25 @@ export default function CheckOutGrid(props) {
                   variant="contained"
                   square="true"
                   sx={{ width: "100%", borderRadius: "0px" }}
-                  onClick={() => handleCheckout()}
+                  onClick={() => handleStripe()}
                 >
-                  THANH TOÁN
+                  <FaStripe style={{fontSize:"30px", marginRight:"10px"}}/>
+                  THANH TOÁN BẰNG STRIPE
+                </Button>
+
+
+                <Button
+                  variant="contained"
+                  sx={{
+                    width: "100%",
+                    marginTop: "10px",
+                    borderRadius: "0px",
+                  }}
+                  onClick={()=>handleMoney()}
+                >
+                 
+                  <LocalAtmIcon style={{marginRight:"10px"}}/>
+                    THANH TOÁN BẰNG TIỀN MẶT
                 </Button>
 
                 <Button
