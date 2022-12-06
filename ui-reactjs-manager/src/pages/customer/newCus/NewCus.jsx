@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import Sidebar from "../../../components/sidebar/Sidebar";
 import Navbar from "../../../components/navbar/Navbar";
 import Box from "@mui/material/Box";
@@ -12,9 +12,17 @@ import IconButton from "@mui/material/IconButton";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import InputAdornment from "@mui/material/InputAdornment";
-
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import "./New.scss";
 export default function New({ title }) {
+  const username = useRef();
+  const address = useRef();
+  const phone = useRef();
+  const email = useRef();
+  const password = useRef();
+  const confirmPassword = useRef();
+  const navigate = useNavigate();
   const [values, setValues] = useState({ password: "", showPassword: false });
   const handleChange = (prop) => (event) => {
     setValues({ ...values, [prop]: event.target.value });
@@ -28,6 +36,29 @@ export default function New({ title }) {
   };
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
+  };
+  const handleClick = async (e) => {
+    e.preventDefault();
+    if (confirmPassword.current.value !== password.current.value) {
+      confirmPassword.current.setCustomValidity("Mật khẩu không khớp");
+    } else {
+      const user = {
+        username: username.current.value,
+        email: email.current.value,
+        password: password.current.value,
+        address: address.current.value,
+        phone: phone.current.value,
+      };
+      try {
+        await axios.post(
+          "https://huflit-sneaker-api.up.railway.app/api/auth/register",
+          user
+        );
+        navigate("/login");
+      } catch (err) {
+        console.log(err);
+      }
+    }
   };
   return (
     <div className="new">
@@ -45,6 +76,7 @@ export default function New({ title }) {
                 "& .MuiTextField-root": { m: 1, width: "50ch" },
               }}
               autoComplete="off"
+              onSubmit={handleClick}
             >
               <div>
                 <div>
@@ -53,24 +85,29 @@ export default function New({ title }) {
                   </Typography>
 
                   <TextField
-                    id="outlined-basic"
+                    required
+                    id="outlined-username"
                     label="Tên khách hàng"
-                    variant="outlined"
+                    inputRef={username}
                   />
                   <TextField
-                    id="outlined-basic"
+                    required
+                    id="outlined-phone"
                     label="Số điện thoại"
-                    variant="outlined"
+                    inputRef={phone}
                   />
                   <TextField
-                    id="outlined-basic"
+                    required
+                    id="outlined-address"
                     label="Địa chỉ"
-                    variant="outlined"
+                    inputRef={address}
                   />
+
                   <TextField
-                    id="outlined-basic"
+                    required
+                    id="outlined-email"
                     label="Email"
-                    variant="outlined"
+                    inputRef={email}
                   />
                 </div>
                 <div>
@@ -103,6 +140,7 @@ export default function New({ title }) {
                       type={values.showPassword ? "text" : "password"}
                       value={values.password}
                       onChange={handleChange("password")}
+                      inputRef={password}
                       endAdornment={
                         <InputAdornment position="end">
                           <IconButton
@@ -130,6 +168,7 @@ export default function New({ title }) {
                       id="outlined-adornment-password"
                       type={values.showPassword ? "text" : "password"}
                       value={values.password}
+                      inputRef={confirmPassword}
                       onChange={handleChange("password")}
                       endAdornment={
                         <InputAdornment position="end">
@@ -152,7 +191,7 @@ export default function New({ title }) {
                   </FormControl>
                 </div>
               </div>
-              <Button variant="contained" color="success">
+              <Button variant="contained" color="success" type="submit">
                 Đồng ý
               </Button>
               <Button variant="contained">Đặt lại</Button>

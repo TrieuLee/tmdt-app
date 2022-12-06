@@ -3,7 +3,8 @@ const jwt = require("jsonwebtoken");
 var dataToken = {};
 // token check thông tin người dùng
 const verifyToken = (req, res, next) => {
-  const token = req.body.header;
+  const token = req.body.header ? req.body.header : req.params.header;
+  console.log(req.params.header);
   if (token) {
     jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
       if (err) {
@@ -18,7 +19,8 @@ const verifyToken = (req, res, next) => {
 };
 // token cho admin và nhân viên chỉnh thông tin cá nhân
 const verifyTokenAndAuthoriation = (req, res, next) => {
-  if (dataToken.id === req.params.id || dataToken.role === 1) next();
+  console.log(dataToken.id, req.params.id);
+  if (dataToken.id === req.params.id || dataToken.role !== 3) next();
   else return res.status(401).json("You are not allow to do this action!");
 };
 

@@ -29,18 +29,13 @@ class UserCURD {
     // }
   }
   async delete(req, res) {
-    if (req.user.id === req.params.id || req.user.role ===1) {
-      try {
-        await User.findByIdAndDelete(req.params.id);
-        res.status(200).json("Bạn đã xóa tài khoản thành công");
-      } catch (err) {
-        return res.status(500).json(500);
-      }
-    } else {
-      return res.status(403).json("bạn chỉ có thể xóa tài khoản của bạn");
+    try {
+      await User.findByIdAndDelete(req.params.id);
+      res.status(200).json("Bạn đã xóa tài khoản thành công");
+    } catch (err) {
+      return res.status(500).json(500);
     }
   }
-
 }
 
 module.exports = new UserCURD();

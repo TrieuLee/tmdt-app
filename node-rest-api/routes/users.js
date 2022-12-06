@@ -12,7 +12,7 @@ router.put(
   userController.update
 );
 router.delete(
-  "/:id",
+  "/:id/:header",
   verifyToken,
   verifyTokenAndAuthoriation,
   userController.delete

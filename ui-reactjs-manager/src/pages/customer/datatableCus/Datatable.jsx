@@ -2,25 +2,27 @@ import React, { useState, useContext, useEffect } from "react";
 import "./Datatable.scss";
 import { DataGrid } from "@mui/x-data-grid";
 // import { userRows } from "../../customer/datatableCus";
-import { Link ,useLocation} from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import useFetch from "../../../components/hooks/useFetch";
 import domain from "../../../utils/domain";
 import axios from "axios";
 
 export default function Datatable() {
-  const [list,setList] = useState("");
+  const [list, setList] = useState("");
   const { data, loading, error } = useFetch(`${domain}/api/auth`);
+  const customerList = data.filter((item) => item.role === 3);
   useEffect(() => {
-    setList(data);
+    setList(customerList);
   }, [data]);
+  console.log(list);
 
-  console.log(data);
-  
   const handleDelete = async (id) => {
     const answer = window.confirm("Bạn có chắc chắn xóa người dùng này?");
     if (answer) {
       try {
-        await axios.delete(`${domain}/api/users/${id}`);
+        const header = JSON.parse(localStorage.getItem("user")).accessToken;
+        console.log(header, id);
+        await axios.delete(`${domain}/api/users/${id}/${header}`);
         setList(list.filter((item) => item._id !== id));
       } catch (err) {
         console.log(err);
@@ -122,7 +124,7 @@ export default function Datatable() {
       </div>
       <DataGrid
         className="datagrid"
-        rows={data}
+        rows={list}
         columns={userColumns.concat(actionColumn)}
         pageSize={9}
         rowsPerPageOptions={[9]}
