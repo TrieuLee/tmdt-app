@@ -14,7 +14,7 @@ const OrderSchema = new mongoose.Schema(
     subtotal: { type: Number, required: true },
     total: { type: Number, required: true },
     shipping: { type: Object, required: true },
-    delivery_status: { type: String, default: "pending" },
+    delivery_status: { type: String, default: "đã nhận đơn hàng" },
     payment_status: { type: String, required: true },
   },
   { timestamps: true }

@@ -23,11 +23,38 @@ class AuthCRUD {
         password: hashedPassword,
         phone: req.body.phone,
         address: req.body.address,
-        role: req.body.role,
+        role: 3,
       });
       // save user and respond
       const user = await newUser.save();
       res.status(200).json(user);
+    } catch (err) {
+      res.status(500).json(err);
+      console.log(err);
+    }
+  }
+
+  async registerManager(req, res) {
+    try {
+      // generate the password
+      const salt = await bcrypt.genSalt(10);
+      const hashedPassword = await bcrypt.hash(req.body.password, salt);
+      if (!req.params.id) return res.status(500).json(err);
+      const admin = await User.findById(req.params.id);
+      if (admin.role === 1) {
+        const newUser = new User({
+          username: req.body.username,
+          email: req.body.email,
+          password: hashedPassword,
+          phone: req.body.phone,
+          address: req.body.address,
+          role: 2,
+        });
+        // save user and respond
+        const user = await newUser.save();
+        res.status(200).json(user);
+      } else res.status(500).json(err);
+      // create new user
     } catch (err) {
       res.status(500).json(err);
       console.log(err);
@@ -39,6 +66,38 @@ class AuthCRUD {
       const user = await User.findOne({ email: req.body.email });
       if (!user) {
         return res.status(404).json("Tài khoản hoặc mật khẩu sai!");
+      }
+
+      const validPassword = await bcrypt.compare(
+        req.body.password,
+        user.password
+      );
+      if (!validPassword) {
+        return res.status(400).json("Tài khoản hoặc mật khẩu sai!");
+      }
+      const accessToken = jwt.sign(
+        {
+          id: user._id,
+          role: user.role,
+        },
+        process.env.JWT_SECRET,
+        { expiresIn: "3d" }
+      );
+
+      res.status(200).json({ user, accessToken });
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  }
+  async loginManager(req, res) {
+    try {
+      const user = await User.findOne({ email: req.body.email });
+      if (!user) {
+        return res.status(404).json("Tài khoản hoặc mật khẩu sai!");
+      }
+
+      if (user.role === 3) {
+        return res.status(404).json("Trang web chỉ dành cho Nhân viên");
       }
 
       const validPassword = await bcrypt.compare(
