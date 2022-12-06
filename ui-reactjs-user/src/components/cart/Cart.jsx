@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 
 import { useSelector } from "react-redux";
@@ -20,9 +20,12 @@ import Button from "@mui/material/Button";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
 import DeleteIcon from "@mui/icons-material/Delete";
+import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 
 export default function Cart(props) {
-  const { visible, onRequestClose } = props;
+  const { isOpen, onRequestClose } = props;
+  const { user } = useContext(AuthContext);
+  const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
   // console.log(cart);
   const getTotal = () => {
@@ -34,9 +37,6 @@ export default function Cart(props) {
     });
     return { totalPrice, totalQuantity };
   };
-  const { user } = useContext(AuthContext);
-  const dispatch = useDispatch();
-
   //   const itemsPrice = cart
   //     ? cart.reduce((a, c) => a + c.price * c.quantity, 0)
   //     : 0;
@@ -56,7 +56,7 @@ export default function Cart(props) {
   return (
     <SlidingPane
       className="some-custom-class"
-      isOpen={visible}
+      isOpen={isOpen}
       title="Giỏ hàng của tôi"
       width="40%"
       onRequestClose={onRequestClose}
@@ -76,7 +76,7 @@ export default function Cart(props) {
               alt=""
             />
           </Grid>
-          <Grid item xs={6} sx={{ display: "flex", alignItems: "center" }}>
+          <Grid item xs={4} sx={{ display: "flex", alignItems: "center" }}>
             <ul
               style={{
                 listStyle: "none",
@@ -88,13 +88,13 @@ export default function Cart(props) {
                 <b>{item.name}</b>
               </li>
               <li style={{ marginTop: "8px" }}>
-                <b>{item.price}$</b>
+                <b>${item.price}</b>
               </li>
               <li style={{ marginTop: "8px" }}>
                 <b>Size:</b> {item.size}
               </li>
               <li style={{ marginTop: "8px" }}>
-                <b>Số lượng:</b> {item.quantity} x {item.price}$
+                <b>Số lượng:</b> {item.quantity} x ${item.price}
               </li>
             </ul>
           </Grid>
@@ -106,6 +106,14 @@ export default function Cart(props) {
             <IconButton onClick={() => dispatch(decrementQuantity(item._id))}>
               <RemoveCircleIcon />
             </IconButton>
+          </Grid>
+
+          <Grid
+            item
+            xs={2}
+            sx={{ display: "flex", alignItems: "center", color: "red" }}
+          >
+            <DeleteIcon onClick={() => dispatch(removeProduct(item._id))} />
           </Grid>
         </Grid>
       ))}
@@ -120,7 +128,7 @@ export default function Cart(props) {
               marginTop: "0",
             }}
           >
-            Tạm tính: {getTotal().totalPrice}$
+            Tạm tính: ${getTotal().totalPrice}
           </p>
           <p
             style={{
@@ -134,7 +142,7 @@ export default function Cart(props) {
             className="reset"
             onClick={() => dispatch(resetCart())}
           >
-            <DeleteIcon />
+            <DeleteForeverIcon />
             Xoá tất cả sản phẩm
           </p>
 
