@@ -16,7 +16,7 @@ import axios from "axios";
 import { AuthContext } from "../../context/AuthContext";
 import "./Grid.scss";
 import { FaStripe } from "react-icons/fa";
-import LocalAtmIcon from '@mui/icons-material/LocalAtm';
+import LocalAtmIcon from "@mui/icons-material/LocalAtm";
 const StyledTableCell = styled(
   TableCell,
   Paper
@@ -40,30 +40,40 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 export default function CheckOutGrid(props) {
   const carts = !localStorage.lstOrFd ? "" : JSON.parse(localStorage.lstOrFd);
+  console.log(carts.total);
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
   function listCart() {
     return carts.cart.products.map((item, i) => {
       return (
         <React.Fragment key={i}>
-          <StyledTableRow>
+          <TableRow>
             <StyledTableCell component="th">
-              <div style={{ display: "flex"} }>
-                <img src={item.img} style={{ width: "100px" }} alt="" />
-                <div style={{marginTop:"20px"}}>
-                  <p style={{fontWeight:"bold"}}>{item.name}</p>
-                  <p style={{fontWeight:"bold"}}>Size: {item.size}</p>
+              <div style={{ display: "flex", alignItems: "center" }}>
+                <img
+                  src={item.img}
+                  style={{
+                    width: "100px",
+                    height: "100px",
+                    borderRadius: "50%",
+                    marginRight: "15px",
+                  }}
+                  alt=""
+                />
+                <div>
+                  <p style={{ fontWeight: "bold" }}>{item.name}</p>
+                  <p style={{ fontWeight: "bold" }}>Size: {item.size}</p>
                 </div>
               </div>
             </StyledTableCell>
 
             <StyledTableCell>
-              <p>{item.price}$</p>
+              <p>$ {item.price}</p>
             </StyledTableCell>
             <StyledTableCell>
               <p>{item.quantity}</p>
             </StyledTableCell>
-          </StyledTableRow>
+          </TableRow>
         </React.Fragment>
       );
     });
@@ -73,13 +83,13 @@ export default function CheckOutGrid(props) {
       <React.Fragment>
         <StyledTableRow>
           <StyledTableCell component="th" scope="row">
-            Tổng số lượng : {carts.cart.quantity}
+            Tổng số lượng : {carts.total.totalQuantity}
           </StyledTableCell>
         </StyledTableRow>
 
         <StyledTableRow>
           <StyledTableCell component="th" scope="row">
-            Tổng cộng: {carts.cart.total}$
+            Tổng cộng: $ {carts.total.totalPrice}
           </StyledTableCell>
         </StyledTableRow>
       </React.Fragment>
@@ -100,8 +110,8 @@ export default function CheckOutGrid(props) {
   };
 
   const handleMoney = () => {
-    navigate("/order")
-  }
+    navigate("/order");
+  };
 
   return (
     <>
@@ -146,10 +156,9 @@ export default function CheckOutGrid(props) {
                   sx={{ width: "100%", borderRadius: "0px" }}
                   onClick={() => handleStripe()}
                 >
-                  <FaStripe style={{fontSize:"30px", marginRight:"10px"}}/>
+                  <FaStripe style={{ fontSize: "30px", marginRight: "10px" }} />
                   THANH TOÁN BẰNG STRIPE
                 </Button>
-
 
                 <Button
                   variant="contained"
@@ -158,11 +167,10 @@ export default function CheckOutGrid(props) {
                     marginTop: "10px",
                     borderRadius: "0px",
                   }}
-                  onClick={()=>handleMoney()}
+                  onClick={() => handleMoney()}
                 >
-                 
-                  <LocalAtmIcon style={{marginRight:"10px"}}/>
-                    THANH TOÁN BẰNG TIỀN MẶT
+                  <LocalAtmIcon style={{ marginRight: "10px" }} />
+                  THANH TOÁN BẰNG TIỀN MẶT
                 </Button>
 
                 <Button

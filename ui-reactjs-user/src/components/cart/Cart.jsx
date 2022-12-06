@@ -24,7 +24,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 export default function Cart(props) {
   const { visible, onRequestClose } = props;
   const cart = useSelector((state) => state.cart);
-  console.log(cart);
+  // console.log(cart);
   const getTotal = () => {
     let totalQuantity = 0;
     let totalPrice = 0;
@@ -65,7 +65,16 @@ export default function Cart(props) {
       {cart.products.map((item, i) => (
         <Grid container key={i}>
           <Grid item xs={3}>
-            <img src={item.img} style={{ width: "100px" }} alt="" />
+            <img
+              src={item.img}
+              style={{
+                width: "120px",
+                height: "120px",
+                borderRadius: "50%",
+                marginTop: "15px",
+              }}
+              alt=""
+            />
           </Grid>
           <Grid item xs={6} sx={{ display: "flex", alignItems: "center" }}>
             <ul
