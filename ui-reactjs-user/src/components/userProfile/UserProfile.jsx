@@ -9,9 +9,9 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import { DataGrid } from "@mui/x-data-grid";
 import { AuthContext } from "../../context/AuthContext";
-import { Divider } from "@mui/material";
 import { styled } from "@mui/material/styles";
-const StyledDataGrid = styled(DataGrid)(({}) => ({
+import domain from "../../utils/domain"
+const StyledDataGrid = styled(DataGrid)(({theme}) => ({
   "& .MuiDataGrid-renderingZone": {
     maxHeight: "none !important",
   },
@@ -32,7 +32,7 @@ export default function UserProfile() {
     const getOrders = async () => {
       try {
         const res = await axios.get(
-          `http://localhost:5000/api/orders/find/${idUser}`
+          `${domain}/api/orders/find/${idUser}`
         );
         setOrders(res.data);
         // console.log(res.data);

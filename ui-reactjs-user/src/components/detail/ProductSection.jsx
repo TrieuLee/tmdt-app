@@ -12,12 +12,13 @@ import Breadcrumbs from "@mui/material/Breadcrumbs";
 import Stack from "@mui/material/Stack";
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import domain from "../../utils/domain"
 import HomeIcon from "@mui/icons-material/Home";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import { addProduct } from "../../context/CartReducer";
 import { useDispatch } from "react-redux";
+
 const theme = {
   spacing: {
     marginTop: "30px",
@@ -61,13 +62,19 @@ export default function ProductSection(props) {
   };
 
   const handleClick = () => {
-    dispatch(addProduct({ ...products, quantity, size }));
+    if(!size){
+      return window.alert("Vui lòng chọn size giày")
+    }
+    else{
+      dispatch(addProduct({ ...products, quantity, size }));
+
+    }
   };
   useEffect(() => {
     const getProducts = async () => {
       try {
         const res = await axios.get(
-          "https://huflit-sneaker-api.up.railway.app/api/products/find/" + idP
+          `${domain}/api/products/find/` + idP
         );
         setProducts(res.data);
       } catch (err) {}
@@ -182,18 +189,7 @@ export default function ProductSection(props) {
                 <Button
                   sx={theme.bread}
                   onClick={() => {
-                    if (products.size !== "") {
-                      // alert("Vui lòng chọn size giày")
-                      handleClick();
-                    } else {
-                      <Alert
-                        onClose={alertClose}
-                        severity="success"
-                        sx={{ width: "100%" }}
-                      >
-                        Thêm vào giỏ hàng thành công
-                      </Alert>;
-                    }
+                    handleClick()
                   }}
                 >
                   <AddShoppingCartIcon sx={theme.AddShoppingCartIcon} />

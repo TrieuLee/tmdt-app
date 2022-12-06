@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 
 import { useSelector } from "react-redux";
 import { AuthContext } from "../../context/AuthContext";
+import { useDispatch } from "react-redux";
+import { resetCart } from "../../context/CartReducer";
 
 import SlidingPane from "react-sliding-pane";
 import "react-sliding-pane/dist/react-sliding-pane.css";
@@ -12,11 +14,14 @@ import { IconButton } from "@mui/material";
 import Button from "@mui/material/Button";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
-
+import DeleteIcon from "@mui/icons-material/Delete";
 export default function Cart(props) {
   const { visible, onRequestClose } = props;
   const cart = useSelector((state) => state.cart);
   const { user } = useContext(AuthContext);
+  const dispatch = useDispatch();
+  const quantity = useSelector((state) => state.cart.quantity);
+  console.log(cart)
   //   const itemsPrice = cart
   //     ? cart.reduce((a, c) => a + c.price * c.quantity, 0)
   //     : 0;
@@ -42,7 +47,7 @@ export default function Cart(props) {
     >
       {cart.products && cart.products.length === 0 && <p>Giỏ hàng trống</p>}
       {cart.products.map((item, i) => (
-        <Grid container key={i}>
+        <Grid container key={i} >
           <Grid item xs={3}>
             <img src={item.img} style={{ width: "100px" }} alt="" />
           </Grid>
@@ -81,25 +86,34 @@ export default function Cart(props) {
       ))}
       {cart.products && cart.products.length !== 0 && (
         <>
-          <div style={{ marginTop: "70%" }}>
-            <p style={{ display: "flex", justifyContent: "end" }}>
+            <p
+              style={{
+                display: "flex",
+                justifyContent: "end",
+                color: "green",
+                fontWeight: "bold",
+                marginTop: "0",
+              }}
+            >
               Tạm tính: {cart.total}$
             </p>
-            {/* <p style={{ display: "flex", justifyContent: "end" }}>
-              Phí ship:{" "}
-              {shippingPrice.toLocaleString("it-IT", {
-                style: "currency",
-                currency: "VND",
-              })}
+            <p
+              style={{
+                display: "flex",
+                justifyContent: "end",
+                color: "red",
+                fontWeight: "bold",
+                cursor: "pointer",
+                alignItems:"center"
+              }}
+              className="reset"
+              onClick={() => dispatch(resetCart())}
+            >
+              <DeleteIcon />
+              Xoá tất cả sản phẩm
             </p>
-            <p style={{ display: "flex", justifyContent: "end" }}>
-              Tổng tiền:{" "}
-              {totalPrice.toLocaleString("it-IT", {
-                style: "currency",
-                currency: "VND",
-              })}
-            </p> */}
-          </div>
+
+         
           {user ? (
             <Link
               type="submit"

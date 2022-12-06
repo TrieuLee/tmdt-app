@@ -11,6 +11,7 @@ import { CardActionArea } from "@mui/material";
 import Breadcrumbs from "@mui/material/Breadcrumbs";
 import Stack from "@mui/material/Stack";
 import HomeIcon from "@mui/icons-material/Home";
+import domain from "../../utils/domain";
 import { Helmet } from "react-helmet-async";
 // import Records from "../../server.json";
 export default function ProductGrid() {
@@ -25,8 +26,8 @@ export default function ProductGrid() {
       try {
         const res = await axios.get(
           cate
-            ? `https://huflit-sneaker-api.up.railway.app/api/products?brand=${cate}`
-            : "https://huflit-sneaker-api.up.railway.app/api/products?"
+            ? `${domain}/api/products?brand=${cate}`
+            : `${domain}/api/products?`
         );
         setProducts(res.data);
       } catch (err) {}
@@ -90,7 +91,7 @@ export default function ProductGrid() {
                         {record.price}$
                       </Typography>
                       <Typography variant="body2" color="text.secondary">
-                        {record.brand.name}
+                        {record.brand}
                       </Typography>
                     </CardContent>
                   </CardActionArea>
