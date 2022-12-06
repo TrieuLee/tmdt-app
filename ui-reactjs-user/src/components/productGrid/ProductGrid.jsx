@@ -24,10 +24,14 @@ export default function ProductGrid() {
   useEffect(() => {
     const getProducts = async () => {
       try {
+        const dataSend = {
+          head: JSON.parse(localStorage.getItem("user")).accessToken,
+        };
         const res = await axios.get(
           cate
             ? `${domain}/api/products?brand=${cate}`
-            : `${domain}/api/products?`
+            : `${domain}/api/products?`,
+          dataSend
         );
         setProducts(res.data);
       } catch (err) {}

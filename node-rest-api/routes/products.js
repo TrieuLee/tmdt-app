@@ -13,12 +13,8 @@ router.delete(
   verifyTokenAndUpdate,
   productController.delete
 );
-router.get("/", verifyToken, productController.get);
-router.get(
-  "/find/:id",
-  verifyToken,
-  productController.getProduct
-);
+router.get("/", productController.get);
+router.get("/find/:id", productController.getProduct);
 // router.get("/", productController.get);
 // router.post("/create", verifyTokenAndAdmin, productController.create);
 module.exports = router;

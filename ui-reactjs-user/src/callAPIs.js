@@ -1,5 +1,5 @@
 import axios from "axios";
-import domain from "../../ui-reactjs-manager/src/utils/domain";
+import domain from "././utils/domain";
 export const loginCall = async (userCredentials, dispatch) => {
   dispatch({ type: "LOGIN_START" });
   try {
