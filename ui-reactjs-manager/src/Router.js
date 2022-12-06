@@ -33,28 +33,49 @@ const Router = () => {
 
           {/* Khách hàng */}
           <Route path="users">
-            <Route index element={<UserList />} />
-            <Route path=":userId" element={<UserInfo />} />
-            <Route path="new" element={<NewUser title="Thêm khách hàng" />} />
+            <Route index element={user ? <UserList /> : <Login />} />
+            <Route path=":userId" element={user ? <UserInfo /> : <Login />} />
+            <Route
+              path="new"
+              element={user ? <NewUser title="Thêm khách hàng" /> : <Login />}
+            />
             <Route
               path="edit"
-              element={<EditUser title="Chỉnh sửa thông tin khách hàng" />}
+              element={
+                user ? (
+                  <EditUser title="Chỉnh sửa thông tin khách hàng" />
+                ) : (
+                  <Login />
+                )
+              }
             />
           </Route>
           {/* Sản phẩm */}
           <Route path="products">
-            <Route index element={<ProductList />} />
-            <Route path=":productId" element={<ProductInfo />} />
-            <Route path="new" element={<NewProduct title="Thêm sản phẩm" />} />
+            <Route index element={user ? <ProductList /> : <Login />} />
+            <Route
+              path=":productId"
+              element={user ? <ProductInfo /> : <Login />}
+            />
+            <Route
+              path="new"
+              element={user ? <NewProduct title="Thêm sản phẩm" /> : <Login />}
+            />
             <Route
               path="edit"
-              element={<EditProduct title="Chỉnh sửa thông tin sản phẩm" />}
+              element={
+                user ? (
+                  <EditProduct title="Chỉnh sửa thông tin sản phẩm" />
+                ) : (
+                  <Login />
+                )
+              }
             />
           </Route>
         </Route>
 
         <Route path="orders">
-          <Route index element={<OrderList />} />
+          <Route index element={user ? <OrderList /> : <Login />} />
         </Route>
       </Routes>
     </>
