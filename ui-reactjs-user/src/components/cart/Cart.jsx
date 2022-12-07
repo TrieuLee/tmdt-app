@@ -27,6 +27,8 @@ export default function Cart(props) {
   const { user } = useContext(AuthContext);
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
+  const PF = process.env.REACT_APP_PUBLIC_FOLDER;
+
   // console.log(cart);
   const getTotal = () => {
     let totalQuantity = 0;
@@ -64,7 +66,13 @@ export default function Cart(props) {
       width="40%"
       onRequestClose={onRequestClose}
     >
-      {cart.products && cart.products.length === 0 && <p>Giỏ hàng trống</p>}
+      {cart.products && cart.products.length === 0 && (
+        <>
+          <div>
+            <img src={PF + "img/empty_cart.png"} alt="" />
+          </div>
+        </>
+      )}
       {cart.products.map((item, i) => (
         <Grid container key={i}>
           <Grid item xs={3}>
