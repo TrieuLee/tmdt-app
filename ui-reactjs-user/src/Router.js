@@ -30,11 +30,10 @@ const Router = () => {
           <Route index element={<Product />} />
           <Route path=":itemID" element={<ProductDetail />} />
         </Route>
-
-        <Route path="checkout" element={<CheckOut />} />
-        <Route path="order" element={<FinishOrder />} />
         <Route path="profile" element={<Profile />} />
 
+        <Route path="checkout" element={<CheckOut />} />
+        <Route path="checkout-cash" element={<FinishOrder />} />
         <Route path="checkout-success" element={<Success />} />
       </Routes>
     </>
