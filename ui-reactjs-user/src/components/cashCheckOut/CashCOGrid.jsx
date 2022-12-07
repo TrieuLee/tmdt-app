@@ -130,7 +130,9 @@ export default function OrderGrid() {
       },
     };
     try {
-      await axios.post(`${domain}/api/orders`, order);
+      const header = JSON.parse(localStorage.getItem("user")).accessToken;
+
+      await axios.post(`${domain}/api/orders/${header}`, order);
       navigate("/checkout-success");
       console.log(order);
     } catch (err) {
