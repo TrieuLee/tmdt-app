@@ -15,7 +15,6 @@ import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import { styled } from "@mui/material/styles";
 import { Link } from "react-router-dom";
@@ -39,7 +38,7 @@ const StyledTableCell = styled(
 
 export default function OrderGrid() {
   const carts = !localStorage.lstOrFd ? "" : JSON.parse(localStorage.lstOrFd);
-  console.log(carts.cart.products);
+  console.log(carts.total);
   const x = carts.cart.products.map((item) => {
     const temp = {
       id: item._id,
@@ -93,6 +92,9 @@ export default function OrderGrid() {
                 <div>
                   <p style={{ fontWeight: "bold" }}>{item.name}</p>
                   <p style={{ fontWeight: "bold" }}>Size: {item.size}</p>
+                  <p style={{ fontWeight: "bold" }}>
+                    Số lượng: {item.quantity}
+                  </p>
                 </div>
               </div>
             </StyledTableCell>
@@ -100,13 +102,47 @@ export default function OrderGrid() {
             <StyledTableCell>
               <p>$ {item.price}</p>
             </StyledTableCell>
-            <StyledTableCell>
-              <p>{item.quantity}</p>
-            </StyledTableCell>
           </TableRow>
         </React.Fragment>
       );
     });
+  }
+  function priceCheckOut() {
+    return (
+      <>
+        <div style={{ paddingRight: "15px" }}>
+          <p
+            style={{
+              color: "red",
+              display: "flex",
+              justifyContent: "flex-end",
+              fontWeight: "bold",
+            }}
+          >
+            Đơn hàng trên $100 sẽ được miễn phí ship
+          </p>
+          <p style={{ display: "flex", justifyContent: "flex-end" }}>
+            Tổng số lượng: {carts.total.totalQuantity}
+          </p>
+          <p style={{ display: "flex", justifyContent: "flex-end" }}>
+            Tạm tính: $ {carts.total.subPrice}
+          </p>
+          <p style={{ display: "flex", justifyContent: "flex-end" }}>
+            Phí ship: $ {carts.total.shipPrice}
+          </p>
+          <p
+            style={{
+              display: "flex",
+              justifyContent: "flex-end",
+              fontWeight: "bold",
+              fontSize: "20px",
+            }}
+          >
+            Cần thanh toán: $ {carts.total.totalPrice}
+          </p>
+        </div>
+      </>
+    );
   }
   const nameCus = useRef();
   const address = useRef();
@@ -128,6 +164,7 @@ export default function OrderGrid() {
       shipping: {
         name: nameCus.current.value,
       },
+      payment_method: 0,
     };
     try {
       const header = JSON.parse(localStorage.getItem("user")).accessToken;
@@ -184,24 +221,18 @@ export default function OrderGrid() {
               label="Email"
               inputRef={email}
             />
-            <Button variant="contained" className="registerButon" type="submit">
-              Đăng nhập
-            </Button>
           </Box>
+          <Button variant="contained" className="registerButon" type="submit">
+            Hoàn tất đơn hàng
+          </Button>
         </Grid>
         <Grid item xs={6}>
           <TableContainer>
             <Paper variant="outlined" square>
-              <Table sx={{ minWidth: 700 }} aria-label="customized table">
-                <TableHead>
-                  <TableRow>
-                    <StyledTableCell>Tên sản phẩm</StyledTableCell>
-                    <StyledTableCell>Giá</StyledTableCell>
-                    <StyledTableCell>Số lượng</StyledTableCell>
-                  </TableRow>
-                </TableHead>
+              <Table>
                 <TableBody>{listCart()}</TableBody>
               </Table>
+              {priceCheckOut()}
             </Paper>
           </TableContainer>
         </Grid>

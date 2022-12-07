@@ -16,6 +16,7 @@ const OrderSchema = new mongoose.Schema(
     shipping: { type: Object, required: true },
     delivery_status: { type: String, default: "đã nhận đơn hàng" },
     payment_status: { type: String, required: true },
+    payment_method: { type: Number },
   },
   { timestamps: true }
 );

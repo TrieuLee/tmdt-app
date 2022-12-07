@@ -159,6 +159,7 @@ export default function UserProfile() {
                 columns={columns}
                 pageSize={5}
                 rowsPerPageOptions={[5]}
+                getRowHeight={() => "auto"}
                 getRowId={(rows) => rows._id}
               />
             </Box>

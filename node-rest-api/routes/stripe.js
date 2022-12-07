@@ -127,10 +127,12 @@ const createOrder = async (customer, data) => {
     subtotal: data.amount_subtotal,
     shipping: data.customer_details,
     payment_status: data.payment_status,
+    payment_method: 1,
   });
 
   try {
     const savedOrder = await newOrder.save();
+    console.log(savedOrder);
   } catch (err) {
     console.log(err);
   }

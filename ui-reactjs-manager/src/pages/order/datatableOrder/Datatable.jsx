@@ -8,6 +8,8 @@ import domain from "../../../utils/domain";
 
 export default function Datatable() {
   const { data, loading, error } = useFetch(`${domain}/api/orders`);
+  const [select, setSelection] = useState([]);
+
   const handleDelete = (id) => {
     // setData(data.filter((item) => item.id !== id));
   };
@@ -50,7 +52,9 @@ export default function Datatable() {
       field: "delivery_status",
       headerName: "Trạng thái",
       width: 100,
-      valueOptions: ["United Kingdom", "Spain", "Brazil"],
+      editable: true,
+
+      valueOptions: ["Đã nhận đơn hàng", "Đang giao", "Hoàn thành"],
       type: "singleSelect",
     },
   ];
@@ -87,6 +91,9 @@ export default function Datatable() {
         rowsPerPageOptions={[9]}
         checkboxSelection
         getRowId={(row) => row._id}
+        onSelectionChange={(newSelection) => {
+          setSelection(newSelection.rows);
+        }}
       />
     </div>
   );
