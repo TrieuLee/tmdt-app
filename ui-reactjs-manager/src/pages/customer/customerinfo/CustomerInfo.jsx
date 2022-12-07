@@ -27,6 +27,7 @@ export default function CustomerInfo() {
         const res = await axios.get(`${domain}/api/auth/find/` + idP);
         setUsers(res.data);
         // console.log(res.data);
+        localStorage.setItem("editUser", JSON.stringify(res.data));
       } catch (err) {}
     };
     getUsers();
@@ -35,8 +36,9 @@ export default function CustomerInfo() {
   useEffect(() => {
     const getOrders = async () => {
       try {
+        const header = JSON.parse(localStorage.getItem("user")).accessToken;
         const res = await axios.get(
-          `http://localhost:5000/api/orders/find/${idP}`
+          `http://localhost:5000/api/orders/find/${idP}/${header}`
         );
         setOrders(res.data);
         // console.log(res.data);

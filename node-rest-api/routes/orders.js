@@ -18,7 +18,7 @@ router.delete(
   verifyTokenAndUpdate,
   orderController.delete
 );
-router.get("/", orderController.get);
-router.get("/find/:id", orderController.getUserOrder);
+router.get("/:header", orderController.get);
+router.get("/find/:id/:header", orderController.getUserOrder);
 
 module.exports = router;

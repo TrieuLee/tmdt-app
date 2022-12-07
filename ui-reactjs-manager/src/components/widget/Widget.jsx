@@ -52,7 +52,8 @@ export default function Widget({ type }) {
         amount: cus.length,
         title: "SỐ LƯỢNG NGƯỜI DÙNG",
         isMoney: false,
-        link: "See all users",
+        link: "Xem chi tiết...",
+        url: "/users",
         icon: (
           <PersonOutlinedIcon
             className="icon"
@@ -69,7 +70,8 @@ export default function Widget({ type }) {
         amount: pro.length,
         title: "ĐƠN ĐẶT HÀNG",
         isMoney: false,
-        link: "View all orders",
+        link: "Xem chi tiết...",
+        url: "/orders",
         icon: (
           <ShoppingCartOutlinedIcon
             className="icon"
@@ -86,7 +88,8 @@ export default function Widget({ type }) {
         amount: revene,
         title: "DOANH THU SẢN PHẨM",
         isMoney: true,
-        link: "View net earnings",
+        link: "Xem chi tiết...",
+        url: "/orders",
         icon: (
           <MonetizationOnOutlinedIcon
             className="icon"
@@ -100,7 +103,8 @@ export default function Widget({ type }) {
         amount: filterpro.length,
         title: "ĐƠN HÀNG ĐANG THỰC HIỆN",
         isMoney: true,
-        link: "See details",
+        link: "Xem chi tiết...",
+        url: "/orders",
         icon: (
           <AccountBalanceWalletOutlinedIcon
             className="icon"
@@ -122,7 +126,9 @@ export default function Widget({ type }) {
         <span className="counter">
           {data.isMoney && "$"} {data.amount}
         </span>
-        <span className="link">{data.link}</span>
+        <a className="link" href={data.url} style={{ textDecoration: "none" }}>
+          {data.link}
+        </a>
       </div>
       <div className="right">
         <div className="percentage positive"></div>
