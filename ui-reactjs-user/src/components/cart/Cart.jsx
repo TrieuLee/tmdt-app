@@ -69,7 +69,21 @@ export default function Cart(props) {
       {cart.products && cart.products.length === 0 && (
         <>
           <div>
-            <img src={PF + "img/empty_cart.png"} alt="" />
+            <img
+              style={{ width: "100%", marginTop: "15%" }}
+              src={PF + "img/empty_cart.png"}
+              alt=""
+            />
+            <p
+              style={{
+                fontWeight: "bold",
+                display: "flex",
+                fontSize: "35px",
+                justifyContent: "center",
+              }}
+            >
+              Giỏ hàng trống{" "}
+            </p>
           </div>
         </>
       )}
