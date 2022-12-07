@@ -5,8 +5,13 @@ const {
 } = require("../middleware/verifyToken");
 const orderController = require("../controller/orderController");
 
-router.post("/", orderController.create);
-router.put("/:id", verifyToken, verifyTokenAndUpdate, orderController.update);
+router.post("/:header", verifyToken, orderController.create);
+router.put(
+  "/:id/:header",
+  verifyToken,
+  verifyTokenAndUpdate,
+  orderController.update
+);
 router.delete(
   "/:id/:header",
   verifyToken,
