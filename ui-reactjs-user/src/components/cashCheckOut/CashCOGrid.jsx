@@ -160,7 +160,7 @@ export default function OrderGrid() {
       products: x,
       subtotal: carts.total.totalPrice,
       total: carts.total.totalPrice,
-      payment_status: "đã trả tiền",
+      payment_status: "chưa thanh toán",
       shipping: {
         name: nameCus.current.value,
       },
@@ -221,10 +221,10 @@ export default function OrderGrid() {
               label="Email"
               inputRef={email}
             />
+            <Button variant="contained" className="registerButon" type="submit">
+              Hoàn tất đơn hàng
+            </Button>
           </Box>
-          <Button variant="contained" className="registerButon" type="submit">
-            Hoàn tất đơn hàng
-          </Button>
         </Grid>
         <Grid item xs={6}>
           <TableContainer>
