@@ -50,6 +50,8 @@ export default function Datatable() {
       field: "delivery_status",
       headerName: "Trạng thái",
       width: 100,
+      valueOptions: ["United Kingdom", "Spain", "Brazil"],
+      type: "singleSelect",
     },
   ];
   const actionColumn = [
