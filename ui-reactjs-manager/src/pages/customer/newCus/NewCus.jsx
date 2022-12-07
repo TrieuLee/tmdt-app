@@ -54,7 +54,7 @@ export default function New({ title }) {
           "https://huflit-sneaker-api.up.railway.app/api/auth/register",
           user
         );
-        navigate("/login");
+        navigate("/users");
       } catch (err) {
         console.log(err);
       }

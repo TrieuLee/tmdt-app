@@ -4,7 +4,6 @@ var dataToken = {};
 // token check thông tin người dùng
 const verifyToken = (req, res, next) => {
   const token = req.body.header ? req.body.header : req.params.header;
-  console.log(req.params.header);
   if (token) {
     jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
       if (err) {

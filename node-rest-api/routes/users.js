@@ -6,7 +6,7 @@ const {
 const userController = require("../controller/userController");
 
 router.put(
-  "/:id",
+  "/:id/:header",
   verifyToken,
   verifyTokenAndAuthoriation,
   userController.update

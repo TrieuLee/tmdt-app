@@ -1,20 +1,50 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./Widget.scss";
+import axios from "axios";
 import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
 import AccountBalanceWalletOutlinedIcon from "@mui/icons-material/AccountBalanceWalletOutlined";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import MonetizationOnOutlinedIcon from "@mui/icons-material/MonetizationOnOutlined";
+import domain from "../../utils/domain";
 export default function Widget({ type }) {
+  const [cus, setCus] = useState("");
+  const [pro, setPro] = useState("");
+  const [revene, setRevene] = useState({});
   let data;
 
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        const res = await axios.get(`${domain}/api/auth`);
+        console.log(res.data);
+        setCus(res.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    const getOrders = async () => {
+      try {
+        const header = JSON.parse(localStorage.getItem("user")).accessToken;
+        const res = await axios.get(`${domain}/api/orders/${header}`);
+        setPro(res.data);
+        console.log(res.data.length);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getData();
+    getOrders();
+  }, []);
   //temporary
+
   const amount = 100;
   const diff = 20;
 
   switch (type) {
     case "user":
       data = {
-        title: "SỐ LƯỢNG KHÁCH HÀNG",
+        amount: cus.length,
+        title: "SỐ LƯỢNG NGƯỜI DÙNG",
         isMoney: false,
         link: "See all users",
         icon: (
@@ -59,7 +89,7 @@ export default function Widget({ type }) {
       break;
     case "balance":
       data = {
-        title: "BALANCE",
+        title: "ĐƠN HÀNG ĐANG THỰC HIỆN",
         isMoney: true,
         link: "See details",
         icon: (

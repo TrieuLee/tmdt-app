@@ -4,6 +4,7 @@ const bcrypt = require("bcryptjs");
 class UserCURD {
   async update(req, res) {
     // if (req.user.id === req.params.id) {
+    
     if (req.body.password) {
       try {
         const salt = await bcrypt.genSalt(10);
