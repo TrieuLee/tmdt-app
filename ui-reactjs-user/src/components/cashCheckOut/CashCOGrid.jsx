@@ -51,7 +51,7 @@ export default function OrderGrid() {
     <Link
       key="2"
       style={{ color: "black", textDecoration: "none" }}
-      to={`/order`}
+      to={`/checkout-cash`}
     >
       <b>Thanh toán bằng tiền mặt</b>
     </Link>,
