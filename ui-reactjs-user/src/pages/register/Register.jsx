@@ -11,7 +11,7 @@ import InputAdornment from "@mui/material/InputAdornment";
 import InputLabel from "@mui/material/InputLabel";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
-
+import domain from "../../utils/domain";
 //import style
 import "./register.scss";
 
@@ -56,7 +56,7 @@ export default function Register() {
         phone: phone.current.value,
       };
       try {
-        await axios.post("https://huflit-sneaker-api.up.railway.app/api/auth/register", user);
+        await axios.post(`${domain}/api/auth/register`, user);
         navigate("/login");
       } catch (err) {
         console.log(err);

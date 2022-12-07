@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
@@ -12,11 +12,12 @@ import { IconButton } from "@mui/material";
 
 export default function NavDropDown() {
   const { user } = useContext(AuthContext);
-
+  const navigate = useNavigate();
   const handleLogOut = () => {
     const answer = window.confirm("Bạn có chắc chắn đăng xuất?");
     if (answer) {
       localStorage.clear("user", user);
+      navigate("/");
       window.location.reload(false);
     }
   };

@@ -109,7 +109,7 @@ export default function CheckOutGrid(props) {
   };
 
   const handleMoney = () => {
-    navigate("/order");
+    navigate("/checkout-cash");
   };
 
   return (

@@ -6,7 +6,7 @@ const {
 } = require("../middleware/verifyToken");
 const orderController = require("../controller/orderController");
 
-router.post("/", verifyToken, orderController.create);
+router.post("/", orderController.create);
 router.put("/:id", verifyToken, verifyTokenAndUpdate, orderController.update);
 router.delete(
   "/:id",
@@ -14,7 +14,7 @@ router.delete(
   verifyTokenAndUpdate,
   orderController.delete
 );
-router.get("/", verifyToken, verifyTokenAndUpdate, orderController.get);
-router.get("/find/:id", verifyToken, orderController.getUserOrder);
+router.get("/", orderController.get);
+router.get("/find/:id", orderController.getUserOrder);
 
 module.exports = router;
