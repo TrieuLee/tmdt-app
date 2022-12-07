@@ -18,7 +18,6 @@ const verifyToken = (req, res, next) => {
 };
 // token cho admin và nhân viên chỉnh thông tin cá nhân
 const verifyTokenAndAuthoriation = (req, res, next) => {
-  console.log(dataToken.id, req.params.id);
   if (dataToken.id === req.params.id || dataToken.role !== 3) next();
   else return res.status(401).json("You are not allow to do this action!");
 };

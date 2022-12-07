@@ -9,14 +9,14 @@ import domain from "../../utils/domain";
 export default function Widget({ type }) {
   const [cus, setCus] = useState("");
   const [pro, setPro] = useState("");
-  const [revene, setRevene] = useState({});
+  const [revene, setRevene] = useState(0);
+  const [filterpro, setFilterPro] = useState("");
   let data;
 
   useEffect(() => {
-    const getData = async () => {
+    const getCus = async () => {
       try {
         const res = await axios.get(`${domain}/api/auth`);
-        console.log(res.data);
         setCus(res.data);
       } catch (err) {
         console.log(err);
@@ -27,14 +27,20 @@ export default function Widget({ type }) {
         const header = JSON.parse(localStorage.getItem("user")).accessToken;
         const res = await axios.get(`${domain}/api/orders/${header}`);
         setPro(res.data);
-        console.log(res.data.length);
+        let initialValue = 0;
+        res.data.forEach((element) => (initialValue += element.total));
+        const temp = res.data.filter(
+          (x) => x.delivery_status === "đã nhận đơn hàng"
+        );
+        setFilterPro(temp);
+        setRevene(initialValue);
       } catch (err) {
         console.log(err);
       }
     };
-    getData();
+    getCus();
     getOrders();
-  }, []);
+  }, [revene]);
   //temporary
 
   const amount = 100;
@@ -60,6 +66,7 @@ export default function Widget({ type }) {
       break;
     case "order":
       data = {
+        amount: pro.length,
         title: "ĐƠN ĐẶT HÀNG",
         isMoney: false,
         link: "View all orders",
@@ -76,6 +83,7 @@ export default function Widget({ type }) {
       break;
     case "earning":
       data = {
+        amount: revene,
         title: "DOANH THU SẢN PHẨM",
         isMoney: true,
         link: "View net earnings",
@@ -89,6 +97,7 @@ export default function Widget({ type }) {
       break;
     case "balance":
       data = {
+        amount: filterpro.length,
         title: "ĐƠN HÀNG ĐANG THỰC HIỆN",
         isMoney: true,
         link: "See details",
@@ -111,7 +120,7 @@ export default function Widget({ type }) {
       <div className="left">
         <span className="title">{data.title}</span>
         <span className="counter">
-          {data.isMoney && "$"} {amount}
+          {data.isMoney && "$"} {data.amount}
         </span>
         <span className="link">{data.link}</span>
       </div>
