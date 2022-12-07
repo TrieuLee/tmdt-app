@@ -167,15 +167,19 @@ export default function OrderGrid() {
       payment_method: 0,
     };
     try {
-      const header = JSON.parse(localStorage.getItem("user")).accessToken;
+      const answer = window.confirm("Bạn có chắc chắn đặt mua sản phẩm?");
+      if (answer) {
+        const header = JSON.parse(localStorage.getItem("user")).accessToken;
 
-      await axios.post(`${domain}/api/orders/${header}`, order);
-      navigate("/checkout-success");
-      console.log(order);
+        await axios.post(`${domain}/api/orders/${header}`, order);
+        navigate("/checkout-success");
+        console.log(order);
+      }
     } catch (err) {
       console.log(err);
     }
   };
+
   return (
     <Container>
       <Stack spacing={2} sx={{ mt: 2 }}>
@@ -184,7 +188,7 @@ export default function OrderGrid() {
         </Breadcrumbs>
       </Stack>
       <Grid container spacing={2}>
-        <Grid item xs={6}>
+        <Grid item xs={6} sx={{ mt: 2 }}>
           <Box
             component="form"
             sx={{
