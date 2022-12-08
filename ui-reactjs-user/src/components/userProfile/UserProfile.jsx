@@ -1,12 +1,17 @@
 import React, { useContext, useEffect, useState } from "react";
 import "./UserProfile.scss";
 import axios from "axios";
+import moment from "moment";
+import vi from "moment/locale/vi";
+
 import Grid from "@mui/material/Grid";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
+import { FaCcStripe } from "react-icons/fa";
+import { FaRegMoneyBillAlt } from "react-icons/fa";
 import { DataGrid } from "@mui/x-data-grid";
 import { AuthContext } from "../../context/AuthContext";
 import { styled } from "@mui/material/styles";
@@ -32,33 +37,34 @@ export default function UserProfile() {
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 
   useEffect(() => {
+    const header = JSON.parse(localStorage.getItem("user")).accessToken;
     const getOrders = async () => {
       try {
-        const res = await axios.get(`${domain}/api/orders/find/${idUser}`);
+        const res = await axios.get(
+          `${domain}/api/orders/find/${idUser}/${header}`
+        );
         setOrders(res.data);
         // console.log(res.data);
       } catch (err) {}
     };
     getOrders();
   }, [idUser]);
-  const orderMap = orders.map((item) =>
-    item.products.map((product, i) => (
-      <ul key={i} style={{ listStyle: "none", padding: "" }}>
-        <li>{product.quantity}</li>
-      </ul>
-    ))
-  );
   console.log(orders);
+
+  const size1Map = orders.map((item) =>
+    item.products.map((product, i) => product?.quantity)
+  );
+
   const columns = [
     { field: "_id", headerName: "Mã đơn hàng", width: 120 },
     {
       field: "products",
       headerName: "Sản phẩm",
-      width: 200,
+      width: 150,
       renderCell: (params) => (
         <ul style={{ listStyle: "none", padding: "0px" }}>
           {params.value.map((role, index) => (
-            <li key={index}>{role.name}</li>
+            <li key={role.name}>{role.name}</li>
           ))}
         </ul>
       ),
@@ -66,34 +72,60 @@ export default function UserProfile() {
     },
 
     {
-      field: orderMap.toString(),
+      field: size1Map.toString(),
       headerName: "Số lượng",
       width: 90,
-      renderCell: () => (
-        <ul style={{ listStyle: "none", padding: "0px" }}>
-          {orderMap.map((item, i) => (
-            <li key={i}>{item}</li>
-          ))}
-        </ul>
-      ),
+      valueGetter: (params) => params.row.products.map((item) => item.quantity),
+      type: "string",
     },
     {
       field: "total",
       headerName: "Tổng tiền",
-      width: 150,
+      width: 100,
     },
 
     {
       field: "delivery_status",
-      headerName: "Thanh toán",
+      headerName: "Tình trạng ",
       width: 100,
-      editable: true,
+    },
+    {
+      field: "payment_method",
+      headerName: "Phương thức ",
+      width: 100,
+      renderCell: (params) => {
+        if (params.row.payment_method !== 0) {
+          return (
+            <FaCcStripe
+              style={{
+                fontSize: "35px",
+                color: "blue",
+              }}
+            />
+          );
+        } else {
+          return (
+            <FaRegMoneyBillAlt
+              style={{
+                fontSize: "35px",
+                color: "green",
+              }}
+            />
+          );
+        }
+      },
     },
     {
       field: "payment_status",
       headerName: "Thanh toán",
       width: 100,
-      editable: true,
+    },
+    {
+      field: "createdAt",
+      headerName: "Ngày mua",
+      width: 100,
+      valueGetter: (params) =>
+        moment(params.value).locale("vi", vi).format("L"),
     },
   ];
   const history = [
@@ -112,28 +144,60 @@ export default function UserProfile() {
       type: "string",
     },
     {
-      field: "price",
-      headerName: "Giá tiền",
-      width: 150,
-      editable: true,
-    },
-    {
-      field: "quantity",
+      field: size1Map.toString(),
       headerName: "Số lượng",
-      width: 120,
-      editable: true,
+      width: 90,
+      valueGetter: (params) => params.row.products.map((item) => item.quantity),
+      type: "string",
     },
     {
       field: "total",
       headerName: "Tổng tiền",
-      width: 160,
-      editable: true,
+      width: 100,
     },
+
     {
       field: "delivery_status",
+      headerName: "Tình trạng ",
+      width: 100,
+    },
+    {
+      field: "payment_method",
+      headerName: "Phương thức ",
+      width: 100,
+      renderCell: (params) => {
+        if (params.row.payment_method !== 0) {
+          return (
+            <FaCcStripe
+              style={{
+                fontSize: "35px",
+                color: "blue",
+              }}
+            />
+          );
+        } else {
+          return (
+            <FaRegMoneyBillAlt
+              style={{
+                fontSize: "35px",
+                color: "green",
+              }}
+            />
+          );
+        }
+      },
+    },
+    {
+      field: "payment_status",
       headerName: "Thanh toán",
-      width: 180,
-      editable: true,
+      width: 100,
+    },
+    {
+      field: "createdAt",
+      headerName: "Ngày mua",
+      width: 160,
+      valueGetter: (params) =>
+        moment(params.value).locale("vi", vi).format("dddd, LLL"),
     },
   ];
 
@@ -159,6 +223,7 @@ export default function UserProfile() {
                 columns={columns}
                 pageSize={5}
                 rowsPerPageOptions={[5]}
+                getRowHeight={() => "auto"}
                 getRowId={(rows) => rows._id}
               />
             </Box>
@@ -196,6 +261,7 @@ export default function UserProfile() {
             rows={orders}
             columns={history}
             pageSize={5}
+            getRowHeight={() => "auto"}
             rowsPerPageOptions={[5]}
             getRowId={(rows) => rows._id}
           />

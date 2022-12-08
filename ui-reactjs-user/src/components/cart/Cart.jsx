@@ -27,28 +27,33 @@ export default function Cart(props) {
   const { user } = useContext(AuthContext);
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
+  const PF = process.env.REACT_APP_PUBLIC_FOLDER;
+
   // console.log(cart);
   const getTotal = () => {
     let totalQuantity = 0;
+    let subPrice = 0;
+    let shipPrice = 0;
     let totalPrice = 0;
     cart.products.forEach((item) => {
       totalQuantity += item.quantity;
-      totalPrice += item.price * item.quantity;
+      subPrice += item.price * item.quantity;
+      shipPrice = subPrice < 100 ? subPrice + 20 : subPrice;
+      totalPrice += shipPrice;
     });
-    return { totalPrice, totalQuantity };
+    return { subPrice, totalPrice, totalQuantity, shipPrice };
   };
   //   const itemsPrice = cart
   //     ? cart.reduce((a, c) => a + c.price * c.quantity, 0)
   //     : 0;
-  //   const dis = itemsPrice * 0.01;
-  //   const shippingPrice = itemsPrice < 200000 ? 0 : dis;
-  //   const totalPrice = itemsPrice + shippingPrice;
+  // const dis = getTotal().totalPrice * 0.01;
+  // const shippingPrice = getTotal().totalPrice < 200000 ? 0 : dis;
+  // //   const totalPrice = itemsPrice + shippingPrice;
   function SetCartPayment() {
     const lstOrFd = {
       cart: cart,
       total: getTotal(),
       // itemsPrice: itemsPrice ? itemsPrice : "",
-      // shippingPrice: shippingPrice ? shippingPrice : "",
       // totalPrice: totalPrice ? totalPrice : "",
     };
     localStorage.setItem("lstOrFd", JSON.stringify(lstOrFd));
@@ -61,7 +66,27 @@ export default function Cart(props) {
       width="40%"
       onRequestClose={onRequestClose}
     >
-      {cart.products && cart.products.length === 0 && <p>Giỏ hàng trống</p>}
+      {cart.products && cart.products.length === 0 && (
+        <>
+          <div>
+            <img
+              style={{ width: "100%", marginTop: "15%" }}
+              src={PF + "img/empty_cart.png"}
+              alt=""
+            />
+            <p
+              style={{
+                fontWeight: "bold",
+                display: "flex",
+                fontSize: "35px",
+                justifyContent: "center",
+              }}
+            >
+              Giỏ hàng trống{" "}
+            </p>
+          </div>
+        </>
+      )}
       {cart.products.map((item, i) => (
         <Grid container key={i}>
           <Grid item xs={3}>
@@ -128,7 +153,7 @@ export default function Cart(props) {
               marginTop: "0",
             }}
           >
-            Tạm tính: ${getTotal().totalPrice}
+            Tạm tính: ${getTotal().subPrice}
           </p>
           <p
             style={{

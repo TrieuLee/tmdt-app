@@ -88,7 +88,7 @@ export default function CheckOutGrid(props) {
 
         <StyledTableRow>
           <StyledTableCell component="th" scope="row">
-            Tổng cộng: $ {carts.total.totalPrice}
+            Tổng cộng: $ {carts.total.subPrice}
           </StyledTableCell>
         </StyledTableRow>
       </React.Fragment>
