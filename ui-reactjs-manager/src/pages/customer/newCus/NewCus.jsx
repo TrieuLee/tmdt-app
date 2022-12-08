@@ -15,6 +15,7 @@ import InputAdornment from "@mui/material/InputAdornment";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./New.scss";
+import domain from "../../../utils/domain"
 export default function New({ title }) {
   const username = useRef();
   const address = useRef();
@@ -51,7 +52,7 @@ export default function New({ title }) {
       };
       try {
         await axios.post(
-          "https://huflit-sneaker-api.up.railway.app/api/auth/register",
+          `${domain}/api/auth/register`,
           user
         );
         navigate("/users");

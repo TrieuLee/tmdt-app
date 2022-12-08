@@ -1,17 +1,40 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Datatable.scss";
 import { DataGrid } from "@mui/x-data-grid";
 // import { userRows } from "../../order/datatableOrder";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import useFetch from "../../../components/hooks/useFetch";
 import domain from "../../../utils/domain";
+import { styled } from "@mui/material/styles";
 
+const StyledDataGrid = styled(DataGrid)(({ theme }) => ({
+  "& .MuiDataGrid-renderingZone": {
+    maxHeight: "none !important",
+  },
+  "& .MuiDataGrid-cell": {
+    lineHeight: "unset !important",
+    maxHeight: "none !important",
+    whiteSpace: "normal",
+    minWidth: "none !important",
+  },
+  "& .MuiDataGrid-row": {
+    maxHeight: "none !important",
+  },
+}));
 export default function Datatable() {
-  const { data, loading, error } = useFetch(`${domain}/api/orders`);
+  const header = JSON.parse(localStorage.getItem("user")).accessToken;
+  const location = useLocation();
+  const path = location.pathname.split("/")[1];
+
+  const [list, setList] = useState("");
+  const { data, loading, error } = useFetch(`${domain}/api/${path}/${header}`);
+  useEffect(() => {
+    setList(data);
+  }, [data]);
+
   const handleDelete = (id) => {
     // setData(data.filter((item) => item.id !== id));
   };
-  console.log(data);
   const userColumns = [
     {
       field: "_id",
@@ -22,9 +45,17 @@ export default function Datatable() {
       },
     },
     {
-      field: "product",
+      field: "products",
       headerName: "Sản phẩm",
-      width: 180,
+      width: 200,
+      renderCell: (params) => (
+        <ul style={{ listStyle: "none" }}>
+          {params.value.map((role, index) => (
+            <li key={index}>{role.name}</li>
+          ))}
+        </ul>
+      ),
+      type: "string",
     },
     {
       field: "shipping",
@@ -78,8 +109,8 @@ export default function Datatable() {
   ];
   return (
     <div className="datatable">
-      <div className="datatableTitle">Danh sách đơn hàng</div>
-      <DataGrid
+      <div className="datatableTitle">Danh mục đơn hàng</div>
+      <StyledDataGrid
         className="datagrid"
         rows={data}
         columns={userColumns.concat(actionColumn)}

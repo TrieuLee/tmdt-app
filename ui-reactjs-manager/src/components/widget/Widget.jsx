@@ -8,6 +8,7 @@ import MonetizationOnOutlinedIcon from "@mui/icons-material/MonetizationOnOutlin
 import domain from "../../utils/domain";
 export default function Widget({ type }) {
   const [cus, setCus] = useState("");
+  const [order, setOrder] = useState("");
   const [pro, setPro] = useState("");
   const [revene, setRevene] = useState(0);
   const [filterpro, setFilterPro] = useState("");
@@ -22,11 +23,19 @@ export default function Widget({ type }) {
         console.log(err);
       }
     };
+    const getPro = async () => {
+      try {
+        const res = await axios.get(`${domain}/api/products`);
+        setPro(res.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
     const getOrders = async () => {
       try {
         const header = JSON.parse(localStorage.getItem("user")).accessToken;
         const res = await axios.get(`${domain}/api/orders/${header}`);
-        setPro(res.data);
+        setOrder(res.data);
         let initialValue = 0;
         res.data.forEach((element) => (initialValue += element.total));
         const temp = res.data.filter(
@@ -40,6 +49,7 @@ export default function Widget({ type }) {
     };
     getCus();
     getOrders();
+    getPro();
   }, [revene]);
   //temporary
 
@@ -68,10 +78,10 @@ export default function Widget({ type }) {
     case "order":
       data = {
         amount: pro.length,
-        title: "ĐƠN ĐẶT HÀNG",
+        title: "SỐ LƯỢNG SẢN PHẨM",
         isMoney: false,
         link: "Xem chi tiết...",
-        url: "/orders",
+        url: "/products",
         icon: (
           <ShoppingCartOutlinedIcon
             className="icon"

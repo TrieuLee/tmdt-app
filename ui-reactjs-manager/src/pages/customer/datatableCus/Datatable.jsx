@@ -117,7 +117,7 @@ export default function Datatable() {
   return (
     <div className="datatable">
       <div className="datatableTitle">
-        Danh sách khách hàng
+        Danh mục khách hàng
         <Link to="/users/new" className="link">
           Thêm khách hàng
         </Link>

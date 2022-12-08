@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Sidebar from "../../../components/sidebar/Sidebar";
 import Navbar from "../../../components/navbar/Navbar";
 import "./Edit.scss";
@@ -13,17 +13,67 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
+import axios from "axios";
+import domain from "../../../utils/domain";
+import { useNavigate } from "react-router-dom";
 export default function EditProduct({ title }) {
   // Hãng
   const [brand, setBrand] = useState("");
+  const [size, setSize] = useState([]);
+  const [state, setState] = useState(true);
+  const [name, setName] = useState("");
+  const [price, setPrice] = useState("");
+  const navigate = useNavigate();
+
+  const setData = () => {
+    setBrand(JSON.parse(localStorage.getItem("editProduct")).brand[0]);
+
+    setState(JSON.parse(localStorage.getItem("editProduct")).state);
+    setName(JSON.parse(localStorage.getItem("editProduct")).name);
+    setPrice(JSON.parse(localStorage.getItem("editProduct")).price);
+  };
+  useEffect(() => {
+    if (localStorage.getItem("editUser")) {
+      setData();
+    }
+  }, []);
+
   const changeBrand = (event) => {
     setBrand(event.target.value);
   };
 
   // TÌnh trạng giày
-  const [state, setState] = useState("");
   const changeState = (event) => {
     setState(event.target.value);
+  };
+  const handleChange = (e) => {
+    const arr = size;
+    if (e.target.checked) {
+      arr.push(e.target.value);
+      setSize(arr);
+    } else {
+      const x = arr.length > 1 ? arr.filter((i) => i !== e.target.value) : [];
+      setSize(x);
+    }
+  };
+  const handleClick = async (e) => {
+    e.preventDefault();
+
+    const product = {
+      name: name ? name : undefined,
+      price: price ? price : undefined,
+      size: size ? size : [],
+      brand: brand ? brand : [],
+      state: state !== undefined ? state : true,
+    };
+    try {
+      const header = JSON.parse(localStorage.getItem("user")).accessToken;
+      const id = JSON.parse(localStorage.getItem("editProduct"))._id;
+      await axios.put(`${domain}/api/products/${id}/${header}`, product);
+      navigate("/products");
+    } catch (err) {
+      console.log(err);
+    }
   };
   return (
     <div className="edit">
@@ -41,6 +91,7 @@ export default function EditProduct({ title }) {
                 "& .MuiTextField-root": { m: 1, width: "50ch" },
               }}
               autoComplete="off"
+              onSubmit={handleClick}
             >
               <div>
                 <div>
@@ -52,6 +103,8 @@ export default function EditProduct({ title }) {
                     id="outlined-basic"
                     label="Tên sản phẩm"
                     variant="outlined"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
                   />
                   <FormControl sx={{ m: 1, width: "50ch" }}>
                     <InputLabel id="demo-simple-select-label">Hãng</InputLabel>
@@ -70,6 +123,8 @@ export default function EditProduct({ title }) {
                     id="outlined-basic"
                     label="Giá tiền"
                     variant="outlined"
+                    value={price}
+                    onChange={(e) => setPrice(e.target.value)}
                   />
                   <FormControl sx={{ m: 1, width: "50ch" }}>
                     <InputLabel id="demo-simple-select-label">
@@ -82,8 +137,8 @@ export default function EditProduct({ title }) {
                       label="Tình trạng"
                       onChange={changeState}
                     >
-                      <MenuItem value={"Còn hàng"}>Còn hàng</MenuItem>
-                      <MenuItem value={"Hết hàng"}>Hết hàng</MenuItem>
+                      <MenuItem value={true}>Còn hàng</MenuItem>
+                      <MenuItem value={false}>Hết hàng</MenuItem>
                     </Select>
                   </FormControl>
                 </div>
@@ -92,22 +147,29 @@ export default function EditProduct({ title }) {
                     <Typography variant="p" component="h2">
                       Size:
                     </Typography>
-                    <FormGroup sx={{ flexDirection: "row" }}>
+                    <FormGroup
+                      onChange={handleChange}
+                      sx={{ flexDirection: "row" }}
+                    >
                       <FormControlLabel
-                        control={<Checkbox defaultChecked />}
+                        control={<Checkbox />}
                         label="38"
+                        value={38}
                       />
                       <FormControlLabel
-                        control={<Checkbox defaultChecked />}
+                        control={<Checkbox />}
                         label="39"
+                        value={39}
                       />
                       <FormControlLabel
-                        control={<Checkbox defaultChecked />}
+                        control={<Checkbox />}
                         label="40"
+                        value={40}
                       />
                       <FormControlLabel
-                        control={<Checkbox defaultChecked />}
+                        control={<Checkbox />}
                         label="41"
+                        value={41}
                       />
                     </FormGroup>
                   </div>
@@ -120,7 +182,7 @@ export default function EditProduct({ title }) {
                   </Button>
                 </div>
               </div>
-              <Button variant="contained" color="success">
+              <Button variant="contained" color="success" type="submit">
                 Đồng ý
               </Button>
               <Button variant="contained">Đặt lại</Button>

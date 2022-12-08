@@ -16,7 +16,7 @@ export default function ProductInfo() {
       try {
         const res = await axios.get(`${domain}/api/products/find/` + idP);
         setProducts(res.data);
-        console.log(res.data);
+        localStorage.setItem("editProduct", JSON.stringify(res.data));
       } catch (err) {}
     };
     getProducts();

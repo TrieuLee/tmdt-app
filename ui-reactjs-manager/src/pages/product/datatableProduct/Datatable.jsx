@@ -5,6 +5,7 @@ import { Link, useLocation } from "react-router-dom";
 import useFetch from "../../../components/hooks/useFetch";
 import domain from "../../../utils/domain";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const currencyFormatter = new Intl.NumberFormat("en-US", {
   style: "currency",
@@ -18,6 +19,7 @@ const usdPrice = {
   cellClassName: "font-tabular-nums",
 };
 export default function Datatable() {
+  const navigate = useNavigate();
   const location = useLocation();
   const path = location.pathname.split("/")[1];
   const [list, setList] = useState("");
@@ -30,7 +32,8 @@ export default function Datatable() {
     const answer = window.confirm("Bạn có chắc chắn xóa sản phẩm?");
     if (answer) {
       try {
-        await axios.delete(`${domain}/api/${path}/${id}`);
+        const header = JSON.parse(localStorage.getItem("user")).accessToken;
+        await axios.delete(`${domain}/api/products/${id}/${header}`);
         setList(list.filter((item) => item._id !== id));
       } catch (err) {
         console.log(err);
@@ -41,8 +44,8 @@ export default function Datatable() {
   const userColumns = [
     { field: "_id", headerName: "ID", width: 70 },
     {
-      field: "product",
-      headerName: "Tên sản phẩm",
+      field: "products",
+      headerName: "Sản phẩm",
       width: 230,
       renderCell: (params) => {
         return (
@@ -118,7 +121,7 @@ export default function Datatable() {
   return (
     <div className="datatable">
       <div className="datatableTitle">
-        Danh sách sản phẩm
+        Danh mục sản phẩm
         <Link to="/products/new" className="link">
           Thêm sản phẩm
         </Link>
