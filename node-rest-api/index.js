@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const multer = require("multer");
 const loaders = require("./loaders");
+const path = require("path");
 // Routes
 const userRoute = require("./routes/users");
 const authRoute = require("./routes/auth");
@@ -17,6 +18,7 @@ const { PORT } = require("./config/index");
 (async () => {
   await loaders(app);
   // set up router
+  app.use(express.static(path.join(__dirname, "public/images")));
   app.use("/api/auth", authRoute);
   app.use("/api/users", userRoute);
   app.use("/api/products", productRoute);
