@@ -13,22 +13,6 @@ const stripe = require("./routes/stripe");
 
 // Routes
 const { PORT } = require("./config/index");
-// const storage = multer.diskStorage({
-//   destination: (req, file, cb) => {
-//     cb(null, "public/images");
-//   },
-//   filename: (req, file, cb) => {
-//     cb(null, file.originalname);
-//   },
-// });
-// const upload = multer({ storage });
-// app.post("/api/upload", upload.single("file"), (req, res) => {
-//   try {
-//     return res.status(200).json("successfull");
-//   } catch (err) {
-//     console.log(err);
-//   }
-// });
 
 (async () => {
   await loaders(app);
@@ -39,6 +23,23 @@ const { PORT } = require("./config/index");
   app.use("/api/orders", orderRoute);
   app.use("/api/carts", cartRoute);
   app.use("/api/stripe", stripe);
+
+  const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+      cb(null, "public/images");
+    },
+    filename: (req, file, cb) => {
+      cb(null, file.originalname);
+    },
+  });
+  const upload = multer({ storage });
+  app.post("/api/upload", upload.single("file"), (req, res) => {
+    try {
+      return res.status(200).json("successfull");
+    } catch (err) {
+      console.log(err);
+    }
+  });
   app.listen(PORT, () => {
     console.log(`Example app listening on port ${PORT}`);
   });
