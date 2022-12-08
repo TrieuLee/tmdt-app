@@ -6,7 +6,10 @@ import { Link, useLocation } from "react-router-dom";
 import useFetch from "../../../components/hooks/useFetch";
 import domain from "../../../utils/domain";
 import { styled } from "@mui/material/styles";
-
+import moment from "moment";
+import vi from "moment/locale/vi";
+import { FaCcStripe } from "react-icons/fa";
+import { FaRegMoneyBillAlt } from "react-icons/fa";
 const StyledDataGrid = styled(DataGrid)(({ theme }) => ({
   "& .MuiDataGrid-renderingZone": {
     maxHeight: "none !important",
@@ -35,6 +38,9 @@ export default function Datatable() {
   const handleDelete = (id) => {
     // setData(data.filter((item) => item.id !== id));
   };
+
+  const shipping = data.map((item) => item.shipping.name);
+  console.log(shipping);
   const userColumns = [
     {
       field: "_id",
@@ -58,14 +64,18 @@ export default function Datatable() {
       type: "string",
     },
     {
-      field: "shipping",
+      field: shipping.toString(),
       headerName: "Khách hàng",
-      width: 180,
+      width: 100,
+      valueGetter: (params) => params.row?.shipping?.name,
+      type: "string",
     },
     {
-      field: "date",
+      field: "createdAt",
       headerName: "Ngày mua",
-      width: 150,
+      width: 160,
+      valueGetter: (params) =>
+        moment(params.value).locale("vi", vi).format("dddd, LLL"),
     },
     {
       field: "total",
@@ -85,6 +95,33 @@ export default function Datatable() {
 
       valueOptions: ["Đã nhận đơn hàng", "Đang giao", "Hoàn thành"],
       type: "singleSelect",
+    },
+
+    {
+      field: "payment_method",
+      headerName: "Phương thức ",
+      width: 100,
+      renderCell: (params) => {
+        if (params.row.payment_method !== 0) {
+          return (
+            <FaCcStripe
+              style={{
+                fontSize: "35px",
+                color: "blue",
+              }}
+            />
+          );
+        } else {
+          return (
+            <FaRegMoneyBillAlt
+              style={{
+                fontSize: "35px",
+                color: "green",
+              }}
+            />
+          );
+        }
+      },
     },
   ];
   const actionColumn = [
@@ -120,9 +157,9 @@ export default function Datatable() {
         rowsPerPageOptions={[9]}
         checkboxSelection
         getRowId={(row) => row._id}
-        onSelectionChange={(newSelection) => {
-          setSelection(newSelection.rows);
-        }}
+        // onSelectionChange={(newSelection) => {
+        //   setSelection(newSelection.rows);
+        // }}
       />
     </div>
   );
