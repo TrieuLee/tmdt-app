@@ -17,6 +17,7 @@ import moment from "moment";
 import vi from "moment/locale/vi";
 import { FaCcStripe } from "react-icons/fa";
 import { FaRegMoneyBillAlt } from "react-icons/fa";
+
 export default function CustomerInfo() {
   // const { user } = useContext(AuthContext);
   const location = useLocation();
@@ -41,7 +42,7 @@ export default function CustomerInfo() {
       try {
         const header = JSON.parse(localStorage.getItem("user")).accessToken;
         const res = await axios.get(
-          `http://localhost:5000/api/orders/find/${idP}/${header}`
+          `${domain}/api/orders/find/${idP}/${header}`
         );
         setOrders(res.data);
         // console.log(res.data);
