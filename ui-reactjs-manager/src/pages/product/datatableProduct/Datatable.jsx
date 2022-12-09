@@ -52,8 +52,9 @@ export default function Datatable() {
           <div className="cellWithImg">
             <img
               className="cellImg"
-              src="http://localhost:5000/images/167058623543310.jpg"  
+              src={`${domain}/images/${params.row.img}`}
               alt=""
+              crossorigin="anonymous"
             />
             {params.row.name}
           </div>
