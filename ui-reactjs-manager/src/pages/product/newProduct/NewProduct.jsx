@@ -117,11 +117,11 @@ export default function New({ title }) {
                       label="Hãng"
                       onChange={changeBrand}
                     >
-                      <MenuItem value={"Air Force"}>Air Force</MenuItem>
-                      <MenuItem value={"Jordan"}>Jordan</MenuItem>
-                      <MenuItem value={"Blazer"}>Blazer</MenuItem>
-                      <MenuItem value={"Crater"}>Crater</MenuItem>
-                      <MenuItem value={"Hippie"}>Hippie</MenuItem>
+                      <MenuItem value={"airforce"}>Air Force</MenuItem>
+                      <MenuItem value={"jordan"}>Jordan</MenuItem>
+                      <MenuItem value={"blazer"}>Blazer</MenuItem>
+                      <MenuItem value={"crater"}>Crater</MenuItem>
+                      <MenuItem value={"hippie"}>Hippie</MenuItem>
                     </Select>
                   </FormControl>
                   <TextField

@@ -7,7 +7,7 @@ const stripe = require("stripe")(
 const { Order } = require("../models");
 const YOUR_DOMAIN = "http://localhost:3000";
 
-router.post("/create-checkout-session", async (req, res) => {
+router.post(" ", async (req, res) => {
   const cart = req.body.carts.cart.products;
   const x = cart.map((item) => {
     const temp = {
