@@ -187,6 +187,7 @@ export default function New({ title }) {
                       accept=".png,.jpeg,.jpg"
                       type="file"
                       id="file"
+                      hidden
                       onChange={(e) => {
                         setFile(e.target.files[0]);
                       }}

@@ -35,6 +35,7 @@ export default function Datatable() {
         const header = JSON.parse(localStorage.getItem("user")).accessToken;
         await axios.delete(`${domain}/api/products/${id}/${header}`);
         setList(list.filter((item) => item._id !== id));
+        navigate("/products")
       } catch (err) {
         console.log(err);
       }
