@@ -18,7 +18,7 @@ const { PORT } = require("./config/index");
 (async () => {
   await loaders(app);
   // set up router
-  app.use(express.static(path.join(__dirname, "public/images")));
+  app.use("/images", express.static(path.join(__dirname, "public/images")));
   app.use("/api/auth", authRoute);
   app.use("/api/users", userRoute);
   app.use("/api/products", productRoute);
@@ -31,15 +31,15 @@ const { PORT } = require("./config/index");
       cb(null, "public/images");
     },
     filename: (req, file, cb) => {
-      cb(null, file.originalname);
+      cb(null, req.body.name);
     },
   });
-  const upload = multer({ storage });
+  const upload = multer({ storage: storage });
   app.post("/api/upload", upload.single("file"), (req, res) => {
     try {
-      return res.status(200).json("successfull");
-    } catch (err) {
-      console.log(err);
+      return res.status(200).json("File uploded successfully");
+    } catch (error) {
+      console.error(error);
     }
   });
   app.listen(PORT, () => {

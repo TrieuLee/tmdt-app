@@ -46,14 +46,14 @@ export default function Datatable() {
     {
       field: "products",
       headerName: "Sản phẩm",
-      width: 230,
+      width: 530,
       renderCell: (params) => {
         return (
           <div className="cellWithImg">
             <img
               className="cellImg"
-              src={params.row.img || "https://i.ibb.co/MBtjqXQ/no-avatar.gif"}
-              alt="avatar"
+              src="http://localhost:5000/images/167058623543310.jpg"  
+              alt=""
             />
             {params.row.name}
           </div>

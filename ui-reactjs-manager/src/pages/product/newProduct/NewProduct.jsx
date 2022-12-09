@@ -22,6 +22,7 @@ export default function New({ title }) {
   const [brand, setBrand] = useState("");
   const [size, setSize] = useState([]);
   const [state, setState] = useState(true);
+  const [file, setFile] = useState(null);
   const name = useRef("");
   const price = useRef("");
   const navigate = useNavigate();
@@ -46,7 +47,7 @@ export default function New({ title }) {
   };
   const handleClick = async (e) => {
     e.preventDefault();
-
+    const header = JSON.parse(localStorage.getItem("user")).accessToken;
     const user = {
       name: name.current.value,
       price: price.current.value,
@@ -54,14 +55,28 @@ export default function New({ title }) {
       brand: brand ? brand : [],
       state: state ? state : true,
     };
+    if (file) {
+      const data = new FormData();
+      const fileName = Date.now() + file.name;
+      data.append("name", fileName);
+      data.append("file", file);
+      user.img = fileName;
+      try {
+        await axios.post(`${domain}/api/upload`, data);
+      } catch (err) {}
+    }
     try {
-      const header = JSON.parse(localStorage.getItem("user")).accessToken;
       await axios.post(`${domain}/api/products/${header}`, user);
       navigate("/products");
     } catch (err) {
       console.log(err);
     }
   };
+  // const onFileChange = (event) => {
+  //   // Update the state
+  //   setImage(event);
+  //   console.log(image);
+  // };
 
   return (
     <div className="new">
@@ -165,9 +180,17 @@ export default function New({ title }) {
                 </div>
 
                 <div>
-                  <Button variant="contained" component="label">
+                  <Button variant="contained" component="label" htmlFor="file">
                     Upload
-                    <input hidden accept="image/*" multiple type="file" />
+                    <input
+                      name="image"
+                      accept=".png,.jpeg,.jpg"
+                      type="file"
+                      id="file"
+                      onChange={(e) => {
+                        setFile(e.target.files[0]);
+                      }}
+                    />
                   </Button>
                 </div>
               </div>
@@ -175,6 +198,11 @@ export default function New({ title }) {
                 Đồng ý
               </Button>
               <Button variant="contained">Đặt lại</Button>
+              {/* <img
+                alt="not fount"
+                width={"250px"}
+                src={URL.createObjectURL(image)}
+              /> */}
             </Box>
           </div>
         </div>

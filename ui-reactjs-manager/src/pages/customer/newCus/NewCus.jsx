@@ -15,7 +15,7 @@ import InputAdornment from "@mui/material/InputAdornment";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./New.scss";
-import domain from "../../../utils/domain"
+import domain from "../../../utils/domain";
 export default function New({ title }) {
   const username = useRef();
   const address = useRef();
@@ -51,10 +51,7 @@ export default function New({ title }) {
         phone: phone.current.value,
       };
       try {
-        await axios.post(
-          `${domain}/api/auth/register`,
-          user
-        );
+        await axios.post(`${domain}/api/auth/register`, user);
         navigate("/users");
       } catch (err) {
         console.log(err);
@@ -195,6 +192,7 @@ export default function New({ title }) {
               <Button variant="contained" color="success" type="submit">
                 Đồng ý
               </Button>
+
               <Button variant="contained">Đặt lại</Button>
             </Box>
           </div>
