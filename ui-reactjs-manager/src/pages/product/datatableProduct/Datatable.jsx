@@ -42,11 +42,11 @@ export default function Datatable() {
   };
 
   const userColumns = [
-    { field: "_id", headerName: "ID", width: 70 },
+    { field: "_id", headerName: "ID", width: 230 },
     {
       field: "products",
       headerName: "Sản phẩm",
-      width: 530,
+      width: 200,
       renderCell: (params) => {
         return (
           <div className="cellWithImg">
@@ -64,14 +64,14 @@ export default function Datatable() {
     {
       field: "brand",
       headerName: "Hãng",
-      width: 180,
+      width: 80,
     },
 
     {
       field: "price",
       ...usdPrice,
       headerName: "Giá tiền",
-      width: 160,
+      width: 90,
     },
     {
       field: "size",
@@ -82,7 +82,7 @@ export default function Datatable() {
     {
       field: "state",
       headerName: "Tình trạng",
-      width: 160,
+      width: 130,
       renderCell: (params) => {
         if (params.row.state === true) {
           return (
@@ -98,7 +98,7 @@ export default function Datatable() {
     {
       field: "action",
       headerName: "Action",
-      width: 200,
+      width: 150,
       renderCell: (params) => {
         return (
           <div className="cellAction">
