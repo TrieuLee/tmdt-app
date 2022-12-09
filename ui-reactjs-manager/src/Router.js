@@ -9,6 +9,12 @@ import UserList from "./pages/customer/customerlist/CustomerList";
 import UserInfo from "./pages/customer/customerinfo/CustomerInfo";
 import NewUser from "./pages/customer/newCus/NewCus";
 import EditUser from "./pages/customer/editCus/EditCus";
+
+// Thông tin nhân viên
+import EmployeeList from "./pages/employee/employeelist/EmployeeList";
+// import UserInfo from "./pages/customer/customerinfo/CustomerInfo";
+// import NewUser from "./pages/customer/newCus/NewCus";
+// import EditUser from "./pages/customer/editCus/EditCus";
 // Thông tin sản phẩm
 import ProductList from "./pages/product/productlist/ProductList";
 import ProductInfo from "./pages/product/productinfo/ProductInfo";
@@ -17,6 +23,7 @@ import EditProduct from "./pages/product/editProduct/editProduct";
 
 // Thông tin đơn hàng
 import OrderList from "./pages/order/orderlist/OrderList";
+
 
 import Home from "./pages/home/Home";
 const Router = () => {
@@ -76,6 +83,26 @@ const Router = () => {
 
         <Route path="orders">
           <Route index element={user ? <OrderList /> : <Login />} />
+        </Route>
+
+        {/* Nhân viên */}
+        <Route path="employees">
+          <Route index element={user ? <EmployeeList /> : <Login />} />
+          <Route path=":employeeId" element={user ? <UserInfo /> : <Login />} />
+          <Route
+            path="new"
+            element={user ? <NewUser title="Thêm nhân viên" /> : <Login />}
+          />
+          <Route
+            path="edit"
+            element={
+              user ? (
+                <EditUser title="Chỉnh sửa thông tin nhân viên" />
+              ) : (
+                <Login />
+              )
+            }
+          />
         </Route>
       </Routes>
     </>

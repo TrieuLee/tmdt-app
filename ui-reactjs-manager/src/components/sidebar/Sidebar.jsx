@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useContext} from "react";
 import "./Sidebar.scss";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
@@ -7,10 +7,13 @@ import StoreIcon from "@mui/icons-material/Store";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import LeaderboardIcon from "@mui/icons-material/Leaderboard";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { FaStripe } from "react-icons/fa";
+import { AuthContext } from "../../context/AuthContext";
 export default function Sidebar() {
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
+   const { user } = useContext(AuthContext);
+
   return (
     <div className="sidebar">
       <div className="top">
@@ -36,7 +39,7 @@ export default function Sidebar() {
           <Link to="/users" style={{ textDecoration: "none" }}>
             <li>
               <PersonOutlineIcon className="icon" />
-              <span>Người dùng </span>
+              <span>Khách hàng </span>
             </li>
           </Link>
           <Link to="/products" style={{ textDecoration: "none" }}>
@@ -69,12 +72,20 @@ export default function Sidebar() {
               <span>Báo cáo doanh thu</span>
             </li>
           </Link>
-
-          <p className="title">Thông tin nhân viên</p>
-          <li>
-            <AccountCircleOutlinedIcon className="icon" />
-            <span>Hồ sơ nhân viên</span>
-          </li>
+          {user.user.role !==1 ?(
+            <div></div>
+          ):(
+            <>
+            <Link to="/employees" style={{ textDecoration: "none" }}>
+            <p className="title">Thông tin nhân viên</p>
+            <li>
+              <AccountCircleOutlinedIcon className="icon" />
+              <span>Hồ sơ nhân viên</span>
+            </li>
+            </Link>
+            </>
+            
+          )}
           <li>
             <ExitToAppIcon className="icon" />
             <span>Đăng xuất</span>
