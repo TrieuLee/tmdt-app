@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./Widget.scss";
 import axios from "axios";
+import { Link } from "react-router-dom";
 import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
 import AccountBalanceWalletOutlinedIcon from "@mui/icons-material/AccountBalanceWalletOutlined";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
@@ -136,9 +137,9 @@ export default function Widget({ type }) {
         <span className="counter">
           {data.isMoney && "$"} {data.amount}
         </span>
-        <a className="link" href={data.url} style={{ textDecoration: "none" }}>
+        <Link className="link" to={data.url} style={{ textDecoration: "none" }}>
           {data.link}
-        </a>
+        </Link>
       </div>
       <div className="right">
         <div className="percentage positive"></div>
