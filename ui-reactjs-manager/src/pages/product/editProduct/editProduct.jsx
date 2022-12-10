@@ -24,15 +24,16 @@ export default function EditProduct({ title }) {
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
   const [file, setFile] = useState(null);
+  const [img, setImg] = useState(null);
+  
   const navigate = useNavigate();
 
   const setData = () => {
     setBrand(JSON.parse(localStorage.getItem("editProduct")).brand);
-    console.log(brand);
     setState(JSON.parse(localStorage.getItem("editProduct")).state);
     setName(JSON.parse(localStorage.getItem("editProduct")).name);
     setPrice(JSON.parse(localStorage.getItem("editProduct")).price);
-    setFile(JSON.parse(localStorage.getItem("editProduct")).img);
+    setImg(JSON.parse(localStorage.getItem("editProduct")).img);
   };
   useEffect(() => {
     if (localStorage.getItem("editProduct")) {
@@ -67,10 +68,11 @@ export default function EditProduct({ title }) {
       size: size ? size : [],
       brand: brand ? brand : [],
       state: state !== undefined ? state : true,
+      img: img ? img : undefined
     };
     if (file) {
       const data = new FormData();
-      const fileName = Date.now() + file.name;
+      const fileName = file.name;
       data.append("name", fileName);
       data.append("file", file);
       product.img = fileName;
