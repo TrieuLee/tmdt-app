@@ -23,6 +23,10 @@ const StyledDataGrid = styled(DataGrid)(({ theme }) => ({
   "& .MuiDataGrid-row": {
     maxHeight: "none !important",
   },
+  "& .MuiDataGridCell": {
+    textAlign: "center",
+    justifyContent: "center",
+  },
 }));
 export default function Datatable() {
   const header = JSON.parse(localStorage.getItem("user")).accessToken;
@@ -40,28 +44,28 @@ export default function Datatable() {
   };
 
   const shipping = data.map((item) => item.shipping.name);
-  console.log(shipping);
   const userColumns = [
-    {
-      field: "_id",
-      headerName: "Mã đơn hàng",
-      width: 140,
-      renderCell: (params) => {
-        return <div className="cellWithImg">{params.row._id}</div>;
-      },
-    },
+    // {
+    //   field: "_id",
+    //   headerName: "Mã đơn hàng",
+    //   width: 140,
+    //   renderCell: (params) => {
+    //     return <div className="cellWithImg">{params.row._id}</div>;
+    //   },
+    // },
     {
       field: "products",
       headerName: "Sản phẩm",
-      width: 200,
-        renderCell: (params) => (
-          <ul style={{ listStyle: "none" }}>
-            {params.value.map((role, index) => (
-              <li key={index}>{role.name}</li>
-            ))}
-          </ul>
-        ),
-        type: "string",
+      width: 160,
+      renderCell: (params) => (
+        <div style={{ listStyleType: "none" }}>
+          {params.value.map((role, index) => (
+            <li key={index}>{role.name}</li>
+          ))}
+        </div>
+      ),
+      type: "string",
+      headerAlign: "center",
     },
     {
       field: shipping.toString(),
@@ -69,30 +73,37 @@ export default function Datatable() {
       width: 100,
       valueGetter: (params) => params.row?.shipping?.name,
       type: "string",
+      headerAlign: "center",
     },
-    {
-      field: "createdAt",
-      headerName: "Ngày mua",
-      width: 160,
-      valueGetter: (params) =>
-        moment(params.value).locale("vi", vi).format("dddd, LLL"),
-    },
+    // {
+    //   field: "createdAt",
+    //   headerName: "Ngày mua",
+    //   width: 160,
+    //   headerAlign: "center",
+    //   valueGetter: (params) =>
+    //     moment(params.value).locale("vi", vi).format("dddd, LLL"),
+    // },
     {
       field: "total",
       headerName: "Tổng tiền",
-      width: 120,
+      width: 80,
+      headerAlign: "center",
+      align: "right",
     },
     {
       field: "payment_status",
       headerName: "Thanh toán",
       width: 160,
+      headerAlign: "center",
+      align: "left",
     },
     {
       field: "delivery_status",
       headerName: "Trạng thái",
-      width: 100,
+      width: 200,
       editable: true,
-
+      headerAlign: "center",
+      align: "left",
       valueOptions: ["Đã nhận đơn hàng", "Đang giao", "Hoàn thành"],
       type: "singleSelect",
     },
@@ -101,6 +112,8 @@ export default function Datatable() {
       field: "payment_method",
       headerName: "Phương thức ",
       width: 100,
+      headerAlign: "center",
+      align: "center",
       renderCell: (params) => {
         if (params.row.payment_method !== 0) {
           return (
@@ -129,10 +142,15 @@ export default function Datatable() {
       field: "action",
       headerName: "Action",
       width: 150,
+      headerAlign: "center",
+      align: "center",
       renderCell: (params) => {
         return (
           <div className="cellAction">
-            <Link to={`/${path}/${params.row._id}`} style={{ textDecoration: "none" }}>
+            <Link
+              to={`/${path}/${params.row._id}`}
+              style={{ textDecoration: "none" }}
+            >
               <div className="viewButton">Chi tiết</div>
             </Link>
             <div

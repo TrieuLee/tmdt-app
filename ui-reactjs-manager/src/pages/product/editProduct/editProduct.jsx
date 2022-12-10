@@ -23,17 +23,20 @@ export default function EditProduct({ title }) {
   const [state, setState] = useState(true);
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
+  const [file, setFile] = useState(null);
+  const [img, setImg] = useState(null);
+
   const navigate = useNavigate();
 
   const setData = () => {
-    setBrand(JSON.parse(localStorage.getItem("editProduct")).brand[0]);
-
+    setBrand(JSON.parse(localStorage.getItem("editProduct")).brand);
     setState(JSON.parse(localStorage.getItem("editProduct")).state);
     setName(JSON.parse(localStorage.getItem("editProduct")).name);
     setPrice(JSON.parse(localStorage.getItem("editProduct")).price);
+    setImg(JSON.parse(localStorage.getItem("editProduct")).img);
   };
   useEffect(() => {
-    if (localStorage.getItem("editUser")) {
+    if (localStorage.getItem("editProduct")) {
       setData();
     }
   }, []);
@@ -65,7 +68,18 @@ export default function EditProduct({ title }) {
       size: size ? size : [],
       brand: brand ? brand : [],
       state: state !== undefined ? state : true,
+      img: img ? img : undefined,
     };
+    if (file) {
+      const data = new FormData();
+      const fileName = file.name;
+      data.append("name", fileName);
+      data.append("file", file);
+      product.img = fileName;
+      try {
+        await axios.post(`${domain}/api/upload`, data);
+      } catch (err) {}
+    }
     try {
       const header = JSON.parse(localStorage.getItem("user")).accessToken;
       const id = JSON.parse(localStorage.getItem("editProduct"))._id;
@@ -103,7 +117,7 @@ export default function EditProduct({ title }) {
                     id="outlined-basic"
                     label="Tên sản phẩm"
                     variant="outlined"
-                    value={name}
+                    value={name ? name : "1"}
                     onChange={(e) => setName(e.target.value)}
                   />
                   <FormControl sx={{ m: 1, width: "50ch" }}>
@@ -115,8 +129,11 @@ export default function EditProduct({ title }) {
                       label="Hãng"
                       onChange={changeBrand}
                     >
-                      <MenuItem value={"Air Force"}>Air Force</MenuItem>
-                      <MenuItem value={"Jordan"}>Jordan</MenuItem>
+                      <MenuItem value={"airforce"}>Air Force</MenuItem>
+                      <MenuItem value={"jordan"}>Jordan</MenuItem>
+                      <MenuItem value={"blazer"}>Blazer</MenuItem>
+                      <MenuItem value={"hippie"}>Hippie</MenuItem>
+                      <MenuItem value={"crater"}>Crater</MenuItem>
                     </Select>
                   </FormControl>
                   <TextField
@@ -178,7 +195,16 @@ export default function EditProduct({ title }) {
                 <div>
                   <Button variant="contained" component="label">
                     Upload
-                    <input hidden accept="image/*" multiple type="file" />
+                    <input
+                      name="image"
+                      accept=".png,.jpeg,.jpg"
+                      type="file"
+                      id="file"
+                      hidden
+                      onChange={(e) => {
+                        setFile(e.target.files[0]);
+                      }}
+                    />
                   </Button>
                 </div>
               </div>

@@ -26,7 +26,7 @@ export default function Datatable() {
   const { data, loading, error } = useFetch(`${domain}/api/${path}`);
   useEffect(() => {
     setList(data);
-  }, [data]);
+  }, [list]);
 
   const handleDelete = async (id) => {
     const answer = window.confirm("Bạn có chắc chắn xóa sản phẩm?");
@@ -35,6 +35,7 @@ export default function Datatable() {
         const header = JSON.parse(localStorage.getItem("user")).accessToken;
         await axios.delete(`${domain}/api/products/${id}/${header}`);
         setList(list.filter((item) => item._id !== id));
+        console.log(list);
       } catch (err) {
         console.log(err);
       }
@@ -42,18 +43,26 @@ export default function Datatable() {
   };
 
   const userColumns = [
-    { field: "_id", headerName: "ID", width: 70 },
+    {
+      field: "_id",
+      headerName: "ID",
+      width: 230,
+      headerAlign: "center",
+    },
     {
       field: "products",
+      headerAlign: "center",
       headerName: "Sản phẩm",
-      width: 230,
+      align: "left",
+      width: 200,
       renderCell: (params) => {
         return (
           <div className="cellWithImg">
             <img
               className="cellImg"
-              src={params.row.img || "https://i.ibb.co/MBtjqXQ/no-avatar.gif"}
-              alt="avatar"
+              src={`${domain}/images/${params.row.img}`}
+              alt=""
+              crossorigin="anonymous"
             />
             {params.row.name}
           </div>
@@ -63,25 +72,33 @@ export default function Datatable() {
     {
       field: "brand",
       headerName: "Hãng",
-      width: 180,
+      width: 80,
+      headerAlign: "center",
+      align: "left",
     },
 
     {
       field: "price",
       ...usdPrice,
       headerName: "Giá tiền",
-      width: 160,
+      width: 90,
+      headerAlign: "center",
+      align: "right",
     },
     {
       field: "size",
       headerName: "Size",
       width: 150,
+      headerAlign: "center",
+      align: "center",
     },
 
     {
       field: "state",
       headerName: "Tình trạng",
-      width: 160,
+      width: 130,
+      headerAlign: "center",
+      align: "center",
       renderCell: (params) => {
         if (params.row.state === true) {
           return (
@@ -97,7 +114,9 @@ export default function Datatable() {
     {
       field: "action",
       headerName: "Action",
-      width: 200,
+      width: 150,
+      headerAlign: "center",
+      align: "center",
       renderCell: (params) => {
         return (
           <div className="cellAction">
