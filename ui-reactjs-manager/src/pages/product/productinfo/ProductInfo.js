@@ -36,7 +36,13 @@ export default function ProductInfo() {
             </div>
             <h1 className="title">Thông tin sản phẩm</h1>
             <div className="item">
-              <img src={products.img} alt="" className="itemImg" />
+              <img
+                className="itemImg"
+                src={`${domain}/images/${products.img}`}
+                alt=""
+                crossorigin="anonymous"
+              />
+
               <div className="details">
                 <h1 className="itemTitle">{products.name}</h1>
                 <div className="detailItem">
