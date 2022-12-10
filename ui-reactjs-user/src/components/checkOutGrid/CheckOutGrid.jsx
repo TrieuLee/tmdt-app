@@ -17,6 +17,7 @@ import { AuthContext } from "../../context/AuthContext";
 import "./Grid.scss";
 import { FaStripe } from "react-icons/fa";
 import LocalAtmIcon from "@mui/icons-material/LocalAtm";
+import domain from "../../utils/domain";
 const StyledTableCell = styled(
   TableCell,
   Paper
@@ -40,10 +41,11 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 export default function CheckOutGrid(props) {
   const carts = !localStorage.lstOrFd ? "" : JSON.parse(localStorage.lstOrFd);
+  console.log(carts.cart);
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
   function listCart() {
-    return carts.cart.products.map((item, i) => {
+    return carts.cart.map((item, i) => {
       return (
         <React.Fragment key={i}>
           <TableRow>

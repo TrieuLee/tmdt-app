@@ -8,7 +8,7 @@ const { Order } = require("../models");
 const YOUR_DOMAIN = "http://localhost:3000";
 
 router.post("/create-checkout-session", async (req, res) => {
-  const cart = req.body.carts.cart.products;
+  const cart = req.body.carts.cart;
   const x = cart.map((item) => {
     const temp = {
       id: item._id,
@@ -16,6 +16,7 @@ router.post("/create-checkout-session", async (req, res) => {
       name: item.name,
       price: item.price,
     };
+    console.log(item.img);
     return temp;
   });
   const customer = await stripe.customers.create({
@@ -25,7 +26,7 @@ router.post("/create-checkout-session", async (req, res) => {
     },
   });
 
-  const line_items = req.body.carts.cart.products.map((item) => {
+  const line_items = req.body.carts.cart.map((item) => {
     return {
       price_data: {
         currency: "usd",

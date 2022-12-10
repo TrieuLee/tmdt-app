@@ -21,6 +21,7 @@ import AddCircleIcon from "@mui/icons-material/AddCircle";
 import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
 import DeleteIcon from "@mui/icons-material/Delete";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
+import domain from "../../utils/domain";
 
 export default function Cart(props) {
   const { isOpen, onRequestClose } = props;
@@ -28,7 +29,7 @@ export default function Cart(props) {
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
-
+  // console.log(cart.products[0].img);
   // console.log(cart);
   const getTotal = () => {
     let totalQuantity = 0;
@@ -36,6 +37,7 @@ export default function Cart(props) {
     let shipPrice = 0;
     let totalPrice = 0;
     cart.products.forEach((item) => {
+      const x = item.img;
       totalQuantity += item.quantity;
       subPrice += item.price * item.quantity;
       shipPrice = subPrice < 100 ? subPrice + 20 : subPrice;
@@ -50,8 +52,14 @@ export default function Cart(props) {
   // const shippingPrice = getTotal().totalPrice < 200000 ? 0 : dis;
   // //   const totalPrice = itemsPrice + shippingPrice;
   function SetCartPayment() {
+    const x = cart.products.map((item) => {
+      return {
+        ...item,
+        img: domain + "/images/" + item.img,
+      };
+    });
     const lstOrFd = {
-      cart: cart,
+      cart: x,
       total: getTotal(),
       // itemsPrice: itemsPrice ? itemsPrice : "",
       // totalPrice: totalPrice ? totalPrice : "",
@@ -91,7 +99,7 @@ export default function Cart(props) {
         <Grid container key={i}>
           <Grid item xs={3}>
             <img
-              src={item.img}
+              src={`${domain}/images/${item.img}`}
               style={{
                 width: "120px",
                 height: "120px",

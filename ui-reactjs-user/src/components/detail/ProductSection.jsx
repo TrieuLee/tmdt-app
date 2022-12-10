@@ -127,7 +127,7 @@ export default function ProductSection(props) {
               <Box
                 component="img"
                 sx={{ height: 480, width: 480 }}
-                src={products.img}
+                src={`${domain}/images/${products.img}`}
               />
             </Grid>
             <Grid item xs={6}>

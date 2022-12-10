@@ -39,7 +39,7 @@ const StyledTableCell = styled(
 export default function OrderGrid() {
   const carts = !localStorage.lstOrFd ? "" : JSON.parse(localStorage.lstOrFd);
   console.log(carts.total);
-  const x = carts.cart.products.map((item) => {
+  const x = carts.cart.map((item) => {
     const temp = {
       id: item._id,
       quantity: item.quantity,
@@ -73,7 +73,7 @@ export default function OrderGrid() {
     </Link>,
   ];
   function listCart() {
-    return carts.cart.products.map((item, i) => {
+    return carts.cart.map((item, i) => {
       return (
         <React.Fragment key={i}>
           <TableRow>

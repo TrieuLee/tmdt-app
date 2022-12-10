@@ -80,7 +80,7 @@ export default function ProductGrid() {
                     <CardMedia
                       component="img"
                       height="200"
-                      image={record.img}
+                      image={`${domain}/images/${record.img}`}
                       alt=""
                     />
                     <CardContent>
