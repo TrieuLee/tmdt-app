@@ -35,7 +35,7 @@ export default function Datatable() {
         const header = JSON.parse(localStorage.getItem("user")).accessToken;
         await axios.delete(`${domain}/api/products/${id}/${header}`);
         setList(list.filter((item) => item._id !== id));
-        navigate("/products")
+        navigate("/products");
       } catch (err) {
         console.log(err);
       }
@@ -43,10 +43,17 @@ export default function Datatable() {
   };
 
   const userColumns = [
-    { field: "_id", headerName: "ID", width: 230 },
+    {
+      field: "_id",
+      headerName: "ID",
+      width: 230,
+      headerAlign: "center",
+    },
     {
       field: "products",
+      headerAlign: "center",
       headerName: "Sản phẩm",
+      align: "left",
       width: 200,
       renderCell: (params) => {
         return (
@@ -66,6 +73,8 @@ export default function Datatable() {
       field: "brand",
       headerName: "Hãng",
       width: 80,
+      headerAlign: "center",
+      align: "left",
     },
 
     {
@@ -73,17 +82,23 @@ export default function Datatable() {
       ...usdPrice,
       headerName: "Giá tiền",
       width: 90,
+      headerAlign: "center",
+      align: "right",
     },
     {
       field: "size",
       headerName: "Size",
       width: 150,
+      headerAlign: "center",
+      align: "center",
     },
 
     {
       field: "state",
       headerName: "Tình trạng",
       width: 130,
+      headerAlign: "center",
+      align: "center",
       renderCell: (params) => {
         if (params.row.state === true) {
           return (
@@ -100,6 +115,8 @@ export default function Datatable() {
       field: "action",
       headerName: "Action",
       width: 150,
+      headerAlign: "center",
+      align: "center",
       renderCell: (params) => {
         return (
           <div className="cellAction">
