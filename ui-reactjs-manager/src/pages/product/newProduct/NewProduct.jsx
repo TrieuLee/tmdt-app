@@ -25,6 +25,7 @@ export default function New({ title }) {
   const [file, setFile] = useState(null);
   const name = useRef("");
   const price = useRef("");
+
   const navigate = useNavigate();
   const changeBrand = (event) => {
     setBrand(event.target.value);
@@ -48,7 +49,7 @@ export default function New({ title }) {
   const handleClick = async (e) => {
     e.preventDefault();
     const header = JSON.parse(localStorage.getItem("user")).accessToken;
-    const user = {
+    const product = {
       name: name.current.value,
       price: price.current.value,
       size: size ? size : [],
@@ -60,13 +61,13 @@ export default function New({ title }) {
       const fileName = Date.now() + file.name;
       data.append("name", fileName);
       data.append("file", file);
-      user.img = fileName;
+      product.img = fileName;
       try {
         await axios.post(`${domain}/api/upload`, data);
       } catch (err) {}
     }
     try {
-      await axios.post(`${domain}/api/products/${header}`, user);
+      await axios.post(`${domain}/api/products/${header}`, product);
       navigate("/products");
     } catch (err) {
       console.log(err);
