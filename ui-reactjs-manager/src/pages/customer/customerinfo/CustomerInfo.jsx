@@ -42,7 +42,7 @@ export default function CustomerInfo() {
       try {
         const header = JSON.parse(localStorage.getItem("user")).accessToken;
         const res = await axios.get(
-          `${domain}/api/orders/find/${idP}/${header}`
+          `${domain}/api/orders/findByUser/${idP}/${header}`
         );
         setOrders(res.data);
         // console.log(res.data);
@@ -121,8 +121,9 @@ export default function CustomerInfo() {
                         {item.shipping.name}
                       </TableCell>
                       <TableCell className="tableCell">
-                        
-                        { moment(item.createdAt).locale("vi", vi).format("dddd, LLL")}
+                        {moment(item.createdAt)
+                          .locale("vi", vi)
+                          .format("dddd, LLL")}
                       </TableCell>
                       <TableCell className="tableCell">
                         {" "}
@@ -140,11 +141,11 @@ export default function CustomerInfo() {
                           />
                         ) : (
                           <FaRegMoneyBillAlt
-                          style={{
-                            fontSize: "35px",
-                            color: "green",
-                          }}
-                        />
+                            style={{
+                              fontSize: "35px",
+                              color: "green",
+                            }}
+                          />
                         )}
                       </TableCell>
                       <TableCell className="tableCell">

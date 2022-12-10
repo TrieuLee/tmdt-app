@@ -1,4 +1,4 @@
-import React, { useEffect, useContext, useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Single.scss";
 import Sidebar from "../../../components/sidebar/Sidebar";
 import Navbar from "../../../components/navbar/Navbar";
@@ -9,66 +9,120 @@ import domain from "../../../utils/domain";
 export default function OrderInfo() {
   const location = useLocation();
   const idP = location.pathname.split("/")[2];
-  console.log(idP);
-  const [orders, setOrders] = useState({});
+  const [order, setOrder] = useState(null);
   useEffect(() => {
-    const getOrders = async () => {
+    const getOrder = async () => {
       try {
         const header = JSON.parse(localStorage.getItem("user")).accessToken;
-        const res = await axios.get(`${domain}/api/orders/find/${idP}/${header}` );
-        setOrders(res.data);
-
+        const res = await axios.get(
+          `${domain}/api/orders/find/${idP}/${header}`
+        );
+        setOrder(res.data);
         localStorage.setItem("editOrder", JSON.stringify(res.data));
       } catch (err) {}
     };
-    getOrders();
+    getOrder();
   }, [idP]);
+
+  const GetProducts = () => {
+    console.log(order.products[0].name);
+    const x = order.products.map((i) => {
+      return (
+        <ul>
+          <li className="itemValue">Tên sản phẩm: {i.name}</li>
+          <li className="itemValue">Giá sản phẩm: {i.price}</li>
+          <li className="itemValue">Số lượng: {i.quantity}</li>
+        </ul>
+      );
+    });
+    return x;
+  };
   return (
     <div className="single">
       <Sidebar />
-      <div className="singleContainer">
-        <Navbar />
-        <div className="top">
-          <div className="left">
-            <div className="editButton">
-              <Link to="/products/edit" className="link">
-                Chỉnh sửa
-              </Link>
-            </div>
-            <h1 className="title">Thông tin sản phẩm</h1>
-            <div className="item">
-              <img src={orders.img} alt="" className="itemImg" />
-              <div className="details">
-                <h1 className="itemTitle">{orders.name}</h1>
-                <div className="detailItem">
-                  <span className="itemKey">Hãng:</span>
-                  <span className="itemValue">{orders.brand}</span>
+      {order && (
+        <>
+          <div className="singleContainer">
+            <Navbar />
+            <div className="top">
+              <div className="left">
+                <div className="editButton">
+                  <Link to="/products/edit" className="link">
+                    Chỉnh sửa
+                  </Link>
                 </div>
-                <div className="detailItem">
-                  <span className="itemKey">Giá tiền:</span>
-                  <span className="itemValue">{orders.price}</span>
-                </div>
-                <div className="detailItem">
-                  <span className="itemKey">Size:</span>
-                  <span className="itemValue">
-                    {orders.size &&
-                      orders.size.map((record, i) => (
-                        <span key={i}>{record}</span>
-                      ))}
-                  </span>
-                </div>
+                <div className="item">
+                  <div className="details">
+                    <h1 className="title">Thông tin Người nhận</h1>
+                    <h1 className="itemTitle"></h1>
+                    <div className="detailItem">
+                      <span className="itemKey">Tên người nhận:</span>
+                      <span className="itemValue">{order.shipping.name}</span>
+                    </div>
+                    <div className="detailItem">
+                      <span className="itemKey">Địa chỉ nhận hàng:</span>
+                      <span className="itemValue">
+                        {order.payment_method === 1 ? (
+                          <>
+                            {order.shipping.address.line1},{" "}
+                            {order.shipping.address.city},
+                            {order.shipping.address.country}
+                          </>
+                        ) : (
+                          <>{order.shipping.address}</>
+                        )}
+                      </span>
+                    </div>
+                    <div className="detailItem">
+                      <span className="itemKey">Số điện thoại:</span>
+                      <span className="itemValue">{order.shipping.phone}</span>
+                    </div>
+                    <div className="detailItem">
+                      <span className="itemKey">Email người nhận:</span>
+                      <span className="itemValue">{order.shipping.email}</span>
+                    </div>
+                  </div>
+                  <hr />
+                  <div className="details">
+                    <h1 className="title">Thông tin Đơn hàng</h1>
+                    <h1 className="itemTitle"></h1>
+                    <div className="detailItem">
+                      <span className="itemKey">Sản phẩm:</span>
+                      {GetProducts()}
+                    </div>
 
-                <div className="detailItem">
-                  <span className="itemKey">Tình trạng:</span>
-                  <span className="itemValue">
-                    {orders.state ? "Còn hàng" : "Tạm hết"}
-                  </span>
+                    <div className="detailItem">
+                      <span className="itemKey">Trạng thái đơn hàng:</span>
+                      <span className="itemValue">{order.delivery_status}</span>
+                    </div>
+                    <div className="detailItem">
+                      <span className="itemKey">Thanh toán:</span>
+                      <span className="itemValue">
+                        {order.payment_status
+                          ? "Đã thanh toán"
+                          : "Chưa thanh toán"}
+                      </span>
+                    </div>
+                    <div className="detailItem">
+                      <span className="itemKey">Hình thức thanh toán:</span>
+                      <span className="itemValue">
+                        {order.payment_method === 0
+                          ? "Trực tiếp"
+                          : "Chuyển khoản"}
+                      </span>
+                    </div>
+
+                    <div className="detailItem">
+                      <span className="itemKey">Giá tiền:</span>
+                      <span className="itemValue"></span>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </div>
+        </>
+      )}
     </div>
   );
 }

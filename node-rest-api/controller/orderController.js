@@ -39,9 +39,16 @@ class OrderCRUD {
   }
   // GET USER ORDERS
   async getUserOrder(req, res) {
-
     try {
       const orders = await Order.find({ userId: req.params.id });
+      res.status(200).json(orders);
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  }
+  async getOrder(req, res) {
+    try {
+      const orders = await Order.findById(req.params.id);
       res.status(200).json(orders);
     } catch (err) {
       res.status(500).json(err);

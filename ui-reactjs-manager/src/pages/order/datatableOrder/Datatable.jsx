@@ -103,8 +103,7 @@ export default function Datatable() {
       width: 200,
       editable: true,
       headerAlign: "center",
-      align: "left",
-      valueOptions: ["Đã nhận đơn hàng", "Đang giao", "Hoàn thành"],
+      align: "center",
       type: "singleSelect",
     },
 

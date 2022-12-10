@@ -41,7 +41,7 @@ export default function UserProfile() {
     const getOrders = async () => {
       try {
         const res = await axios.get(
-          `${domain}/api/orders/find/${idUser}/${header}`
+          `${domain}/api/orders/findByUser/${idUser}/${header}`
         );
         setOrders(res.data);
         // console.log(res.data);
