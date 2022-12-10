@@ -25,7 +25,7 @@ export default function EditProduct({ title }) {
   const [price, setPrice] = useState("");
   const [file, setFile] = useState(null);
   const [img, setImg] = useState(null);
-  
+
   const navigate = useNavigate();
 
   const setData = () => {
@@ -68,7 +68,7 @@ export default function EditProduct({ title }) {
       size: size ? size : [],
       brand: brand ? brand : [],
       state: state !== undefined ? state : true,
-      img: img ? img : undefined
+      img: img ? img : undefined,
     };
     if (file) {
       const data = new FormData();
@@ -133,7 +133,7 @@ export default function EditProduct({ title }) {
                       <MenuItem value={"jordan"}>Jordan</MenuItem>
                       <MenuItem value={"blazer"}>Blazer</MenuItem>
                       <MenuItem value={"hippie"}>Hippie</MenuItem>
-                      <MenuItem value={"hippie"}>Crater</MenuItem>
+                      <MenuItem value={"crater"}>Crater</MenuItem>
                     </Select>
                   </FormControl>
                   <TextField

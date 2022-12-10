@@ -17,7 +17,6 @@ export default function OrderInfo() {
         const header = JSON.parse(localStorage.getItem("user")).accessToken;
         const res = await axios.get(`${domain}/api/orders/find/${idP}/${header}` );
         setOrders(res.data);
-        console.log(res.data)
 
         localStorage.setItem("editOrder", JSON.stringify(res.data));
       } catch (err) {}
