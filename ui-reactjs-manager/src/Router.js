@@ -20,6 +20,7 @@ import ProductList from "./pages/product/productlist/ProductList";
 import ProductInfo from "./pages/product/productinfo/ProductInfo";
 import NewProduct from "./pages/product/newProduct/NewProduct";
 import EditProduct from "./pages/product/editProduct/editProduct";
+import EditOrder from "./pages/order/editOrder/editOrder";
 
 // Thông tin đơn hàng
 import OrderList from "./pages/order/orderlist/OrderList";
@@ -85,6 +86,16 @@ const Router = () => {
         <Route path="orders">
           <Route index element={user ? <OrderList /> : <Login />} />
           <Route path=":orderId" element={user ? <OrderInfo /> : <Login />} />
+          <Route
+              path="edit"
+              element={
+                user ? (
+                  <EditOrder title="Chỉnh sửa thông tin Đơn hàng" />
+                ) : (
+                  <Login />
+                )
+              }
+            />
 
         </Route>
 

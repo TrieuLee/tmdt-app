@@ -25,7 +25,6 @@ export default function OrderInfo() {
   }, [idP]);
 
   const GetProducts = () => {
-    console.log(order.products[0].name);
     const x = order.products.map((i) => {
       return (
         <ul>
@@ -47,7 +46,7 @@ export default function OrderInfo() {
             <div className="top">
               <div className="left">
                 <div className="editButton">
-                  <Link to="/products/edit" className="link">
+                  <Link to="/orders/edit" className="link">
                     Chỉnh sửa
                   </Link>
                 </div>
@@ -62,7 +61,7 @@ export default function OrderInfo() {
                     <div className="detailItem">
                       <span className="itemKey">Địa chỉ nhận hàng:</span>
                       <span className="itemValue">
-                        {order.payment_method === 1 ? (
+                        {order.shipping.address.line1 ? (
                           <>
                             {order.shipping.address.line1},{" "}
                             {order.shipping.address.city},
@@ -111,12 +110,11 @@ export default function OrderInfo() {
                           : "Chuyển khoản"}
                       </span>
                     </div>
-
-                    <div className="detailItem">
-                      <span className="itemKey">Giá tiền:</span>
-                      <span className="itemValue"></span>
-                    </div>
                   </div>
+                </div>
+                <div className="detailItem">
+                  <span className="itemKey">Tổng cộng:</span>
+                  <span className="itemValue"> {order.total} $</span>
                 </div>
               </div>
             </div>

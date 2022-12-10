@@ -152,12 +152,6 @@ export default function Datatable() {
             >
               <div className="viewButton">Chi tiết</div>
             </Link>
-            <div
-              className="deleteButton"
-              onClick={() => handleDelete(params.row._id)}
-            >
-              Xoá
-            </div>
           </div>
         );
       },
