@@ -155,14 +155,16 @@ export default function OrderGrid() {
     const order = {
       userId: user.user._id,
       address: address.current.value,
-      phone: phone.current.value,
-      email: email.current.value,
+
       products: x,
       subtotal: carts.total.totalPrice,
       total: carts.total.totalPrice,
       payment_status: "chưa thanh toán",
       shipping: {
         name: nameCus.current.value,
+        address: address.current.value,
+        phone: phone.current.value,
+        email: email.current.value,
       },
       payment_method: 0,
     };
