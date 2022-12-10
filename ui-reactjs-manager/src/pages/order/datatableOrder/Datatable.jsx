@@ -54,14 +54,14 @@ export default function Datatable() {
       field: "products",
       headerName: "Sản phẩm",
       width: 200,
-      renderCell: (params) => (
-        <ul style={{ listStyle: "none" }}>
-          {params.value.map((role, index) => (
-            <li key={index}>{role.name}</li>
-          ))}
-        </ul>
-      ),
-      type: "string",
+        renderCell: (params) => (
+          <ul style={{ listStyle: "none" }}>
+            {params.value.map((role, index) => (
+              <li key={index}>{role.name}</li>
+            ))}
+          </ul>
+        ),
+        type: "string",
     },
     {
       field: shipping.toString(),
