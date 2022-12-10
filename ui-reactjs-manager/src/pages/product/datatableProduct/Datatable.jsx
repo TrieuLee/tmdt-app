@@ -26,7 +26,7 @@ export default function Datatable() {
   const { data, loading, error } = useFetch(`${domain}/api/${path}`);
   useEffect(() => {
     setList(data);
-  }, [data]);
+  }, [list]);
 
   const handleDelete = async (id) => {
     const answer = window.confirm("Bạn có chắc chắn xóa sản phẩm?");
@@ -35,7 +35,7 @@ export default function Datatable() {
         const header = JSON.parse(localStorage.getItem("user")).accessToken;
         await axios.delete(`${domain}/api/products/${id}/${header}`);
         setList(list.filter((item) => item._id !== id));
-        navigate("/products");
+        console.log(list);
       } catch (err) {
         console.log(err);
       }
