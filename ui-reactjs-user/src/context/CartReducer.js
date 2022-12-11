@@ -11,13 +11,16 @@ const cartSlice = createSlice({
         (item) => item._id === action.payload._id
       );
       if (itemInCart) {
-        itemInCart.quantity++;
+        itemInCart.quantity += action.payload.quantity;
       } else {
         const diffSize = state.products.findIndex(
           (item) => item.size === action.size
         );
-        console.log(diffSize);
-        state.products.push({ ...action.payload, diffSize, quantity: 1 });
+        state.products.push({
+          ...action.payload,
+          diffSize,
+          quantity: action.payload.quantity,
+        });
       }
     },
     incrementQuantity: (state, action) => {

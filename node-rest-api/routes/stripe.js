@@ -9,6 +9,7 @@ const YOUR_DOMAIN = "http://localhost:3000";
 
 router.post("/create-checkout-session", async (req, res) => {
   const cart = req.body.carts.cart;
+  int a = (int)req.body.carts.total.subPrice*0.01;
   const x = cart.map((item) => {
     const temp = {
       id: item._id,
@@ -74,10 +75,10 @@ router.post("/create-checkout-session", async (req, res) => {
         shipping_rate_data: {
           type: "fixed_amount",
           fixed_amount: {
-            amount: 1500,
+            amount: 1000,
             currency: "usd",
           },
-          display_name: "Next day air",
+          display_name: "Fast Delivery",
           // Delivers in exactly 1 business day
           delivery_estimate: {
             minimum: {

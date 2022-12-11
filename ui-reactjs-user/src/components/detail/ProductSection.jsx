@@ -68,6 +68,7 @@ export default function ProductSection(props) {
     if (!size) {
       window.alert("Vui lòng chọn size giày");
     } else {
+      console.log(addProduct({ ...products, quantity, size }));
       dispatch(addProduct({ ...products, quantity, size }));
       alertClick();
     }
@@ -150,14 +151,37 @@ export default function ProductSection(props) {
               >
                 {products.price}$
               </Typography>
+              <div
+                style={{
+                  display: "flex",
+                }}
+              >
+                <label>Số lượng:</label>
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  <RemoveIcon
+                    onClick={() =>
+                      setQuantity((prev) => (prev === 1 ? 1 : prev - 1))
+                    }
+                  />
+                  <div
+                    style={{
+                      paddingLeft: "5px",
+                      paddingRight: "5px",
+                    }}
+                  >
+                    {" "}
+                    {quantity}{" "}
+                  </div>
+                  <AddIcon onClick={() => setQuantity((prev) => prev + 1)} />
+                </div>
+              </div>
 
-              <RemoveIcon
-                onClick={() =>
-                  setQuantity((prev) => (prev === 1 ? 1 : prev - 1))
-                }
-              />
-              <div>{quantity}</div>
-              <AddIcon onClick={() => setQuantity((prev) => prev + 1)} />
               <div style={{ display: "flex", alignproductss: "center" }}>
                 <div>Size giày:</div>
                 <select onChange={(e) => setSize(e.target.value)}>

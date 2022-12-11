@@ -125,7 +125,7 @@ export default function OrderGrid() {
             Tổng số lượng: {carts.total.totalQuantity}
           </p>
           <p style={{ display: "flex", justifyContent: "flex-end" }}>
-            Tạm tính: $ {carts.total.subPrice}
+            Sản phẩm: $ {carts.total.subPrice}
           </p>
           <p style={{ display: "flex", justifyContent: "flex-end" }}>
             Phí ship: $ {carts.total.shipPrice}
@@ -157,8 +157,8 @@ export default function OrderGrid() {
       address: address.current.value,
 
       products: x,
-      subtotal: carts.total.totalPrice,
-      total: carts.total.totalPrice,
+      subtotal: carts.total.shipPrice,
+      total: carts.total.subPrice,
       payment_status: "chưa thanh toán",
       shipping: {
         name: nameCus.current.value,
