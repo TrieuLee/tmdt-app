@@ -110,6 +110,7 @@ router.post("/create-checkout-session", async (req, res) => {
 
 const createOrder = async (customer, data) => {
   const Items = JSON.parse(customer.metadata.cart);
+  console.log(Items);
   const products = Items.map((item) => {
     const product = {
       productId: item.id,
@@ -127,7 +128,7 @@ const createOrder = async (customer, data) => {
     total: data.amount_total,
     subtotal: data.amount_subtotal,
     shipping: data.customer_details,
-    payment_status: data.payment_status,
+    payment_status: "Đã thanh toán",
     payment_method: 1,
   });
 
