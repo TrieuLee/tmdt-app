@@ -17,14 +17,29 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 
 export default function Datatable() {
-  const [dateIn, setDateIn] = useState(new Date());
-  const [dateOut, setDateOut] = useState(new Date());
+  const [dateIn, setDateIn] = useState("");
+  const [dateOut, setDateOut] = useState("");
   const header = JSON.parse(localStorage.getItem("user")).accessToken;
 
   const { data, loading, error } = useFetch(`${domain}/api/orders/${header}`);
-  let sortOrder = [...data];
-  sortOrder.filter((item) => item.payment_status);
-  console.log(sortOrder);
+  function getStatistic() {
+    let sortOrder = [...data];
+    const x = sortOrder.filter(
+      (item) =>
+        item.payment_status === "Đã thanh toán" &&
+        Date.parse(dateIn) <= Date.parse(item.createdAt) &&
+        Date.parse(dateOut) >= Date.parse(item.createdAt)
+    );
+    console.log(x);
+    if (sortOrder.length > 0) {
+      let total = 0;
+      sortOrder.forEach((item) => {
+        total += item.total;
+      });
+      console.log(total);
+    }
+  }
+  // console.log(getStatistic());
 
   return (
     <div className="datatable">
@@ -71,7 +86,7 @@ export default function Datatable() {
               padding: "5px",
               cursor: "pointer",
             }}
-            // onClick={getRooms}
+            onClick={getStatistic}
           >
             Thống kê
           </label>
