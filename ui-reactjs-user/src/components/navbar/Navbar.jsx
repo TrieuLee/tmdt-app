@@ -24,7 +24,7 @@ const ThemeComponent1 = styled(AccountCircleIcon)({
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
   "& .MuiBadge-badge": {
-    right: 3,
+    right: 10,
     top: 13,
     padding: "0 4px",
     zIndex: "0",
@@ -148,13 +148,13 @@ export default function Navbar(props) {
                 ))}
             </div>
           </div>
-          <div className="navItem">
+          <div className="navItem" style={{ display: "flex" }}>
             <StyledBadge
               badgeContent={cart.length ? cart.length : "0"}
               color="secondary"
             >
               <ThemeComponent
-                sx={{ mb: 1, mr: 0.5 }}
+                sx={{ mb: 1.5, mr: 1.5 }}
                 fontSize="large"
                 onClick={() => {
                   setIsLiked(!isLiked);
@@ -169,7 +169,7 @@ export default function Navbar(props) {
             />
             {user == null ? (
               <Link to="/login" style={{ textDecoration: "none" }}>
-                <ThemeComponent1 sx={{ mb: -1.2 }} fontSize="large" />
+                <ThemeComponent1 sx={{ mb: 1 }} fontSize="large" />
               </Link>
             ) : (
               user && <NavDropDown />
