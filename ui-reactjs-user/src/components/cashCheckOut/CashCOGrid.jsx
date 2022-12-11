@@ -22,7 +22,7 @@ import Breadcrumbs from "@mui/material/Breadcrumbs";
 import HomeIcon from "@mui/icons-material/Home";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
-
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 const StyledTableCell = styled(
   TableCell,
   Paper
@@ -227,8 +227,14 @@ export default function OrderGrid() {
               label="Email"
               inputRef={email}
             />
-            <Button variant="contained" className="registerButon" type="submit">
-              Hoàn tất đơn hàng
+            <Button
+              variant="contained"
+              color="success"
+              style={{ marginLeft: "10px", marginTop: "10px" }}
+              type="submit"
+            >
+              <CheckCircleIcon />
+              <p style={{ margin: "5px" }}>Hoàn tất đơn hàng</p>
             </Button>
           </Box>
         </Grid>

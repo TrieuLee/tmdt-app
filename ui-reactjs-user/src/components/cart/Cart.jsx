@@ -40,8 +40,8 @@ export default function Cart(props) {
       const x = item.img;
       totalQuantity += item.quantity;
       subPrice += item.price * item.quantity;
-      shipPrice = subPrice < 1000 ? subPrice * 0.05 : 0;
-      totalPrice = subPrice + shipPrice;
+      shipPrice = 20;
+      totalPrice = subPrice < 100 ? subPrice + 20 : 0;
     });
     return { subPrice, totalPrice, totalQuantity, shipPrice };
   };
