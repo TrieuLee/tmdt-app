@@ -11,7 +11,7 @@ const OrderSchema = new mongoose.Schema(
         quantity: { type: Number, default: 1 },
       },
     ],
-    subtotal: { type: Number, required: true },
+    subtotal: { type: Number, required: true }, // phí ship
     total: { type: Number, required: true },
     shipping: { type: Object, required: true },
     delivery_status: { type: String, default: "đã nhận đơn hàng" },
