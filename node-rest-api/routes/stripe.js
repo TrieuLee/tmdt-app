@@ -9,7 +9,7 @@ const YOUR_DOMAIN = "http://localhost:3000";
 
 router.post("/create-checkout-session", async (req, res) => {
   const cart = req.body.carts.cart;
-  //int a = (int)req.body.carts.total.subPrice*0.01;
+  const a = (req.body.carts.total.subPrice * 0.1) | 0;
   const x = cart.map((item) => {
     const temp = {
       id: item._id,
@@ -75,7 +75,7 @@ router.post("/create-checkout-session", async (req, res) => {
         shipping_rate_data: {
           type: "fixed_amount",
           fixed_amount: {
-            amount: 1000,
+            amount: a,
             currency: "usd",
           },
           display_name: "Fast Delivery",
@@ -127,7 +127,7 @@ const createOrder = async (customer, data) => {
     paymentIntentId: data.payment_intent,
     products,
     total: data.amount_total,
-    subtotal: data.amount_subtotal,
+    subtotal: data.amount_shipping ? data.amount_shipping : 0,
     shipping: data.customer_details,
     payment_status: "Đã thanh toán",
     payment_method: 1,
