@@ -9,7 +9,7 @@ const YOUR_DOMAIN = "http://localhost:3000";
 
 router.post("/create-checkout-session", async (req, res) => {
   const cart = req.body.carts.cart;
-  int a = (int)req.body.carts.total.subPrice*0.01;
+  //int a = (int)req.body.carts.total.subPrice*0.01;
   const x = cart.map((item) => {
     const temp = {
       id: item._id,
