@@ -1,12 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import TextField from "@mui/material/TextField";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import Button from "@mui/material/Button";
-export default function Datatable() {
-  const [value, setValue] = React.useState(null);
+import useFetch from "../../../components/hooks/useFetch";
+import domain from "../../../utils/domain";
 
+export default function Datatable() {
+  const [dateIn, setDateIn] = useState("");
+  const [dateOut, setDateOut] = useState("");
+  const header = JSON.parse(localStorage.getItem("user")).accessToken;
+
+  const { data, loading, error } = useFetch(`${domain}/api/orders/${header}`);
+  console.log(data);
   return (
     <div className="datatable">
       <div className="datatableTitle">Thống kê doanh thu</div>
@@ -14,9 +21,9 @@ export default function Datatable() {
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <DatePicker
             label="Từ ngày"
-            value={value}
+            value={dateIn}
             onChange={(newValue) => {
-              setValue(newValue);
+              setDateIn(newValue);
             }}
             renderInput={(params) => <TextField {...params} />}
           />
@@ -25,9 +32,9 @@ export default function Datatable() {
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <DatePicker
             label="Đến ngày"
-            value={value}
+            value={dateOut}
             onChange={(newValue) => {
-              setValue(newValue);
+              setDateOut(newValue);
             }}
             renderInput={(params) => <TextField {...params} />}
           />

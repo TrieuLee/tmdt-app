@@ -68,7 +68,7 @@ export default function Cart(props) {
   }
   return (
     <SlidingPane
-      className="some-custom-class"
+      className="sliding-pane"
       isOpen={isOpen}
       title="Giỏ hàng của tôi"
       width="40%"
@@ -132,11 +132,19 @@ export default function Cart(props) {
             </ul>
           </Grid>
           <Grid item xs={3} sx={{ display: "flex", alignItems: "center" }}>
-            <IconButton onClick={() => dispatch(incrementQuantity(item._id))}>
+            <IconButton
+              onClick={() => {
+                dispatch(incrementQuantity(item._id));
+              }}
+            >
               <AddCircleIcon />
             </IconButton>
             <div>{item.quantity}</div>
-            <IconButton onClick={() => dispatch(decrementQuantity(item._id))}>
+            <IconButton
+              onClick={() => {
+                dispatch(decrementQuantity(item._id));
+              }}
+            >
               <RemoveCircleIcon />
             </IconButton>
           </Grid>

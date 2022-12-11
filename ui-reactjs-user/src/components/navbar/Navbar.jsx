@@ -15,10 +15,7 @@ import Badge from "@mui/material/Badge";
 import { AuthContext } from "../../context/AuthContext";
 import domain from "../../utils/domain";
 
-const ThemeComponent = styled(
-  ShoppingBagIcon,
-  AccountCircleIcon
-)({
+const ThemeComponent = styled(ShoppingBagIcon)({
   color: "white",
 });
 const ThemeComponent1 = styled(AccountCircleIcon)({
@@ -27,9 +24,8 @@ const ThemeComponent1 = styled(AccountCircleIcon)({
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
   "& .MuiBadge-badge": {
-    right: -3,
+    right: 3,
     top: 13,
-    border: `2px solid black`,
     padding: "0 4px",
     zIndex: "0",
   },
@@ -46,6 +42,7 @@ export default function Navbar(props) {
   const [products, setProducts] = useState([]);
   const [search, setSearch] = useState("");
   const [isLiked, setIsLiked] = useState(false);
+  const handleChange = () => {};
   useEffect(() => {
     const getProducts = async () => {
       try {
@@ -152,23 +149,26 @@ export default function Navbar(props) {
             </div>
           </div>
           <div className="navItem">
-            <IconButton onClick={() => setIsLiked(!isLiked)}>
-              <Cart
-                isOpen={isLiked}
-                onRequestClose={() => {
-                  setIsLiked(isLiked);
+            <StyledBadge
+              badgeContent={cart.length ? cart.length : "0"}
+              color="secondary"
+            >
+              <ThemeComponent
+                sx={{ mb: 1, mr: 0.5 }}
+                fontSize="large"
+                onClick={() => {
+                  setIsLiked(!isLiked);
                 }}
               />
-              <StyledBadge
-                badgeContent={cart.length ? cart.length : "0"}
-                color="secondary"
-              >
-                <ThemeComponent color="error" sx={{ mb: 1 }} fontSize="large" />
-              </StyledBadge>
-            </IconButton>
-
+            </StyledBadge>
+            <Cart
+              isOpen={isLiked}
+              onRequestClose={() => {
+                setIsLiked(!isLiked);
+              }}
+            />
             {user == null ? (
-              <Link to="/login">
+              <Link to="/login" style={{ textDecoration: "none" }}>
                 <ThemeComponent1 sx={{ mb: -1.2 }} fontSize="large" />
               </Link>
             ) : (

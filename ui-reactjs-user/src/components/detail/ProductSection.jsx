@@ -14,8 +14,13 @@ import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
 import domain from "../../utils/domain";
 import HomeIcon from "@mui/icons-material/Home";
-import AddIcon from "@mui/icons-material/Add";
-import RemoveIcon from "@mui/icons-material/Remove";
+import AddCircleTwoToneIcon from "@mui/icons-material/AddCircleTwoTone";
+import RemoveCircleTwoToneIcon from "@mui/icons-material/RemoveCircleTwoTone";
+import Select from "@mui/material/Select";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import InputLabel from "@mui/material/InputLabel";
+
 import { addProduct } from "../../context/CartReducer";
 import { useDispatch } from "react-redux";
 
@@ -68,7 +73,6 @@ export default function ProductSection(props) {
     if (!size) {
       window.alert("Vui lòng chọn size giày");
     } else {
-      console.log(addProduct({ ...products, quantity, size }));
       dispatch(addProduct({ ...products, quantity, size }));
       alertClick();
     }
@@ -144,19 +148,18 @@ export default function ProductSection(props) {
                 </p>
               </div>
               <Typography
-                id="modal-modal-title"
                 variant="h4"
                 component="h6"
                 style={{ marginTop: "10px" }}
               >
-                {products.price}$
+                $ {products.price}
               </Typography>
               <div
                 style={{
                   display: "flex",
+                  marginTop: "10px",
                 }}
               >
-                <label>Số lượng:</label>
                 <div
                   style={{
                     display: "flex",
@@ -164,7 +167,8 @@ export default function ProductSection(props) {
                     alignItems: "center",
                   }}
                 >
-                  <RemoveIcon
+                  <p style={{ marginRight: "10px" }}>Số lượng:</p>
+                  <RemoveCircleTwoToneIcon
                     onClick={() =>
                       setQuantity((prev) => (prev === 1 ? 1 : prev - 1))
                     }
@@ -175,31 +179,47 @@ export default function ProductSection(props) {
                       paddingRight: "5px",
                     }}
                   >
-                    {" "}
-                    {quantity}{" "}
+                    {quantity}
                   </div>
-                  <AddIcon onClick={() => setQuantity((prev) => prev + 1)} />
+                  <AddCircleTwoToneIcon
+                    onClick={() => setQuantity((prev) => prev + 1)}
+                  />
                 </div>
               </div>
 
-              <div style={{ display: "flex", alignproductss: "center" }}>
-                <div>Size giày:</div>
-                <select onChange={(e) => setSize(e.target.value)}>
+              <div
+                style={{
+                  display: "flex",
+                  marginTop: "5px",
+                  alignItems: "center",
+                }}
+              >
+                <p style={{ marginRight: "10px" }}>Size giày:</p>
+                {/* <select onChange={(e) => setSize(e.target.value)}>
+                  <option value="">Chọn size</option>
                   {products.size &&
                     products.size.map((record) => (
-                      <option
-                        key={record}
-                        style={{
-                          border: "1px solid black",
-                          padding: "8px",
-                          marginLeft: "20px",
-                          cursor: "pointer",
-                        }}
-                      >
-                        {record}
-                      </option>
+                      <option key={record}>{record}</option>
                     ))}
-                </select>
+                </select> */}
+                <FormControl sx={{ width: 100 }} size="small">
+                  <Select
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    displayEmpty
+                    value={size}
+                    inputProps={{ "aria-label": "Without label" }}
+                    onChange={(e) => setSize(e.target.value)}
+                  >
+                    <MenuItem value="">-Size-</MenuItem>
+                    {products.size &&
+                      products.size.map((record) => (
+                        <MenuItem key={record} value={record}>
+                          {record}
+                        </MenuItem>
+                      ))}
+                  </Select>
+                </FormControl>
               </div>
 
               <Stack direction="row" spacing={2} sx={theme.spacing}>
