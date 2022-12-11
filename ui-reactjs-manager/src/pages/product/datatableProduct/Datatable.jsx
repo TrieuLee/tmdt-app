@@ -140,7 +140,7 @@ export default function Datatable() {
   return (
     <div className="datatable">
       <div className="datatableTitle">
-        Danh mục sản phẩm
+        <p style={{ color: "black" }}>Danh mục sản phẩm</p>
         <Link to="/products/new" className="link">
           Thêm sản phẩm
         </Link>

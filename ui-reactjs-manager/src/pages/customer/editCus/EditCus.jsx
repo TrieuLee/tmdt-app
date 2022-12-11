@@ -61,7 +61,8 @@ export default function EditCus({ inputs, title }) {
       <div className="editContainer">
         <Navbar />
         <div className="top">
-          <h1>{title}</h1>
+        <h1 style={{ color: "black" }}>{title}</h1>
+
         </div>
         <div className="bottom">
           <div className="right">

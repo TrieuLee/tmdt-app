@@ -159,7 +159,10 @@ export default function Datatable() {
   ];
   return (
     <div className="datatable">
-      <div className="datatableTitle">Danh mục đơn hàng</div>
+      <div className="datatableTitle">
+        {" "}
+        <p style={{ color: "black" }}>Danh mục đơn hàng</p>
+      </div>
       <StyledDataGrid
         className="datagrid"
         rows={data}

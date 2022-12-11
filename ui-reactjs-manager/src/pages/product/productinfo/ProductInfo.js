@@ -34,7 +34,9 @@ export default function ProductInfo() {
                 Chỉnh sửa
               </Link>
             </div>
-            <h1 className="title">Thông tin sản phẩm</h1>
+            <h1 style={{ color: "black" }} className="title">
+              Thông tin sản phẩm
+            </h1>
             <div className="item">
               <img
                 className="itemImg"

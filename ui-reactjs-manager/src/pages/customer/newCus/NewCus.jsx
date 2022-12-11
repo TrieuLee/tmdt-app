@@ -64,7 +64,7 @@ export default function New({ title }) {
       <div className="newContainer">
         <Navbar />
         <div className="top">
-          <h1>{title}</h1>
+          <h1 style={{ color: "black", fontSize: "20px" }}>{title}</h1>
         </div>
         <div className="bottom">
           <div className="right">
