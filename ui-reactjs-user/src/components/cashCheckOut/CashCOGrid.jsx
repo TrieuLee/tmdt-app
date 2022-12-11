@@ -158,7 +158,7 @@ export default function OrderGrid() {
 
       products: x,
       subtotal: carts.total.shipPrice,
-      total: carts.total.subPrice,
+      total: carts.total.totalPrice,
       payment_status: "chưa thanh toán",
       shipping: {
         name: nameCus.current.value,
