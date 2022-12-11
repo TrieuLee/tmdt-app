@@ -15,6 +15,10 @@ import EmployeeList from "./pages/employee/employeelist/EmployeeList";
 // import UserInfo from "./pages/customer/customerinfo/CustomerInfo";
 // import NewUser from "./pages/customer/newCus/NewCus";
 // import EditUser from "./pages/customer/editCus/EditCus";
+
+// Thống kê doanh thu
+import StatisticList from "./pages/statistic/statisticlist/StatisticList";
+
 // Thông tin sản phẩm
 import ProductList from "./pages/product/productlist/ProductList";
 import ProductInfo from "./pages/product/productinfo/ProductInfo";
@@ -25,7 +29,6 @@ import EditOrder from "./pages/order/editOrder/editOrder";
 // Thông tin đơn hàng
 import OrderList from "./pages/order/orderlist/OrderList";
 import OrderInfo from "./pages/order/orderinfo/OrderInfo";
-
 
 import Home from "./pages/home/Home";
 const Router = () => {
@@ -87,16 +90,19 @@ const Router = () => {
           <Route index element={user ? <OrderList /> : <Login />} />
           <Route path=":orderId" element={user ? <OrderInfo /> : <Login />} />
           <Route
-              path="edit"
-              element={
-                user ? (
-                  <EditOrder title="Chỉnh sửa thông tin Đơn hàng" />
-                ) : (
-                  <Login />
-                )
-              }
-            />
-
+            path="edit"
+            element={
+              user ? (
+                <EditOrder title="Chỉnh sửa thông tin Đơn hàng" />
+              ) : (
+                <Login />
+              )
+            }
+          />
+        </Route>
+        {/* Thống kê doanh thu */}
+        <Route path="statistic">
+          <Route index element={user ? <StatisticList /> : <Login />} />
         </Route>
 
         {/* Nhân viên */}
