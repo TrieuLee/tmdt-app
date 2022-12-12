@@ -1,10 +1,6 @@
 import React, { useState } from "react";
 import TextField from "@mui/material/TextField";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { vi } from "date-fns/locale";
 
-import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import Button from "@mui/material/Button";
 import useFetch from "../../../components/hooks/useFetch";
 import domain from "../../../utils/domain";
@@ -19,6 +15,7 @@ import Paper from "@mui/material/Paper";
 export default function Datatable() {
   const [dateIn, setDateIn] = useState("");
   const [dateOut, setDateOut] = useState("");
+  const [getdata, setGetData] = useState({});
   const header = JSON.parse(localStorage.getItem("user")).accessToken;
 
   const { data, loading, error } = useFetch(`${domain}/api/orders/${header}`);
@@ -30,7 +27,8 @@ export default function Datatable() {
         Date.parse(dateIn) <= Date.parse(item.createdAt) &&
         Date.parse(dateOut) >= Date.parse(item.createdAt)
     );
-    console.log(x);
+    setGetData(x);
+    console.log(getdata);
     if (sortOrder.length > 0) {
       let total = 0;
       sortOrder.forEach((item) => {
@@ -39,8 +37,22 @@ export default function Datatable() {
       console.log(total);
     }
   }
-  // console.log(getStatistic());
 
+  function filterOrder() {
+    const getOrder = getdata.map((item, i) => (
+      <TableRow>
+        <TableCell className="tableCell">{item.total}</TableCell>
+        <TableCell className="tableCell">{item.products}</TableCell>
+        <TableCell className="tableCell"></TableCell>
+        <TableCell className="tableCell"></TableCell>
+        <TableCell className="tableCell"></TableCell>
+        <TableCell className="tableCell"></TableCell>
+        <TableCell className="tableCell"></TableCell>
+      </TableRow>
+    ));
+
+    return getOrder;
+  }
   return (
     <div className="datatable">
       <div className="datatableTitle">
@@ -51,7 +63,6 @@ export default function Datatable() {
           <label
             className="lblColor"
             style={{ marginRight: "10px" }}
-            htmlFor="typeofRoom"
           >
             Từ ngày
           </label>
@@ -108,15 +119,15 @@ export default function Datatable() {
               </TableRow>
             </TableHead>
             <TableBody>
-              <TableRow>
-                <TableCell className="tableCell"></TableCell>
-                <TableCell className="tableCell"></TableCell>
-                <TableCell className="tableCell"></TableCell>
-                <TableCell className="tableCell"></TableCell>
-                <TableCell className="tableCell"></TableCell>
-                <TableCell className="tableCell"></TableCell>
-                <TableCell className="tableCell"></TableCell>
-              </TableRow>
+              {getStatistic.length > 0 ? (
+                <>
+                  {filterOrder()}
+                  console.log(filterOrder())
+                  Tổng doanh thu :
+                </>
+              ) : (
+                <h3>Không có dữ liệu</h3>
+              )}
             </TableBody>
           </Table>
         </TableContainer>
