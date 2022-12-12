@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import TextField from "@mui/material/TextField";
 
 import Button from "@mui/material/Button";
@@ -15,10 +15,13 @@ import Paper from "@mui/material/Paper";
 export default function Datatable() {
   const [dateIn, setDateIn] = useState("");
   const [dateOut, setDateOut] = useState("");
-  const [getdata, setGetData] = useState({});
+  const [getdata, setGetData] = useState();
   const header = JSON.parse(localStorage.getItem("user")).accessToken;
 
-  const { data, loading, error } = useFetch(`${domain}/api/orders/${header}`); 
+  const { data, loading, error } = useFetch(`${domain}/api/orders/${header}`);
+  useEffect(() => {
+    setGetData(data);
+  }, [data]);
   // con
   function getStatistic() {
     let sortOrder = [...data];
@@ -61,10 +64,7 @@ export default function Datatable() {
       </div>
       <div style={{ display: "flex", justifyContent: "space-around" }}>
         <div className="lblcheckIn">
-          <label
-            className="lblColor"
-            style={{ marginRight: "10px" }}
-          >
+          <label className="lblColor" style={{ marginRight: "10px" }}>
             Từ ngày
           </label>
           <input
@@ -123,8 +123,7 @@ export default function Datatable() {
               {getStatistic.length > 0 ? (
                 <>
                   {filterOrder()}
-                  console.log(filterOrder())
-                  Tổng doanh thu :
+                  console.log(filterOrder()) Tổng doanh thu :
                 </>
               ) : (
                 <h3>Không có dữ liệu</h3>
