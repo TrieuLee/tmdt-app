@@ -18,7 +18,8 @@ export default function Datatable() {
   const [getdata, setGetData] = useState({});
   const header = JSON.parse(localStorage.getItem("user")).accessToken;
 
-  const { data, loading, error } = useFetch(`${domain}/api/orders/${header}`);
+  const { data, loading, error } = useFetch(`${domain}/api/orders/${header}`); 
+  // con
   function getStatistic() {
     let sortOrder = [...data];
     const x = sortOrder.filter(
