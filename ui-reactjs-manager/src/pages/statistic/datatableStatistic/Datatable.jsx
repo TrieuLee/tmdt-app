@@ -1,7 +1,4 @@
 import React, { useState, useEffect } from "react";
-import TextField from "@mui/material/TextField";
-
-import Button from "@mui/material/Button";
 import useFetch from "../../../components/hooks/useFetch";
 import domain from "../../../utils/domain";
 import Table from "@mui/material/Table";
@@ -13,6 +10,8 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import moment from "moment";
 import vi from "moment/locale/vi";
+import { FaCcStripe } from "react-icons/fa";
+import { FaRegMoneyBillAlt } from "react-icons/fa";
 export default function Datatable() {
   const [dateIn, setDateIn] = useState("");
   const [dateOut, setDateOut] = useState("");
@@ -59,17 +58,43 @@ export default function Datatable() {
   // co
 
   function filterOrder() {
-    return getdata.map((i) => (
-      <TableRow>
-        <TableCell className="tableCell">{i._id}</TableCell>
-        <TableCell className="tableCell">{}</TableCell>
+    return getdata.map((i, index) => (
+      <TableRow key={index}>
+        <TableCell className="tableCell" size="small">{i._id}</TableCell>
+        <TableCell className="tableCell">
+          {i.products.map((item, index) => (
+            <li key={index} style={{ listStyle: "none" }}>
+              {item.name}
+            </li>
+          ))}
+        </TableCell>
         <TableCell className="tableCell">{i.shipping.name}</TableCell>
         <TableCell className="tableCell">
           {moment(i.createdAt).locale("vi", vi).format("dddd, LLL")}
         </TableCell>
-        <TableCell className="tableCell"></TableCell>
         <TableCell className="tableCell">
-          {i.payment_method === 0 ? "Trực tiếp" : "Trực tuyến"}
+          {i.products.map((a) => (
+            <li key={a} style={{ listStyle: "none" }}>
+              {a.quantity}
+            </li>
+          ))}
+        </TableCell>
+        <TableCell className="tableCell">
+          {i.payment_method === 1 ? (
+            <FaCcStripe
+              style={{
+                fontSize: "35px",
+                color: "blue",
+              }}
+            />
+          ) : (
+            <FaRegMoneyBillAlt
+              style={{
+                fontSize: "35px",
+                color: "green",
+              }}
+            />
+          )}
         </TableCell>
         <TableCell className="tableCell">{i.payment_status}</TableCell>
       </TableRow>
@@ -108,46 +133,24 @@ export default function Datatable() {
             onChange={(e) => setDateOut(e.target.value)}
             className="roomInput1"
           />
-          <label
-            className="lblColor"
-            style={{
-              marginLeft: "50px",
-              background: "rgb(205, 166, 85)",
-              padding: "5px",
-              cursor: "pointer",
-            }}
-            // onClick={getRooms}
-          >
-            Thống kê
-          </label>
         </div>
       </div>
 
       <div style={{ marginTop: "20px" }}>
         <TableContainer component={Paper} className="table">
-          <Table sx={{ minWidth: 650 }} aria-label="simple table">
+          <Table sx={{ minWidth: 850 }} aria-label="simple table">
             <TableHead>
               <TableRow>
                 <TableCell className="tableCell">Mã đơn hàng</TableCell>
                 <TableCell className="tableCell">Sản phẩm</TableCell>
                 <TableCell className="tableCell">Khách hàng</TableCell>
-                <TableCell className="tableCell">Date</TableCell>
-                <TableCell className="tableCell">Amount</TableCell>
-                <TableCell className="tableCell">Payment Method</TableCell>
-                <TableCell className="tableCell">Status</TableCell>
+                <TableCell className="tableCell">Ngày mua</TableCell>
+                <TableCell className="tableCell">Số lượng</TableCell>
+                <TableCell className="tableCell">Phương thức</TableCell>
+                <TableCell className="tableCell">Trạng thái</TableCell>
               </TableRow>
             </TableHead>
-            <TableBody>
-              {filterOrder()}
-              {/* {getStatistic.length > 0 ? (
-                <>
-                  {filterOrder()}
-                  console.log(filterOrder()) Tổng doanh thu :
-                </>
-              ) : (
-                <h3>Không có dữ liệu</h3>
-              )} */}
-            </TableBody>
+            <TableBody>{filterOrder()}</TableBody>
           </Table>
         </TableContainer>
       </div>

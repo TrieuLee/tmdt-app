@@ -9,7 +9,7 @@ import Typography from "@mui/material/Typography";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import domain from "../../../utils/domain";
-
+import ChangePasswordDialog from "./ChangePasswordDialog.jsx";
 export default function EditCus({ inputs, title }) {
   const [userName, setUsername] = useState("");
   const [address, setAddress] = useState("");
@@ -54,15 +54,21 @@ export default function EditCus({ inputs, title }) {
       }
     }
   };
+  const [open, setOpen] = useState(false);
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
 
+  const handleClose = () => {
+    setOpen(false);
+  };
   return (
     <div className="edit">
       <Sidebar />
       <div className="editContainer">
         <Navbar />
         <div className="top">
-        <h1 style={{ color: "black" }}>{title}</h1>
-
+          <h1 style={{ color: "black" }}>{title}</h1>
         </div>
         <div className="bottom">
           <div className="right">
@@ -110,26 +116,11 @@ export default function EditCus({ inputs, title }) {
                     onChange={(e) => setEmail(e.target.value)}
                   />
                 </div>
+                <Button onClick={handleClickOpen} sx={{textTransform:"none"}} color="error">
+                  Thay đổi mật khẩu cho khách hàng
+                </Button>
+                <ChangePasswordDialog open={open} onClose={handleClose} />
 
-                <div>
-                  <Typography variant="p" component="h2" sx={{ mt: 2 }}>
-                    Đặt lại Mật khẩu?
-                  </Typography>
-                  <TextField
-                    id="outlined-password-input"
-                    label="Mật khẩu"
-                    type="password"
-                    autoComplete="current-password"
-                    onChange={(e) => setPassword(e.target.value)}
-                  />
-                  <TextField
-                    id="outlined-confirm-password-input"
-                    label="Xác nhận mật khẩu"
-                    type="password"
-                    autoComplete="current-password"
-                    onChange={(e) => setCfrpass(e.target.value)}
-                  />
-                </div>
               </div>
               <Button variant="contained" color="success" type="submit">
                 Đồng ý
