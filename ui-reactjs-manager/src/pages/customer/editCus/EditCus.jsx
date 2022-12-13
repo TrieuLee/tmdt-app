@@ -30,9 +30,15 @@ export default function EditCus({ inputs, title }) {
       setData();
     }
   }, []);
-
+  const emailNu = JSON.parse(localStorage.getItem("editUser")).email;
+  console.log(emailNu);
   const handleClick = async (e) => {
     e.preventDefault();
+    if (password !== "") {
+      window.alert(
+        `Đã thay đổi mật khẩu. Nhân viên vui lòng thông báo cho khách hàng thông qua email: ${emailNu} `
+      );
+    }
     if (password !== cfrpass) {
       console.log("khoong trung mk");
     } else {
@@ -116,11 +122,19 @@ export default function EditCus({ inputs, title }) {
                     onChange={(e) => setEmail(e.target.value)}
                   />
                 </div>
-                <Button onClick={handleClickOpen} sx={{textTransform:"none"}} color="error">
-                  Thay đổi mật khẩu cho khách hàng
+                <Button
+                  onClick={handleClickOpen}
+                  sx={{ textTransform: "none" }}
+                  color="error"
+                >
+                  Thay đổi mật khẩu cho người dùng
                 </Button>
-                <ChangePasswordDialog open={open} onClose={handleClose} />
-
+                <ChangePasswordDialog
+                  open={open}
+                  onClose={handleClose}
+                  setPassword={setPassword}
+                  setCfrpass={setCfrpass}
+                />
               </div>
               <Button variant="contained" color="success" type="submit">
                 Đồng ý
