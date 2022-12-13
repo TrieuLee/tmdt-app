@@ -40,7 +40,7 @@ export default function Widget({ type }) {
         let initialValue = 0;
         res.data.forEach((element) => (initialValue += element.total));
         const temp = res.data.filter(
-          (x) => x.delivery_status === "đã nhận đơn hàng"
+          (x) => x.delivery_status === "Đã nhận đơn hàng"
         );
         setFilterPro(temp);
         setRevene(initialValue);

@@ -11,51 +11,69 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-
+import moment from "moment";
+import vi from "moment/locale/vi";
 export default function Datatable() {
   const [dateIn, setDateIn] = useState("");
   const [dateOut, setDateOut] = useState("");
-  const [getdata, setGetData] = useState();
+  const [getdata, setGetData] = useState([]);
   const header = JSON.parse(localStorage.getItem("user")).accessToken;
 
   const { data, loading, error } = useFetch(`${domain}/api/orders/${header}`);
   useEffect(() => {
-    setGetData(data);
-  }, [data]);
-  // con
-  function getStatistic() {
-    let sortOrder = [...data];
-    const x = sortOrder.filter(
-      (item) =>
-        item.payment_status === "Đã thanh toán" &&
-        Date.parse(dateIn) <= Date.parse(item.createdAt) &&
-        Date.parse(dateOut) >= Date.parse(item.createdAt)
-    );
-    setGetData(x);
-    console.log(getdata);
-    if (sortOrder.length > 0) {
-      let total = 0;
-      sortOrder.forEach((item) => {
-        total += item.total;
+    const getStatistic = () => {
+      let sortOrder = [...data];
+
+      const x = sortOrder.filter((item) => {
+        if (
+          item.payment_status === "Đã thanh toán" &&
+          Date.parse(dateIn) <= Date.parse(item.createdAt.slice(0, 10)) &&
+          Date.parse(dateOut) >= Date.parse(item.createdAt.slice(0, 10))
+        ) {
+          console.log(
+            item.createdAt,
+            Date.parse(dateIn) <= Date.parse(item.createdAt.slice(0, 10)),
+            Date.parse(dateOut) >= Date.parse(item.createdAt.slice(0, 10))
+          );
+          return item;
+        } else {
+          console.log(
+            item.createdAt.slice(0, 10),
+            Date.parse(dateIn) <= Date.parse(item.createdAt.slice(0, 10)),
+            Date.parse(dateOut) >= Date.parse(item.createdAt.slice(0, 10))
+          );
+        }
       });
-      console.log(total);
-    }
-  }
+      setGetData(x);
+      console.log(x);
+      if (getdata.length > 0) {
+        let total = 0;
+        getdata.forEach((item) => {
+          total += item.total;
+        });
+      }
+    };
+
+    getStatistic();
+  }, [data, dateIn, dateOut]);
+  // co
 
   function filterOrder() {
-    const getOrder = getdata.map((item, i) => (
+    return getdata.map((i) => (
       <TableRow>
-        <TableCell className="tableCell">{item.total}</TableCell>
-        <TableCell className="tableCell">{item.products}</TableCell>
+        <TableCell className="tableCell">{i._id}</TableCell>
+        <TableCell className="tableCell">{}</TableCell>
+        <TableCell className="tableCell">{i.shipping.name}</TableCell>
+        <TableCell className="tableCell">
+          {moment(i.createdAt).locale("vi", vi).format("dddd, LLL")}
+        </TableCell>
         <TableCell className="tableCell"></TableCell>
-        <TableCell className="tableCell"></TableCell>
-        <TableCell className="tableCell"></TableCell>
-        <TableCell className="tableCell"></TableCell>
-        <TableCell className="tableCell"></TableCell>
+        <TableCell className="tableCell">
+          {i.payment_method === 0 ? "Trực tiếp" : "Trực tuyến"}
+        </TableCell>
+        <TableCell className="tableCell">{i.payment_status}</TableCell>
       </TableRow>
     ));
-
-    return getOrder;
   }
   return (
     <div className="datatable">
@@ -120,14 +138,15 @@ export default function Datatable() {
               </TableRow>
             </TableHead>
             <TableBody>
-              {getStatistic.length > 0 ? (
+              {filterOrder()}
+              {/* {getStatistic.length > 0 ? (
                 <>
                   {filterOrder()}
                   console.log(filterOrder()) Tổng doanh thu :
                 </>
               ) : (
                 <h3>Không có dữ liệu</h3>
-              )}
+              )} */}
             </TableBody>
           </Table>
         </TableContainer>
