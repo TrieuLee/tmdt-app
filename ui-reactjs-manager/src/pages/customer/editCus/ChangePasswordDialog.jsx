@@ -19,6 +19,7 @@ export default function ChangePassword(props) {
             id="outlined-password-input"
             label="Mật khẩu"
             type="password"
+            sx={{ mt: 1 }}
             fullWidth
             autoComplete="current-password"
             onChange={(e) => setPassword(e.target.value)}
