@@ -10,7 +10,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import domain from "../../../utils/domain";
 import ChangePasswordDialog from "./ChangePasswordDialog.jsx";
-export default function EditCus({ inputs, title }) {
+export default function EditCus({  title }) {
   const [userName, setUsername] = useState("");
   const [address, setAddress] = useState("");
   const [phone, setphone] = useState("");
