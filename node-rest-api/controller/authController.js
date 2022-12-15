@@ -1,6 +1,7 @@
 const { User } = require("../models");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const createError = require("../utils/error");
 class AuthCRUD {
   async get(req, res) {
     try {
@@ -61,11 +62,11 @@ class AuthCRUD {
     }
   }
 
-  async login(req, res) {
+  async login(req, res, next) {
     try {
       const user = await User.findOne({ email: req.body.email });
       if (!user) {
-        return res.status(404).json("Tài khoản hoặc mật khẩu sai!");
+        return next(createError(404, "Không tìm thấy người dùng!"));
       }
 
       const validPassword = await bcrypt.compare(
@@ -73,7 +74,7 @@ class AuthCRUD {
         user.password
       );
       if (!validPassword) {
-        return res.status(400).json("Tài khoản hoặc mật khẩu sai!");
+        return next(createError(400, "Tài khoản hoặc mật khẩu sai!"));
       }
       const accessToken = jwt.sign(
         {
@@ -86,18 +87,18 @@ class AuthCRUD {
 
       res.status(200).json({ user, accessToken });
     } catch (err) {
-      res.status(500).json(err);
+      next(err);
     }
   }
-  async loginManager(req, res) {
+  async loginManager(req, res, next) {
     try {
       const user = await User.findOne({ email: req.body.email });
       if (!user) {
-        return res.status(404).json("Tài khoản hoặc mật khẩu sai!");
+        return next(createError(404, "Không tìm thấy người dùng!"));
       }
 
       if (user.role === 3) {
-        return res.status(404).json("Trang web chỉ dành cho Nhân viên");
+        return next(createError(404, "Trang web chỉ dành cho Nhân viên"));
       }
 
       const validPassword = await bcrypt.compare(
@@ -105,7 +106,7 @@ class AuthCRUD {
         user.password
       );
       if (!validPassword) {
-        return res.status(400).json("Tài khoản hoặc mật khẩu sai!");
+        return next(createError(400, "Tài khoản hoặc mật khẩu sai!"));
       }
       const accessToken = jwt.sign(
         {
@@ -118,7 +119,7 @@ class AuthCRUD {
 
       res.status(200).json({ user, accessToken });
     } catch (err) {
-      res.status(500).json(err);
+      next(err);
     }
   }
 

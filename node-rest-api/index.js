@@ -9,7 +9,6 @@ const authRoute = require("./routes/auth");
 const productRoute = require("./routes/products");
 const orderRoute = require("./routes/orders");
 const cartRoute = require("./routes/cart");
-
 const stripe = require("./routes/stripe");
 
 // Routes
@@ -26,6 +25,16 @@ const { PORT } = require("./config/index");
   app.use("/api/carts", cartRoute);
   app.use("/api/stripe", stripe);
 
+  app.use((err, req, res, next) => {
+    const errorStatus = err.status || 500;
+    const errorMessage = err.message || "Something went wrong!";
+    return res.status(errorStatus).json({
+      success: false,
+      status: errorStatus,
+      message: errorMessage,
+      stack: err.stack,
+    });
+  });
   const storage = multer.diskStorage({
     destination: (req, file, cb) => {
       cb(null, "public/images");

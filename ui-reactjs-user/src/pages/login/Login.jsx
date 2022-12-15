@@ -12,7 +12,6 @@ import InputAdornment from "@mui/material/InputAdornment";
 import InputLabel from "@mui/material/InputLabel";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
-import domain from "../../utils/domain";
 //import style
 import CircularProgress from "@mui/material/CircularProgress";
 
@@ -38,8 +37,8 @@ export default function Login() {
 
   const email = useRef();
   const password = useRef();
-  const { user, isFetching, dispatch } = useContext(AuthContext);
-
+  const { isFetching, error, dispatch } = useContext(AuthContext);
+  console.log(error);
   const handleClick = (e) => {
     e.preventDefault();
     loginCall(
@@ -103,6 +102,7 @@ export default function Login() {
               />
             </FormControl>
             <span className="loginForgot">Quên mật khẩu?</span>
+            {error && <span>{error.message}</span>}
 
             <Button
               variant="contained"

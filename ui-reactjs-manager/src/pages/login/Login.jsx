@@ -17,18 +17,17 @@ const theme = createTheme();
 
 export default function Login() {
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
-  
+
   const email = useRef();
   const password = useRef();
-  const { user, isFetching, dispatch } = useContext(AuthContext);
-  const navigate = useNavigate();
+  const { isFetching, error, dispatch } = useContext(AuthContext);
+  console.log(error);
   const handleClick = (e) => {
     e.preventDefault();
     loginCall(
       { email: email.current.value, password: password.current.value },
       dispatch
     );
-
   };
   return (
     <ThemeProvider theme={theme}>
@@ -76,6 +75,7 @@ export default function Login() {
               autoComplete="current-password"
               inputRef={password}
             />
+            {error && <span style={{ color: "red" }}>{error.message}</span>}
 
             <Button
               type="submit"
