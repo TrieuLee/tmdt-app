@@ -1,4 +1,4 @@
-import React,{useContext} from "react";
+import React, { useContext } from "react";
 import "./Sidebar.scss";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
@@ -12,7 +12,7 @@ import { FaStripe } from "react-icons/fa";
 import { AuthContext } from "../../context/AuthContext";
 export default function Sidebar() {
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
-   const { user } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
 
   return (
     <div className="sidebar">
@@ -52,7 +52,7 @@ export default function Sidebar() {
           <Link to="/orders" style={{ textDecoration: "none" }}>
             <li>
               <LocalShippingIcon className="icon" />
-              <span>Giao hàng</span>
+              <span>Quản lý Đơn hàng</span>
             </li>
           </Link>
 
@@ -72,19 +72,18 @@ export default function Sidebar() {
               <span>Báo cáo doanh thu</span>
             </li>
           </Link>
-          {user.user.role !==1 ?(
+          {user.user.role !== 1 ? (
             <div></div>
-          ):(
+          ) : (
             <>
-            <Link to="/employees" style={{ textDecoration: "none" }}>
-            <p className="title">Thông tin nhân viên</p>
-            <li>
-              <AccountCircleOutlinedIcon className="icon" />
-              <span>Hồ sơ nhân viên</span>
-            </li>
-            </Link>
+              <Link to="/employees" style={{ textDecoration: "none" }}>
+                <p className="title">Thông tin nhân viên</p>
+                <li>
+                  <AccountCircleOutlinedIcon className="icon" />
+                  <span>Hồ sơ nhân viên</span>
+                </li>
+              </Link>
             </>
-            
           )}
           <li>
             <ExitToAppIcon className="icon" />

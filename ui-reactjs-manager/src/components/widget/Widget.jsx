@@ -48,7 +48,6 @@ export default function Widget({ type }) {
             x.delivery_status !== "Hoàn thành" &&
             x.delivery_status !== "Hủy đơn hàng"
           ) {
-            console.log(x);
             return x;
           }
         });
