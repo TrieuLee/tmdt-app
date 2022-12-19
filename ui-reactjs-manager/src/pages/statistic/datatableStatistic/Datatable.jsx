@@ -22,7 +22,7 @@ export default function Datatable() {
   useEffect(() => {
     const getStatistic = () => {
       let sortOrder = [...data];
-      console.log(sortOrder);
+
 
       const x = sortOrder.filter((item) => {
         if (
@@ -40,7 +40,6 @@ export default function Datatable() {
         }
       });
       setGetData(x);
-      console.log(x);
       if (getdata.length > 0) {
         let total = 0;
         getdata.forEach((item) => {

@@ -31,7 +31,7 @@ export default function ProductGrid() {
         );
         const x = res.data.filter((i) => {
           if (i.quantity > 0 && i.state == true) {
-            console.log(i);
+
             return i;
           }
         });

@@ -19,18 +19,17 @@ import { FaCcStripe } from "react-icons/fa";
 import { FaRegMoneyBillAlt } from "react-icons/fa";
 
 export default function CustomerInfo() {
-  // const { user } = useContext(AuthContext);
+
   const location = useLocation();
   const idP = location.pathname.split("/")[2];
 
-  // console.log(idP);
+
   const [users, setUsers] = useState({});
   useEffect(() => {
     const getUsers = async () => {
       try {
         const res = await axios.get(`${domain}/api/auth/find/` + idP);
         setUsers(res.data);
-        // console.log(res.data);
         localStorage.setItem("editUser", JSON.stringify(res.data));
       } catch (err) {}
     };
@@ -45,12 +44,11 @@ export default function CustomerInfo() {
           `${domain}/api/orders/findByUser/${idP}/${header}`
         );
         setOrders(res.data);
-        // console.log(res.data);
       } catch (err) {}
     };
     getOrders();
   }, [idP]);
-  console.log(orders);
+
   return (
     <div className="single">
       <Sidebar />

@@ -23,11 +23,10 @@ export default function ChangeProfile() {
 
   const handleClick = async (e) => {
     e.preventDefault();
-    if (password !== "") {
-      window.alert(`Đã thay đổi mật khẩu. Quý khách vui lòng đăng nhập lại`);
-    }
+
     if (password !== cfrpass) {
       console.log("khoong trung mk");
+      window.alert(`Không trùng mật khẩu`);
     } else {
       const user = {
         password: password ? password : undefined,
@@ -35,20 +34,18 @@ export default function ChangeProfile() {
 
       try {
         const header = JSON.parse(localStorage.getItem("user")).accessToken;
-        const id = JSON.parse(localStorage.getItem("user"))._id;
-        console.log(id);
-        await axios.put(`${domain}/api/users/${id}/${header}`, user);
+        const id = JSON.parse(localStorage.getItem("user")).user._id;
+
+        await axios.put(`${domain}/api/users/password/${id}/${header}`, user);
         navigate("/");
-      } catch (err) {
-        console.log(err);
-      }
+      } catch (err) {}
     }
   };
 
   return (
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
-        <CssBaseline  />
+        <CssBaseline />
         <Box
           sx={{
             marginTop: 8,

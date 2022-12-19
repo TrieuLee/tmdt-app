@@ -36,15 +36,7 @@ export default function Datatable() {
   const [list, setList] = useState("");
   const { data, loading, error } = useFetch(`${domain}/api/${path}/${header}`);
   useEffect(() => {
-    const temp = data.filter((x) => {
-      if (
-        x.delivery_status !== "Hoàn thành" &&
-        x.delivery_status !== "Hủy đơn hàng"
-      ) {
-        return x;
-      }
-    });
-    setList(temp);
+    setList(data);
   }, [data]);
 
   const shipping = data.map((item) => item.shipping.name);
@@ -169,7 +161,7 @@ export default function Datatable() {
       </div>
       <StyledDataGrid
         className="datagrid"
-        rows={list}
+        rows={data}
         columns={userColumns.concat(actionColumn)}
         pageSize={9}
         rowsPerPageOptions={[9]}

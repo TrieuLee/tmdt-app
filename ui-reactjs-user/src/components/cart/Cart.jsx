@@ -29,8 +29,7 @@ export default function Cart(props) {
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
-  // console.log(cart.products[0].img);
-  // console.log(cart);
+
   const getTotal = () => {
     let totalQuantity = 0;
     let subPrice = 0;
@@ -42,7 +41,7 @@ export default function Cart(props) {
       totalQuantity += item.quantity;
       subPrice += item.price * item.quantity;
     });
-    console.log(user.user.reward);
+
     discountPrice = user.user.reward >= 2 ? (subPrice * 0.05) | 0 : 0;
     shipPrice = subPrice < 1000 ? (subPrice * 0.01) | 0 : 0;
     totalPrice = subPrice + shipPrice - discountPrice;

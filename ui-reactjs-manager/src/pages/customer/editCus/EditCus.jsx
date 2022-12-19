@@ -31,7 +31,7 @@ export default function EditCus({  title }) {
     }
   }, []);
   const emailNu = JSON.parse(localStorage.getItem("editUser")).email;
-  console.log(emailNu);
+
   const handleClick = async (e) => {
     e.preventDefault();
     if (password !== "") {

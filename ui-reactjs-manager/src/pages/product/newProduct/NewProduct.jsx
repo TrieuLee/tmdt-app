@@ -78,7 +78,6 @@ export default function New({ title }) {
   // const onFileChange = (event) => {
   //   // Update the state
   //   setImage(event);
-  //   console.log(image);
   // };
 
   return (

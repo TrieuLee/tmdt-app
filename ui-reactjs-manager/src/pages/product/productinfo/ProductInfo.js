@@ -9,7 +9,6 @@ import domain from "../../../utils/domain";
 export default function ProductInfo() {
   const location = useLocation();
   const idP = location.pathname.split("/")[2];
-  console.log(idP);
   const [products, setProducts] = useState({});
   useEffect(() => {
     const getProducts = async () => {
@@ -21,7 +20,6 @@ export default function ProductInfo() {
     };
     getProducts();
   }, [idP]);
-  console.log(products.size);
   return (
     <div className="single">
       <Sidebar />

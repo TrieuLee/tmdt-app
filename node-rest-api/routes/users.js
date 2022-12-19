@@ -12,6 +12,11 @@ router.put(
   userController.update
 );
 router.put(
+  "/password/:id/:header",
+  verifyToken,
+  userController.update
+);
+router.put(
   "/reward/:id/:header",
   verifyToken,
   verifyTokenAndAuthoriation,
