@@ -1,4 +1,4 @@
-const { Product } = require("../models");
+const { Product, Order } = require("../models");
 
 class ProductCRUD {
   // Create
@@ -30,13 +30,16 @@ class ProductCRUD {
     }
   }
   async updateQuantity(req, res) {
+    // id của order
     try {
-      // id của order
-      console.log(req.body);
-      const updatedProduct = await Product.findById(req.params.id);
-      updatedProduct.quantity += req.body.quantity;
-      await updatedProduct.save();
-      res.status(200).json(updatedProduct);
+      const orderData = await Order.findById(req.params.id);
+      orderData.products.forEach(async (i) => {
+        const updateProduct = await Product.findById(i.productId);
+        updateProduct.quantity += i.quantity;
+        await updateProduct.save();
+      });
+
+      res.status(200).json(orderData);
     } catch (err) {
       res.status(500).json(err);
     }
