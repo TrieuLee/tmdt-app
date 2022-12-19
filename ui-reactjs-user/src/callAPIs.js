@@ -13,11 +13,9 @@ export const loginCall = async (userCredentials, dispatch) => {
 };
 
 export const forgetCall = async (userCredentials, dispatch) => {
-  const nav = useNavigate;
   dispatch({ type: "FORGET_START" });
   try {
     const res = await axios.put(`${domain}/api/auth/forget`, userCredentials);
-
     dispatch({ type: "FORGET_SUCCESS", payload: res.data });
   } catch (err) {
     dispatch({ type: "FORGET_FAILURE", payload: err.response.data });
