@@ -1,10 +1,10 @@
-const { User } = require("../models");
+const { User, Order } = require("../models");
 const bcrypt = require("bcryptjs");
 
 class UserCURD {
   async update(req, res) {
     // if (req.user.id === req.params.id) {
-    
+
     if (req.body.password) {
       try {
         const salt = await bcrypt.genSalt(10);
@@ -28,6 +28,23 @@ class UserCURD {
     // } else {
     //   return res.status(403).json("bạn chỉ có thể cập nhập tài khoản của bạn");
     // }
+  }
+  async updateReward(req, res) {
+    try {
+      const successOrder = await Order.find({ userId: req.params.id });
+      if (!successOrder) res.status(500).json("Invalid update Reward");
+      else {
+        const x = successOrder.filter(
+          (i) => i.delivery_status === "Hoàn thành"
+        );
+        const updateUser = await User.findById(req.params.id);
+        updateUser.reward = x.length;
+        await updateUser.save();
+        res.status(200).json(x);
+      }
+    } catch (err) {
+      res.status(500).json("Invalid update Reward");
+    }
   }
   async delete(req, res) {
     try {
