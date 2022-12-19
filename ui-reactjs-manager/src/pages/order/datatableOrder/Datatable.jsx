@@ -100,7 +100,6 @@ export default function Datatable() {
       editable: true,
       headerAlign: "center",
       align: "center",
-      type: "singleSelect",
     },
 
     {
