@@ -46,7 +46,6 @@ export default function UserProfile() {
       try {
         const res = await axios.get(`${domain}/api/auth/find/` + idUser);
         setUpdateUser(res.data);
-   
       } catch (err) {}
     };
     const getOrders = async () => {
@@ -61,7 +60,7 @@ export default function UserProfile() {
     getUsers();
     getOrders();
     handleClick();
-  }, [idUser, orderId, updateUser]);
+  }, [idUser, updateUser]);
 
   const handleClick = async (e) => {
     if (orderId !== "") {
@@ -72,7 +71,8 @@ export default function UserProfile() {
           const id = orderId;
           await axios.put(`${domain}/api/products/quantity/${id}/${header}`);
         } catch (e) {}
-      } else setOrderId("");
+      }
+      setOrderId("");
     }
   };
 
