@@ -36,21 +36,20 @@ export default function Cart(props) {
     let subPrice = 0;
     let shipPrice = 0;
     let totalPrice = 0;
+    let discountPrice = 0;
     cart.products.forEach((item) => {
       const x = item.img;
       totalQuantity += item.quantity;
       subPrice += item.price * item.quantity;
-      shipPrice = subPrice < 1000 ? (subPrice * 0.05) | 0 : 0;
-      totalPrice = subPrice + shipPrice;
     });
-    return { subPrice, totalPrice, totalQuantity, shipPrice };
+    console.log(user.user.reward);
+    discountPrice = user.user.reward >= 2 ? (subPrice * 0.05) | 0 : 0;
+    shipPrice = subPrice < 1000 ? (subPrice * 0.01) | 0 : 0;
+    totalPrice = subPrice + shipPrice - discountPrice;
+
+    return { subPrice, totalPrice, totalQuantity, shipPrice, discountPrice };
   };
-  //   const itemsPrice = cart
-  //     ? cart.reduce((a, c) => a + c.price * c.quantity, 0)
-  //     : 0;
-  // const dis = getTotal().totalPrice * 0.01;
-  // const shippingPrice = getTotal().totalPrice < 200000 ? 0 : dis;
-  // //   const totalPrice = itemsPrice + shippingPrice;
+
   function SetCartPayment() {
     const x = cart.products.map((item) => {
       return {
