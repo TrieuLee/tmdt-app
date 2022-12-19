@@ -5,7 +5,7 @@ const stripe = require("stripe")(
   "sk_test_51M4DNQLPEIpJHgz9Ph5mee7rbBlhBk6nyzzASuyzG9ywTZfxFRzBVc8PzW1x6btHGaufcRI7zNeOG9uEoSREmS8O00bzDXn395"
 );
 const { Order } = require("../models");
-const YOUR_DOMAIN = "http://localhost:3000";
+const YOUR_DOMAIN = "https://huflit-sneaker-11.netlify.app/";
 
 router.post("/create-checkout-session", async (req, res) => {
   const cart = req.body.carts.cart;
@@ -140,7 +140,6 @@ const createOrder = async (customer, data) => {
       updateProduct.quantity -= i.quantity;
       await updateProduct.save();
     });
-
   } catch (err) {
     console.log(err);
   }
