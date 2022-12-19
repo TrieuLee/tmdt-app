@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useContext, useRef, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import TextField from "@mui/material/TextField";
@@ -12,15 +12,9 @@ import InputLabel from "@mui/material/InputLabel";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import domain from "../../utils/domain";
-//import style
-import "./register.scss";
 
-export default function Register() {
+export default function Forget() {
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
-
-  const username = useRef();
-  const address = useRef();
-  const phone = useRef();
   const email = useRef();
   const password = useRef();
   const confirmPassword = useRef();
@@ -49,14 +43,11 @@ export default function Register() {
       confirmPassword.current.setCustomValidity("Mật khẩu không khớp");
     } else {
       const user = {
-        username: username.current.value,
         email: email.current.value,
         password: password.current.value,
-        address: address.current.value,
-        phone: phone.current.value,
       };
       try {
-        await axios.post(`${domain}/api/auth/register`, user);
+        await axios.put(`${domain}/api/auth/forget`, user);
         navigate("/login");
       } catch (err) {
         console.log(err);
@@ -66,50 +57,31 @@ export default function Register() {
 
   return (
     <div
-      className="register"
+      className="login"
       style={{
         backgroundImage: "url(" + PF + "img/5482397.jpg)",
         backgroundSize: "cover",
       }}
     >
-      <div className="registerWrapper">
-        <div className="registerLeft">
-          <h3 className="registerLogo">.Sneaker</h3>
-          <span className="registerDesc" style={{ color: "white" }}>
+      <div className="loginWrapper">
+        <div className="loginLeft">
+          <h3 className="loginLogo">.Sneaker</h3>
+          <span className="loginDesc" style={{ color: "white" }}>
             Hãy là thời trang của chính mình
           </span>
         </div>
-        <div className="registerRight">
+        <div className="loginRight">
           <Box
             component="form"
             sx={{
               "& .MuiTextField-root": { m: 1, width: "60ch" },
             }}
-            className="registerBox"
+            className="loginBox"
             onSubmit={handleClick}
           >
             <TextField
               required
-              id="outlined-username"
-              label="Tên khách hàng"
-              inputRef={username}
-            />
-            <TextField
-              required
-              id="outlined-phone"
-              label="Số điện thoại"
-              inputRef={phone}
-            />
-            <TextField
-              required
-              id="outlined-address"
-              label="Địa chỉ"
-              inputRef={address}
-            />
-
-            <TextField
-              required
-              id="outlined-email"
+              id="outlined-required"
               label="Email"
               inputRef={email}
             />
@@ -167,47 +139,14 @@ export default function Register() {
                 label="Confirm Password"
               />
             </FormControl>
+            <span className="loginForgot">Quên mật khẩu?</span>
 
-            <Button variant="contained" className="registerButon" type="submit">
-              Đăng nhập
-            </Button>
+            <Button
+              variant="contained"
+              className="loginButon"
+              type="submit"
+            ></Button>
           </Box>
-          {/* <form className="registerRight" onSubmit={handleClick}>
-          <div className="registerBox">
-            <input
-              placeholder="Tên đăng nhập"
-              type="text"
-              className="registerInput"
-              ref={username}
-              required
-            />
-            <input
-              placeholder="Email"
-              type="email"
-              className="registerInput"
-              ref={email}
-              required
-            />
-            <input
-              placeholder="Mật khẩu"
-              type="password"
-              className="registerInput"
-              ref={password}
-              required
-              minLength="8"
-            />
-            <input
-              placeholder="Nhập lại mật khẩu"
-              type="password"
-              className="registerInput"
-              ref={confirmPassword}
-              required
-              minLength="8"
-            />
-            <button className="registerButon">Đăng ký</button>
-            <button className="registerLoginButton">Đăng nhập</button>
-          </div>
-        </form> */}
         </div>
       </div>
     </div>
