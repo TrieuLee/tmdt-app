@@ -80,6 +80,11 @@ export default function EditProduct({ title }) {
       if (deliveryStatus === "Hoàn thành") {
         await axios.put(`${domain}/api/users/reward/${userId}/${header}`);
         navigate("/orders");
+      } else {
+        if (deliveryStatus === "Hủy đơn hàng") {
+          await axios.put(`${domain}/api/products/quantity/${id}/${header}`);
+          navigate("/orders");
+        }
       }
       navigate("/orders");
     } catch (err) {
