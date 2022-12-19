@@ -111,7 +111,6 @@ router.post("/create-checkout-session", async (req, res) => {
 
 const createOrder = async (customer, data) => {
   const Items = JSON.parse(customer.metadata.cart);
-  console.log(Items);
   const products = Items.map((item) => {
     const product = {
       productId: item.id,
