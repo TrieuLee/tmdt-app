@@ -60,7 +60,7 @@ export default function UserProfile() {
     getUsers();
     getOrders();
     handleClick();
-  }, [idUser, updateUser]);
+  }, [idUser]);
 
   const handleClick = async (e) => {
     if (orderId !== "") {
