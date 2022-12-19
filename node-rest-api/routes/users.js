@@ -11,6 +11,12 @@ router.put(
   verifyTokenAndAuthoriation,
   userController.update
 );
+router.put(
+  "/reward/:id/:header",
+  verifyToken,
+  verifyTokenAndAuthoriation,
+  userController.updateReward
+);
 router.delete(
   "/:id/:header",
   verifyToken,

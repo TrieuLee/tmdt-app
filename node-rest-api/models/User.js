@@ -39,6 +39,10 @@ const UserSchema = new mongoose.Schema(
       default: 3,
       enum: [1, 2, 3],
     },
+    reward: {
+      type: Number,
+      default: 0,
+    },
   },
   { timestamps: true }
 );

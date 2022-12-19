@@ -22,11 +22,13 @@ export default function EditProduct({ title }) {
   const [deliveryStatus, setDeliveryStatus] = useState("");
   const [paymentMethod, setPaymentMethod] = useState(0);
   const [paymentStatus, setPaymentStatus] = useState("");
+  const [userId, setUserId] = useState("");
 
   const navigate = useNavigate();
 
   const setData = () => {
     setName(JSON.parse(localStorage.getItem("editOrder")).shipping.name);
+    setUserId(JSON.parse(localStorage.getItem("editOrder")).userId);
     setAddress(
       JSON.parse(localStorage.getItem("editOrder")).payment_method === 0
         ? JSON.parse(localStorage.getItem("editOrder")).shipping.address
@@ -75,6 +77,10 @@ export default function EditProduct({ title }) {
       const header = JSON.parse(localStorage.getItem("user")).accessToken;
       const id = JSON.parse(localStorage.getItem("editOrder"))._id;
       await axios.put(`${domain}/api/orders/${id}/${header}`, order);
+      if (deliveryStatus === "Hoàn thành") {
+        await axios.put(`${domain}/api/users/reward/${userId}/${header}`);
+        navigate("/orders");
+      }
       navigate("/orders");
     } catch (err) {
       console.log(err);
