@@ -111,7 +111,6 @@ router.post("/create-checkout-session", async (req, res) => {
 
 const createOrder = async (customer, data) => {
   const Items = JSON.parse(customer.metadata.cart);
-  console.log(Items);
   const products = Items.map((item) => {
     const product = {
       productId: item.id,
@@ -135,6 +134,11 @@ const createOrder = async (customer, data) => {
 
   try {
     const savedOrder = await newOrder.save();
+    savedOrder.products.forEach(async (i) => {
+      const updateProduct = await Product.findById(i.productId);
+      updateProduct.quantity -= i.quantity;
+      await updateProduct.save();
+    });
     console.log(savedOrder);
   } catch (err) {
     console.log(err);

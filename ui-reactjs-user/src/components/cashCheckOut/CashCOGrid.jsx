@@ -41,13 +41,14 @@ export default function OrderGrid() {
   console.log(carts.total);
   const x = carts.cart.map((item) => {
     const temp = {
-      id: item._id,
+      productId: item._id,
       quantity: item.quantity,
       name: item.name,
       price: item.price,
     };
     return temp;
   });
+
   const { user } = useContext(AuthContext);
   const breadcrumbs = [
     <Link

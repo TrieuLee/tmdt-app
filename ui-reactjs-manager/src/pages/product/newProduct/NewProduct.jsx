@@ -25,6 +25,7 @@ export default function New({ title }) {
   const [file, setFile] = useState(null);
   const name = useRef("");
   const price = useRef("");
+  const quantity = useRef("");
 
   const navigate = useNavigate();
   const changeBrand = (event) => {
@@ -55,6 +56,7 @@ export default function New({ title }) {
       size: size ? size : [],
       brand: brand ? brand : [],
       state: state ? state : true,
+      quantity: quantity.current.value,
     };
     if (file) {
       const data = new FormData();
@@ -130,6 +132,12 @@ export default function New({ title }) {
                     label="Giá tiền"
                     variant="outlined"
                     inputRef={price}
+                  />
+                  <TextField
+                    id="outlined-basic"
+                    label="Số lượng"
+                    variant="outlined"
+                    inputRef={quantity}
                   />
                   <FormControl sx={{ m: 1, width: "50ch" }}>
                     <InputLabel id="demo-simple-select-label">

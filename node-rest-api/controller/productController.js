@@ -29,7 +29,17 @@ class ProductCRUD {
       res.status(500).json(err);
     }
   }
-
+  async updateQuantity(req, res) {
+    try {
+      console.log(req.body);
+      const updatedProduct = await Product.findById(req.params.id);
+      updatedProduct.quantity += req.body.quantity;
+      await updatedProduct.save();
+      res.status(200).json(updatedProduct);
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  }
   // Delete
   async delete(req, res) {
     try {

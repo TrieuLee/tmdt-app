@@ -5,8 +5,23 @@ const {
 } = require("../middleware/verifyToken");
 const productController = require("../controller/productController");
 
-router.post("/:header", verifyToken, verifyTokenAndUpdate, productController.create);
-router.put("/:id/:header", verifyToken, verifyTokenAndUpdate, productController.update);
+router.post(
+  "/:header",
+  verifyToken,
+  verifyTokenAndUpdate,
+  productController.create
+);
+router.put(
+  "/:id/:header",
+  verifyToken,
+  verifyTokenAndUpdate,
+  productController.update
+);
+router.put(
+  "/quantity/:id/:header",
+  verifyToken,
+  productController.updateQuantity
+);
 router.delete(
   "/:id/:header",
   verifyToken,

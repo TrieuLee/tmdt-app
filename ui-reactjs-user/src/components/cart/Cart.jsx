@@ -56,6 +56,7 @@ export default function Cart(props) {
       return {
         ...item,
         img: domain + "/images/" + item.img,
+        productId: item._id,
       };
     });
     const lstOrFd = {
