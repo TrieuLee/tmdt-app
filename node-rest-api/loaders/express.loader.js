@@ -6,8 +6,8 @@ const cors = require("cors");
 module.exports = async (expressApp) => {
   dotenv.config();
   expressApp.use(express.json());
-  expressApp.use(helmet({ crossOriginResourcePolicy: false,}));
-  
+  expressApp.use(helmet({ crossOriginResourcePolicy: false }));
+
   expressApp.use(
     cors({
       origin: [
