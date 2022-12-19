@@ -106,7 +106,7 @@ export default function Login() {
                 style={{ color: "blue", textDecoration: "none" }}
                 to="/forget"
               >
-                Quên mật khẩu?  
+                Quên mật khẩu?
               </Link>
             </span>
             {error && <span style={{ color: "red" }}>{error.message}</span>}
