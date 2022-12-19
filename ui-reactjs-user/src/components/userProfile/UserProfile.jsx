@@ -35,12 +35,20 @@ export default function UserProfile() {
   const { user } = useContext(AuthContext);
   const [orders, setOrders] = useState([]);
   const [orderId, setOrderId] = useState("");
+  const [updateUser, setUpdateUser] = useState("");
   const idUser = user.user._id ? user.user._id : "";
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
   const [deliveryStatus, setDeliveryStatus] = useState("Hủy đơn hàng");
 
   useEffect(() => {
     const header = JSON.parse(localStorage.getItem("user")).accessToken;
+    const getUsers = async () => {
+      try {
+        const res = await axios.get(`${domain}/api/auth/find/` + idUser);
+        setUpdateUser(res.data);
+        // console.log(res.data);
+      } catch (err) {}
+    };
     const getOrders = async () => {
       try {
         const res = await axios.get(
@@ -50,9 +58,10 @@ export default function UserProfile() {
         localStorage.setItem("userOrder", JSON.stringify(res.data));
       } catch (err) {}
     };
+    getUsers();
     getOrders();
     handleClick();
-  }, [idUser, orderId]);
+  }, [idUser, orderId, updateUser]);
 
   const handleClick = async (e) => {
     if (orderId !== "") {
@@ -288,16 +297,16 @@ export default function UserProfile() {
                   Thông tin khách hàng
                 </Typography>
                 <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                  Tên khách hàng: {user.user.username}
+                  Tên khách hàng: {updateUser.username}
                 </Typography>
                 <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                  Địa chỉ: {user.user.address}
+                  Địa chỉ: {updateUser.address}
                 </Typography>
                 <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                  Số điện thoại: {user.user.phone}
+                  Số điện thoại: {updateUser.phone}
                 </Typography>
                 <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                  Điểm thưởng: {user.user.reward}
+                  Điểm thưởng: {updateUser.reward}
                 </Typography>
                 <Typography sx={{ mb: 1.5 }} color="text.secondary">
                   Thành viên:
