@@ -31,6 +31,7 @@ class ProductCRUD {
   }
   async updateQuantity(req, res) {
     try {
+      // id của order
       console.log(req.body);
       const updatedProduct = await Product.findById(req.params.id);
       updatedProduct.quantity += req.body.quantity;

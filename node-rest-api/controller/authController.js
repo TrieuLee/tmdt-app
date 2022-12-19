@@ -1,4 +1,4 @@
-const { User } = require("../models");
+const { User, Order } = require("../models");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const createError = require("../utils/error");
@@ -76,6 +76,7 @@ class AuthCRUD {
       if (!validPassword) {
         return next(createError(400, "Tài khoản hoặc mật khẩu sai!"));
       }
+
       const accessToken = jwt.sign(
         {
           id: user._id,

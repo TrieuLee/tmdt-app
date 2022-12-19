@@ -3,7 +3,7 @@ import "./UserProfile.scss";
 import axios from "axios";
 import moment from "moment";
 import vi from "moment/locale/vi";
-
+import { useNavigate } from "react-router-dom";
 import Grid from "@mui/material/Grid";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
@@ -16,6 +16,7 @@ import { DataGrid } from "@mui/x-data-grid";
 import { AuthContext } from "../../context/AuthContext";
 import { styled } from "@mui/material/styles";
 import domain from "../../utils/domain";
+
 const StyledDataGrid = styled(DataGrid)(({ theme }) => ({
   "& .MuiDataGrid-renderingZone": {
     maxHeight: "none !important",
@@ -35,6 +36,7 @@ export default function UserProfile() {
   const [orders, setOrders] = useState([]);
   const idUser = user.user._id ? user.user._id : "";
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
+  const [deliveryStatus, setDeliveryStatus] = useState("Hủy đơn hàng");
 
   useEffect(() => {
     const header = JSON.parse(localStorage.getItem("user")).accessToken;
@@ -44,19 +46,34 @@ export default function UserProfile() {
           `${domain}/api/orders/findByUser/${idUser}/${header}`
         );
         setOrders(res.data);
-        // console.log(res.data);
+        localStorage.setItem("userOrder", JSON.stringify(res.data));
       } catch (err) {}
     };
     getOrders();
   }, [idUser]);
-  console.log(orders);
+
+  const handleClick = async (e) => {
+    e.preventDefault();
+    console.log(e);
+    // const answer = window.confirm("Bạn có chắc chắn hủy đơn hàng?");
+    // if (answer) {
+    //   const order = {
+    //     delivery_status: deliveryStatus ? deliveryStatus : undefined,
+    //   };
+    //   try {
+    //     const header = JSON.parse(localStorage.getItem("user")).accessToken;
+    //     const id = JSON.parse(localStorage.getItem("userOrder"))._id;
+    //     await axios.put(`${domain}/api/orders/${id}/${header}`, order);
+    //   } catch (e) {}
+    // }
+  };
 
   const size1Map = orders.map((item) =>
     item.products.map((product, i) => product?.quantity)
   );
 
   const columns = [
-    { field: "_id", headerName: "Mã đơn hàng", width: 120 },
+    // { field: "_id", headerName: "Mã đơn hàng", width: 120 },
     {
       field: "products",
       headerName: "Sản phẩm",
@@ -86,12 +103,12 @@ export default function UserProfile() {
 
     {
       field: "delivery_status",
-      headerName: "Tình trạng ",
+      headerName: "Tình trạng",
       width: 100,
     },
     {
       field: "payment_method",
-      headerName: "Phương thức ",
+      headerName: "Phương thức",
       width: 100,
       renderCell: (params) => {
         if (params.row.payment_method !== 0) {
@@ -117,7 +134,7 @@ export default function UserProfile() {
     },
     {
       field: "payment_status",
-      headerName: "Thanh toán",
+      headerName: "Thanhtoán",
       width: 100,
     },
     {
@@ -127,17 +144,30 @@ export default function UserProfile() {
       valueGetter: (params) =>
         moment(params.value).locale("vi", vi).format("L"),
     },
+    {
+      field: "_id",
+      headerName: "Thao tác",
+      width: 100,
+      renderCell: (params) => {
+        console.log(params)
+        return(
+          <button onClick={handleClick}>Huy don hang</button>
+        )
+      },
+    },
   ];
   const history = [
-    { field: "_id", headerName: "STT", width: 90 },
+    { field: "_id", headerName: "Mã đơn hàng", width: 230 },
     {
       field: "products",
       headerName: "Sản phẩm",
       width: 200,
+      align: "left",
+
       renderCell: (params) => (
-        <ul style={{ listStyle: "none" }}>
+        <ul style={{ listStyle: "none", padding: "0px" }}>
           {params.value.map((role, index) => (
-            <li key={index}>{role.name}</li>
+            <li key={role.name}>{role.name}</li>
           ))}
         </ul>
       ),
@@ -221,6 +251,29 @@ export default function UserProfile() {
               <StyledDataGrid
                 rows={orders}
                 columns={columns}
+                initialState={{
+                  filter: {
+                    filterModel: {
+                      items: [
+                        {
+                          columnField: "payment_status",
+                          operatorValue: "contains",
+                          value: "Chưa thanh toán",
+                        },
+                        {
+                          columnField: "delivery_status",
+                          operatorValue: "contains",
+                          value: "Đã nhận đơn hàng",
+                        },
+                        {
+                          columnField: "delivery_status",
+                          operatorValue: "contains",
+                          value: "Hủy đơn hàng",
+                        },
+                      ],
+                    },
+                  },
+                }}
                 pageSize={5}
                 rowsPerPageOptions={[5]}
                 getRowHeight={() => "auto"}
@@ -247,7 +300,7 @@ export default function UserProfile() {
                   Điểm thưởng: {user.user.reward}
                 </Typography>
                 <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                  Thành viên: Thường
+                  Thành viên: 
                 </Typography>
               </CardContent>
             </Card>
@@ -264,6 +317,19 @@ export default function UserProfile() {
             getRowHeight={() => "auto"}
             rowsPerPageOptions={[5]}
             getRowId={(rows) => rows._id}
+            initialState={{
+              filter: {
+                filterModel: {
+                  items: [
+                    {
+                      columnField: "delivery_status",
+                      operatorValue: "contains",
+                      value: "Hoàn thành",
+                    },
+                  ],
+                },
+              },
+            }}
           />
         </Box>
       </Container>

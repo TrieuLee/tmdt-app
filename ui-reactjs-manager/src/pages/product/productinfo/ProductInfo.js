@@ -61,18 +61,21 @@ export default function ProductInfo() {
                 </div>
                 <div className="detailItem">
                   <span className="itemKey">Size:</span>
-                  <span className="itemValue">
-                    {products.size &&
-                      products.size.map((record, i) => (
-                        <span key={i}>{record}, </span>
-                      ))}
-                  </span>
+                  <span className="itemValue">{products.size?.join()}</span>
                 </div>
 
                 <div className="detailItem">
                   <span className="itemKey">Tình trạng:</span>
                   <span className="itemValue">
-                    {products.state ? "Còn hàng" : "Tạm hết"}
+                    {products.state ? (
+                      <span style={{ color: "green", fontWeight: "bold" }}>
+                        Còn hàng
+                      </span>
+                    ) : (
+                      <span style={{ color: "red", fontWeight: "bold" }}>
+                        Tạm hết
+                      </span>
+                    )}
                   </span>
                 </div>
               </div>

@@ -47,7 +47,7 @@ export default function Datatable() {
     {
       field: "_id",
       headerName: "ID",
-      width: 230,
+      width: 180,
       headerAlign: "center",
     },
     {

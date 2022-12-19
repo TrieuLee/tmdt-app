@@ -9,6 +9,7 @@ import PersonAdd from "@mui/icons-material/PersonAdd";
 import Avatar from "@mui/material/Avatar";
 import { AuthContext } from "../../context/AuthContext";
 import { IconButton } from "@mui/material";
+import Settings from "@mui/icons-material/Settings";
 
 export default function NavDropDown() {
   const { user } = useContext(AuthContext);
@@ -93,7 +94,17 @@ export default function NavDropDown() {
             Hồ sơ cá nhân
           </Link>
         </MenuItem>
-
+        <MenuItem>
+          <ListItemIcon>
+            <Settings fontSize="small" />
+          </ListItemIcon>
+          <Link
+            to="/change-profile"
+            style={{ textDecoration: "none", color: "black" }}
+          >
+            Đổi mật khẩu{" "}
+          </Link>
+        </MenuItem>
         <MenuItem onClick={handleLogOut}>
           <ListItemIcon>
             <Logout fontSize="small" />
