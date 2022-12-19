@@ -38,6 +38,9 @@ export default function Forget() {
   // MUI
 
   const handleClick = async (e) => {
+    if (password !== "") {
+      window.alert(`Bạn đã đổi mật khẩu thành công. Chúc bạn mua sắm vui vẻ`);
+    }
     e.preventDefault();
     if (confirmPassword.current.value !== password.current.value) {
       confirmPassword.current.setCustomValidity("Mật khẩu không khớp");
@@ -139,13 +142,10 @@ export default function Forget() {
                 label="Confirm Password"
               />
             </FormControl>
-            <span className="loginForgot">Quên mật khẩu?</span>
 
-            <Button
-              variant="contained"
-              className="loginButon"
-              type="submit"
-            ></Button>
+            <Button variant="contained" className="loginButon" type="submit">
+              Xác nhận
+            </Button>
           </Box>
         </div>
       </div>
