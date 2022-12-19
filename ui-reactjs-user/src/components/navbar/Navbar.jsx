@@ -131,7 +131,7 @@ export default function Navbar(props) {
                     >
                       <div style={{ display: "flex" }}>
                         <img
-                          src={item.img}
+                          src={`${domain}/images/${item.img}`}
                           alt=""
                           style={{
                             width: "50px",

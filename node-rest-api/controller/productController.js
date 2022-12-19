@@ -16,6 +16,7 @@ class ProductCRUD {
 
   // Update
   async update(req, res) {
+    console.log(req.body);
     try {
       const updatedProduct = await Product.findByIdAndUpdate(
         req.params.id,

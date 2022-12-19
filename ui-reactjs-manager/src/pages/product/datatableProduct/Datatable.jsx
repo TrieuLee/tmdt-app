@@ -23,6 +23,7 @@ export default function Datatable() {
   const location = useLocation();
   const path = location.pathname.split("/")[1];
   const [list, setList] = useState("");
+  
   const { data, loading, error } = useFetch(`${domain}/api/${path}`);
   useEffect(() => {
     setList(data);
@@ -89,6 +90,13 @@ export default function Datatable() {
       field: "size",
       headerName: "Size",
       width: 150,
+      headerAlign: "center",
+      align: "center",
+    },
+    {
+      field: "quantity",
+      headerName: "Số lượng",
+      width: 90,
       headerAlign: "center",
       align: "center",
     },

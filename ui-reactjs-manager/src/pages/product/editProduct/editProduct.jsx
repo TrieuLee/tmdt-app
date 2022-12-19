@@ -25,6 +25,7 @@ export default function EditProduct({ title }) {
   const [price, setPrice] = useState("");
   const [file, setFile] = useState(null);
   const [img, setImg] = useState(null);
+  const [quantity, setQuantity] = useState(null);
 
   const navigate = useNavigate();
 
@@ -34,6 +35,7 @@ export default function EditProduct({ title }) {
     setName(JSON.parse(localStorage.getItem("editProduct")).name);
     setPrice(JSON.parse(localStorage.getItem("editProduct")).price);
     setImg(JSON.parse(localStorage.getItem("editProduct")).img);
+    setQuantity(JSON.parse(localStorage.getItem("editProduct")).quantity);
   };
   useEffect(() => {
     if (localStorage.getItem("editProduct")) {
@@ -69,6 +71,7 @@ export default function EditProduct({ title }) {
       brand: brand ? brand : [],
       state: state !== undefined ? state : true,
       img: img ? img : undefined,
+      quantity: quantity ? quantity : undefined,
     };
     if (file) {
       const data = new FormData();
@@ -142,6 +145,13 @@ export default function EditProduct({ title }) {
                     variant="outlined"
                     value={price}
                     onChange={(e) => setPrice(e.target.value)}
+                  />
+                  <TextField
+                    id="outlined-basic"
+                    label="Số lượng"
+                    variant="outlined"
+                    value={quantity}
+                    onChange={(e) => setQuantity(e.target.value)}
                   />
                   <FormControl sx={{ m: 1, width: "50ch" }}>
                     <InputLabel id="demo-simple-select-label">
