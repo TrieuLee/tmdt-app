@@ -38,7 +38,8 @@ class ProductCRUD {
         updateProduct.quantity += i.quantity;
         await updateProduct.save();
       });
-
+      orderData.delivery_status = "Hủy đơn hàng";
+      await orderData.save();
       res.status(200).json(orderData);
     } catch (err) {
       res.status(500).json(err);

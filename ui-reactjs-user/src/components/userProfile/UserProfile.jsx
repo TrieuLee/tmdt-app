@@ -51,37 +51,20 @@ export default function UserProfile() {
       } catch (err) {}
     };
     getOrders();
-  }, [idUser]);
-  useEffect(async () => {
-    const process = async () => {
-      if (orderId !== "") {
-        const answer = window.confirm("Bạn có chắc chắn hủy đơn hàng?");
-        if (answer) {
-          try {
-            const header = JSON.parse(localStorage.getItem("user")).accessToken;
-            const id = orderId;
-            await axios.put(`${domain}/api/products/quantity/${id}/${header}`);
-          } catch (e) {}
-        }
-      }
-    };
-    process();
-  }, []);
+    handleClick();
+  }, [idUser, orderId]);
 
   const handleClick = async (e) => {
-    e.preventDefault();
-    console.log(e);
-    // const answer = window.confirm("Bạn có chắc chắn hủy đơn hàng?");
-    // if (answer) {
-    //   const order = {
-    //     delivery_status: deliveryStatus ? deliveryStatus : undefined,
-    //   };
-    //   try {
-    //     const header = JSON.parse(localStorage.getItem("user")).accessToken;
-    //     const id = JSON.parse(localStorage.getItem("userOrder"))._id;
-    //     await axios.put(`${domain}/api/orders/${id}/${header}`, order);
-    //   } catch (e) {}
-    // }
+    if (orderId !== "") {
+      const answer = window.confirm("Bạn có chắc chắn hủy đơn hàng?");
+      if (answer) {
+        try {
+          const header = JSON.parse(localStorage.getItem("user")).accessToken;
+          const id = orderId;
+          await axios.put(`${domain}/api/products/quantity/${id}/${header}`);
+        } catch (e) {}
+      } else setOrderId("");
+    }
   };
 
   const size1Map = orders.map((item) =>
@@ -165,10 +148,11 @@ export default function UserProfile() {
       headerName: "Thao tác",
       width: 100,
       renderCell: (params) => {
-        console.log(params)
-        return(
-          <button onClick={handleClick}>Huy don hang</button>
-        )
+        return (
+          <button onClick={(e) => setOrderId(params.value)}>
+            Huy don hang
+          </button>
+        );
       },
     },
   ];
@@ -316,7 +300,7 @@ export default function UserProfile() {
                   Điểm thưởng: {user.user.reward}
                 </Typography>
                 <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                  Thành viên: 
+                  Thành viên:
                 </Typography>
               </CardContent>
             </Card>

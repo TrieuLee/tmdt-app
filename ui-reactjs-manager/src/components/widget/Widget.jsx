@@ -37,12 +37,22 @@ export default function Widget({ type }) {
         const header = JSON.parse(localStorage.getItem("user")).accessToken;
         const res = await axios.get(`${domain}/api/orders/${header}`);
         setOrder(res.data);
+
         let initialValue = 0;
-        res.data.forEach((element) => (initialValue += element.total));
-        const temp = res.data.filter(
-          (x) => x.delivery_status === "Đã nhận đơn hàng"
-        );
+        res.data.forEach((element) => {
+          if (element.delivery_status === "Hoàn thành")
+            initialValue += element.total;
+        });
+        const temp = res.data.filter((x) => {
+          if (
+            x.delivery_status !== "Hoàn thành" &&
+            x.delivery_status !== "Hủy đơn hàng"
+          ) {
+            return x;
+          }
+        });
         setFilterPro(temp);
+
         setRevene(initialValue);
       } catch (err) {
         console.log(err);

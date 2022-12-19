@@ -22,18 +22,14 @@ export default function Datatable() {
   useEffect(() => {
     const getStatistic = () => {
       let sortOrder = [...data];
+      console.log(sortOrder);
 
       const x = sortOrder.filter((item) => {
         if (
-          item.payment_status === "Đã thanh toán" &&
+          item.delivery_status === "Hoàn thành" &&
           Date.parse(dateIn) <= Date.parse(item.createdAt.slice(0, 10)) &&
           Date.parse(dateOut) >= Date.parse(item.createdAt.slice(0, 10))
         ) {
-          console.log(
-            item.createdAt,
-            Date.parse(dateIn) <= Date.parse(item.createdAt.slice(0, 10)),
-            Date.parse(dateOut) >= Date.parse(item.createdAt.slice(0, 10))
-          );
           return item;
         } else {
           console.log(
@@ -60,7 +56,9 @@ export default function Datatable() {
   function filterOrder() {
     return getdata.map((i, index) => (
       <TableRow key={index}>
-        <TableCell className="tableCell" size="small">{i._id}</TableCell>
+        <TableCell className="tableCell" size="small">
+          {i._id}
+        </TableCell>
         <TableCell className="tableCell">
           {i.products.map((item, index) => (
             <li key={index} style={{ listStyle: "none" }}>
@@ -79,6 +77,7 @@ export default function Datatable() {
             </li>
           ))}
         </TableCell>
+        <TableCell className="tableCell">{i.total}</TableCell>
         <TableCell className="tableCell">
           {i.payment_method === 1 ? (
             <FaCcStripe
@@ -146,6 +145,7 @@ export default function Datatable() {
                 <TableCell className="tableCell">Khách hàng</TableCell>
                 <TableCell className="tableCell">Ngày mua</TableCell>
                 <TableCell className="tableCell">Số lượng</TableCell>
+                <TableCell className="tableCell">Tổng tiền</TableCell>
                 <TableCell className="tableCell">Phương thức</TableCell>
                 <TableCell className="tableCell">Trạng thái</TableCell>
               </TableRow>
