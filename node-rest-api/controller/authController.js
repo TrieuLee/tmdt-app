@@ -132,5 +132,28 @@ class AuthCRUD {
       res.status(500).json(err);
     }
   }
+
+  async forgotPassword(req, res, next) {
+    try {
+      const user = await User.findOne({ email: req.body.email });
+      if (!user) {
+        return next(createError(404, "Không tìm thấy người dùng!"));
+      }
+      const salt = await bcrypt.genSalt(10);
+      const hashedPassword = await bcrypt.hash(req.body.password, salt);
+      user.password = hashedPassword;
+      const savedPassword = await user.save();
+      const accessToken = jwt.sign(
+        {
+          id: savedPassword._id,
+        },
+        process.env.JWT_SECRET,
+        { expiresIn: "3d" }
+      );
+      res.status(200).json({ user, accessToken });
+    } catch (err) {
+      next(err);
+    }
+  }
 }
 module.exports = new AuthCRUD();

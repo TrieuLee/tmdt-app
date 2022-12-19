@@ -7,9 +7,10 @@ router.post("/register/:id", authController.registerManager);
 router.post("/login/manager", authController.loginManager);
 router.post("/login", authController.login);
 router.get("/find/:id", authController.getUser);
+router.put("/forget", authController.forgotPassword);
 
 // router.post("/logout", authController.logout);
-// router.put("/:id", authController.update);   
+// router.put("/:id", authController.update);
 // router.delete("/:id", authController.delete);
 
 module.exports = router;

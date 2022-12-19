@@ -1,10 +1,11 @@
 const { User, Order } = require("../models");
 const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+const createError = require("../utils/error");
 
 class UserCURD {
   async update(req, res) {
     // if (req.user.id === req.params.id) {
-
     if (req.body.password) {
       try {
         const salt = await bcrypt.genSalt(10);
@@ -54,6 +55,8 @@ class UserCURD {
       return res.status(500).json(500);
     }
   }
+
+  
 }
 
 module.exports = new UserCURD();
