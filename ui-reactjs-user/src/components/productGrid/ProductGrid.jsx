@@ -94,7 +94,7 @@ export default function ProductGrid() {
                         {record.brand}
                       </Typography>
                       <Typography variant="body2" color="text.secondary">
-                        {record.quantity}
+                        Số lượng: {record.quantity}
                       </Typography>
                     </CardContent>
                   </CardActionArea>
