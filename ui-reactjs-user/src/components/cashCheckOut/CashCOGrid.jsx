@@ -120,7 +120,7 @@ export default function OrderGrid() {
               fontWeight: "bold",
             }}
           >
-            Đơn hàng trên $100 sẽ được miễn phí ship
+            Đơn hàng trên $1000 sẽ được miễn phí ship
           </p>
           <p style={{ display: "flex", justifyContent: "flex-end" }}>
             Tổng số lượng: {carts.total.totalQuantity}
@@ -128,6 +128,12 @@ export default function OrderGrid() {
           <p style={{ display: "flex", justifyContent: "flex-end" }}>
             Sản phẩm: $ {carts.total.subPrice}
           </p>
+          {carts.total.discountPrice !== 0 && (
+            <p style={{ display: "flex", justifyContent: "flex-end" }}>
+              Khách hàng Thân thiết: giảm $ {carts.total.discountPrice}
+            </p>
+          )}
+
           <p style={{ display: "flex", justifyContent: "flex-end" }}>
             Phí ship: $ {carts.total.shipPrice}
           </p>

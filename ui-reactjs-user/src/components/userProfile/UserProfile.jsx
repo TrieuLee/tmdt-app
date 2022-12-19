@@ -54,17 +54,18 @@ export default function UserProfile() {
 
   const handleClick = async (e) => {
     e.preventDefault();
-    const answer = window.confirm("Bạn có chắc chắn hủy đơn hàng?");
-    if (answer) {
-      const order = {
-        delivery_status: deliveryStatus ? deliveryStatus : undefined,
-      };
-      try {
-        const header = JSON.parse(localStorage.getItem("user")).accessToken;
-        const id = JSON.parse(localStorage.getItem("userOrder"))._id;
-        await axios.put(`${domain}/api/orders/${id}/${header}`, order);
-      } catch (e) {}
-    }
+    console.log(e);
+    // const answer = window.confirm("Bạn có chắc chắn hủy đơn hàng?");
+    // if (answer) {
+    //   const order = {
+    //     delivery_status: deliveryStatus ? deliveryStatus : undefined,
+    //   };
+    //   try {
+    //     const header = JSON.parse(localStorage.getItem("user")).accessToken;
+    //     const id = JSON.parse(localStorage.getItem("userOrder"))._id;
+    //     await axios.put(`${domain}/api/orders/${id}/${header}`, order);
+    //   } catch (e) {}
+    // }
   };
 
   const size1Map = orders.map((item) =>
@@ -144,7 +145,7 @@ export default function UserProfile() {
         moment(params.value).locale("vi", vi).format("L"),
     },
     {
-      field: "action",
+      field: "_id",
       headerName: "Thao tác",
       width: 100,
       renderCell: (params) => {
