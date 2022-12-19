@@ -165,8 +165,10 @@ export default function UserProfile() {
       headerName: "Thao tác",
       width: 100,
       renderCell: (params) => {
-        // console.log(params.value);
-        return <button onClick={setOrderId(params.value)}>Huy don hang</button>;
+        console.log(params)
+        return(
+          <button onClick={handleClick}>Huy don hang</button>
+        )
       },
     },
   ];
@@ -279,6 +281,11 @@ export default function UserProfile() {
                           operatorValue: "contains",
                           value: "Đã nhận đơn hàng",
                         },
+                        {
+                          columnField: "delivery_status",
+                          operatorValue: "contains",
+                          value: "Hủy đơn hàng",
+                        },
                       ],
                     },
                   },
@@ -309,7 +316,7 @@ export default function UserProfile() {
                   Điểm thưởng: {user.user.reward}
                 </Typography>
                 <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                  Thành viên: Thường
+                  Thành viên: 
                 </Typography>
               </CardContent>
             </Card>

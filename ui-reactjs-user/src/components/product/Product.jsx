@@ -7,7 +7,7 @@ export default function Product() {
       <img src={PF + "img/air.png"} alt="" className="productImg" />
       <div className="productDetails">
         <h1 className="productTitle">AIR FORCE</h1>
-        <h2 className="productPrice">5.999.000 VNĐ</h2>
+        <h2 className="productPrice">99$</h2>
         <p className="productDesc">
         Hãy để tinh thần nổi loạn của bạn tỏa sáng trong Air Force 1 Mid '07 LX. 
         Các lớp phủ da tổng hợp sắc nét, các điểm nhấn táo bạo và lượng đèn flash hoàn hảo 

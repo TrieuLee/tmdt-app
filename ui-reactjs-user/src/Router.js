@@ -14,6 +14,7 @@ import FinishOrder from "./pages/finishOrder/FinishOrder";
 import Profile from "./pages/profile/Profile";
 import Success from "./pages/success/Success";
 import ChangeProfile from "./components/userProfile/ChangeProfile";
+import Forget from "./pages/forget/Forget";
 const Router = () => {
   const { user } = useContext(AuthContext);
 
@@ -27,12 +28,14 @@ const Router = () => {
           path="register"
           element={user ? <Navigate to="/" /> : <Register />}
         />
+        <Route path="forget" element={<Forget />} />
         <Route path=":id">
           <Route index element={<Product />} />
           <Route path=":itemID" element={<ProductDetail />} />
         </Route>
         <Route path="profile" element={<Profile />} />
         <Route path="change-profile" element={<ChangeProfile />} />
+
         <Route path="checkout" element={<CheckOut />} />
         <Route path="checkout-cash" element={<FinishOrder />} />
         <Route path="checkout-success" element={<Success />} />

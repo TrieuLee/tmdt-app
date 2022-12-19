@@ -14,6 +14,8 @@ import domain from "../../utils/domain";
 import { useNavigate } from "react-router-dom";
 
 export default function ChangeProfile() {
+  const PF = process.env.REACT_APP_PUBLIC_FOLDER;
+
   const theme = createTheme();
   const [password, setPassword] = useState("");
   const [cfrpass, setCfrpass] = useState("");
@@ -34,6 +36,7 @@ export default function ChangeProfile() {
       try {
         const header = JSON.parse(localStorage.getItem("user")).accessToken;
         const id = JSON.parse(localStorage.getItem("user"))._id;
+        console.log(id);
         await axios.put(`${domain}/api/users/${id}/${header}`, user);
         navigate("/");
       } catch (err) {
@@ -45,7 +48,7 @@ export default function ChangeProfile() {
   return (
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
-        <CssBaseline />
+        <CssBaseline  />
         <Box
           sx={{
             marginTop: 8,
