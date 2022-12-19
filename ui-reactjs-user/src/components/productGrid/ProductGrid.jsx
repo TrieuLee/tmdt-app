@@ -29,7 +29,13 @@ export default function ProductGrid() {
             ? `${domain}/api/products?brand=${cate}`
             : `${domain}/api/products?`
         );
-        setProducts(res.data);
+        const x = res.data.filter((i) => {
+          if (i.quantity > 0 && i.state == true) {
+            console.log(i);
+            return i;
+          }
+        });
+        setProducts(x);
       } catch (err) {}
     };
     getProducts();
