@@ -102,7 +102,7 @@ export default function Login() {
               />
             </FormControl>
             <span className="loginForgot">Quên mật khẩu?</span>
-            {error && <span>{error.message}</span>}
+            {error && <span style={{ color: "red" }}>{error.message}</span>}
 
             <Button
               variant="contained"

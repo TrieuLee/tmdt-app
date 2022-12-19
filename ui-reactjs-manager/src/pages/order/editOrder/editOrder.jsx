@@ -6,9 +6,6 @@ import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import Checkbox from "@mui/material/Checkbox";
-import FormGroup from "@mui/material/FormGroup";
-import FormControlLabel from "@mui/material/FormControlLabel";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
@@ -153,6 +150,7 @@ export default function EditProduct({ title }) {
                         Đang vận chuyển
                       </MenuItem>
                       <MenuItem value={"Hoàn thành"}>Hoàn thành</MenuItem>
+                      <MenuItem value={"Hủy đơn hàng"}>Hủy đơn hàng</MenuItem>
                     </Select>
                   </FormControl>
 

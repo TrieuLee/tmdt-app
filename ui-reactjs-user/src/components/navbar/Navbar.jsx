@@ -42,7 +42,6 @@ export default function Navbar(props) {
   const [products, setProducts] = useState([]);
   const [search, setSearch] = useState("");
   const [isLiked, setIsLiked] = useState(false);
-  const handleChange = () => {};
   useEffect(() => {
     const getProducts = async () => {
       try {

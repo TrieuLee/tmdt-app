@@ -108,7 +108,7 @@ export default function Navbar() {
                 <ListItemIcon>
                   <Settings fontSize="small" />
                 </ListItemIcon>
-                Settings
+                Đổi mật khẩu
               </MenuItem>
               <MenuItem onClick={handleLogOut}>
                 <ListItemIcon>

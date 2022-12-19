@@ -1,5 +1,4 @@
-import React, { useState, useContext, useRef } from "react";
-import { useNavigate } from "react-router-dom";
+import React, {  useContext, useRef } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import { loginCall } from "../../callAPIs";
 import CircularProgress from "@mui/material/CircularProgress";
@@ -16,7 +15,6 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 const theme = createTheme();
 
 export default function Login() {
-  const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 
   const email = useRef();
   const password = useRef();
