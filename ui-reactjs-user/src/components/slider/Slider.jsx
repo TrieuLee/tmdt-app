@@ -25,7 +25,7 @@ export default function Slider() {
               AIR JORDAN <br /> 1 HIGH OG
               <br /> 
             </div>
-            <h2 className="sliderPrice">79$</h2>
+            <h2 className="sliderPrice">499$</h2>
             <a href="#product" className="sliderLink">
               <button className="buyButton">MUA NGAY!</button>
             </a>

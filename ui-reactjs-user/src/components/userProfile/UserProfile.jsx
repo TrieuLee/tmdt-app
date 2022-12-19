@@ -34,6 +34,7 @@ const StyledDataGrid = styled(DataGrid)(({ theme }) => ({
 export default function UserProfile() {
   const { user } = useContext(AuthContext);
   const [orders, setOrders] = useState([]);
+  const [orderId, setOrderId] = useState("");
   const idUser = user.user._id ? user.user._id : "";
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
   const [deliveryStatus, setDeliveryStatus] = useState("Hủy đơn hàng");
@@ -51,6 +52,21 @@ export default function UserProfile() {
     };
     getOrders();
   }, [idUser]);
+  useEffect(async () => {
+    const process = async () => {
+      if (orderId !== "") {
+        const answer = window.confirm("Bạn có chắc chắn hủy đơn hàng?");
+        if (answer) {
+          try {
+            const header = JSON.parse(localStorage.getItem("user")).accessToken;
+            const id = orderId;
+            await axios.put(`${domain}/api/products/quantity/${id}/${header}`);
+          } catch (e) {}
+        }
+      }
+    };
+    process();
+  }, []);
 
   const handleClick = async (e) => {
     e.preventDefault();
