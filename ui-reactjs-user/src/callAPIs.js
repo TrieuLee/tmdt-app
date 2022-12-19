@@ -1,5 +1,6 @@
 import axios from "axios";
 import domain from "././utils/domain";
+import { useNavigate } from "react-router-dom";
 export const loginCall = async (userCredentials, dispatch) => {
   dispatch({ type: "LOGIN_START" });
   try {
@@ -12,6 +13,7 @@ export const loginCall = async (userCredentials, dispatch) => {
 };
 
 export const forgetCall = async (userCredentials, dispatch) => {
+  const nav = useNavigate;
   dispatch({ type: "FORGET_START" });
   try {
     const res = await axios.put(`${domain}/api/auth/forget`, userCredentials);

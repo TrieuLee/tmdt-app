@@ -1,5 +1,7 @@
 import React, { useContext, useRef, useState } from "react";
 import axios from "axios";
+import { forgetCall } from "../../callAPIs";
+import { ForgetContext } from "../../context/ForgetContext";
 import { useNavigate } from "react-router-dom";
 import TextField from "@mui/material/TextField";
 import FormControl from "@mui/material/FormControl";
@@ -11,7 +13,7 @@ import InputAdornment from "@mui/material/InputAdornment";
 import InputLabel from "@mui/material/InputLabel";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
-import domain from "../../utils/domain";
+import CircularProgress from "@mui/material/CircularProgress";
 
 export default function Forget() {
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
@@ -19,6 +21,7 @@ export default function Forget() {
   const password = useRef();
   const confirmPassword = useRef();
   const navigate = useNavigate();
+  const { isFetching, error, dispatch } = useContext(ForgetContext);
 
   // MUI
   const [values, setValues] = useState({ passwords: "", showPasswords: false });
@@ -38,23 +41,27 @@ export default function Forget() {
   // MUI
 
   const handleClick = async (e) => {
-    if (password !== "") {
-      window.alert(`Bạn đã đổi mật khẩu thành công. Chúc bạn mua sắm vui vẻ`);
-    }
+    // if (password !== "") {
+    //   window.alert(`Bạn đã đổi mật khẩu thành công. Chúc bạn mua sắm vui vẻ`);
+    // }
     e.preventDefault();
     if (confirmPassword.current.value !== password.current.value) {
       confirmPassword.current.setCustomValidity("Mật khẩu không khớp");
     } else {
-      const user = {
-        email: email.current.value,
-        password: password.current.value,
-      };
-      try {
-        await axios.put(`${domain}/api/auth/forget`, user);
-        navigate("/login");
-      } catch (err) {
-        console.log(err);
-      }
+      // const user = {
+      //   email: email.current.value,
+      //   password: password.current.value,
+      // };
+      // try {
+      //   await axios.put(`${domain}/api/auth/forget`, user);
+      //   navigate("/login");
+      // } catch (err) {
+      //   console.log(err);
+      // }
+      forgetCall(
+        { email: email.current.value, password: password.current.value },
+        dispatch
+      );
     }
   };
 
@@ -142,9 +149,15 @@ export default function Forget() {
                 label="Confirm Password"
               />
             </FormControl>
+            {error && <span style={{ color: "red" }}>{error.message}</span>}
 
-            <Button variant="contained" className="loginButon" type="submit">
-              Xác nhận
+            <Button
+              variant="contained"
+              className="loginButon"
+              type="submit"
+              disabled={isFetching}
+            >
+              {isFetching ? <CircularProgress color="inherit" /> : "Xác nhận"}
             </Button>
           </Box>
         </div>
