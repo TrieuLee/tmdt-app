@@ -101,7 +101,14 @@ export default function Login() {
                 label="Password"
               />
             </FormControl>
-            <span className="loginForgot">Quên mật khẩu?</span>
+            <span className="loginForgot">
+              <Link
+                style={{ color: "blue", textDecoration: "none" }}
+                to="/forget"
+              >
+                Quên mật khẩu?  
+              </Link>
+            </span>
             {error && <span style={{ color: "red" }}>{error.message}</span>}
 
             <Button
