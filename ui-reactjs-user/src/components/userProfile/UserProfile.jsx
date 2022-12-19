@@ -46,7 +46,7 @@ export default function UserProfile() {
       try {
         const res = await axios.get(`${domain}/api/auth/find/` + idUser);
         setUpdateUser(res.data);
-        // console.log(res.data);
+   
       } catch (err) {}
     };
     const getOrders = async () => {

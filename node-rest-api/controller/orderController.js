@@ -4,7 +4,6 @@ class OrderCRUD {
   // CREATE
   async create(req, res) {
     const newOrder = new Order(req.body);
-    console.log(req.body.products, "hello");
     try {
       const savedOrder = await newOrder.save();
 

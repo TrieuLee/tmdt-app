@@ -56,7 +56,7 @@ export default function Forget() {
       //   await axios.put(`${domain}/api/auth/forget`, user);
       //   navigate("/login");
       // } catch (err) {
-      //   console.log(err);
+
       // }
       forgetCall(
         { email: email.current.value, password: password.current.value },

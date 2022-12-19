@@ -18,7 +18,7 @@ router.post("/create-checkout-session", async (req, res) => {
       name: item.name,
       price: item.price,
     };
-    console.log(item.img);
+
     return temp;
   });
   const customer = await stripe.customers.create({
@@ -140,7 +140,7 @@ const createOrder = async (customer, data) => {
       updateProduct.quantity -= i.quantity;
       await updateProduct.save();
     });
-    console.log(savedOrder);
+
   } catch (err) {
     console.log(err);
   }

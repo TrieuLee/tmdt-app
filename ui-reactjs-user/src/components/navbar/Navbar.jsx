@@ -35,7 +35,7 @@ export default function Navbar(props) {
 
   const { user } = useContext(AuthContext);
   const cart = useSelector((state) => state.cart.products);
-  // console.log(cart);
+
 
   const location = useLocation();
   const cate = location.pathname.split("/")[1];

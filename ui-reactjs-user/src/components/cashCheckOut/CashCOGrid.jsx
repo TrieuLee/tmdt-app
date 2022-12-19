@@ -38,7 +38,7 @@ const StyledTableCell = styled(
 
 export default function OrderGrid() {
   const carts = !localStorage.lstOrFd ? "" : JSON.parse(localStorage.lstOrFd);
-  console.log(carts.total);
+
   const x = carts.cart.map((item) => {
     const temp = {
       productId: item._id,
@@ -182,7 +182,7 @@ export default function OrderGrid() {
 
         await axios.post(`${domain}/api/orders/${header}`, order);
         navigate("/checkout-success");
-        console.log(order);
+ 
       }
     } catch (err) {
       console.log(err);

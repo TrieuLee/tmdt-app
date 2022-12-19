@@ -14,14 +14,13 @@ export default function Datatable() {
   useEffect(() => {
     setList(employeeList);
   }, [data]);
-  console.log(data);
+
   
   const handleDelete = async (id) => {
     const answer = window.confirm("Bạn có chắc chắn xóa người dùng này?");
     if (answer) {
       try {
         const header = JSON.parse(localStorage.getItem("user")).accessToken;
-        console.log(header, id);
         await axios.delete(`${domain}/api/users/${id}/${header}`);
         setList(list.filter((item) => item._id !== id));
       } catch (err) {
