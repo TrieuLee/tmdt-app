@@ -13,7 +13,7 @@ export default function Slider() {
               AIR FORCE <br /> PHIÊN BẢN
               <br /> MỚI
             </div>
-            <h2 className="sliderPrice">$4.990.000Đ</h2>
+            <h2 className="sliderPrice">99$</h2>
             <a href="#product" className="sliderLink">
               <button className="buyButton">MUA NGAY!</button>
             </a>
@@ -22,10 +22,10 @@ export default function Slider() {
             <img src={PF + "img/jordan.png"} alt="" className="sliderImg" />
             <div className="sliderBg"></div>
             <div className="sliderTitle">
-              AIR JORDAN <br /> PHIÊN BẢN
-              <br /> MỚI
+              AIR JORDAN <br /> 1 HIGH OG
+              <br /> 
             </div>
-            <h2 className="sliderPrice">3.790.000Đ</h2>
+            <h2 className="sliderPrice">79$</h2>
             <a href="#product" className="sliderLink">
               <button className="buyButton">MUA NGAY!</button>
             </a>
