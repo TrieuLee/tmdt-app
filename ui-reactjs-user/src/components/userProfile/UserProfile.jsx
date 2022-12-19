@@ -147,7 +147,12 @@ export default function UserProfile() {
       field: "action",
       headerName: "Thao tác",
       width: 100,
-      renderCell: () => <button onClick={handleClick}>Hủy đơn hàng</button>,
+      renderCell: (params) => {
+        console.log(params)
+        return(
+          <button onClick={handleClick}>Huy don hang</button>
+        )
+      },
     },
   ];
   const history = [
@@ -259,6 +264,11 @@ export default function UserProfile() {
                           operatorValue: "contains",
                           value: "Đã nhận đơn hàng",
                         },
+                        {
+                          columnField: "delivery_status",
+                          operatorValue: "contains",
+                          value: "Hủy đơn hàng",
+                        },
                       ],
                     },
                   },
@@ -289,7 +299,7 @@ export default function UserProfile() {
                   Điểm thưởng: {user.user.reward}
                 </Typography>
                 <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                  Thành viên: Thường
+                  Thành viên: 
                 </Typography>
               </CardContent>
             </Card>
