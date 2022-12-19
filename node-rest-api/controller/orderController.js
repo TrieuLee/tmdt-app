@@ -1,12 +1,19 @@
-const { Order } = require("../models");
+const { Order, Product } = require("../models");
 
 class OrderCRUD {
   // CREATE
   async create(req, res) {
     const newOrder = new Order(req.body);
-
+    console.log(req.body.products, "hello");
     try {
       const savedOrder = await newOrder.save();
+
+      savedOrder.products.forEach(async (i) => {
+        const updateProduct = await Product.findById(i.productId);
+        updateProduct.quantity -= i.quantity;
+        await updateProduct.save();
+      });
+
       res.status(200).json(savedOrder);
     } catch (err) {
       res.status(500).json(err);

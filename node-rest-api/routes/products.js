@@ -17,6 +17,11 @@ router.put(
   verifyTokenAndUpdate,
   productController.update
 );
+router.put(
+  "/quantity/:id/:header",
+  verifyToken,
+  productController.updateQuantity
+);
 router.delete(
   "/:id/:header",
   verifyToken,

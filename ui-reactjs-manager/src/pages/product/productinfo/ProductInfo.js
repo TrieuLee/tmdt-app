@@ -56,11 +56,15 @@ export default function ProductInfo() {
                   <span className="itemValue">{products.price}</span>
                 </div>
                 <div className="detailItem">
+                  <span className="itemKey">Số lượng:</span>
+                  <span className="itemValue">{products.quantity}</span>
+                </div>
+                <div className="detailItem">
                   <span className="itemKey">Size:</span>
                   <span className="itemValue">
                     {products.size &&
                       products.size.map((record, i) => (
-                        <span key={i}>{record}</span>
+                        <span key={i}>{record}, </span>
                       ))}
                   </span>
                 </div>

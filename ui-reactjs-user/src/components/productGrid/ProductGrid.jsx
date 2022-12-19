@@ -93,6 +93,9 @@ export default function ProductGrid() {
                       <Typography variant="body2" color="text.secondary">
                         {record.brand}
                       </Typography>
+                      <Typography variant="body2" color="text.secondary">
+                        {record.quantity}
+                      </Typography>
                     </CardContent>
                   </CardActionArea>
                 </Card>

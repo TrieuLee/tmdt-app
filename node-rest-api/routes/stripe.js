@@ -135,6 +135,11 @@ const createOrder = async (customer, data) => {
 
   try {
     const savedOrder = await newOrder.save();
+    savedOrder.products.forEach(async (i) => {
+      const updateProduct = await Product.findById(i.productId);
+      updateProduct.quantity -= i.quantity;
+      await updateProduct.save();
+    });
     console.log(savedOrder);
   } catch (err) {
     console.log(err);
