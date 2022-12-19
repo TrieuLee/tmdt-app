@@ -309,7 +309,10 @@ export default function UserProfile() {
                   Điểm thưởng: {updateUser.reward}
                 </Typography>
                 <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                  Thành viên:
+                  Thành viên:{" "}
+                  {updateUser.reward >= 10
+                    ? "Khách hàng thân thiết"
+                    : "khách vãng lai"}
                 </Typography>
               </CardContent>
             </Card>
