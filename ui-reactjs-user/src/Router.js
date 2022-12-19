@@ -13,6 +13,7 @@ import CheckOut from "./pages/checkOut/CheckOut";
 import FinishOrder from "./pages/finishOrder/FinishOrder";
 import Profile from "./pages/profile/Profile";
 import Success from "./pages/success/Success";
+import ChangeProfile from "./components/userProfile/ChangeProfile";
 const Router = () => {
   const { user } = useContext(AuthContext);
 
@@ -31,7 +32,7 @@ const Router = () => {
           <Route path=":itemID" element={<ProductDetail />} />
         </Route>
         <Route path="profile" element={<Profile />} />
-
+        <Route path="change-profile" element={<ChangeProfile />} />
         <Route path="checkout" element={<CheckOut />} />
         <Route path="checkout-cash" element={<FinishOrder />} />
         <Route path="checkout-success" element={<Success />} />
