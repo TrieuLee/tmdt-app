@@ -113,7 +113,7 @@ export default function Register() {
               label="Email"
               inputRef={email}
             />
-            <FormControl sx={{ m: 1, width: "60ch" }} variant="outlined">
+            <FormControl sx={{ m: 1, width: "50ch" }} variant="outlined">
               <InputLabel htmlFor="outlined-adornment-password" required>
                 Mật khẩu
               </InputLabel>
@@ -138,7 +138,7 @@ export default function Register() {
                 label="Password"
               />
             </FormControl>
-            <FormControl sx={{ m: 1, width: "60ch" }} variant="outlined">
+            <FormControl sx={{ m: 1, width: "50ch" }} variant="outlined">
               <InputLabel htmlFor="outlined-confirm-password" required>
                 Xác nhận mật khẩu
               </InputLabel>

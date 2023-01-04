@@ -38,7 +38,6 @@ export default function UserProfile() {
   const [updateUser, setUpdateUser] = useState("");
   const idUser = user.user._id ? user.user._id : "";
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
-  const [deliveryStatus, setDeliveryStatus] = useState("Hủy đơn hàng");
 
   useEffect(() => {
     const header = JSON.parse(localStorage.getItem("user")).accessToken;
