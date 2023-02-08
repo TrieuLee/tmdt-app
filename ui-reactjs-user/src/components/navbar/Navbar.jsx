@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+  import React, { useState, useContext, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import axios from "axios";
 
@@ -36,7 +36,7 @@ export default function Navbar(props) {
   const { user } = useContext(AuthContext);
   const cart = useSelector((state) => state.cart.products);
 
-
+  const a =1;
   const location = useLocation();
   const cate = location.pathname.split("/")[1];
   const [products, setProducts] = useState([]);
