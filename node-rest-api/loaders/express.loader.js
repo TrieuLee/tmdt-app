@@ -5,6 +5,7 @@ const helmet = require("helmet");
 const cors = require("cors");
 module.exports = async (expressApp) => {
   dotenv.config();
+  express.urlencoded({ extended: false });
   expressApp.use(express.json());
   expressApp.use(helmet({ crossOriginResourcePolicy: false }));
 
